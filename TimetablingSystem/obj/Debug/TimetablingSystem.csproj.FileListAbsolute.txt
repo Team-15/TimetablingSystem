@@ -1,4 +1,0 @@
-C:\Users\coje3\Desktop\GitHub\TimetablingSystem\TimetablingSystem\TimetablingSystem\bin\TimetablingSystem.dll
-C:\Users\coje3\Desktop\GitHub\TimetablingSystem\TimetablingSystem\TimetablingSystem\bin\TimetablingSystem.pdb
-C:\Users\coje3\Desktop\GitHub\TimetablingSystem\TimetablingSystem\TimetablingSystem\obj\Debug\TimetablingSystem.dll
-C:\Users\coje3\Desktop\GitHub\TimetablingSystem\TimetablingSystem\TimetablingSystem\obj\Debug\TimetablingSystem.pdb
