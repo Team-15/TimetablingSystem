@@ -1,0 +1,7 @@
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\bin\TimetablingSystem.dll
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\bin\TimetablingSystem.pdb
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\bin\EntityFramework.dll
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\bin\EntityFramework.xml
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\obj\Debug\TimetablingSystem.csprojResolveAssemblyReference.cache
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\obj\Debug\TimetablingSystem.dll
+C:\Users\dan\Documents\GitHub\TimetablingSystem\TimetablingSystem\obj\Debug\TimetablingSystem.pdb
