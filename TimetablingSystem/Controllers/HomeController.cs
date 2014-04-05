@@ -10,21 +10,26 @@ namespace TimetablingSystem.Controllers
     {
         public ActionResult Index()
         {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Index");
+            }
+
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            return PartialView("About");
+            //return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            return PartialView("Contact");
+            //return View();
         }
     }
 }
