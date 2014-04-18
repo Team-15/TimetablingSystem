@@ -24,4 +24,12 @@
 
     });
 
+    /*
+    var x = [true, false, true, false, true, true, true, true, true, false, false, false];
+    var y = "010101010100001111111";
+
+    alert(weeksEncoder(x));
+    alert(weeksDecoder(y));
+    alert(weeksReadableFormat(x));
+    */
 });

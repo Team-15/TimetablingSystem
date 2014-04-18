@@ -15,7 +15,10 @@ namespace TimetablingSystem
                 //"~/Scripts/bootstrap.js",
                 //"~/Scripts/respond.js",
 
-                "~/ViewScripts/parentScript.js"
+                "~/ViewScripts/parentScript.js",
+                "~/JS/globalConstants.js",
+                "~/JS/objectDataTypes.js",
+                "~/JS/weeksManipulator.js"
 
                 ));
 
