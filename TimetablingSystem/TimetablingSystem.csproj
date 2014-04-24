@@ -168,7 +168,48 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="DBInterface\building.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\DBTestController.cs" />
+    <Compile Include="DBInterface\department.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\facility.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\module.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\request.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\room.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\round.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\semester.cs">
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\TimetablingSystemModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimetablingSystemModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\TimetablingSystemModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBInterface\TimetablingSystemModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimetablingSystemModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +218,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\parentStyle.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -233,6 +275,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="DBInterface\TimetablingSystemModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TimetablingSystemModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DBInterface\TimetablingSystemModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimetablingSystemModel.edmx</DependentUpon>
+      <LastGenOutput>TimetablingSystemModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBInterface\TimetablingSystemModel.edmx.diagram">
+      <DependentUpon>TimetablingSystemModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DBInterface\TimetablingSystemModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimetablingSystemModel.edmx</DependentUpon>
+      <LastGenOutput>TimetablingSystemModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="JS\globalConstants.js" />
     <Content Include="JS\instanceData.js" />
@@ -288,17 +347,22 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Parent.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Main\Settings.cshtml" />
+    <Content Include="Views\Main\Add.cshtml" />
+    <Content Include="Views\Main\Home.cshtml" />
+    <Content Include="Views\Display\Requests.cshtml" />
+    <Content Include="Views\Display\Results.cshtml" />
+    <Content Include="Views\Display\History.cshtml" />
+    <Content Include="Views\Display\AllBookings.cshtml" />
+    <Content Include="Views\Display\MyBookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DBInterface\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

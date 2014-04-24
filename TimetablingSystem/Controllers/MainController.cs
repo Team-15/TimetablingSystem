@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace TimetablingSystem.Controllers
 {
-    public class HomeController : Controller
+    public class MainController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Home()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
@@ -17,7 +17,7 @@ namespace TimetablingSystem.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Add()
         {
             ViewBag.Message = "Your app description page.";
 
@@ -26,7 +26,9 @@ namespace TimetablingSystem.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        
+
+        public ActionResult Settings()
         {
             ViewBag.Message = "Your contact page.";
 
@@ -34,5 +36,9 @@ namespace TimetablingSystem.Controllers
 
             return View();
         }
+
+        
+
+
     }
 }
