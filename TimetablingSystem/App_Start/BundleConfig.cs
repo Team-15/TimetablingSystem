@@ -23,6 +23,9 @@ namespace TimetablingSystem
 
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/addRequests").Include(
+                        "~/ViewScripts/addRequestsScript.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
