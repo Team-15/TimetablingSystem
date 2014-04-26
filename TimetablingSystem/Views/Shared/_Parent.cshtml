@@ -11,9 +11,10 @@
     </head>
     <body>
         
+        <div id="mainWrapper">
         <header>
             <div class="headerWrapper">
-                 
+                 <img id="lboroLogo" src="~/Images/LboroLogo.png" alt="Loughborough University Logo"/>
             </div>
 
             
@@ -83,6 +84,9 @@
         *@
 
         @RenderSection("scripts", required: false)
+
+        </div>
+
     </body>
 
     @Scripts.Render("~/bundles/parent")

@@ -18,6 +18,7 @@ namespace TimetablingSystem
                 "~/JS/testA.js",
                 "~/ViewScripts/parentScript.js",
                 "~/JS/globalConstants.js",
+                "~/JS/instanceData.js",
                 "~/JS/objectDataTypes.js",
                 "~/JS/weeksManipulator.js"
 
