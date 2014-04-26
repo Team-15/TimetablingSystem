@@ -1,5 +1,7 @@
 $(document).ready(function () {
+    newRequest = new Request();
     createObjects();
+    weekCreator();
     tableCreator();
     modulePopulate();
     facilityPopulate();
@@ -29,9 +31,9 @@ function facilityStore() {
 
     newRequest.priority = ($("#PRY").selected ? true : false);
     newRequest.noOfRooms = $("#NOR").val;
-    newrequest.otherReqs = $("#ORE").val;
+    newRequest.otherReqs = $("#ORE").val;
     newRequest.students = $("#CAP").val;
-    newRequest.students = $("#PRK").val;
+    console.log(newRequest.students);
 }
 
 //populate module titles and codes
@@ -44,6 +46,15 @@ function modulePopulate() {
     for (var i = 0; i < modulesArray.length; i++) {
         $("#modCodeSelect").append("<option value='" + modulesArray[i].code + "'>" + modulesArray[i].code + "</option>");
     }
+}
+
+function weekCreator() {
+    var tempStr = "";
+    tempStr += "<table class = ''>Weeks";
+    for (var i = 0; i < numberOfWeeks; i++) {
+        tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick='getBookedRooms()'>" + i;
+    }
+    $("#weekSelect").append(tempStr);
 }
 
 //creates period grid selector

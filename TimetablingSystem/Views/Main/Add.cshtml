@@ -11,24 +11,24 @@
             <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="ModuleSelector(this)"></select></br>
             <table class='table reqTable'>
                 <tr>
-                    <td><input type='checkbox' class='specReq' id='QUR' onchange='facilityStore()'><label for='QUR'>Quality Room</label></td>
-                    <td><input type='checkbox' class='specReq' id='WHC' onchange='facilityStore()'><label for='WHC'>Wheelchair</label></td>
+                    <td><input type='checkbox' class='specReq' id='QUR' onchange='facilityStore()'>Quality Room</td>
+                    <td><input type='checkbox' class='specReq' id='WHC' onchange='facilityStore()'>Wheelchair</td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' class='specReq' id='DP1' onchange='facilityStore()'><label for='DP1'>Data Projector</label></td>
-                    <td><input type='checkbox' class='specReq' id='DP2' onchange='facilityStore()' disabled='true'><label for='DP2'>(Second) Data Projector</label></td>
+                    <td><input type='checkbox' class='specReq' id='DP1' onchange='facilityStore()'>Data Projector</td>
+                    <td><input type='checkbox' class='specReq' id='DP2' onchange='facilityStore()' disabled='true'>(Second) Data Projector</td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' class='specReq' id='VIS' onchange='facilityStore()'><label for='VIS'>Visualiser</label></td>
-                    <td><input type='checkbox' class='specReq' id='VDB' onchange='facilityStore()'><label for='VDB'>Video/DVD/BluRay</label></td>
+                    <td><input type='checkbox' class='specReq' id='VIS' onchange='facilityStore()'>Visualiser</td>
+                    <td><input type='checkbox' class='specReq' id='VDB' onchange='facilityStore()'>Video/DVD/BluRay</td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' class='specReq' id='CMP' onchange='facilityStore()'><label for='CMP'>Computer</label></td>
-                    <td><input type='checkbox' class='specReq' id='WHB' onchange='facilityStore()'><label for='WHB'>Whiteboard</label></td>
+                    <td><input type='checkbox' class='specReq' id='CMP' onchange='facilityStore()'>Computer</td>
+                    <td><input type='checkbox' class='specReq' id='WHB' onchange='facilityStore()'>Whiteboard</td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' class='specReq' id='CHB' onchange='facilityStore()'><label for='CHB'>Chalkboard</label></td>
-                    <td><input type='checkbox' class='specReq' id='NER' onchange='facilityStore()'><label for='NER'>Near Previous Room</label></td>
+                    <td><input type='checkbox' class='specReq' id='CHB' onchange='facilityStore()'>Chalkboard</td>
+                    <td><input type='checkbox' class='specReq' id='NER' onchange='facilityStore()'>Near Previous Room</td>
                 </tr>
                 <tr>
                     <td>No of Students:</td><td><input type='textbox' class='specReqText' id='CAP' value='50' onchange='facilityStore()'></td>
@@ -52,10 +52,12 @@
                 <tr><td>Number of rooms:</td><td><select id='NOR'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select></td></tr>
                 <tr>
                     <td>Priority:</td><td>
-                        <input type='radio' class='specReqP' id='PRY' name='Priority' ><label for='PRY'>Yes</label>
-                        <input type='radio' class='specReqP' id='PRN' name='Priority' ><label for='PRN'>No</label></td>
+                        <input type='radio' class='specReqP' id='PRY' name='Priority' >Yes
+                        <input type='radio' class='specReqP' id='PRN' name='Priority' >No</td>
                 </tr>
             </table>
+        </div>
+        <div id="weekSelect">
         </div>
         <div id="weekTable">
         </div>
