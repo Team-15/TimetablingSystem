@@ -1,11 +1,14 @@
 ﻿body {
-    min-width:960px;
-    margin:0px;
+    min-width: 960px;
+    margin: 0px;
 }
 
 .headerWrapper {
-    height:200px;
-    background:#330066 ;
+    height: 100px;
+    /*
+        background: #330066;
+    */
+    background: linear-gradient(to right, #2f0065 25%,#5a3163 100%);
 }
 
 #navSection ul {
