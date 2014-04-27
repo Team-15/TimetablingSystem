@@ -330,6 +330,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="ViewScripts\addRequestsScript.js" />
     <Content Include="ViewScripts\parentScript.js" />
+    <Content Include="ViewScripts\settingsScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
