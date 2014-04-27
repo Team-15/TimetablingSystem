@@ -1,0 +1,33 @@
+﻿@model TimetablingSystem.Models.UserModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Timetabling System Login</h2>
+
+@using (Html.BeginForm()) { 
+    
+    <div>
+
+        <fieldset>
+
+            <legend></legend>
+            <div>@Html.Label("Username")</div>
+            <div>
+                @Html.TextBoxFor(user => user.username)
+            </div>
+
+            <div>@Html.Label("Password")</div>
+            <div>
+                @Html.PasswordFor(user => user.password)
+                @Html.ValidationMessageFor(user => user.password)
+            </div>
+
+            <input type="submit" value="Log In" />
+
+        </fieldset>
+
+    </div>
+    
+}

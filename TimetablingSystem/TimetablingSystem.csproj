@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DBInterface\building.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
@@ -215,6 +216,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -375,6 +377,7 @@
     <Content Include="Views\Display\History.cshtml" />
     <Content Include="Views\Display\AllBookings.cshtml" />
     <Content Include="Views\Display\MyBookings.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
