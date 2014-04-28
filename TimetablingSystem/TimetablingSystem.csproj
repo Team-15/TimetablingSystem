@@ -379,6 +379,7 @@
     <Content Include="Views\Display\AllBookings.cshtml" />
     <Content Include="Views\Display\MyBookings.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\Shared\_AuthorizeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -405,7 +406,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>3842</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2562/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

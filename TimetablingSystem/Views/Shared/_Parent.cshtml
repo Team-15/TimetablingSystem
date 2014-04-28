@@ -20,7 +20,7 @@
             
             
         </header>
-
+        @Html.ActionLink("Log Out", "LogOut", "User")
         <nav id="navSection">
             <ul id="menuLinks">
                 <li>@Html.ActionLink("Home", "Home", "Main")</li>
@@ -31,6 +31,7 @@
                 <li>@Html.ActionLink("All Bookings", "AllBookings", "Display")</li>
                 <li>@Html.ActionLink("History", "History", "Display")</li>
                 <li>@Html.ActionLink("Settings", "Settings", "Main")</li>
+                
             </ul>
         </nav>
 

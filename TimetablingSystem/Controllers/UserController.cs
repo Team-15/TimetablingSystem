@@ -26,7 +26,7 @@ namespace TimetablingSystem.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.UserModel user)
         {
-
+            
             if (ModelState.IsValid) if (userValidator(user.username, user.password))
             {
 
@@ -37,13 +37,15 @@ namespace TimetablingSystem.Controllers
                 return RedirectToAction("Home", "Main");
 
             }
-
+            
             return View();
         }
 
         public ActionResult LogOut()
         {
-            return View();
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("LogIn", "User");
         }
 
         private bool userValidator(string username, string password) {

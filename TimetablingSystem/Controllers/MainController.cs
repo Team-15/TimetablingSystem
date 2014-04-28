@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace TimetablingSystem.Controllers
 {
+    [Authorize]
     public class MainController : Controller
     {
+
         public ActionResult Home()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            //return RedirectToAction("Login", "User");
+            ViewBag.Message = Session.SessionID;
+            
             if (Request.IsAjaxRequest()) return PartialView();
 
             return View();
