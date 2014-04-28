@@ -51,7 +51,7 @@ namespace TimetablingSystem.Controllers
         private bool userValidator(string username, string password) {
 
             bool valid = true;
-
+            /*
             using (var _db = new TimetablingSystemContext())
             {
 
@@ -60,7 +60,7 @@ namespace TimetablingSystem.Controllers
                 if (user != null) if (user.hash == password) valid = true;
 
             }
-
+            */
             return valid;
 
         }
