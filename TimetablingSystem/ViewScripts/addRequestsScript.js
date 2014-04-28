@@ -21,6 +21,14 @@ function createObjects() {
      module2.deptCode = "CO";
      module1.active = true;
      module2.active = true;
+     //dummy facilities till we have the db DATA hurry up JB ;)
+     facility1 = new Facility();
+     facility2 = new Facility();
+     facilityArray = [facility1, facility2];
+     facility1.id = 0;
+     facility2.id = 1;
+     facility1.name = "table tennis";
+     facility2.name = "skydiving";
      //create new request for this instance
      newRequest = new Request();
 }
@@ -30,10 +38,9 @@ function createObjects() {
 function facilityStore() {
 
     newRequest.priority = ($("#PRY").selected ? true : false);
-    newRequest.noOfRooms = $("#NOR").val;
-    newRequest.otherReqs = $("#ORE").val;
-    newRequest.students = $("#CAP").val;
-    console.log(newRequest.students);
+    newRequest.noOfRooms = $("#NOR").val();
+    newRequest.otherReqs = $("#ORE").val();
+    newRequest.students = $("#CAP").val();
 }
 
 //populate module titles and codes
@@ -93,4 +100,12 @@ function tableSelector(gridRef) {
 
 //FIXME convert facilities to be spawned here
 function facilityPopulate() {
+    var tempStr = "";
+    tempStr += "<table class='table reqTable'>";
+    for (var i = 0; i < facilityArray.length; i++) {
+        console.log("what a noob");
+        tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore()'>" + facilityArray[i].name + "</td>";
+    }
+    tempStr += "</table>";
+    $("#propertiesBox").append(tempStr);
 }

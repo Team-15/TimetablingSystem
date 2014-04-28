@@ -9,53 +9,6 @@
         <div id="propertiesBox">
             <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="ModuleSelector(this)"></select></br>
             <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="ModuleSelector(this)"></select></br>
-            <table class='table reqTable'>
-                <tr>
-                    <td><input type='checkbox' class='specReq' id='QUR' onchange='facilityStore()'>Quality Room</td>
-                    <td><input type='checkbox' class='specReq' id='WHC' onchange='facilityStore()'>Wheelchair</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='specReq' id='DP1' onchange='facilityStore()'>Data Projector</td>
-                    <td><input type='checkbox' class='specReq' id='DP2' onchange='facilityStore()' disabled='true'>(Second) Data Projector</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='specReq' id='VIS' onchange='facilityStore()'>Visualiser</td>
-                    <td><input type='checkbox' class='specReq' id='VDB' onchange='facilityStore()'>Video/DVD/BluRay</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='specReq' id='CMP' onchange='facilityStore()'>Computer</td>
-                    <td><input type='checkbox' class='specReq' id='WHB' onchange='facilityStore()'>Whiteboard</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='specReq' id='CHB' onchange='facilityStore()'>Chalkboard</td>
-                    <td><input type='checkbox' class='specReq' id='NER' onchange='facilityStore()'>Near Previous Room</td>
-                </tr>
-                <tr>
-                    <td>No of Students:</td><td><input type='textbox' class='specReqText' id='CAP' value='50' onchange='facilityStore()'></td>
-                </tr>
-                <tr>
-                    <td>Park:</td>
-                    <td>
-                        <select id='PRK' onchange='facilityStore()' class='modChooser'>
-                            <option value='ANY' selected>Any</option>
-                            <option value='E'>East</option>
-                            <option value='C'>Central</option>
-                            <option value='W'>West</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Other Requirements:</td>
-                    <td><input type='textbox' class='specReqText' onchange='facilityStore()' id='ORE' placeholder='Type here...'></td>
-                </tr>
-                <tr><td></td><td><label id='charToGo'> </label></td></tr>
-                <tr><td>Number of rooms:</td><td><select id='NOR'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option></select></td></tr>
-                <tr>
-                    <td>Priority:</td><td>
-                        <input type='radio' class='specReqP' id='PRY' name='Priority' >Yes
-                        <input type='radio' class='specReqP' id='PRN' name='Priority' >No</td>
-                </tr>
-            </table>
         </div>
         <div id="weekSelect">
         </div>
