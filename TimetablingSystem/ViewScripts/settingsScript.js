@@ -43,10 +43,10 @@ function table() {
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button type="button" onclick="edit(' + i + ')">edit</button>'
+        tbl += '<button id=edit'+i+' type="button">edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button type="button" onclick="remove(' + i + ')">delete</button>'
+        tbl += '<button id=delete'+i+' type="button">delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
@@ -70,6 +70,7 @@ function add() {
 
 function remove(index) {
     modulesArray.splice(index, 1);
+    alert("hello");
     table();
 }
 
@@ -124,3 +125,17 @@ $("#addbutton").click(function () {
 $("#resetbutton").click(function () {
     reset();
 });
+
+for (var i = 0; i < modulesArray.length; i++) {
+    $("#delete" + i).click(function () {
+        var delid = this.id.substring(6, 7);
+        remove(delid);
+    });
+}
+
+for (var i = 0; i < modulesArray.length; i++) {
+    $("#edit" + i).click(function () {
+        var editid = this.id.substring(4, 5);
+        edit(editid);
+    });
+}
