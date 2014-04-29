@@ -10,7 +10,7 @@ namespace TimetablingSystem.Models
     {
 
         [Required]
-        [Display(Name="Username/Department")]
+        [Display(Name="Department")]
         public string username { get; set; }
 
         [Required]

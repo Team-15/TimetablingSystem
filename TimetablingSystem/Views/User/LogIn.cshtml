@@ -13,10 +13,11 @@
 
         <fieldset>
 
-            <legend></legend>
-            <div>@Html.Label("Username")</div>
+            <legend>Login</legend>
+            <div>@Html.LabelFor(user => user.username)</div>
             <div>
-                @Html.TextBoxFor(user => user.username)
+                @*@Html.TextBoxFor(user => user.username)*@
+                @Html.DropDownListFor(user => user.username, ViewData["userList"] as List<SelectListItem>, "Please Select")
                 @Html.ValidationMessageFor(user => user.username)
             </div>
 
@@ -31,5 +32,6 @@
         </fieldset>
 
     </div>
+        
     
 }

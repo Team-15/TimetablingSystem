@@ -329,6 +329,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="ViewScripts\addRequestsScript.js" />
+    <Content Include="ViewScripts\logoutScript.js" />
     <Content Include="ViewScripts\parentScript.js" />
     <Content Include="ViewScripts\settingsScript.js" />
     <Content Include="Web.config">
@@ -380,6 +381,7 @@
     <Content Include="Views\Display\MyBookings.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Shared\_AuthorizeView.cshtml" />
+    <Content Include="Views\User\LogOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

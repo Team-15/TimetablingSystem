@@ -15,6 +15,8 @@ namespace TimetablingSystem.Controllers
         {
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+            ViewBag.Message = HttpContext.User.Identity.Name;
+
             if (Request.IsAjaxRequest()) return PartialView();
 
             return View();

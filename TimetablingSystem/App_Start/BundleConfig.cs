@@ -30,6 +30,12 @@ namespace TimetablingSystem
             bundles.Add(new ScriptBundle("~/bundles/settings").Include(
                         "~/ViewScripts/settingsScript.js"));
 
+            
+            
+            
+            bundles.Add(new ScriptBundle("~/bundles/logout").Include(
+                        "~/ViewScripts/logoutScript.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

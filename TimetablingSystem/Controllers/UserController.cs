@@ -18,7 +18,8 @@ namespace TimetablingSystem.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            
+
+            ViewData["userList"] = GetUserList();
 
             return View();
         }
@@ -27,27 +28,95 @@ namespace TimetablingSystem.Controllers
         public ActionResult LogIn(Models.UserModel user)
         {
             
-            if (ModelState.IsValid) if (userValidator(user.username, user.password))
+            if (ModelState.IsValid)
             {
-                
-               FormsAuthentication.SetAuthCookie(user.username, false); 
 
-                return RedirectToAction("Home", "Main");
+                if (UserValidator(user.username, user.password))
+                {
+
+                    FormsAuthentication.SetAuthCookie(user.username, false);
+
+                    return RedirectToAction("Home", "Main");
+
+                } 
 
             }
-            
+
+            ViewData["userList"] = GetUserList();
+
             return View();
         }
 
         [AllowAnonymous]
-        public ActionResult LogOut()
+        public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut();
+             FormsAuthentication.SignOut();
 
-            return RedirectToAction("LogIn", "User");
+             return RedirectToAction("LogOut", "User");
         }
 
-        private bool userValidator(string username, string password) {
+        public ActionResult LogOut()
+        {
+            return View();
+        }
+
+
+        [Authorize]
+        public ActionResult SetupUsers()
+        {
+   
+            using (var _db = new TimetablingSystemContext())
+            {
+
+                var deptList = _db.departments;
+
+                foreach (DBInterface.department dept in deptList)
+                {
+                    
+                    dept.salt = GenerateSalt();
+                    dept.hashedPassword = HashPassword("password", dept.salt);
+                    
+                }
+
+                _db.SaveChanges();
+                
+            }
+            
+            return Content("All users returned to default password");
+
+        }
+
+
+
+        private List<SelectListItem> GetUserList() {
+
+            List<SelectListItem> userList = new List<SelectListItem>();
+
+            using (var _db = new TimetablingSystemContext())
+            {
+
+                var deptList =
+                    from dept in _db.departments
+                    orderby dept.name ascending
+                    select dept;
+
+                foreach (DBInterface.department dept in deptList)
+                {
+                    userList.Add(new SelectListItem
+                    {
+                        Text = dept.code + " - " + dept.name,
+                        Value = dept.code
+                    });
+                }
+
+            }
+
+
+            return userList;
+        }
+
+
+        private bool UserValidator(string username, string password) {
 
             bool valid = false;
 
@@ -58,7 +127,13 @@ namespace TimetablingSystem.Controllers
 
                 var user = _db.departments.FirstOrDefault(data => data.code == username);
 
-                if (user != null) if (user.hashedPassword != password) valid = true;
+                string hashedUserInput = HashPassword(password, user.salt);
+
+                if (user != null){
+
+                    if (user.hashedPassword == hashedUserInput) valid = true;
+                    else ModelState.AddModelError("password", "The Password is Incorrect");
+                }
 
             }
             
@@ -67,94 +142,33 @@ namespace TimetablingSystem.Controllers
         }
 
 
+        private static string GenerateSalt() {
 
-        private static string GenerateSaltValue()
-        {
-            UnicodeEncoding utf16 = new UnicodeEncoding();
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] saltBytes = new byte[4];
+            rng.GetNonZeroBytes(saltBytes);
 
-            if (utf16 != null)
-            {
-                // Create a random number object seeded from the value
-                // of the last random seed value. This is done
-                // interlocked because it is a static value and we want
-                // it to roll forward safely.
+            return Convert.ToBase64String(saltBytes);
 
-                Random random = new Random(unchecked((int)DateTime.Now.Ticks));
-
-                if (random != null)
-                {
-                    // Create an array of random values.
-
-                    byte[] saltValue = new byte[10];
-
-                    random.NextBytes(saltValue);
-
-                    // Convert the salt value to a string. Note that the resulting string
-                    // will still be an array of binary values and not a printable string. 
-                    // Also it does not convert each byte to a double byte.
-
-                    string saltValueString = utf16.GetString(saltValue);
-
-                    // Return the salt value as a string.
-
-                    return saltValueString;
-                }
-            }
-
-            return null;
         }
 
-        private static string HashPassword(string clearData, string saltValue, HashAlgorithm hash)
-        {
-            UnicodeEncoding encoding = new UnicodeEncoding();
 
-            if (clearData != null && hash != null && encoding != null)
-            {
-                // If the salt string is null or the length is invalid then
-                // create a new valid salt value.
+        private static string HashPassword(string password, string salt) {
 
-                if (saltValue == null)
-                {
-                    // Generate a salt string.
-                    saltValue = GenerateSaltValue();
-                }
+            string saltedPassword = salt + password;
 
-                // Convert the salt string and the password string to a single
-                // array of bytes. Note that the password string is Unicode and
-                // therefore may or may not have a zero in every other byte.
+            Byte[] passwordBytes = Encoding.UTF8.GetBytes(saltedPassword);
 
-                byte[] binarySaltValue = new byte[4];
+            HashAlgorithm encoder = new SHA256CryptoServiceProvider();
 
-                binarySaltValue[0] = byte.Parse(saltValue.Substring(0, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-                binarySaltValue[1] = byte.Parse(saltValue.Substring(2, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-                binarySaltValue[2] = byte.Parse(saltValue.Substring(4, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-                binarySaltValue[3] = byte.Parse(saltValue.Substring(6, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
+            Byte[] hashedPassword = encoder.ComputeHash(passwordBytes);
 
-                byte[] valueToHash = new byte[4 + encoding.GetByteCount(clearData)];
-                byte[] binaryPassword = encoding.GetBytes(clearData);
 
-                // Copy the salt value and the password to the hash buffer.
+            //return hashedPassword.ToString();
 
-                binarySaltValue.CopyTo(valueToHash, 0);
-                binaryPassword.CopyTo(valueToHash, 4);
+            return BitConverter.ToString(hashedPassword);
 
-                byte[] hashValue = hash.ComputeHash(valueToHash);
-
-                // The hashed password is the salt plus the hash value (as a string).
-
-                string hashedPassword = saltValue;
-
-                foreach (byte hexdigit in hashValue)
-                {
-                    hashedPassword += hexdigit.ToString("X2", CultureInfo.InvariantCulture.NumberFormat);
-                }
-
-                // Return the hashed password as a string.
-
-                return hashedPassword;
-            }
-
-            return null;
+            
         }
 
 

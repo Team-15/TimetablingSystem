@@ -25,7 +25,8 @@ namespace TimetablingSystem.DBInterface
                     select mRes;
 
             return Json(moduleQuery.Select(
-                x => new { 
+                x => new
+                {
                     code = x.code,
                     title = x.title,
                     deptCode = x.deptCode,
