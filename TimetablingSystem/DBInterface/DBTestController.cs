@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace TimetablingSystem.DBInterface
 {
+    [Authorize]
     public class DBTestController : Controller
     {
         //
@@ -13,6 +14,7 @@ namespace TimetablingSystem.DBInterface
 
         TimetablingSystemContext _db = new TimetablingSystemContext();
 
+        [HttpPost]
         public ActionResult Index()
         {
 

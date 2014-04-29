@@ -22,7 +22,7 @@ namespace TimetablingSystem.DBInterface
         public string code { get; set; }
         public string name { get; set; }
         public string salt { get; set; }
-        public string hash { get; set; }
+        public string hashedPassword { get; set; }
     
         public virtual ICollection<module> modules { get; set; }
     }

@@ -1,4 +1,4 @@
-﻿var currentSessionID = "";
+﻿//var currentSessionID = "";
 
 
 var department = "";

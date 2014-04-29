@@ -17,9 +17,10 @@
             <div>@Html.Label("Username")</div>
             <div>
                 @Html.TextBoxFor(user => user.username)
+                @Html.ValidationMessageFor(user => user.username)
             </div>
 
-            <div>@Html.Label("Password")</div>
+            <div>@Html.LabelFor(user => user.password)</div>
             <div>
                 @Html.PasswordFor(user => user.password)
                 @Html.ValidationMessageFor(user => user.password)
