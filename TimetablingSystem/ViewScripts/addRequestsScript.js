@@ -141,9 +141,15 @@ function facilityPopulate() {
 function roomListPopulate() {
     var tempStr = "";
     for (var i = 0; i < roomsArray.length; i++) {
-        tempStr += "<input type='button' value='" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")'><br>";
+        tempStr += "<input type='checkbox' id='" + roomsArray[i].code + "' data-counter='room-" + i + "'>" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")<br>";
     }
-    tempStr += "<input type='button' value='clear' onclick=''>";
+    tempStr += "<input type='button' value='clear' onclick='clearRoomSel()'>";
     tempStr += "<input type='button' value='sort' onclick='sortCap()'>";
     $('#roomList').append(tempStr);
+}
+
+function clearRoomSel() {
+    for (var i = 0; i < roomsArray.length; i++) {
+        $('input[data-counter="room-' + i + '"]').attr('checked', false);
+    }
 }
