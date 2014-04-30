@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace TimetablingSystem.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MainController : Controller
     {
 

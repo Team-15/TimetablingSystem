@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace TimetablingSystem.Controllers
 {
+
+    //[Authorize]
     public class DisplayController : Controller
     {
         //
