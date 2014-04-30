@@ -92,6 +92,7 @@ namespace TimetablingSystem.Controllers
 
             List<SelectListItem> userList = new List<SelectListItem>();
 
+
             using (var _db = new TimetablingSystemContext())
             {
 
@@ -122,10 +123,14 @@ namespace TimetablingSystem.Controllers
 
             username = username.ToUpper();
             
-            using (var _db = new TimetablingSystemContext())
-            {
+            //using (var _db = new TimetablingSystemContext())
+            //{
 
-                var user = _db.departments.FirstOrDefault(data => data.code == username);
+            DeptModController deptMod = new DeptModController();
+
+                //var user = _db.departments.FirstOrDefault(data => data.code == username);
+
+            var user = deptMod.GetAuthorisedDepartment(username);
 
                 string hashedUserInput = HashPassword(password, user.salt);
 
@@ -135,7 +140,7 @@ namespace TimetablingSystem.Controllers
                     else ModelState.AddModelError("password", "The Password is Incorrect");
                 }
 
-            }
+           // }
             
             return valid;
 

@@ -1,32 +1,65 @@
-﻿var module0 = new Module();
+﻿var modulesArray = null;
 
-module0.code = "COA123";
-module0.title = "Test module 1";
-module0.deptCode = "CO";
-module0.active = true;
+$(document).ready(function () {
 
-var module1 = new Module();
+    modulesArray = setupDummyModules();
 
-module1.code = "COA124";
-module1.title = "Test module 2";
-module1.deptCode = "CO";
-module1.active = true;
+    table();
 
-var module2 = new Module();
+    
+    
 
-module2.code = "COA125";
-module2.title = "Test module 3";
-module2.deptCode = "CO";
-module2.active = true;
+    /*
+    $("#addbutton").click(function () {
+        add();
+    });
 
-var module3 = new Module();
+    $("#resetbutton").click(function () {
+        reset();
+    });
 
-module3.code = "COA126";
-module3.title = "Test module 4";
-module3.deptCode = "CO";
-module3.active = true;
+    */
 
-var modulesArray = [module0, module1, module2, module3];
+});
+
+function setupDummyModules() {
+
+    var module0 = new Module();
+
+    module0.code = "COA123";
+    module0.title = "Test module 1";
+    module0.deptCode = "CO";
+    module0.active = true;
+
+    var module1 = new Module();
+
+    module1.code = "COA124";
+    module1.title = "Test module 2";
+    module1.deptCode = "CO";
+    module1.active = true;
+
+    var module2 = new Module();
+
+    module2.code = "COA125";
+    module2.title = "Test module 3";
+    module2.deptCode = "CO";
+    module2.active = true;
+
+    var module3 = new Module();
+
+    module3.code = "COA126";
+    module3.title = "Test module 4";
+    module3.deptCode = "CO";
+    module3.active = true;
+
+    alert("Done");
+    return [module0, module1, module2, module3];
+    
+}
+
+
+
+
 
 
 function table() {
@@ -43,31 +76,32 @@ function table() {
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id=edit'+i+' type="button">edit</button>'
+        tbl += '<button id="edit'+i+'" type="button">edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id=delete'+i+' type="button">delete</button>'
+        tbl += '<button id="delete'+i+'" type="button">delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
     }
     tbl += '</table>';
     document.getElementById('tablediv').innerHTML = tbl;
+    setupDelete();
+    setupEdit();
 }
 
-
+/*
 function add() {
-    var last = modulesArray.length;
-    var Modnamenew = document.getElementById("name").value;
-    var Modcodenew = document.getElementById("code").value;
-    var newmodule = "module".concat(last);
-    var newmodule = new Module();
-    modulesArray.push(newmodule);
-    modulesArray[last].code = Modcodenew;
-    modulesArray[last].title = Modnamenew;
+
+    var newModule = new Module();
+    newModule.code = $("#code").val;
+    newModule.title = $("#name").val;
+
+    modulesArray.push(newModule);
+
     table();
 }
-
+*/
 function remove(index) {
     modulesArray.splice(index, 1);
     alert("hello");
@@ -75,13 +109,14 @@ function remove(index) {
 }
 
 function edit(index) {
-    var nCode = window.prompt("Please enter the new Code", modulesArray[index].code);
-    modulesArray[index].code = nCode;
-    var nTitle = window.prompt("Please enter the new Title", modulesArray[index].title);
-    modulesArray[index].title = nTitle;
+    modulesArray[index].code = window.prompt("Please enter the new Code", modulesArray[index].code);
+    modulesArray[index].title = window.prompt("Please enter the new Title", modulesArray[index].title);
     table();
 }
 
+
+
+/*
 var newpass = "";
 var newpass1 = "";
 var pass = "";
@@ -114,28 +149,25 @@ function reset() {
 
 }
 
-$(document).ready(function () {
-    table();
-});
+*/
 
-$("#addbutton").click(function () {
-    add();
-});
 
-$("#resetbutton").click(function () {
-    reset();
-});
-
-for (var i = 0; i < modulesArray.length; i++) {
-    $("#delete" + i).click(function () {
-        var delid = this.id.substring(6, 7);
-        remove(delid);
-    });
+function setupDelete() {
+    for (var i = 0; i < modulesArray.length; i++) {
+        $("#delete" + i).data("index", i);
+        $("#delete" + i).click(function () {
+            
+            remove($(this).data("index"));
+        });
+    }
 }
 
-for (var i = 0; i < modulesArray.length; i++) {
-    $("#edit" + i).click(function () {
-        var editid = this.id.substring(4, 5);
-        edit(editid);
-    });
+function setupEdit() {
+    for (var i = 0; i < modulesArray.length; i++) {
+        $("#edit" + i).data("index", i);
+        $("#edit" + i).click(function () {
+            alert($(this).data("index"));
+            edit($(this).data("index"));
+        });
+    }
 }

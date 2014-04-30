@@ -1,4 +1,12 @@
-﻿//Module Object Class
+﻿function Department() {
+
+    this.code = "";
+    this.name = "";
+
+}
+
+
+//Module Object Class
 function Module() {
 
     this.code = "";
