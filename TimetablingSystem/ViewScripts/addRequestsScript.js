@@ -35,12 +35,17 @@ function createObjects() {
 
 //FIXME finish the rest of these being stored in the facility array
 //store user-chosen facilities in request instance
-function facilityStore() {
+function facilityStore(checkbox) {
+    if (checkbox.checked == true) {
+        newRequest.facilities.push(checkbox.id);
+    }
+}
 
-    newRequest.priority = ($("#PRY").selected ? true : false);
-    newRequest.noOfRooms = $("#NOR").val();
+function sizeLocation() {
     newRequest.otherReqs = $("#ORE").val();
     newRequest.students = $("#CAP").val();
+    newRequest.priority = ($("#PRY").selected ? true : false);
+    newRequest.noOfRooms = $("#NOR").val();
 }
 
 //populate module titles and codes
@@ -56,10 +61,11 @@ function modulePopulate() {
 }
 
 function weekCreator() {
+    numberOfWeeks = 15; //temp set
     var tempStr = "";
-    tempStr += "<table class = ''>Weeks";
-    for (var i = 0; i < numberOfWeeks; i++) {
-        tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick='getBookedRooms()'>" + i;
+    tempStr += "<table class = ''>Weeks: ";
+    for (var i = 1; i <= numberOfWeeks; i++) {
+        tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + i;
     }
     $("#weekSelect").append(tempStr);
 }
@@ -75,7 +81,7 @@ function tableCreator() {
     for (var i = 0; i < 5; i++) {
         tempStr += "<tr> <td onclick='tableSelector(this.id)' id=weekGridHeader" + i + ">" + shortDaysArray[i] + "</td>";
         for (var j = 0; j < 9; j++) {
-            tempStr += "<td onclick='tableSelector(this.id)' id=weekGrid" + i + j + ">clickme</td>";
+            tempStr += "<td onclick='tableSelector(this.id)' id=weekGrid" + i + j + ">no</td>";
         }
         tempStr += "</tr>";
     }
@@ -90,10 +96,12 @@ function tableSelector(gridRef) {
             $("#" + gridRef).removeClass("gridClicked");
             $("#" + gridRef).addClass("grid");
             console.log(gridRef + " disabled");
+            $("#" + gridRef).html("no");
         } else {
             $("#" + gridRef).removeClass("grid");
             $("#" + gridRef).addClass("gridClicked");
             console.log(gridRef + " enabled");
+            $("#" + gridRef).html("yes");
         }
     }
 }
@@ -103,9 +111,16 @@ function facilityPopulate() {
     var tempStr = "";
     tempStr += "<table class='table reqTable'>";
     for (var i = 0; i < facilityArray.length; i++) {
-        console.log("what a noob");
-        tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore()'>" + facilityArray[i].name + "</td>";
+        tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore(this)'>" + facilityArray[i].name + "</td>";
     }
-    tempStr += "</table>";
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='sizeLocation()' value='50'></td></tr>";
+    tempStr += "<tr><td>Park: <select id='parkSel'>";
+    for (var j = 0; j < parksArray.length; j++) {
+        tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
+    }
+    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='sizeLocation()' id='ORE'>";
+    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='sizeLocation()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='sizeLocation()'><input type='radio' id='PRF' name='priority' value='false' onchange='sizeLocation()'></td></tr>";
+    tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
