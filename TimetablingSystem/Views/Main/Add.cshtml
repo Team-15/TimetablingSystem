@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+        <div id="propertiesBox">
+            Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="ModuleSelector(this)"></select><br>
+            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="ModuleSelector(this)"></select>
+        </div>
+        <div id="weekSelect">
+        </div>
+        <div id="weekTable">
+        </div>
+  </div>
+  <div class="col-md-4">
+    <div id="roomList">
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+@Scripts.Render("~/bundles/addRequests")
