@@ -5,32 +5,45 @@ $(document).ready(function () {
     tableCreator();
     modulePopulate();
     facilityPopulate();
+    roomListPopulate();
 });
 
 
 function createObjects() {
     //dummy modules till we have the db dataaaa
-     module1 = new Module();
-     module2 = new Module();
-     modulesArray = [module1, module2];
-     module1.code = "COA123";
-     module2.code = "COA124";
-     module1.title = "useless module 1";
-     module2.title = "boring module 2";
-     module1.deptCode = "CO";
-     module2.deptCode = "CO";
-     module1.active = true;
-     module2.active = true;
-     //dummy facilities till we have the db DATA hurry up JB ;)
-     facility1 = new Facility();
-     facility2 = new Facility();
-     facilityArray = [facility1, facility2];
-     facility1.id = 0;
-     facility2.id = 1;
-     facility1.name = "table tennis";
-     facility2.name = "skydiving";
-     //create new request for this instance
-     newRequest = new Request();
+    module1 = new Module();
+    module2 = new Module();
+    modulesArray = [module1, module2];
+    module1.code = "COA123";
+    module2.code = "COA124";
+    module1.title = "useless module 1";
+    module2.title = "boring module 2";
+    module1.deptCode = "CO";
+    module2.deptCode = "CO";
+    module1.active = true;
+    module2.active = true;
+    //dummy facilities till we have the db DATA hurry up JB ;)
+    facility1 = new Facility();
+    facility2 = new Facility();
+    facilityArray = [facility1, facility2];
+    facility1.id = 0;
+    facility2.id = 1;
+    facility1.name = "table tennis";
+    facility2.name = "skydiving";
+    //dummy rooms till we have the DB JEEZ HE'S TAKING FUCKING AGES
+    room1 = new Room();
+    room2 = new Room();
+    roomsArray = [room1, room2];
+    room1.code = "N.0.01";
+    room2.code = "N.0.02";
+    room1.type = "Lab";
+    room2.type = "Lecture";
+    room1.capacity = 50;
+    room2.capacity = 80;
+    room2.facilities = [0,1];
+    room2.facilities = [2];
+    //create new request for this instance
+    newRequest = new Request();
 }
 
 //FIXME finish the rest of these being stored in the facility array
@@ -120,7 +133,17 @@ function facilityPopulate() {
     }
     tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='sizeLocation()' id='ORE'>";
     tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='sizeLocation()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='sizeLocation()'><input type='radio' id='PRF' name='priority' value='false' onchange='sizeLocation()'></td></tr>";
+    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='sizeLocation()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='sizeLocation()'>no</td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
+}
+
+function roomListPopulate() {
+    var tempStr = "";
+    for (var i = 0; i < roomsArray.length; i++) {
+        tempStr += "<input type='button' value='" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")'><br>";
+    }
+    tempStr += "<input type='button' value='clear' onclick=''>";
+    tempStr += "<input type='button' value='sort' onclick='sortCap()'>";
+    $('#roomList').append(tempStr);
 }
