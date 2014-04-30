@@ -196,6 +196,7 @@
     <Compile Include="DBInterface\semester.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\TestDeptController.cs" />
     <Compile Include="DBInterface\TimetablingSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

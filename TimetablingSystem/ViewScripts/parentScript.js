@@ -32,5 +32,19 @@
     alert(weeksDecoder(y));
     alert(weeksReadableFormat(x));
     */
-
+    getStuff();
 });
+
+function getStuff() {
+    
+    $.ajax({
+        url: "api/deptmod/GetAllDepartments",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            alert(JSON.stringify(results));
+        }
+    });
+
+}

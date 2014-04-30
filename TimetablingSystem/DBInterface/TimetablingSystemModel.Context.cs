@@ -18,6 +18,7 @@ namespace TimetablingSystem.DBInterface
         public TimetablingSystemContext()
             : base("name=TimetablingSystemContext")
         {
+            //Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

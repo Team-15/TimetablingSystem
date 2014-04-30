@@ -36,11 +36,12 @@ var adHocYear = 0;
 var adHocNumberOfWeeks = 1;
 
 
+var activedepartmentModules = [];
+
 var departmentModules = [];
 
-var allDepartmentModules = [];
-
-var otherModules = [];
+//Move to script file dealing with all bookings view
+//var allModules = [];
 
 var facilitiesArray = [];
 

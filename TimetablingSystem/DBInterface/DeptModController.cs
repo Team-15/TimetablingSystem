@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
-using System.Web.Security;
 
 namespace TimetablingSystem.DBInterface
 {
-    [Authorize]
+    //[Authorize]
     public class DeptModController : ApiController
     {
 
@@ -38,18 +41,18 @@ namespace TimetablingSystem.DBInterface
 
             IEnumerable<department> deptList = _db.departments.OrderBy(d => d.name);
 
-            return deptList;
+            return deptList.AsEnumerable();
 
         }
 
 
 
-        public IEnumerable<module> GetActiveDepartmentModules()
+        public IEnumerable<module> GetActivetModules()
         {
 
             var moduleList =
                 from mods in _db.modules
-                where mods.active == true
+                where mods.active == true && mods.department == GetAuthorisedDepartment()
                 select mods;
 
 
@@ -57,7 +60,7 @@ namespace TimetablingSystem.DBInterface
 
         }
 
-        public IEnumerable<module> GetAllDepartmentModules()
+        public IEnumerable<module> GetDepartmentModules()
         {
             var moduleList =
                 from mods in _db.modules
@@ -68,6 +71,18 @@ namespace TimetablingSystem.DBInterface
 
         }
 
+        public IEnumerable<module> GetAllModules()
+        {
+
+            var moduleList = 
+                from mods in _db.modules
+                where mods.active == true
+                select mods;
+
+
+            return moduleList;
+
+        }
 
     }
 }
