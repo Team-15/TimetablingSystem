@@ -86,15 +86,15 @@ function weekCreator() {
 //creates period grid selector
 function tableCreator() {
     var tempStr = "";
-    tempStr += "<table class = ''><tr><th>Day</th>";
+    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'>Times / Periods</th><tr>";
     for (var h = 0; h < startPeriodsArray.length; h++) {
-        tempStr += "<th>" + startPeriodsArray[h] + " - " + endPeriodsArray[h] + "</th>";
+        tempStr += "<th class = gridHeader>" + startPeriodsArray[h] + " - " + endPeriodsArray[h] + "</th>";
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td onclick='tableSelector(this.id)' id=weekGridHeader" + i + ">" + shortDaysArray[i] + "</td>";
+        tempStr += "<tr> <td onclick='tableSelector(this.id)' class='gridHeader' id=gridHeader" + i + ">" + shortDaysArray[i] + "</td>";
         for (var j = 0; j < 9; j++) {
-            tempStr += "<td onclick='tableSelector(this.id)' id=weekGrid" + i + j + ">no</td>";
+            tempStr += "<td onclick='tableSelector(this.id)'class='gridWeek' id=gridWeek" + i + j + ">no</td>";
         }
         tempStr += "</tr>";
     }
@@ -105,7 +105,7 @@ function tableCreator() {
 //tracks user-selected periods in the period grid
 function tableSelector(gridRef) {
     if ($("#" + gridRef).attr('class') != 'gridBooked') {
-        if ($("#" + gridRef).attr('class') == 'gridClicked') {
+        if ($("#" + gridRef).hasClass('gridClicked')) {
             $("#" + gridRef).removeClass("gridClicked");
             $("#" + gridRef).addClass("grid");
             console.log(gridRef + " disabled");
