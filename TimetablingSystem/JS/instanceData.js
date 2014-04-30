@@ -36,6 +36,12 @@ var adHocYear = 0;
 var adHocNumberOfWeeks = 1;
 
 
+var departmentModules = [];
+
+var allDepartmentModules = [];
+
+var otherModules = [];
+
 var facilitiesArray = [];
 
 

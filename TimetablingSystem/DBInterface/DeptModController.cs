@@ -14,23 +14,60 @@ namespace TimetablingSystem.DBInterface
 
         private TimetablingSystemContext _db = new TimetablingSystemContext();
 
-        public IEnumerable<department> GetAllDepartments()
-        {
-
-            var deptList = _db.departments;
-
-            return deptList;
-
-        }
-
-        public department GetAuthorisedDepartment(string code)
-        {
+        [AllowAnonymous]
+        public department GetDepartment(string code)
+        { 
 
             department dept = _db.departments.FirstOrDefault(d => d.code == code);
 
             return dept;
 
         }
+        
+        public department GetAuthorisedDepartment()
+        {
+
+            department dept = _db.departments.FirstOrDefault(d => d.code == User.Identity.Name);
+
+            return dept;
+
+        }
+
+        public IEnumerable<department> GetAllDepartments()
+        {
+
+            IEnumerable<department> deptList = _db.departments.OrderBy(d => d.name);
+
+            return deptList;
+
+        }
+
+
+
+        public IEnumerable<module> GetActiveDepartmentModules()
+        {
+
+            var moduleList =
+                from mods in _db.modules
+                where mods.active == true
+                select mods;
+
+
+            return moduleList;
+
+        }
+
+        public IEnumerable<module> GetAllDepartmentModules()
+        {
+            var moduleList =
+                from mods in _db.modules
+                where mods.department == GetAuthorisedDepartment()
+                select mods;
+
+            return moduleList;
+
+        }
+
 
     }
 }

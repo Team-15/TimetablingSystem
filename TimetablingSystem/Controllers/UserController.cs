@@ -86,7 +86,7 @@ namespace TimetablingSystem.Controllers
 
         }
 
-
+        private DeptModController deptMod = new DeptModController();
 
         private List<SelectListItem> GetUserList() {
 
@@ -123,24 +123,16 @@ namespace TimetablingSystem.Controllers
 
             username = username.ToUpper();
             
-            //using (var _db = new TimetablingSystemContext())
-            //{
 
-            DeptModController deptMod = new DeptModController();
+            var user = deptMod.GetDepartment(username);
 
-                //var user = _db.departments.FirstOrDefault(data => data.code == username);
+            string hashedUserInput = HashPassword(password, user.salt);
 
-            var user = deptMod.GetAuthorisedDepartment(username);
-
-                string hashedUserInput = HashPassword(password, user.salt);
-
-                if (user != null){
-
-                    if (user.hashedPassword == hashedUserInput) valid = true;
-                    else ModelState.AddModelError("password", "The Password is Incorrect");
-                }
-
-           // }
+            if (user != null)
+            {
+                if (user.hashedPassword == hashedUserInput) valid = true;
+                else ModelState.AddModelError("password", "The Password is Incorrect");
+            }
             
             return valid;
 
