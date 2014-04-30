@@ -86,45 +86,36 @@ namespace TimetablingSystem.Controllers
 
         }
 
+
         private DeptModController deptMod = new DeptModController();
 
-        private List<SelectListItem> GetUserList() {
+        private List<SelectListItem> GetUserList() 
+        {
 
             List<SelectListItem> userList = new List<SelectListItem>();
 
+            IEnumerable<department> deptList = deptMod.GetAllDepartments();
 
-            using (var _db = new TimetablingSystemContext())
+            foreach (department dept in deptList)
             {
-
-                var deptList =
-                    from dept in _db.departments
-                    orderby dept.name ascending
-                    select dept;
-
-                foreach (DBInterface.department dept in deptList)
+                userList.Add(new SelectListItem
                 {
-                    userList.Add(new SelectListItem
-                    {
-                        Text = dept.code + " - " + dept.name,
-                        Value = dept.code
-                    });
-                }
-
+                    Text = dept.code + " - " + dept.name,
+                    Value = dept.code
+                });
             }
 
-
             return userList;
+
         }
 
 
-        private bool UserValidator(string username, string password) {
+        private bool UserValidator(string username, string password) 
+        {
 
             bool valid = false;
 
-            username = username.ToUpper();
-            
-
-            var user = deptMod.GetDepartment(username);
+            department user = deptMod.GetDepartment(username.ToUpper());
 
             string hashedUserInput = HashPassword(password, user.salt);
 
@@ -153,19 +144,13 @@ namespace TimetablingSystem.Controllers
         private static string HashPassword(string password, string salt) {
 
             string saltedPassword = salt + password;
-
             Byte[] passwordBytes = Encoding.UTF8.GetBytes(saltedPassword);
 
             HashAlgorithm encoder = new SHA256CryptoServiceProvider();
-
             Byte[] hashedPassword = encoder.ComputeHash(passwordBytes);
-
-
-            //return hashedPassword.ToString();
-
+            
             return BitConverter.ToString(hashedPassword);
 
-            
         }
 
 
