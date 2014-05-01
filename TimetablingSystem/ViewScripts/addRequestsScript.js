@@ -13,15 +13,25 @@ function createObjects() {
     //dummy modules till we have the db dataaaa
     module1 = new Module();
     module2 = new Module();
-    modulesArray = [module1, module2];
+    module3 = new Module();
+    module4 = new Module();
+    modulesArray = [module1, module2, module3, module4];
     module1.code = "COA123";
-    module2.code = "COA124";
-    module1.title = "useless module 1";
-    module2.title = "boring module 2";
+    module2.code = "4940KK";
+    module3.code = "AARETA";
+    module4.code = "DBR466";
+    module1.title = "useless module";
+    module2.title = "boring module";
+    module3.title = "FUN STUFF";
+    module4.title = "sleeping time";
     module1.deptCode = "CO";
     module2.deptCode = "CO";
+    module3.deptCode = "CO";
+    module4.deptCode = "CO";
     module1.active = true;
     module2.active = true;
+    module3.active = true;
+    module4.active = true;
     //dummy facilities till we have the db DATA hurry up JB ;)
     facility1 = new Facility();
     facility2 = new Facility();
@@ -151,5 +161,16 @@ function roomListPopulate() {
 function clearRoomSel() {
     for (var i = 0; i < roomsArray.length; i++) {
         $('input[data-counter="room-' + i + '"]').attr('checked', false);
+    }
+}
+
+function moduleSelector(changedValue) {
+    console.log(tempStr);
+    for (var i = 0; i < modulesArray.length; i++) {
+        if (modulesArray[i].title == tempStr) {
+            $("#modCodeSelect").val(modulesArray[i].code);
+        } else if (modulesArray[i].code == tempStr) {
+            $("#modTitleSelect").val(modulesArray[i].title);
+        }
     }
 }
