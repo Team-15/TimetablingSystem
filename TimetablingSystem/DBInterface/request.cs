@@ -37,10 +37,10 @@ namespace TimetablingSystem.DBInterface
         public int roundID { get; set; }
         public Nullable<byte> status { get; set; }
     
-        public virtual module module { get; set; }
-        public virtual round round { get; set; }
-        public virtual ICollection<facility> facilities { get; set; }
-        public virtual ICollection<room> roomsAlloc { get; set; }
-        public virtual ICollection<room> roomsPref { get; set; }
+        public virtual module module { internal get; set; }
+        public virtual round round { internal get; set; }
+        public virtual ICollection<facility> facilities { internal get; set; }
+        public virtual ICollection<room> roomsAlloc { internal get; set; }
+        public virtual ICollection<room> roomsPref { internal get; set; }
     }
 }

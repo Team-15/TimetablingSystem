@@ -417,7 +417,6 @@
           <Property Name="code" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="park" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="rooms" Relationship="team15Model.FK_room_building" FromRole="building" ToRole="room" />
         </EntityType>
         <EntityType Name="department">
           <Key>
@@ -426,7 +425,6 @@
           <Property Name="code" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="salt" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="modules" Relationship="team15Model.FK_module_department" FromRole="department" ToRole="module" />
           <Property Type="String" Name="hashedPassword" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="facility">
@@ -444,17 +442,16 @@
           </Key>
           <Property Name="code" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="title" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="deptCode" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="deptCode" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="department" Relationship="team15Model.FK_module_department" FromRole="module" ToRole="department" />
-          <NavigationProperty Name="requests" Relationship="team15Model.FK_request_module" FromRole="module" ToRole="request" />
+          <NavigationProperty Name="department" Relationship="team15Model.FK_module_department" FromRole="module" ToRole="department" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="request">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="moduleCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="moduleCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <Property Name="priority" Type="Boolean" Nullable="false" />
           <Property Name="day" Type="Byte" Nullable="false" />
           <Property Name="startPeriod" Type="Byte" Nullable="false" />
@@ -466,26 +463,26 @@
           <Property Name="roomType" Type="Byte" Nullable="false" />
           <Property Name="numberOfRooms" Type="Byte" Nullable="false" />
           <Property Name="otherRequirements" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="roundID" Type="Int32" Nullable="false" />
+          <Property Name="roundID" Type="Int32" Nullable="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <Property Name="status" Type="Byte" />
-          <NavigationProperty Name="module" Relationship="team15Model.FK_request_module" FromRole="request" ToRole="module" />
-          <NavigationProperty Name="round" Relationship="team15Model.FK_request_round" FromRole="request" ToRole="round" />
-          <NavigationProperty Name="facilities" Relationship="team15Model.requestFacility" FromRole="request" ToRole="facility" />
-          <NavigationProperty Name="roomsAlloc" Relationship="team15Model.roomAllocated" FromRole="request" ToRole="room" />
-          <NavigationProperty Name="roomsPref" Relationship="team15Model.roomPreference" FromRole="request" ToRole="room" />
+          <NavigationProperty Name="module" Relationship="team15Model.FK_request_module" FromRole="request" ToRole="module" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="round" Relationship="team15Model.FK_request_round" FromRole="request" ToRole="round" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="facilities" Relationship="team15Model.requestFacility" FromRole="request" ToRole="facility" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="roomsAlloc" Relationship="team15Model.roomAllocated" FromRole="request" ToRole="room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="roomsPref" Relationship="team15Model.roomPreference" FromRole="request" ToRole="room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="room">
           <Key>
             <PropertyRef Name="code" />
           </Key>
           <Property Name="code" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="buildingCode" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="buildingCode" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <Property Name="roomType" Type="Byte" Nullable="false" />
           <Property Name="capacity" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="building" Relationship="team15Model.FK_room_building" FromRole="room" ToRole="building" />
-          <NavigationProperty Name="requestsAlloc" Relationship="team15Model.roomAllocated" FromRole="room" ToRole="request" />
-          <NavigationProperty Name="facilities" Relationship="team15Model.roomFacility" FromRole="room" ToRole="facility" />
-          <NavigationProperty Name="requestsPref" Relationship="team15Model.roomPreference" FromRole="room" ToRole="request" />
+          <NavigationProperty Name="building" Relationship="team15Model.FK_room_building" FromRole="room" ToRole="building" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="requestsAlloc" Relationship="team15Model.roomAllocated" FromRole="room" ToRole="request" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="facilities" Relationship="team15Model.roomFacility" FromRole="room" ToRole="facility" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="requestsPref" Relationship="team15Model.roomPreference" FromRole="room" ToRole="request" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="round">
           <Key>
@@ -497,9 +494,8 @@
           <Property Name="endTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="adhoc" Type="Boolean" Nullable="false" />
           <Property Name="live" Type="Boolean" Nullable="false" />
-          <Property Name="semesterID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="requests" Relationship="team15Model.FK_request_round" FromRole="round" ToRole="request" />
-          <NavigationProperty Name="semester" Relationship="team15Model.FK_round_semester" FromRole="round" ToRole="semester" />
+          <Property Name="semesterID" Type="Int32" Nullable="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="semester" Relationship="team15Model.FK_round_semester" FromRole="round" ToRole="semester" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="semester">
           <Key>
@@ -509,7 +505,6 @@
           <Property Name="year" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="semesterNumber" Type="Byte" Nullable="false" />
           <Property Name="numberOfWeeks" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="rounds" Relationship="team15Model.FK_round_semester" FromRole="semester" ToRole="round" />
         </EntityType>
         <Association Name="FK_room_building">
           <End Role="building" Type="team15Model.building" Multiplicity="1">

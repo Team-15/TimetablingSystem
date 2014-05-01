@@ -38,8 +38,8 @@
 function getStuff() {
     
     $.ajax({
-        url: "api/deptmod/GetAllDepartments",
-        type: "GET",
+        url: "dbtest/index",
+        type: "POST",
         datatype: "JSON",
         data: {},
         success: function (results) {

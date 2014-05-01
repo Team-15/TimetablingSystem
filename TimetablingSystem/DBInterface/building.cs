@@ -14,15 +14,8 @@ namespace TimetablingSystem.DBInterface
     
     public partial class building
     {
-        public building()
-        {
-            this.rooms = new HashSet<room>();
-        }
-    
         public string code { get; set; }
         public string name { get; set; }
         public byte park { get; set; }
-    
-        public virtual ICollection<room> rooms { get; set; }
     }
 }

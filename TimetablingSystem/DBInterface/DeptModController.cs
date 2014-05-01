@@ -8,13 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Collections.Generic;
 
 namespace TimetablingSystem.DBInterface
 {
     //[Authorize]
     public class DeptModController : ApiController
     {
-
+        
         private TimetablingSystemContext _db = new TimetablingSystemContext();
 
         [AllowAnonymous]
@@ -41,7 +42,7 @@ namespace TimetablingSystem.DBInterface
 
             IEnumerable<department> deptList = _db.departments.OrderBy(d => d.name);
 
-            return deptList.AsEnumerable();
+            return deptList;
 
         }
 
@@ -66,21 +67,31 @@ namespace TimetablingSystem.DBInterface
                 from mods in _db.modules
                 where mods.department == GetAuthorisedDepartment()
                 select mods;
-
+            
             return moduleList;
 
         }
-
-        public IEnumerable<module> GetAllModules()
+        
+        public IEnumerable<module>  GetAllModules()
         {
 
             var moduleList = 
                 from mods in _db.modules
                 where mods.active == true
                 select mods;
-
-
+             
+            
+            
             return moduleList;
+
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+
+            if (_db != null) _db.Dispose();
+
+            base.Dispose(disposing);
 
         }
 
