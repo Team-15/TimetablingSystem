@@ -165,7 +165,7 @@ function clearRoomSel() {
 }
 
 function moduleSelector(changedValue) {
-    console.log(tempStr);
+    var tempStr = $(changedValue).val();
     for (var i = 0; i < modulesArray.length; i++) {
         if (modulesArray[i].title == tempStr) {
             $("#modCodeSelect").val(modulesArray[i].code);
