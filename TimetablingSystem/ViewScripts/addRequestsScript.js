@@ -16,7 +16,8 @@ function createObjects() {
     facility2 = new Facility();
     facility3 = new Facility();
     facility4 = new Facility();
-    facilityArray = [facility1, facility2, facility3, facility4];
+    //facilityArray = [facility1, facility2, facility3, facility4];
+    facArray = facilityArray;
     facility1.id = 0;
     facility2.id = 1;
     facility2.id = 2;
@@ -137,8 +138,8 @@ function tableSelector(gridRef) {
 function facilityPopulate() {
     var tempStr = "";
     tempStr += "<table class='table reqTable'><tr>";
-    for (var i = 0; i < facilityArray.length; i++) {
-        tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore(this)'>" + facilityArray[i].name + "</td>";
+    for (var i = 0; i < facArray.length; i++) {
+        tempStr += "<td><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</td>";
         if (i % 2 != 0) {
             tempStr += "</tr><tr>";
         }
