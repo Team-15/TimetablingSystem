@@ -114,7 +114,7 @@ function weekCreator() {
     for (var i = 1; i <= numberOfWeeks; i++) {
         tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + i;
     }
-    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks()'><input type='button' value='clear' onclick='clearWeeks()'></td></tr>"
+    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks(regularWeeks)'><input type='button' value='all' onclick='setWeeks(numberOfWeeks)'><input type='button' value='clear' onclick='clearWeeks()'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 
@@ -196,14 +196,14 @@ function clearRoomSel() {
 
 //clears checked tickboxes of weeks selected
 function clearWeeks() {
-    for (var i = 0; i < numberOfWeeks; i++) {
+    for (var i = 0; i <= numberOfWeeks; i++) {
        $('#weekChoice' + i).attr('checked', false);
     }
 }
 
 //sets week checkboxes to default selection
-function setWeeks() {
-    for (var i = 0; i <= regularWeeks; i++) {
+function setWeeks(weeksChosen) {
+    for (var i = 0; i <= weeksChosen; i++) {
         $('#weekChoice' + i).attr('checked', true);
     }
 }
