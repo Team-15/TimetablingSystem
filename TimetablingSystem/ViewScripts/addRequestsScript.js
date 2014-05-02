@@ -176,14 +176,14 @@ function clearRoomSel() {
 //clears checked tickboxes of weeks selected
 function clearWeeks() {
     for (var i = 0; i <= numberOfWeeks; i++) {
-       $('#weekChoice' + i).attr('checked', false);
+       $('#weekChoice' + i).prop('checked', false);
     }
 }
 
 //sets week checkboxes to default selection
 function setWeeks(weeksChosen) {
     for (var i = 0; i <= weeksChosen; i++) {
-        $('#weekChoice' + i).attr('checked', true);
+        $('#weekChoice' + i).prop('checked', true);
     }
 }
 
