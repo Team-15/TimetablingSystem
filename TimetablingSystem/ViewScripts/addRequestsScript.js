@@ -62,7 +62,6 @@ function createObjects() {
     newRequest = new Request();
 }
 
-//FIXME finish the rest of these being stored in the facility array
 //store user-chosen facilities in request instance
 function facilityStore(checkbox) {
     if (checkbox.checked == true) {
@@ -82,12 +81,17 @@ function infoStore() {
     $('#PRF').click(function () {
         newRequest.priority = false;
     });
-    for (var i = 0; i < numberOfWeeks; i++) {
-        if ($("#weekChoice" + i).attr("checked") ? true : false) { //FIXME this doesnt work
-            newRequest.weeks.push(i);
+    //wipe week array 
+    //check each week checkbox,
+    //and add currently ticked weeks
+    while(newRequest.weeks.length > 0) {
+        newRequest.weeks.pop();
+    }
+    for (var i = 1; i <= numberOfWeeks; i++) {
+        if ($("#weekChoice" + i).prop("checked")) {
+                    newRequest.weeks.push(i);
         }
     }
-    console.log(newRequest.weeks);
 }
 
 //populate module titles and codes
