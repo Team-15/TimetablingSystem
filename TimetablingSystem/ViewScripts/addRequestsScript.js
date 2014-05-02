@@ -10,6 +10,7 @@ $(document).ready(function () {
 
 
 function createObjects() {
+    
     modulesArray = departmentModules;
     //dummy facilities till we have the db DATA hurry up JB ;)
     facility1 = new Facility();
@@ -17,7 +18,7 @@ function createObjects() {
     facility3 = new Facility();
     facility4 = new Facility();
     //facilityArray = [facility1, facility2, facility3, facility4];
-    facArray = facilityArray;
+    facArray = facilitiesArray;
     facility1.id = 0;
     facility2.id = 1;
     facility2.id = 2;
@@ -40,6 +41,7 @@ function createObjects() {
     room2.facilities = [2];
     //create new request for this instance
     newRequest = new Request();
+    
 }
 
 //store user-chosen facilities in request instance
