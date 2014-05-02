@@ -64,11 +64,18 @@ function facilityStore(checkbox) {
     }
 }
 
+//stores all the non-facility requirements in the request object
 function sizeLocation() {
-    newRequest.otherReqs = $("#ORE").val();
     newRequest.students = $("#CAP").val();
-    newRequest.priority = ($("#PRY").selected ? true : false);
+    newRequest.park = $('#PRK').val();
+    newRequest.otherReqs = $("#ORE").val();
     newRequest.noOfRooms = $("#NOR").val();
+    $('#PRT').click(function () {
+        newRequest.priority = true;
+    });
+    $('#PRF').click(function () {
+        newRequest.priority = false;
+    });
 }
 
 //populate module titles and codes
@@ -83,6 +90,7 @@ function modulePopulate() {
     }
 }
 
+//creates the week selection row
 function weekCreator() {
     numberOfWeeks = 15; //temp set
     var tempStr = "";
@@ -137,7 +145,7 @@ function facilityPopulate() {
         tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore(this)'>" + facilityArray[i].name + "</td>";
     }
     tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='sizeLocation()' value='50'></td></tr>";
-    tempStr += "<tr><td>Park: <select id='parkSel'>";
+    tempStr += "<tr><td>Park: <select id='PRK'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
@@ -148,22 +156,25 @@ function facilityPopulate() {
     $("#propertiesBox").append(tempStr);
 }
 
+//creates the list of rooms on the right
 function roomListPopulate() {
     var tempStr = "";
     for (var i = 0; i < roomsArray.length; i++) {
         tempStr += "<input type='checkbox' id='" + roomsArray[i].code + "' data-counter='room-" + i + "'>" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")<br>";
     }
     tempStr += "<input type='button' value='clear' onclick='clearRoomSel()'>";
-    tempStr += "<input type='button' value='sort' onclick='sortCap()'>";
+    tempStr += "<input type='button' value='sort' onclick='sortRooms()'>";
     $('#roomList').append(tempStr);
 }
 
+//clears checked tickboxes of rooms selected
 function clearRoomSel() {
     for (var i = 0; i < roomsArray.length; i++) {
         $('input[data-counter="room-' + i + '"]').attr('checked', false);
     }
 }
 
+//keeps the dual-module dropdowns the same
 function moduleSelector(changedValue) {
     var tempStr = $(changedValue).val();
     for (var i = 0; i < modulesArray.length; i++) {
@@ -173,4 +184,9 @@ function moduleSelector(changedValue) {
             $("#modTitleSelect").val(modulesArray[i].title);
         }
     }
+}
+
+//sorts rooms by capacity or alphabetically
+function sortRooms() {
+    
 }
