@@ -433,9 +433,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="requests" Relationship="team15Model.requestFacility" FromRole="facility" ToRole="request" />
-          <NavigationProperty Name="rooms" Relationship="team15Model.roomFacility" FromRole="facility" ToRole="room" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="module">
           <Key>
             <PropertyRef Name="code" />

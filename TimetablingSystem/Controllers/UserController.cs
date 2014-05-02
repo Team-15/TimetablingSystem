@@ -94,14 +94,14 @@ namespace TimetablingSystem.Controllers
 
             List<SelectListItem> userList = new List<SelectListItem>();
 
-            IEnumerable<department> deptList = deptMod.GetAllDepartments();
+            IList<NonSensitiveDepartment> deptList = deptMod.GetAllDepartments();
 
-            foreach (department dept in deptList)
+            foreach (NonSensitiveDepartment dept in deptList)
             {
                 userList.Add(new SelectListItem
                 {
-                    Text = dept.code + " - " + dept.name,
-                    Value = dept.code
+                    Text = dept.Code+ " - " + dept.Name,
+                    Value = dept.Code
                 });
             }
 
@@ -109,13 +109,18 @@ namespace TimetablingSystem.Controllers
 
         }
 
-
         private bool UserValidator(string username, string password) 
         {
 
             bool valid = false;
 
-            department user = deptMod.GetDepartment(username.ToUpper());
+            department user = null;
+
+            using (TimetablingSystemContext _db = new TimetablingSystemContext())
+            {
+                user = _db.departments.FirstOrDefault(d => d.code == username);
+                
+            }
 
             string hashedUserInput = HashPassword(password, user.salt);
 
@@ -129,7 +134,6 @@ namespace TimetablingSystem.Controllers
 
         }
 
-
         private static string GenerateSalt() {
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -139,7 +143,6 @@ namespace TimetablingSystem.Controllers
             return Convert.ToBase64String(saltBytes);
 
         }
-
 
         private static string HashPassword(string password, string salt) {
 

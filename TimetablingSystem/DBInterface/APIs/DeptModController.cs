@@ -6,43 +6,38 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
+//using System.Web;
 using System.Web.Http;
-using System.Collections.Generic;
 
 namespace TimetablingSystem.DBInterface
 {
     //[Authorize]
     public class DeptModController : ApiController
     {
-        
+
         private TimetablingSystemContext _db = new TimetablingSystemContext();
+        
+        public NonSensitiveDepartment GetAuthorisedDepartment()
+        {
+
+            var dept = _db.departments
+                .Where (d => d.code == User.Identity.Name)
+                .Select(d => new NonSensitiveDepartment(d.code, d.name));
+
+            return dept as NonSensitiveDepartment;
+
+        }
 
         [AllowAnonymous]
-        public department GetDepartment(string code)
-        { 
-
-            department dept = _db.departments.FirstOrDefault(d => d.code == code);
-
-            return dept;
-
-        }
-        
-        public department GetAuthorisedDepartment()
+        public IList<NonSensitiveDepartment> GetAllDepartments()
         {
 
-            department dept = _db.departments.FirstOrDefault(d => d.code == User.Identity.Name);
+            var deptList = _db.departments
+                .OrderBy(d => d.name)
+                .ToList()
+                .Select(d => new NonSensitiveDepartment(d.code, d.name));
 
-            return dept;
-
-        }
-
-        public IEnumerable<department> GetAllDepartments()
-        {
-
-            IEnumerable<department> deptList = _db.departments.OrderBy(d => d.name);
-
-            return deptList;
+            return deptList.ToList();
 
         }
 
@@ -53,7 +48,7 @@ namespace TimetablingSystem.DBInterface
 
             var moduleList =
                 from mods in _db.modules
-                where mods.active == true && mods.department == GetAuthorisedDepartment()
+                where mods.active == true && mods.department.code == GetAuthorisedDepartment().Code
                 select mods;
 
 
@@ -65,7 +60,7 @@ namespace TimetablingSystem.DBInterface
         {
             var moduleList =
                 from mods in _db.modules
-                where mods.department == GetAuthorisedDepartment()
+                where mods.department.code == GetAuthorisedDepartment().Code
                 select mods;
             
             return moduleList;

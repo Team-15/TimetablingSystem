@@ -14,16 +14,7 @@ namespace TimetablingSystem.DBInterface
     
     public partial class facility
     {
-        public facility()
-        {
-            this.requests = new HashSet<request>();
-            this.rooms = new HashSet<room>();
-        }
-    
         public int id { get; set; }
         public string name { get; set; }
-    
-        public virtual ICollection<request> requests { get; set; }
-        public virtual ICollection<room> rooms { get; set; }
     }
 }
