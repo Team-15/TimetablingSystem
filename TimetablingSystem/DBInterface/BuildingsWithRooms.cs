@@ -19,7 +19,7 @@ namespace TimetablingSystem.DBInterface
         public byte park { get; set; }
 
         [DataMember]
-        public IEnumerable<room> rooms { get; set; }
+        public List<RoomsWithFacilities> rooms { get; set; }
 
         public BuildingsWithRooms(building b, IEnumerable<room> r)
         {
@@ -27,7 +27,14 @@ namespace TimetablingSystem.DBInterface
             name = b.name;
             park = b.park;
 
-            rooms = r;
+            rooms = new List<RoomsWithFacilities>();
+
+            foreach (room rm in r)
+            {
+                RoomsWithFacilities rwf = new RoomsWithFacilities(rm);
+
+                rooms.Add(rwf);
+            }
 
         }
 

@@ -195,6 +195,7 @@
     <Compile Include="DBInterface\room.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\RoomsWithFacilities.cs" />
     <Compile Include="DBInterface\round.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>

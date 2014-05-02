@@ -32,15 +32,16 @@
     alert(weeksDecoder(y));
     alert(weeksReadableFormat(x));
     */
+
     //getStuff();
-    loadModules();
+    loadInstaceData();
 
 });
 
 function getStuff() {
     
     $.ajax({
-        url: "api/deptmod/GetActiveModules",
+        url: "api/BuilRoomFac/GetBuildingsWithRoom",
         type: "GET",
         datatype: "JSON",
         data: {},

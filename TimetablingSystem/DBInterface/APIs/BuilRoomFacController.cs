@@ -22,7 +22,7 @@ namespace TimetablingSystem.DBInterface
 
         }
 
-        public List<BuildingsWithRooms> GetBuildingsWithRoom()
+        public List<BuildingsWithRooms> GetBuildingsWithRooms()
         {
 
             IEnumerable<building> buildings = GetAllBuildings();
@@ -46,7 +46,11 @@ namespace TimetablingSystem.DBInterface
         
         public IEnumerable<room> GetRoomsForBuilding(building b)
         {
-            IEnumerable<room> rooms = _db.rooms.Where(r => r.buildingCode == b.code);
+
+            IEnumerable<room> rooms =
+                from rms in _db.rooms.Include("facilities")
+                where rms.buildingCode == b.code
+                select rms;
 
             return rooms;
 

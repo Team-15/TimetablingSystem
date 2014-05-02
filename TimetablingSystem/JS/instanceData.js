@@ -45,6 +45,8 @@ var allDepartmentModules = [];
 
 var facilitiesArray = [];
 
+var buildingsWithRooms = [];
+
 
 //********Temporary Stores for Edit and Duplicate Functionality*****************
 
@@ -55,6 +57,96 @@ var editRequestFlag = false;
 var temporaryRequestStore = null;
 
 // *****************************************************************************
+
+function loadInstaceData() {
+
+    loadFacilitiesAndBuildingsWithRooms();
+    loadModules();
+
+}
+
+
+
+function loadFacilitiesAndBuildingsWithRooms() {
+    
+    $.ajax({
+        url: "api/BuilRoomFac/GetAllFacilities",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            facilitiesArray = setupFacilities(results);
+        }
+    });
+
+    $.ajax({
+        url: "api/BuilRoomFac/GetBuildingsWithRooms",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            buildingsWithRooms = setupBuildingsWithRooms(results);
+        }
+    });
+
+}
+
+function setupFacilities(facilitiesData) {
+
+    var fArray = [];
+
+    for (var counter = 0; counter < facilitiesData.length; counter++) {
+
+        var facility = new Facility();
+
+        facility.id = facilitiesData[counter].id;
+        facility.name = facilitiesData[counter].name;
+
+        fArray.push(facility);
+
+    }
+
+    return fArray;
+
+}
+
+function setupBuildingsWithRooms(buildingsData) {
+
+    var bwrArray = [];
+
+    for (var bCounter = 0; bCounter < buildingsData.length; bCounter++) {
+        
+        var building = new Building();
+
+        building.code = buildingsData[bCounter].code;
+        building.name = buildingsData[bCounter].name;
+        building.park = buildingsData[bCounter].park;
+        
+        var roomsData = buildingsData[bCounter].rooms;
+
+        for (var rCounter = 0; rCounter < roomsData.length; rCounter++) {
+            
+            var room = new Room();
+
+            room.code = roomsData[rCounter].code;
+            room.type = roomsData[rCounter].type;
+            room.capacity = roomsData[rCounter].capacity;
+
+            var facilitiesData = roomsData[rCounter].facilities;
+            
+            for (var fCounter = 0; fCounter < facilitiesData.length; fCounter++) room.facilities.push(facilitiesData[fCounter].id);
+
+            building.rooms.push(room);
+
+        }
+        
+        bwrArray.push(building);
+
+    }
+
+    return bwrArray;
+
+}
 
 
 
@@ -67,7 +159,6 @@ function loadModules() {
         data: {},
         success: function (results) {
             departmentModules = setupModules(results);
-            //alert(JSON.stringify(departmentModules));
         }
     });
 
@@ -78,7 +169,6 @@ function loadModules() {
         data: {},
         success: function (results) {
             allDepartmentModules = setupModules(results);
-            //alert(JSON.stringify(allDepartmentModules));
         }
     });
 
