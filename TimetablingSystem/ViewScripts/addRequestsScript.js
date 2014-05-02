@@ -102,7 +102,7 @@ function tableCreator() {
     var tempStr = "";
     tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'>Times / Periods</th><tr>";
     for (var h = 0; h < startPeriodsArray.length; h++) {
-        tempStr += "<th class = gridHeader>" + startPeriodsArray[h] + " - " + endPeriodsArray[h] + "</th>";
+        tempStr += "<th class = gridHeader>" + timeDisplayArray[h] + "</th>";
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
