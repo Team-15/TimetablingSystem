@@ -20,10 +20,10 @@ function createObjects() {
     module2.code = "4940KK";
     module3.code = "AARETA";
     module4.code = "DBR466";
-    module1.title = "useless module";
-    module2.title = "boring module";
-    module3.title = "FUN STUFF";
-    module4.title = "sleeping time";
+    module1.title = "placeholder module";
+    module2.title = "placeholder module 2";
+    module3.title = "placeholder module 3";
+    module4.title = "placeholder module 4";
     module1.deptCode = "CO";
     module2.deptCode = "CO";
     module3.deptCode = "CO";
@@ -35,11 +35,17 @@ function createObjects() {
     //dummy facilities till we have the db DATA hurry up JB ;)
     facility1 = new Facility();
     facility2 = new Facility();
-    facilityArray = [facility1, facility2];
+    facility3 = new Facility();
+    facility4 = new Facility();
+    facilityArray = [facility1, facility2, facility3, facility4];
     facility1.id = 0;
     facility2.id = 1;
-    facility1.name = "table tennis";
-    facility2.name = "skydiving";
+    facility2.id = 2;
+    facility2.id = 3;
+    facility1.name = "placeholder facility 1";
+    facility2.name = "placeholder facility 2";
+    facility3.name = "placeholder facility 3";
+    facility4.name = "placeholder facility 4";
     //dummy rooms till we have the DB JEEZ HE'S TAKING FUCKING AGES
     room1 = new Room();
     room2 = new Room();
@@ -65,7 +71,7 @@ function facilityStore(checkbox) {
 }
 
 //stores all the non-facility requirements in the request object
-function sizeLocation() {
+function infoStore() {
     newRequest.students = $("#CAP").val();
     newRequest.park = $('#PRK').val();
     newRequest.otherReqs = $("#ORE").val();
@@ -76,6 +82,12 @@ function sizeLocation() {
     $('#PRF').click(function () {
         newRequest.priority = false;
     });
+    for (var i = 0; i < numberOfWeeks; i++) {
+        if ($("#weekChoice" + i).attr("checked") ? true : false) { //FIXME this doesnt work
+            newRequest.weeks.push(i);
+        }
+    }
+    console.log(newRequest.weeks);
 }
 
 //populate module titles and codes
@@ -137,21 +149,24 @@ function tableSelector(gridRef) {
     }
 }
 
-//FIXME convert facilities to be spawned here
+//inserts facilities and requirements
 function facilityPopulate() {
     var tempStr = "";
-    tempStr += "<table class='table reqTable'>";
+    tempStr += "<table class='table reqTable'><tr>";
     for (var i = 0; i < facilityArray.length; i++) {
         tempStr += "<td><input type='checkbox' class='specReq' id='" + facilityArray[i].id + "' onchange='facilityStore(this)'>" + facilityArray[i].name + "</td>";
+        if (i % 2 != 0) {
+            tempStr += "</tr><tr>";
+        }
     }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='sizeLocation()' value='50'></td></tr>";
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' value='50'></td></tr>";
     tempStr += "<tr><td>Park: <select id='PRK'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
-    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='sizeLocation()' id='ORE'>";
-    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='sizeLocation()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='sizeLocation()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='sizeLocation()'>no</td></tr>";
+    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' id='ORE'>";
+    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()'>no</td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
@@ -162,8 +177,8 @@ function roomListPopulate() {
     for (var i = 0; i < roomsArray.length; i++) {
         tempStr += "<input type='checkbox' id='" + roomsArray[i].code + "' data-counter='room-" + i + "'>" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")<br>";
     }
-    tempStr += "<input type='button' value='clear' onclick='clearRoomSel()'>";
-    tempStr += "<input type='button' value='sort' onclick='sortRooms()'>";
+    tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
+    tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
     $('#roomList').append(tempStr);
 }
 

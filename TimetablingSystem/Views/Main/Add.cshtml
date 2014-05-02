@@ -3,8 +3,8 @@
 }
 
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-4">
+  @*<div class="col-md-2"></div>*@
+  <div class="col-md-6">
         <div id="propertiesBox">
             Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="moduleSelector(this)"></select><br>
             Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select>
@@ -14,11 +14,12 @@
         <div id="weekTable">
         </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
+    Rooms fitting your criteria:
     <div id="roomList">
     </div>
   </div>
-  <div class="col-md-2"></div>
+  @*<div class="col-md-2"></div>*@
 </div>
 <input type='button' value='submit request' onclick=''>
 <input type='button' value='submit and add another' onclick=''>
