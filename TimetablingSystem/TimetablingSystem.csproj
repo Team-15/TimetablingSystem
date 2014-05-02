@@ -169,6 +169,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DBInterface\APIs\BuilRoomFacController.cs" />
     <Compile Include="DBInterface\APIs\SemRouController.cs" />
@@ -335,6 +336,7 @@
     <Content Include="ViewScripts\logoutScript.js" />
     <Content Include="ViewScripts\parentScript.js" />
     <Content Include="ViewScripts\settingsScript.js" />
+    <Content Include="ViewScripts\testScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -375,6 +377,9 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Shared\_AuthorizeView.cshtml" />
     <Content Include="Views\User\LogOut.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
+    <Content Include="Views\Test\Test2.cshtml" />
+    <Content Include="Views\Test\Test3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
