@@ -36,9 +36,9 @@ var adHocYear = 0;
 var adHocNumberOfWeeks = 1;
 
 
-var activedepartmentModules = [];
-
 var departmentModules = [];
+
+var allDepartmentModules = [];
 
 //Move to script file dealing with all bookings view
 //var allModules = [];
@@ -55,6 +55,56 @@ var editRequestFlag = false;
 var temporaryRequestStore = null;
 
 // *****************************************************************************
+
+
+
+function loadModules() {
+
+    $.ajax({
+        url: "api/deptmod/GetActiveModules",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            departmentModules = setupModules(results);
+            //alert(JSON.stringify(departmentModules));
+        }
+    });
+
+    $.ajax({
+        url: "api/deptmod/GetDepartmentModules",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            allDepartmentModules = setupModules(results);
+            //alert(JSON.stringify(allDepartmentModules));
+        }
+    });
+
+}
+
+function setupModules(modulesData) {
+
+    var mArray = [];
+
+    for (var counter = 0; counter < modulesData.length; counter++) {
+
+        var module = new Module();
+
+        module.code = modulesData[counter].code;
+        module.title = modulesData[counter].title;
+        module.deptCode = modulesData[counter].deptCode;
+        module.active = modulesData[counter].active;
+
+        mArray.push(module);
+
+    }
+
+    return mArray;
+
+}
+
 
 
 function loadSession() {

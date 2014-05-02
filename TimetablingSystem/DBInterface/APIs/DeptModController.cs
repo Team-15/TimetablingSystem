@@ -6,25 +6,26 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-//using System.Web;
+using System.Web;
 using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
-    //[Authorize]
+    [Authorize]
     public class DeptModController : ApiController
     {
 
         private TimetablingSystemContext _db = new TimetablingSystemContext();
         
+
         public NonSensitiveDepartment GetAuthorisedDepartment()
         {
 
-            var dept = _db.departments
-                .Where (d => d.code == User.Identity.Name)
-                .Select(d => new NonSensitiveDepartment(d.code, d.name));
+            department dept = _db.departments.SingleOrDefault(d => d.code == HttpContext.Current.User.Identity.Name);
 
-            return dept as NonSensitiveDepartment;
+            NonSensitiveDepartment nsDept = new NonSensitiveDepartment(dept.code, dept.name);
+            
+            return nsDept;
 
         }
 
@@ -43,12 +44,13 @@ namespace TimetablingSystem.DBInterface
 
 
 
-        public IEnumerable<module> GetActivetModules()
+        public IEnumerable<module> GetActiveModules()
         {
+            NonSensitiveDepartment nsDept = GetAuthorisedDepartment();
 
             var moduleList =
                 from mods in _db.modules
-                where mods.active == true && mods.department.code == GetAuthorisedDepartment().code
+                where mods.active == true && mods.deptCode == nsDept.code
                 select mods;
 
 
@@ -58,11 +60,14 @@ namespace TimetablingSystem.DBInterface
 
         public IEnumerable<module> GetDepartmentModules()
         {
+            NonSensitiveDepartment nsDept = GetAuthorisedDepartment();
+
             var moduleList =
                 from mods in _db.modules
-                where mods.department.code == GetAuthorisedDepartment().code
+                where mods.deptCode == nsDept.code
                 select mods;
-            
+
+
             return moduleList;
 
         }

@@ -32,13 +32,15 @@
     alert(weeksDecoder(y));
     alert(weeksReadableFormat(x));
     */
-    getStuff();
+    //getStuff();
+    loadModules();
+
 });
 
 function getStuff() {
     
     $.ajax({
-        url: "api/buildingroom/GetBuildingsWithRoom",
+        url: "api/deptmod/GetActiveModules",
         type: "GET",
         datatype: "JSON",
         data: {},
