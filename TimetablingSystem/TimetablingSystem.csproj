@@ -170,11 +170,13 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DBInterface\APIs\BuilRoomFacController.cs" />
     <Compile Include="DBInterface\APIs\SemRouController.cs" />
     <Compile Include="DBInterface\building.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBInterface\APIs\DBTestController.cs" />
+    <Compile Include="DBInterface\BuildingsWithRooms.cs" />
     <Compile Include="DBInterface\department.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>

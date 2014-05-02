@@ -100,8 +100,8 @@ namespace TimetablingSystem.Controllers
             {
                 userList.Add(new SelectListItem
                 {
-                    Text = dept.Code+ " - " + dept.Name,
-                    Value = dept.Code
+                    Text = dept.code+ " - " + dept.name,
+                    Value = dept.code
                 });
             }
 

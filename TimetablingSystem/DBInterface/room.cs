@@ -27,8 +27,8 @@ namespace TimetablingSystem.DBInterface
         public short capacity { get; set; }
     
         public virtual building building { internal get; set; }
-        public virtual ICollection<request> requestsAlloc { get; set; }
+        public virtual ICollection<request> requestsAlloc { internal get; set; }
         public virtual ICollection<facility> facilities { internal get; set; }
-        public virtual ICollection<request> requestsPref { get; set; }
+        public virtual ICollection<request> requestsPref { internal get; set; }
     }
 }

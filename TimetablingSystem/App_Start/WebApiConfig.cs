@@ -16,6 +16,12 @@ namespace TimetablingSystem
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            /*
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+            json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Error;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            */
         }
     }
 }

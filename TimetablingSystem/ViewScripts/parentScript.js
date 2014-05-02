@@ -38,7 +38,7 @@
 function getStuff() {
     
     $.ajax({
-        url: "api/deptmod/GetAllDepartments",
+        url: "api/buildingroom/GetBuildingsWithRoom",
         type: "GET",
         datatype: "JSON",
         data: {},

@@ -6,20 +6,29 @@ using System.Web;
 
 namespace TimetablingSystem.DBInterface
 {
+
     [Serializable]
     [DataContract]
-    public class NonSensitiveDepartment
+    public class BuildingsWithRooms
     {
-
         [DataMember]
         public string code { get; set; }
         [DataMember]
         public string name { get; set; }
+        [DataMember]
+        public byte park { get; set; }
 
-        public NonSensitiveDepartment(string c, string n)
+        [DataMember]
+        public IEnumerable<room> rooms { get; set; }
+
+        public BuildingsWithRooms(building b, IEnumerable<room> r)
         {
-            code = c;
-            name = n;
+            code = b.code;
+            name = b.name;
+            park = b.park;
+
+            rooms = r;
+
         }
 
     }

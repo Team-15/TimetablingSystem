@@ -12,27 +12,87 @@ namespace TimetablingSystem.DBInterface
 
         private TimetablingSystemContext _db = new TimetablingSystemContext();
 
-        public semester GetCurrentSemester()
+        public round GetLiveRound()
         {
-            round activeRound = 
-                (from rou in _db.rounds
-                where rou.live == true && rou.adhoc == false
-                select rou).FirstOrDefault();
+            round liveRound = _db.rounds.FirstOrDefault(r => r.live == true && r.adhoc == false); 
 
-            semester currentSemeser = new semester();
+            return liveRound;
+        }
 
-            if (activeRound != null)
-            {
-                currentSemeser =
-                (from sem  in _db.semesters
-                where sem.id == activeRound.semesterID
-                select sem).FirstOrDefault();
-            }
-            
+        public round GetAdHocRound()
+        {
+            round adHocRound = _db.rounds.FirstOrDefault(r => r.live == true && r.adhoc == true); 
 
-            return currentSemeser;
+            return adHocRound;
+        }
+
+        public IEnumerable<round> GetLiveRoundSet()
+        {
+
+            semester liveSemester = GetLiveSemester();
+
+            IEnumerable<round> roundSet =
+                from rnds in _db.rounds
+                where rnds.semesterID == liveSemester.id
+                select rnds;
+
+            return roundSet;
 
         }
+
+        public IEnumerable<round> GetAdHocRoundSet()
+        {
+
+            semester adHocSemester = GetAdHocSemester();
+
+            IEnumerable<round> roundSet =
+                from rnds in _db.rounds
+                where rnds.semesterID == adHocSemester.id
+                select rnds;
+
+            return roundSet;
+
+        }
+
+        
+        
+        public semester GetLiveSemester()
+        {
+            round liveRound = GetLiveRound();
+
+            semester liveSemester = null;
+
+            if (liveRound != null)
+            {
+                liveSemester =
+                (from sem  in _db.semesters
+                 where sem.id == liveRound.semesterID
+                select sem).FirstOrDefault();
+            }
+
+            return liveSemester;
+
+        }
+
+        public semester GetAdHocSemester()
+        {
+            round adHocRound = GetLiveRound();
+
+            semester adHocSemester = null;
+
+            if (adHocRound != null)
+            {
+                adHocSemester =
+                (from sem in _db.semesters
+                 where sem.id == adHocRound.semesterID
+                 select sem).FirstOrDefault();
+            }
+
+            return adHocSemester;
+
+        }
+
+
 
 
 

@@ -48,7 +48,7 @@ namespace TimetablingSystem.DBInterface
 
             var moduleList =
                 from mods in _db.modules
-                where mods.active == true && mods.department.code == GetAuthorisedDepartment().Code
+                where mods.active == true && mods.department.code == GetAuthorisedDepartment().code
                 select mods;
 
 
@@ -60,7 +60,7 @@ namespace TimetablingSystem.DBInterface
         {
             var moduleList =
                 from mods in _db.modules
-                where mods.department.code == GetAuthorisedDepartment().Code
+                where mods.department.code == GetAuthorisedDepartment().code
                 select mods;
             
             return moduleList;
