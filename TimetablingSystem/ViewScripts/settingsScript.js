@@ -6,10 +6,6 @@ $(document).ready(function () {
 
     table();
 
-    
-    
-
-    /*
     $("#addbutton").click(function () {
         add();
     });
@@ -18,7 +14,7 @@ $(document).ready(function () {
         reset();
     });
 
-    */
+
 
 });
 
@@ -52,7 +48,6 @@ function setupDummyModules() {
     module3.deptCode = "CO";
     module3.active = true;
 
-    alert("Done");
     return [module0, module1, module2, module3];
     
 }
@@ -90,21 +85,20 @@ function table() {
     setupEdit();
 }
 
-/*
+
 function add() {
 
     var newModule = new Module();
-    newModule.code = $("#code").val;
-    newModule.title = $("#name").val;
+    newModule.code = $('#code').val();
+    newModule.title = $('#name').val();
 
     modulesArray.push(newModule);
 
     table();
 }
-*/
+
 function remove(index) {
     modulesArray.splice(index, 1);
-    alert("hello");
     table();
 }
 
@@ -166,7 +160,6 @@ function setupEdit() {
     for (var i = 0; i < modulesArray.length; i++) {
         $("#edit" + i).data("index", i);
         $("#edit" + i).click(function () {
-            alert($(this).data("index"));
             edit($(this).data("index"));
         });
     }
