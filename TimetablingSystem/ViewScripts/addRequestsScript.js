@@ -110,10 +110,11 @@ function modulePopulate() {
 function weekCreator() {
     numberOfWeeks = 15; //temp set
     var tempStr = "";
-    tempStr += "<table class = ''>Weeks: ";
+    tempStr += "<table class = ''><tr><td>Weeks: ";
     for (var i = 1; i <= numberOfWeeks; i++) {
         tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + i;
     }
+    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks()'><input type='button' value='clear' onclick='clearWeeks()'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 
@@ -190,6 +191,20 @@ function roomListPopulate() {
 function clearRoomSel() {
     for (var i = 0; i < roomsArray.length; i++) {
         $('input[data-counter="room-' + i + '"]').attr('checked', false);
+    }
+}
+
+//clears checked tickboxes of weeks selected
+function clearWeeks() {
+    for (var i = 0; i < numberOfWeeks; i++) {
+       $('#weekChoice' + i).attr('checked', false);
+    }
+}
+
+//sets week checkboxes to default selection
+function setWeeks() {
+    for (var i = 0; i <= regularWeeks; i++) {
+        $('#weekChoice' + i).attr('checked', true);
     }
 }
 
