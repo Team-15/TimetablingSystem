@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
+    [Authorize]
     public class SemRouController : ApiController
     {
 
