@@ -10,28 +10,7 @@ $(document).ready(function () {
 
 
 function createObjects() {
-    //dummy modules till we have the db dataaaa
-    module1 = new Module();
-    module2 = new Module();
-    module3 = new Module();
-    module4 = new Module();
-    modulesArray = [module1, module2, module3, module4];
-    module1.code = "COA123";
-    module2.code = "4940KK";
-    module3.code = "AARETA";
-    module4.code = "DBR466";
-    module1.title = "placeholder module";
-    module2.title = "placeholder module 2";
-    module3.title = "placeholder module 3";
-    module4.title = "placeholder module 4";
-    module1.deptCode = "CO";
-    module2.deptCode = "CO";
-    module3.deptCode = "CO";
-    module4.deptCode = "CO";
-    module1.active = true;
-    module2.active = true;
-    module3.active = true;
-    module4.active = true;
+    modulesArray = departmentModules;
     //dummy facilities till we have the db DATA hurry up JB ;)
     facility1 = new Facility();
     facility2 = new Facility();
