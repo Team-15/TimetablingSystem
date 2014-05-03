@@ -135,10 +135,19 @@ function facilityPopulate() {
 function roomListPopulate() {
     var tempStr = "";
     var buildNum = $("#buildingSelect").val();
-    var chosenBuilding = buildArray[buildNum];
-    for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-        console.log("hello");
-        tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+    if (buildNum == -1) {
+        for (var j = 0; j < buildArray.length; j++) {
+            var chosenBuilding = buildArray[j];
+            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+                tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            }
+        }
+    } else {
+        var chosenBuilding = buildArray[buildNum];
+        console.log(buildNum);
+        for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+            tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+        }
     }
     tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
     tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
@@ -147,7 +156,7 @@ function roomListPopulate() {
 }
 
 function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='All buildings'>All buildings</option>";
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
         tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
     }
