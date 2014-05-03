@@ -1,13 +1,21 @@
 ﻿var modulesArray = null;
+var oldpass1 = "";
+var newpass = "";
+var newpass1 = "";
+
 
 $(document).ready(function () {
 
-    modulesArray = setupDummyModules();
-
+    modulesArray = departmentModules;
+ 
     table();
 
     $("#addbutton").click(function () {
-        add();
+        var codeL = $("#code").val().length;
+        var nameL = $("#name").val().length;
+        if (codeL != 0 && nameL != 0) {
+            add();
+        }
     });
 
     $("#resetbutton").click(function () {
@@ -94,7 +102,11 @@ function add() {
 
     modulesArray.push(newModule);
 
+    document.getElementById("code").value = "";
+    document.getElementById("name").value = "";
+
     table();
+
 }
 
 function remove(index) {
@@ -110,11 +122,9 @@ function edit(index) {
 
 
 
-/*
-var newpass = "";
-var newpass1 = "";
-var pass = "";
 
+
+/*
 function reset1() {
     newpass = window.prompt("Please enter your new password");
     newpass1 = window.prompt("Please confirm your new password");
@@ -129,21 +139,30 @@ function reset1() {
         pass = newpass
     }
 }
-
+*/
 
 function reset() {
-    var oldpass = window.prompt("Please enter your old password");
-    if (oldpass != "oldpass") {
+    oldpass1 = $('#oldpass').val();;
+    newpass = $('#newpass').val();
+    newpass1 = $('#newpass1').val()
+
+    if (oldpass1 != "oldpass") {
         alert("Incorrect Password, Please try again");
-        reset();
     }
     else {
-        reset1();
+        if (newpass.length != 0 && newpass1 != 0) {
+            if (newpass == newpass1) {
+                alert("Password has been changed");
+            }
+            else {
+                alert("Passwords do not match")
+            }
+        }
+        else { alert("Please enter your new password")}
     }
 
 }
 
-*/
 
 
 function setupDelete() {
