@@ -5,43 +5,16 @@ $(document).ready(function () {
     tableCreator();
     modulePopulate();
     facilityPopulate();
-    roomListPopulate();
+    buildingPopulate();
 });
 
-
+//create room/facility/module objects from DB
 function createObjects() {
-    
     modulesArray = departmentModules;
-    //dummy facilities till we have the db DATA hurry up JB ;)
-    facility1 = new Facility();
-    facility2 = new Facility();
-    facility3 = new Facility();
-    facility4 = new Facility();
-    //facilityArray = [facility1, facility2, facility3, facility4];
     facArray = facilitiesArray;
-    facility1.id = 0;
-    facility2.id = 1;
-    facility2.id = 2;
-    facility2.id = 3;
-    facility1.name = "placeholder facility 1";
-    facility2.name = "placeholder facility 2";
-    facility3.name = "placeholder facility 3";
-    facility4.name = "placeholder facility 4";
-    //dummy rooms till we have the DB JEEZ HE'S TAKING FUCKING AGES
-    room1 = new Room();
-    room2 = new Room();
-    roomsArray = [room1, room2];
-    room1.code = "N.0.01";
-    room2.code = "N.0.02";
-    room1.type = "Lab";
-    room2.type = "Lecture";
-    room1.capacity = 50;
-    room2.capacity = 80;
-    room2.facilities = [0,1];
-    room2.facilities = [2];
+    buildArray = buildingsWithRooms;
     //create new request for this instance
     newRequest = new Request();
-    
 }
 
 //store user-chosen facilities in request instance
@@ -158,15 +131,28 @@ function facilityPopulate() {
     $("#propertiesBox").append(tempStr);
 }
 
-//creates the list of rooms on the right
+//creates the list of rooms filtered by the building
 function roomListPopulate() {
     var tempStr = "";
-    for (var i = 0; i < roomsArray.length; i++) {
-        tempStr += "<input type='checkbox' id='" + roomsArray[i].code + "' data-counter='room-" + i + "'>" + roomsArray[i].code + " (capacity: " + roomsArray[i].capacity + ")<br>";
+    var buildNum = $("#buildingSelect").val();
+    var chosenBuilding = buildArray[buildNum];
+    for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+        console.log("hello");
+        tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
     }
     tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
     tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
+    $('#roomList').empty();
     $('#roomList').append(tempStr);
+}
+
+function buildingPopulate() {
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='All buildings'>All buildings</option>";
+    for (var i = 0; i < buildArray.length; i++) {
+        tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+    }
+    tempStr += "</select>";
+    $('#buildingList').append(tempStr);
 }
 
 //clears checked tickboxes of rooms selected
