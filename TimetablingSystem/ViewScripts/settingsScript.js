@@ -16,6 +16,9 @@ $(document).ready(function () {
         if (codeL != 0 && nameL != 0) {
             add();
         }
+        else {
+            alert("Please enter a code and a name for the new module")
+        }
     });
 
     $("#resetbutton").click(function () {
