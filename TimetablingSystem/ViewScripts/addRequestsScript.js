@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    newRequest = new Request();
     createObjects();
     weekCreator();
     tableCreator();
@@ -27,7 +26,7 @@ function facilityStore(checkbox) {
 //stores all the non-facility requirements in the request object
 function infoStore() {
     newRequest.students = $("#CAP").val();
-    newRequest.park = $('#PRK').val();
+    newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
     newRequest.noOfRooms = $("#NOR").val();
     $('#PRT').click(function () {
@@ -47,6 +46,8 @@ function infoStore() {
                     newRequest.weeks.push(i);
         }
     }
+    buildingPopulate();
+    roomListPopulate();
 }
 
 //populate module titles and codes
@@ -119,14 +120,14 @@ function facilityPopulate() {
             tempStr += "</tr><tr>";
         }
     }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' value='50'></td></tr>";
-    tempStr += "<tr><td>Park: <select id='PRK'>";
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='50'></td></tr>";
+    tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
-    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' id='ORE'>";
-    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()'>no</td></tr>";
+    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
+    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
@@ -139,14 +140,18 @@ function roomListPopulate() {
         for (var j = 0; j < buildArray.length; j++) {
             var chosenBuilding = buildArray[j];
             for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-                tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
+                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                }
             }
         }
     } else {
         var chosenBuilding = buildArray[buildNum];
-        console.log(buildNum);
+
         for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-            tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
+                tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            }
         }
     }
     tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
@@ -155,12 +160,18 @@ function roomListPopulate() {
     $('#roomList').append(tempStr);
 }
 
+//creates building filter dropdown
 function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'>";
     for (var i = 0; i < buildArray.length; i++) {
-        tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+        if (newRequest.park == buildArray[i].park) {
+            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+        } else if (newRequest.park == 0) {
+            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+        }
     }
     tempStr += "</select>";
+    $('#buildingList').empty();
     $('#buildingList').append(tempStr);
 }
 
