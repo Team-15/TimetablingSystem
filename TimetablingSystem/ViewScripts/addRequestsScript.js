@@ -177,9 +177,7 @@ function buildingPopulate() {
 
 //clears checked tickboxes of rooms selected
 function clearRoomSel() {
-    for (var i = 0; i < roomsArray.length; i++) {
-        $('input[data-counter="room-' + i + '"]').attr('checked', false);
-    }
+    $('#roomList input:checkbox').attr('checked', false);
 }
 
 //clears checked tickboxes of weeks selected
