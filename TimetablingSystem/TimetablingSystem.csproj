@@ -339,6 +339,8 @@
     <Content Include="ViewScripts\logoutScript.js" />
     <Content Include="ViewScripts\parentScript.js" />
     <Content Include="ViewScripts\settingsScript.js" />
+    <Content Include="ViewScripts\test2Script.js" />
+    <Content Include="ViewScripts\test3Script.js" />
     <Content Include="ViewScripts\testScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -375,14 +377,13 @@
     <Content Include="Views\Display\Requests.cshtml" />
     <Content Include="Views\Display\Results.cshtml" />
     <Content Include="Views\Display\History.cshtml" />
-    <Content Include="Views\Display\AllBookings.cshtml" />
-    <Content Include="Views\Display\MyBookings.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Shared\_AuthorizeView.cshtml" />
     <Content Include="Views\User\LogOut.cshtml" />
     <Content Include="Views\Test\Test.cshtml" />
     <Content Include="Views\Test\Test2.cshtml" />
     <Content Include="Views\Test\Test3.cshtml" />
+    <Content Include="Views\Display\Bookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
