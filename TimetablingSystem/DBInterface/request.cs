@@ -30,12 +30,12 @@ namespace TimetablingSystem.DBInterface
         public string weeks { get; set; }
         public short numberOfStudents { get; set; }
         public byte parkPreference { get; set; }
-        public bool sessionType { get; set; }
-        public byte roomType { get; set; }
+        public byte sessionType { get; set; }
         public byte numberOfRooms { get; set; }
         public string otherRequirements { get; set; }
         public int roundID { get; set; }
         public Nullable<byte> status { get; set; }
+        public bool traditional { get; set; }
     
         public virtual module module { internal get; set; }
         public virtual round round { internal get; set; }

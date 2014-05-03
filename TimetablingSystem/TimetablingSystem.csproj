@@ -172,6 +172,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DBInterface\APIs\BuilRoomFacController.cs" />
+    <Compile Include="DBInterface\APIs\RequestController.cs" />
     <Compile Include="DBInterface\APIs\SemRouController.cs" />
     <Compile Include="DBInterface\building.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
@@ -192,6 +193,7 @@
     <Compile Include="DBInterface\request.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\RequestsWtihLinkedData.cs" />
     <Compile Include="DBInterface\room.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>

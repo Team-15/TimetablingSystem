@@ -4,124 +4,124 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Alias="Self" Namespace="team15Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
+    <Schema Namespace="team15Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="team15ModelStoreContainer">
-          <EntitySet Name="building" EntityType="team15Model.Store.building" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="department" EntityType="team15Model.Store.department" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="facility" EntityType="team15Model.Store.facility" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="module" EntityType="team15Model.Store.module" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="request" EntityType="team15Model.Store.request" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="requestFacility" EntityType="team15Model.Store.requestFacility" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="room" EntityType="team15Model.Store.room" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="roomAllocated" EntityType="team15Model.Store.roomAllocated" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="roomFacility" EntityType="team15Model.Store.roomFacility" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="roomPreference" EntityType="team15Model.Store.roomPreference" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="round" EntityType="team15Model.Store.round" Schema="team15" store:Type="Tables" />
-          <EntitySet Name="semester" EntityType="team15Model.Store.semester" Schema="team15" store:Type="Tables" />
+          <EntitySet Name="building" EntityType="team15Model.Store.building" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="department" EntityType="team15Model.Store.department" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="facility" EntityType="team15Model.Store.facility" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="module" EntityType="team15Model.Store.module" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="request" EntityType="team15Model.Store.request" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="requestFacility" EntityType="team15Model.Store.requestFacility" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="room" EntityType="team15Model.Store.room" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="roomAllocated" EntityType="team15Model.Store.roomAllocated" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="roomFacility" EntityType="team15Model.Store.roomFacility" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="roomPreference" EntityType="team15Model.Store.roomPreference" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="round" EntityType="team15Model.Store.round" store:Type="Tables" Schema="team15" />
+          <EntitySet Name="semester" EntityType="team15Model.Store.semester" store:Type="Tables" Schema="team15" />
           <AssociationSet Name="FK_module_department" Association="team15Model.Store.FK_module_department">
-            <End EntitySet="department" Role="department" />
-            <End EntitySet="module" Role="module" />
+            <End Role="department" EntitySet="department" />
+            <End Role="module" EntitySet="module" />
           </AssociationSet>
           <AssociationSet Name="FK_request_module" Association="team15Model.Store.FK_request_module">
-            <End EntitySet="module" Role="module" />
-            <End EntitySet="request" Role="request" />
+            <End Role="module" EntitySet="module" />
+            <End Role="request" EntitySet="request" />
           </AssociationSet>
           <AssociationSet Name="FK_request_round" Association="team15Model.Store.FK_request_round">
-            <End EntitySet="round" Role="round" />
-            <End EntitySet="request" Role="request" />
+            <End Role="round" EntitySet="round" />
+            <End Role="request" EntitySet="request" />
           </AssociationSet>
           <AssociationSet Name="FK_requestFacility_facility" Association="team15Model.Store.FK_requestFacility_facility">
-            <End EntitySet="facility" Role="facility" />
-            <End EntitySet="requestFacility" Role="requestFacility" />
+            <End Role="facility" EntitySet="facility" />
+            <End Role="requestFacility" EntitySet="requestFacility" />
           </AssociationSet>
           <AssociationSet Name="FK_requestFacility_request" Association="team15Model.Store.FK_requestFacility_request">
-            <End EntitySet="request" Role="request" />
-            <End EntitySet="requestFacility" Role="requestFacility" />
+            <End Role="request" EntitySet="request" />
+            <End Role="requestFacility" EntitySet="requestFacility" />
           </AssociationSet>
           <AssociationSet Name="FK_room_building" Association="team15Model.Store.FK_room_building">
-            <End EntitySet="building" Role="building" />
-            <End EntitySet="room" Role="room" />
+            <End Role="building" EntitySet="building" />
+            <End Role="room" EntitySet="room" />
           </AssociationSet>
           <AssociationSet Name="FK_roomAllocated_request" Association="team15Model.Store.FK_roomAllocated_request">
-            <End EntitySet="request" Role="request" />
-            <End EntitySet="roomAllocated" Role="roomAllocated" />
+            <End Role="request" EntitySet="request" />
+            <End Role="roomAllocated" EntitySet="roomAllocated" />
           </AssociationSet>
           <AssociationSet Name="FK_roomAllocated_room" Association="team15Model.Store.FK_roomAllocated_room">
-            <End EntitySet="room" Role="room" />
-            <End EntitySet="roomAllocated" Role="roomAllocated" />
+            <End Role="room" EntitySet="room" />
+            <End Role="roomAllocated" EntitySet="roomAllocated" />
           </AssociationSet>
           <AssociationSet Name="FK_roomFacility_facility" Association="team15Model.Store.FK_roomFacility_facility">
-            <End EntitySet="facility" Role="facility" />
-            <End EntitySet="roomFacility" Role="roomFacility" />
+            <End Role="facility" EntitySet="facility" />
+            <End Role="roomFacility" EntitySet="roomFacility" />
           </AssociationSet>
           <AssociationSet Name="FK_roomFacility_room" Association="team15Model.Store.FK_roomFacility_room">
-            <End EntitySet="room" Role="room" />
-            <End EntitySet="roomFacility" Role="roomFacility" />
+            <End Role="room" EntitySet="room" />
+            <End Role="roomFacility" EntitySet="roomFacility" />
           </AssociationSet>
           <AssociationSet Name="FK_roomPreference_request" Association="team15Model.Store.FK_roomPreference_request">
-            <End EntitySet="request" Role="request" />
-            <End EntitySet="roomPreference" Role="roomPreference" />
+            <End Role="request" EntitySet="request" />
+            <End Role="roomPreference" EntitySet="roomPreference" />
           </AssociationSet>
           <AssociationSet Name="FK_roomPreference_room" Association="team15Model.Store.FK_roomPreference_room">
-            <End EntitySet="room" Role="room" />
-            <End EntitySet="roomPreference" Role="roomPreference" />
+            <End Role="room" EntitySet="room" />
+            <End Role="roomPreference" EntitySet="roomPreference" />
           </AssociationSet>
           <AssociationSet Name="FK_round_semester" Association="team15Model.Store.FK_round_semester">
-            <End EntitySet="semester" Role="semester" />
-            <End EntitySet="round" Role="round" />
+            <End Role="semester" EntitySet="semester" />
+            <End Role="round" EntitySet="round" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="building">
           <Key>
             <PropertyRef Name="code" />
           </Key>
-          <Property Name="code" Nullable="false" MaxLength="3" Type="varchar" />
-          <Property Name="name" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="park" Nullable="false" Type="tinyint" />
+          <Property Name="code" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="park" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="department">
           <Key>
             <PropertyRef Name="code" />
           </Key>
-          <Property Name="code" Nullable="false" MaxLength="2" Type="varchar" />
-          <Property Name="name" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="salt" MaxLength="255" Type="varchar" />
-          <Property Name="hashedPassword" MaxLength="255" Type="varchar" />
+          <Property Name="code" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="salt" Type="varchar" MaxLength="255" />
+          <Property Name="hashedPassword" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="facility">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" Type="int" />
-          <Property Name="name" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
         <EntityType Name="module">
           <Key>
             <PropertyRef Name="code" />
           </Key>
-          <Property Name="code" Nullable="false" MaxLength="10" Type="varchar" />
-          <Property Name="title" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="deptCode" Nullable="false" MaxLength="2" Type="varchar" />
-          <Property Name="active" Nullable="false" Type="bit" />
+          <Property Name="code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="deptCode" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="request">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="moduleCode" Nullable="false" MaxLength="10" Type="varchar" />
-          <Property Name="priority" Nullable="false" Type="bit" />
-          <Property Name="day" Nullable="false" Type="tinyint" />
-          <Property Name="startPeriod" Nullable="false" Type="tinyint" />
-          <Property Name="endPeriod" Nullable="false" Type="tinyint" />
-          <Property Name="weeks" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="numberOfStudents" Nullable="false" Type="smallint" />
-          <Property Name="parkPreference" Nullable="false" Type="tinyint" />
-          <Property Name="sessionType" Nullable="false" Type="bit" />
-          <Property Name="roomType" Nullable="false" Type="tinyint" />
-          <Property Name="numberOfRooms" Nullable="false" Type="tinyint" />
-          <Property Name="otherRequirements" MaxLength="255" Type="varchar" />
-          <Property Name="roundID" Nullable="false" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="moduleCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="priority" Type="bit" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="startPeriod" Type="tinyint" Nullable="false" />
+          <Property Name="endPeriod" Type="tinyint" Nullable="false" />
+          <Property Name="weeks" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="numberOfStudents" Type="smallint" Nullable="false" />
+          <Property Name="parkPreference" Type="tinyint" Nullable="false" />
+          <Property Name="traditional" Type="bit" Nullable="false" />
+          <Property Name="sessionType" Type="tinyint" Nullable="false" />
+          <Property Name="numberOfRooms" Type="tinyint" Nullable="false" />
+          <Property Name="otherRequirements" Type="varchar" MaxLength="255" />
+          <Property Name="roundID" Type="int" Nullable="false" />
           <Property Name="status" Type="tinyint" />
         </EntityType>
         <EntityType Name="requestFacility">
@@ -129,68 +129,68 @@
             <PropertyRef Name="requestID" />
             <PropertyRef Name="facilityID" />
           </Key>
-          <Property Name="requestID" Nullable="false" Type="int" />
-          <Property Name="facilityID" Nullable="false" Type="int" />
+          <Property Name="requestID" Type="int" Nullable="false" />
+          <Property Name="facilityID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="room">
           <Key>
             <PropertyRef Name="code" />
           </Key>
-          <Property Name="code" Nullable="false" MaxLength="10" Type="varchar" />
-          <Property Name="buildingCode" Nullable="false" MaxLength="3" Type="varchar" />
-          <Property Name="roomType" Nullable="false" Type="tinyint" />
-          <Property Name="capacity" Nullable="false" Type="smallint" />
+          <Property Name="code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="buildingCode" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="roomType" Type="tinyint" Nullable="false" />
+          <Property Name="capacity" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="roomAllocated">
           <Key>
             <PropertyRef Name="requestID" />
             <PropertyRef Name="roomCode" />
           </Key>
-          <Property Name="requestID" Nullable="false" Type="int" />
-          <Property Name="roomCode" Nullable="false" MaxLength="10" Type="varchar" />
+          <Property Name="requestID" Type="int" Nullable="false" />
+          <Property Name="roomCode" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
         <EntityType Name="roomFacility">
           <Key>
             <PropertyRef Name="roomCode" />
             <PropertyRef Name="facilityID" />
           </Key>
-          <Property Name="roomCode" Nullable="false" MaxLength="10" Type="varchar" />
-          <Property Name="facilityID" Nullable="false" Type="int" />
+          <Property Name="roomCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="facilityID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="roomPreference">
           <Key>
             <PropertyRef Name="requestID" />
             <PropertyRef Name="roomCode" />
           </Key>
-          <Property Name="requestID" Nullable="false" Type="int" />
-          <Property Name="roomCode" Nullable="false" MaxLength="10" Type="varchar" />
+          <Property Name="requestID" Type="int" Nullable="false" />
+          <Property Name="roomCode" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
         <EntityType Name="round">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="roundNo" Nullable="false" Type="tinyint" />
-          <Property Name="startTime" Nullable="false" Type="datetime" />
-          <Property Name="endTime" Nullable="false" Type="datetime" />
-          <Property Name="adhoc" Nullable="false" Type="bit" />
-          <Property Name="live" Nullable="false" Type="bit" />
-          <Property Name="semesterID" Nullable="false" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="roundNo" Type="tinyint" Nullable="false" />
+          <Property Name="startTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" Nullable="false" />
+          <Property Name="adhoc" Type="bit" Nullable="false" />
+          <Property Name="live" Type="bit" Nullable="false" />
+          <Property Name="semesterID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="semester">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="year" Nullable="false" MaxLength="255" Type="varchar" />
-          <Property Name="semesterNumber" Nullable="false" Type="tinyint" />
-          <Property Name="numberOfWeeks" Nullable="false" Type="tinyint" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="year" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="semesterNumber" Type="tinyint" Nullable="false" />
+          <Property Name="numberOfWeeks" Type="tinyint" Nullable="false" />
         </EntityType>
         <Association Name="FK_module_department">
-          <End Type="team15Model.Store.department" Multiplicity="1" Role="department">
+          <End Role="department" Type="team15Model.Store.department" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.module" Multiplicity="*" Role="module" />
+          <End Role="module" Type="team15Model.Store.module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="department">
               <PropertyRef Name="code" />
@@ -201,10 +201,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_request_module">
-          <End Type="team15Model.Store.module" Multiplicity="1" Role="module">
+          <End Role="module" Type="team15Model.Store.module" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.request" Multiplicity="*" Role="request" />
+          <End Role="request" Type="team15Model.Store.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="module">
               <PropertyRef Name="code" />
@@ -215,10 +215,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_request_round">
-          <End Type="team15Model.Store.round" Multiplicity="1" Role="round">
+          <End Role="round" Type="team15Model.Store.round" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.request" Multiplicity="*" Role="request" />
+          <End Role="request" Type="team15Model.Store.request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="round">
               <PropertyRef Name="id" />
@@ -229,10 +229,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_requestFacility_facility">
-          <End Type="team15Model.Store.facility" Multiplicity="1" Role="facility">
+          <End Role="facility" Type="team15Model.Store.facility" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.requestFacility" Multiplicity="*" Role="requestFacility" />
+          <End Role="requestFacility" Type="team15Model.Store.requestFacility" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="facility">
               <PropertyRef Name="id" />
@@ -243,10 +243,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_requestFacility_request">
-          <End Type="team15Model.Store.request" Multiplicity="1" Role="request">
+          <End Role="request" Type="team15Model.Store.request" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.requestFacility" Multiplicity="*" Role="requestFacility" />
+          <End Role="requestFacility" Type="team15Model.Store.requestFacility" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="request">
               <PropertyRef Name="id" />
@@ -257,10 +257,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_room_building">
-          <End Type="team15Model.Store.building" Multiplicity="1" Role="building">
+          <End Role="building" Type="team15Model.Store.building" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.room" Multiplicity="*" Role="room" />
+          <End Role="room" Type="team15Model.Store.room" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="building">
               <PropertyRef Name="code" />
@@ -271,10 +271,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomAllocated_request">
-          <End Type="team15Model.Store.request" Multiplicity="1" Role="request">
+          <End Role="request" Type="team15Model.Store.request" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.roomAllocated" Multiplicity="*" Role="roomAllocated" />
+          <End Role="roomAllocated" Type="team15Model.Store.roomAllocated" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="request">
               <PropertyRef Name="id" />
@@ -285,8 +285,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomAllocated_room">
-          <End Type="team15Model.Store.room" Multiplicity="1" Role="room" />
-          <End Type="team15Model.Store.roomAllocated" Multiplicity="*" Role="roomAllocated" />
+          <End Role="room" Type="team15Model.Store.room" Multiplicity="1" />
+          <End Role="roomAllocated" Type="team15Model.Store.roomAllocated" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="room">
               <PropertyRef Name="code" />
@@ -297,10 +297,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomFacility_facility">
-          <End Type="team15Model.Store.facility" Multiplicity="1" Role="facility">
+          <End Role="facility" Type="team15Model.Store.facility" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.roomFacility" Multiplicity="*" Role="roomFacility" />
+          <End Role="roomFacility" Type="team15Model.Store.roomFacility" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="facility">
               <PropertyRef Name="id" />
@@ -311,8 +311,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomFacility_room">
-          <End Type="team15Model.Store.room" Multiplicity="1" Role="room" />
-          <End Type="team15Model.Store.roomFacility" Multiplicity="*" Role="roomFacility" />
+          <End Role="room" Type="team15Model.Store.room" Multiplicity="1" />
+          <End Role="roomFacility" Type="team15Model.Store.roomFacility" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="room">
               <PropertyRef Name="code" />
@@ -323,10 +323,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomPreference_request">
-          <End Type="team15Model.Store.request" Multiplicity="1" Role="request">
+          <End Role="request" Type="team15Model.Store.request" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="team15Model.Store.roomPreference" Multiplicity="*" Role="roomPreference" />
+          <End Role="roomPreference" Type="team15Model.Store.roomPreference" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="request">
               <PropertyRef Name="id" />
@@ -337,8 +337,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_roomPreference_room">
-          <End Type="team15Model.Store.room" Multiplicity="1" Role="room" />
-          <End Type="team15Model.Store.roomPreference" Multiplicity="*" Role="roomPreference" />
+          <End Role="room" Type="team15Model.Store.room" Multiplicity="1" />
+          <End Role="roomPreference" Type="team15Model.Store.roomPreference" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="room">
               <PropertyRef Name="code" />
@@ -349,8 +349,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_round_semester">
-          <End Type="team15Model.Store.semester" Multiplicity="1" Role="semester" />
-          <End Type="team15Model.Store.round" Multiplicity="*" Role="round" />
+          <End Role="semester" Type="team15Model.Store.semester" Multiplicity="1" />
+          <End Role="round" Type="team15Model.Store.round" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="semester">
               <PropertyRef Name="id" />
@@ -457,8 +457,7 @@
           <Property Name="weeks" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="numberOfStudents" Type="Int16" Nullable="false" />
           <Property Name="parkPreference" Type="Byte" Nullable="false" />
-          <Property Name="sessionType" Type="Boolean" Nullable="false" />
-          <Property Name="roomType" Type="Byte" Nullable="false" />
+          <Property Name="sessionType" Type="Byte" Nullable="false" />
           <Property Name="numberOfRooms" Type="Byte" Nullable="false" />
           <Property Name="otherRequirements" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
           <Property Name="roundID" Type="Int32" Nullable="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -468,6 +467,7 @@
           <NavigationProperty Name="facilities" Relationship="team15Model.requestFacility" FromRole="request" ToRole="facility" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <NavigationProperty Name="roomsAlloc" Relationship="team15Model.roomAllocated" FromRole="request" ToRole="room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <NavigationProperty Name="roomsPref" Relationship="team15Model.roomPreference" FromRole="request" ToRole="room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Type="Boolean" Name="traditional" Nullable="false" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -634,6 +634,7 @@
           <EntitySetMapping Name="requests">
             <EntityTypeMapping TypeName="team15Model.request">
               <MappingFragment StoreEntitySet="request">
+                <ScalarProperty Name="traditional" ColumnName="traditional" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="moduleCode" ColumnName="moduleCode" />
                 <ScalarProperty Name="priority" ColumnName="priority" />
@@ -644,7 +645,6 @@
                 <ScalarProperty Name="numberOfStudents" ColumnName="numberOfStudents" />
                 <ScalarProperty Name="parkPreference" ColumnName="parkPreference" />
                 <ScalarProperty Name="sessionType" ColumnName="sessionType" />
-                <ScalarProperty Name="roomType" ColumnName="roomType" />
                 <ScalarProperty Name="numberOfRooms" ColumnName="numberOfRooms" />
                 <ScalarProperty Name="otherRequirements" ColumnName="otherRequirements" />
                 <ScalarProperty Name="roundID" ColumnName="roundID" />
