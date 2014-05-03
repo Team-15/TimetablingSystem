@@ -47,6 +47,10 @@
     background-color: #369;
 }
 
+#contentDiv {
+    padding:10px;
+}
+
 table.gridTable {
     border: 1px solid black;
 }

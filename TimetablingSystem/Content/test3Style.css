@@ -1,2 +1,67 @@
-﻿body {
+﻿#graphicalContainer {
+
+    position:relative;
+    min-height: 700px;
+    width: 940px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid black;
+
 }
+
+#infoSection {
+
+    position:absolute;
+    height:100%;
+    width:340px;
+
+    
+
+    border: 1px solid black;
+}
+
+#graphicalSection {
+    
+    position:absolute;
+    left: 340px;
+
+    height: 100%;
+    width: 600px;
+
+    border: 1px solid black;
+}
+
+.dayTable {
+
+    width: 580px;
+    min-height: 100px;
+    margin: 5px;
+
+    empty-cells: show;
+
+	border-spacing:5px 0px;
+
+    border: 1px solid black;
+}
+
+#hiddenTD {
+	height:0px;
+	border-top: none;
+	border-bottom: none;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+
+    
+    
+}
+
+.dayTable td {
+    
+    height:40px;
+	width:40px;
+    
+    border: 1px solid grey;
+}
+
