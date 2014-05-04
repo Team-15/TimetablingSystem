@@ -1,25 +1,29 @@
-﻿#graphicalContainer {
+﻿#graphicalContainer, #graphicalContainer2 {
 
-    position:relative;
-    min-height: 800px;
+    display: flex;
+    align-items: stretch;
+    align-items: stretch;
+
     width: 950px;
 
     margin: 0;
     padding: 0;
 
-    border: 1px solid black;
+    margin-bottom:100px;
+
+    //border: 1px solid black;
 
 }
 
 #infoSection {
 
-    position:absolute;
-    height:100%;
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+
     width:240px;
 
-    
-
-    border: 1px solid black;
+    //border: 1px solid black;
 }
 
 
@@ -95,13 +99,12 @@
 
 #graphicalSection {
     
-    position:absolute;
-    left: 240px;
+    flex: 1 0 auto;
 
-    height: 100%;
     width: 710px;
 
-    border: 1px solid black;
+    //border: 1px solid black;
+
 }
 
 .daySection {
@@ -142,7 +145,7 @@
     border-collapse:separate;
 	border-spacing:1px 2px;
 
-    border: 1px solid black;
+    //border: 1px solid black;
 }
 
 .dayTable td {
