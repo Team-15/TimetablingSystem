@@ -50,20 +50,3 @@
 #contentDiv {
     padding:5px;
 }
-
-table.gridTable {
-    border: 1px solid black;
-}
-
-th {
-    border: 1px solid black;
-}
-
-td.gridWeek {
-    border: 1px solid black;
-}
-
-#roomList {
-    overflow: auto; 
-    height: 400px;
-}
