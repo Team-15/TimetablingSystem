@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
+    buildingList = [];
     requestArray = [];
     testRequestList();
     moduleList = departmentModules;
-    buildingList = // Add once JB is done.
+    buildingList = buildingsWithRooms;
     dayList = daysArray;
     createModList();
     createBuildingList();
@@ -11,18 +12,29 @@
     createStatusList();
     createDepartmentList();
     createStageList();
+    //var index = document.getElementById("selectbuilding").value
+    $("#selectbuilding").change(function () {
+       var index = document.getElementById("selectbuilding").value;
+       createRoomList(index);
+    });
+    //alert(buildingList[2].rooms[0].code);
+    //alert(JSON.stringify(buildingList));
 
 
 });
 
 $("#selectmod").change(function () {
     alert(document.getElementById("selectmod").value);
+    
 });
+
 
 var requestArray = null;
 
 var moduleList = [];
-var buildingList = [];
+
+//var buildingList = null;
+
 var dayList = [];
 
 
@@ -42,25 +54,44 @@ function createModList() {
 
 function createBuildingList() {
     var building = "";
+    var building1 = "";
 
     building += 'building:';
     building += '<select id="selectbuilding">'
     building += '<option value="All">' + "All" + '</option>';
-    for (var i = 0; i < 3; i++) {
-       // building += '<option value="' + buildingList[i].code + '">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
-        building += '<option>'+"building"+i+'</option>';
+    for (var i = 0; i < buildingList.length; i++) {
+       building += '<option value="'+i+'">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
+        // building += '<option>'+"building"+i+'</option>';
     }
-
+   //index = document.getElementById("selectbuilding").value
     building += '</select>';
-    building += '<select id="selectroom">'
-    building += '<option value="All">' + "All" + '</option>';
-    for (var j = 0; j < 3; j++) {
-        // building += '<option value="' + buildingList[i].rooms[j].code + '">' + buildingList[i].rooms[j].code + '</option>';
-        building += '<option>' + "room" + j + '</option>';
-    }
-    building += '</select>';
+    building1 += '<select id="selectroom">'
+    building1 += '<option value="All">' + "All" + '</option>';
+    //for (var j = 0; j < buildingList[i].rooms.length; j++) {
+       // building += '<option value="' + buildingList[i].rooms[j].code + '">' + buildingList[i].rooms[j].code + '</option>';
+       //building += '<option>' + j +'</option>';
+    
+    building1 += '</select>';
     document.getElementById('buildinglist').innerHTML = building;
+    document.getElementById('roomslist').innerHTML = building1;
+
+
 }
+
+function createRoomList(index) {
+
+
+        var rooms = "";
+        rooms += '<select id="selectroom">'
+        for (var j = 0; j < buildingList[index].rooms.length; j++) {
+            rooms += '<option value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
+        //rooms += '<option>' + j +'</option>';
+        }
+        rooms += '</select>';
+        document.getElementById('roomslist').innerHTML = rooms;
+}
+
+
 
 function createDaysList() {
     
