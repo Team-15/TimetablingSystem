@@ -268,7 +268,7 @@ function testRequestList() {
 
     testReq4.round = roundID;
 
-    testReq4.id = "1236";
+    testReq4.id = "1237";
     testReq4.module = module2;
 
     testReq4.priority = false;
@@ -294,7 +294,7 @@ function testRequestList() {
 
     testReq4.round = roundID;
 
-    testReq5.id = "1236";
+    testReq5.id = "1238";
     testReq5.module = module1;
 
     testReq5.priority = false;
