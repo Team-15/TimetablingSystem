@@ -1,7 +1,7 @@
 ﻿#graphicalContainer {
 
     position:relative;
-    min-height: 700px;
+    min-height: 800px;
     width: 950px;
 
     margin: 0;
@@ -21,6 +21,77 @@
 
     border: 1px solid black;
 }
+
+
+#detailsContainer {
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    //min-height: 700px;
+    width: 230px;
+    margin: 5px;
+
+    border: 1px solid black;
+
+}
+
+.dataRow {
+    
+    min-height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: center;
+    align-items: center;
+    
+    
+    border-bottom: 1px solid grey;
+
+}
+
+.dataTitle {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:center;
+
+    height: 100%;
+    min-height: 40px;
+
+    padding-left: 3px;
+    padding-right: 3px;
+
+    font-weight: 600;
+    text-decoration: underline;
+
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+
+}
+
+.dataContent {
+
+    display:flex;
+    flex:1 0 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:center;
+   
+    min-height: 40px;
+    padding: 0px 3px 0px 3px;
+
+    //border: 1px solid grey;
+
+}
+
+
+
+
+
+
+
 
 #graphicalSection {
     
@@ -57,7 +128,6 @@
 
 }
 
-
 .dayTable {
 
     margin-top: 5px;
@@ -86,23 +156,14 @@
 }
 
 .dayTable [id*="hiddenTD"] {
-	height:0px;
+	
+    height:0px;
 	border-top: none;
 	border-bottom: none;
 	border-right: 1px solid transparent;
 	border-left: 1px solid transparent;
 
-    
-    
 }
-
-.dayTable input[type=radio]{
-
-    visibility: hidden;
-    display: none;
-
-}
-
 
 .radioLabel {
 	
@@ -121,3 +182,12 @@
 	cursor: pointer;
 
 }
+
+.dayTable input[type=radio]{
+
+    visibility: hidden;
+    display: none;
+
+}
+
+
