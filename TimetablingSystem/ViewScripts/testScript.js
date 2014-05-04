@@ -25,11 +25,11 @@
 
 $("#selectmod").change(function () {
     alert(document.getElementById("selectmod").value);
-    
+    runSearch();
 });
 
 
-var requestArray = null;
+//var requestArray = null;
 
 var moduleList = [];
 
@@ -37,6 +37,18 @@ var moduleList = [];
 
 var dayList = [];
 
+
+function runSearch() {
+    for (var i = 0 ; i < requestArray.length; i++) {
+        //for (var j = 0 ; j < requestArray[i].weeks.length ; j++){
+        if ((requestArray[i].moduleCode == document.getElementById("selectmod").value) && (requestArray[i].allocatedRooms == document.getElementById("selectroom").value) && (requestArray[i].day == document.getElementById("selectday").value) && (requestArray[i].weeks[document.getElementById("selectweek").value -1] == true) && (requestArray[i].status == document.getElementById("selectstatus").value)) {
+                alert("hey")
+            }
+       // }
+
+    }
+
+}
 
 function createModList() {
     var modlist="";
@@ -61,15 +73,12 @@ function createBuildingList() {
     building += '<option value="All">' + "All" + '</option>';
     for (var i = 0; i < buildingList.length; i++) {
        building += '<option value="'+i+'">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
-        // building += '<option>'+"building"+i+'</option>';
+        
     }
-   //index = document.getElementById("selectbuilding").value
+
     building += '</select>';
     building1 += '<select id="selectroom">'
     building1 += '<option value="All">' + "All" + '</option>';
-    //for (var j = 0; j < buildingList[i].rooms.length; j++) {
-       // building += '<option value="' + buildingList[i].rooms[j].code + '">' + buildingList[i].rooms[j].code + '</option>';
-       //building += '<option>' + j +'</option>';
     
     building1 += '</select>';
     document.getElementById('buildinglist').innerHTML = building;
@@ -101,7 +110,7 @@ function createDaysList() {
     daylist += '<select id="selectday">'
     daylist += '<option value="All">' + "All" + '</option>';
     for (var i = 0; i < dayList.length; i++) {
-        daylist += '<option value="' + dayList[i]+'">' + dayList[i] + '</option>';
+        daylist += '<option value="' + i +'">' + dayList[i] + '</option>';
     }
     daylist += '</select>';
     document.getElementById('dayslist').innerHTML = daylist;
@@ -131,9 +140,9 @@ function createStatusList() {
     status += 'Status';
     status += '<select id="selectstatus">'
     status += '<option value="All">' + "All" + '</option>';
-    status += '<option>' + "Unsubmitted" + '</option>';
+    status += '<option value="null">' + "Unsubmitted" + '</option>';
     for (var i = 0; i < statusArray.length ; i++) {
-        status += '<option value="'+statusArray[i]+'">' + statusArray[i] + '</option>';
+        status += '<option value="' + i + '">' + statusArray[i] + '</option>';
     }
     status += '</select>';
     document.getElementById('statuslist').innerHTML = status;
@@ -179,7 +188,7 @@ function testRequestList() {
     testReq.round = 1;
 
     testReq.id = "1234";
-    testReq.moduleCode = "COB123";
+    testReq.moduleCode = "COA101";
     testReq.moduleTitle = "Test Module Title";
 
     testReq.priority = true;
