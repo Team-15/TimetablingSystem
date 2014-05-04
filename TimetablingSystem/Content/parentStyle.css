@@ -62,3 +62,8 @@ th {
 td.gridWeek {
     border: 1px solid black;
 }
+
+#roomList {
+    overflow: auto; 
+    height: 400px;
+}
