@@ -136,7 +136,7 @@ function facilityPopulate() {
 function roomListPopulate() {
     var tempStr = "";
     var buildNum = $("#buildingSelect").val();
-    if (buildNum == -1) {
+    if (buildNum == -1 && newRequest.park == 0) {
         for (var j = 0; j < buildArray.length; j++) {
             var chosenBuilding = buildArray[j];
             for (var i = 0; i < chosenBuilding.rooms.length; i++) {
@@ -145,9 +145,17 @@ function roomListPopulate() {
                 }
             }
         }
+    } else if (buildNum == -1) {
+        for (var j = 0; j < buildArray.length; j++) {
+            var chosenBuilding = buildArray[j];
+            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+                if (chosenBuilding.rooms[i].capacity >= newRequest.students && buildArray[j].park == newRequest.park) {
+                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                }
+            }
+        }
     } else {
         var chosenBuilding = buildArray[buildNum];
-
         for (var i = 0; i < chosenBuilding.rooms.length; i++) {
             if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
                 tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
@@ -162,7 +170,7 @@ function roomListPopulate() {
 
 //creates building filter dropdown
 function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'>";
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
         if (newRequest.park == buildArray[i].park) {
             tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
