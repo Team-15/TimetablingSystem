@@ -312,6 +312,7 @@
     </Content>
     <Content Include="Images\LboroLogo.png" />
     <Content Include="JS\globalConstants.js" />
+    <Content Include="JS\globalFunctions.js" />
     <Content Include="JS\instanceData.js" />
     <Content Include="JS\testA.js" />
     <Content Include="JS\objectDataTypes.js" />

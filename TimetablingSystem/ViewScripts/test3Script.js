@@ -1,27 +1,25 @@
 ﻿$(document).ready(function () {
-    //alert("run");
+    
+    rArray = [];
+    fArray = [];
+
+
     rArray = testRequestList();
     fArray = testFacilities();
-
-    //testFacilities
-
-    //
 
     graphicalGenerator(rArray);
 
     $("input[name=gRadio]").click(function () {
+
         rArray = testRequestList();
         var r = null;
-        for (var i = 0; i < rArray.length; i++) if (rArray[i].id = $(this).val()) r = rArray[i];
-
-        //alert(JSON.stringify(r));
+        for (var i = 0; i < rArray.length; i++) if (rArray[i].id === $(this).val()) r = rArray[i];
         displayData(r);
+
     });
 
 });
-
-var rArray = [];
-var fArray = [];
+ 
 
 function displayData(request) {
     
@@ -29,20 +27,18 @@ function displayData(request) {
     $("#id").html(request.id);
     $("#modCode").html(request.module.code);
     $("#modTitle").html(request.module.title);
-    $("#priority").html(request.priority);
+    $("#priority").html(request.priority ? "Yes" : "No");
     $("#status").html(statusArray[request.status]);
-    $("#roomsAlloc").html(request.allocatedRooms);
-    $("#roomsPref").html(request.rooms);
+    $("#roomsAlloc").html(htmlStringFormater(request.allocatedRooms, false));
+    $("#roomsPref").html(htmlStringFormater(request.rooms));
     $("#weeks").html(weeksReadableFormat(request.weeks));
     $("#noOfStudents").html(request.students);
     $("#noOfRooms").html(request.noOfRooms);
-    $("#traditional").html(requst.traditional);
-    $("#park").html(request.park);
-    $("#sessionType").html(request.sessionType);
+    $("#traditional").html(request.traditional ? "T" : "S");
+    $("#park").html(parksArray[request.park]);
+    $("#sessionType").html(sessionTypesArray[request.sessionType]);
     $("#otherRequirements").html(request.otherReqs);
-    $("#facilities").html(request.facilities);
-
-    
+    $("#facilities").html(htmlStringFormater(getFacilityTitles(request.facilities)));
 
 }
 
@@ -130,18 +126,6 @@ function getDayRequests(reqArray, day) {
 
 
 
-
-
-
-
-/*
-$("input[name=gRadio]").click(function () {
-    alert($(this).val());
-});
-*/
-
-
-
 function testFacilities() {
 
     var facility1 = new Facility();
@@ -171,10 +155,12 @@ function testRequestList() {
     var module1 = new Module();
     module1.code = "COA123";
     module1.deptCode = "CO";
+    module1.title = "Server Side Programming";
 
     var module2 = new Module();
-    module2.code = "COA321";
+    module2.code = "COB290";
     module2.deptCode = "CO";
+    module2.title = "Team Projects";
 
     testReq.department = department;
 
@@ -219,7 +205,7 @@ function testRequestList() {
     testReq2.endPeriod = 6;
     testReq2.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false];
 
-    testReq2.students = 100;
+    testReq2.students = 105;
     testReq2.park = 0;
     testReq2.traditional = true;
     testReq2.sessionType = 2;
@@ -258,8 +244,8 @@ function testRequestList() {
 
     testReq3.status = 1;
 
-    testReq3.facilities = ["10102"];
-    testReq3.otherReqs = "";
+    testReq3.facilities = [1, 2, 4, 8];
+    testReq3.otherReqs = "Deaf Student: Sign Linguist Required";
 
     testReq3.allocatedRooms = ["N.0.02"];
 
@@ -278,7 +264,7 @@ function testRequestList() {
     testReq4.endPeriod = 7;
     testReq4.weeks = [false, false, false, true, false, true, false, true, true, true, true, true, false, true, false, false];
 
-    testReq4.students = 100;
+    testReq4.students = 50;
     testReq4.park = 0;
     testReq4.traditional = true;
     testReq4.sessionType = 2;
@@ -306,7 +292,7 @@ function testRequestList() {
 
     testReq5.students = 100;
     testReq5.park = 0;
-    testReq5.traditional = true;
+    testReq5.traditional = false;
     testReq5.sessionType = 2;
     testReq5.noOfRooms = 1;
     testReq5.rooms = ["N.0.01", "N.0.03"];

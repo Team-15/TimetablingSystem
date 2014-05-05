@@ -94,7 +94,7 @@ function getFacilityTitles(facilityCodesArray) {
 
         for (var counter = 0; counter < facilitiesArray.length; counter++) {
 
-            if (facilityCodesArray[count] == facilitiesArray[counter].id) titleArray.push(facilitiesArray[counter].name);
+            if (facilityCodesArray[count] === facilitiesArray[counter].id) titleArray.push(facilitiesArray[counter].name);
 
         }
     }
