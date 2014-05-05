@@ -183,14 +183,34 @@ function moduleFilter(reqArray) {
 function buildingFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
+    
+    var roomsList = buildingList[selectedBuilding].rooms;
 
+    for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
-    /*
-    Execulte Alogrithm here for filtering by buildings.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects
-    */
+        var currentReq = reqArray[reqCounter];
+
+        for (var roomCounter = 0; roomCounter < roomsList.length; roomCounter++) {
+
+            var notAdded = true;
+
+            if (currentReq.rooms.indexOf(roomsList[roomCounter]) != -1) {
+                
+                filteredRequests.push(currentReq);
+
+                notAdded = false;
+
+            }
+
+            if ((currentReq.allocatedRooms.indexOf(roomsList[roomCounter]) != -1) && (notAdded)) {
+
+                filteredRequests.push(currentReq);
+
+            }
+
+        }
+
+    }
 
     return filteredRequests;
 
@@ -201,6 +221,7 @@ function roomFilter(reqArray) {
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
 
+    /*
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
         for (var reqCounter1 = 0; reqCounter1 < reqArray.rooms.length; reqCounte1r++) {
             if (reqArray[reqCounter].allocatedRooms[reqCounter1] === selectedRooms) {
@@ -209,6 +230,7 @@ function roomFilter(reqArray) {
         
         }
     }
+    */
 
     /*
     Execulte Alogrithm here for filtering by rooms.
@@ -230,7 +252,8 @@ function dayFilter(reqArray) {
 
         if (reqArray[reqCounter].building.code === selectedBuilding) {
             filteredRequests.push(reqArray[reqCounter]);
-     }
+        }
+    }
     /*
     Execulte Alogrithm here for filtering by days.
     Use the variable underneath the flag declaration.
