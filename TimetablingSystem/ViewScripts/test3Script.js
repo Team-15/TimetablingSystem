@@ -7,6 +7,8 @@
     rArray = testRequestList();
     fArray = testFacilities();
 
+    layoutSetup();
+    detailsGenerator();
     graphicalGenerator(rArray);
 
     $("input[name=gRadio]").click(function () {
@@ -39,6 +41,108 @@ function displayData(request) {
     $("#sessionType").html(sessionTypesArray[request.sessionType]);
     $("#otherRequirements").html(request.otherReqs);
     $("#facilities").html(htmlStringFormater(getFacilityTitles(request.facilities)));
+
+}
+
+function layoutSetup() {
+
+    var layoutHTML = "";
+
+    layoutHTML += "<div id='infoSection'></div>";
+    layoutHTML += "<div id='graphicalSection'></div>";
+
+    $("#graphicalContainer").html(layoutHTML);
+
+}
+
+function detailsGenerator() {
+
+    var detailsHTML = "";
+
+    detailsHTML += "<div id='detailsContainer'>";
+
+    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+                        <div class='dataTitle'>Department:</div>\
+                        <div class='dataContent' id='deptCode'></div>\
+                        <div class='dataTitle'>ID:</div>\
+                        <div class='dataContent' id='id'></div>\
+                    </div>";
+
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Code:</div>\
+                        <div class='dataContent' id='modCode'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Title:</div>\
+                        <div class='dataContent' id='modTitle'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+                        <div class='dataTitle'>P:</div>\
+                        <div class='dataContent' id='priority'></div>\
+                        <div class='dataTitle'>Status:</div>\
+                        <div class='dataContent' id='status'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Allocated<br />Room(s):</div>\
+                        <div class='dataContent' id='roomsAlloc'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Room<br />Preference(s):</div>\
+                        <div class='dataContent' id='roomsPref'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Weeks:</div>\
+                        <div class='dataContent' id='weeks'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Number of Students:</div>\
+                        <div class='dataContent' id='noOfStudents'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Number of Rooms:</div>\
+                        <div class='dataContent' id='noOfRooms'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+                        <div class='dataTitle'>Tradional:</div>\
+                        <div class='dataContent' id='traditional'></div>\
+                        <div class='dataTitle'>Park:</div>\
+                        <div class='dataContent' id='park'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Session Type:</div>\
+                        <div class='dataContent' id='sessionType'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Other<br />Requirements:</div>\
+                        <div class='dataContent' id='otherRequirements'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataTitle'>Facilities:</div>\
+                        <div class='dataContent' id='facilities'></div>\
+                    </div>";
+
+    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+                        <div class='dataBtn'> <input type='button' name='Edit' value='Edit' data-requestid='' /> </div>\
+                        <div class='dataBtn'> <input type='button' name='Duplicate' value='Duplicate' data-requestid='' /> </div>\
+                        <div class='dataBtn'> <input type='button' name='Delete' value='Delete' data-requestid='' /> </div>\
+                    </div>";
+
+
+    detailsHTML += "</div>";
+
+    $("#infoSection").html(detailsHTML);
 
 }
 

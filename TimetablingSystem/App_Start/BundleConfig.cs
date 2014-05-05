@@ -9,6 +9,7 @@ namespace TimetablingSystem
         public static void RegisterBundles(BundleCollection bundles)
         {
 
+            /*          JS          */
             bundles.Add(new ScriptBundle("~/bundles/parent").Include(
 
                 //"~/Scripts/jquery-{version}.js",
@@ -28,14 +29,38 @@ namespace TimetablingSystem
             bundles.Add(new ScriptBundle("~/bundles/addRequests").Include(
                         "~/ViewScripts/addRequestsScript.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/requests").Include(
+                        "~/ViewScripts/requestsScript.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/results").Include(
+                        "~/ViewScripts/resultsScript.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bookings").Include(
+                        "~/ViewScripts/bookingsScript.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/history").Include(
+                        "~/ViewScripts/historyScript.js"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/settings").Include(
                         "~/ViewScripts/settingsScript.js"));
 
             
-            
-            
             bundles.Add(new ScriptBundle("~/bundles/logout").Include(
                         "~/ViewScripts/logoutScript.js"));
+
+
+            /*              CSS             */
+            //Original
+            //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/parentCSS").Include(
+                    "~/Content/bootstrap/bootstrap.css",
+                    "~/Content/parentStyle.css"
+                ));
+
+
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
@@ -51,15 +76,6 @@ namespace TimetablingSystem
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-
-            //Original
-            //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/parentCSS").Include(
-                    "~/Content/bootstrap/bootstrap.css",
-                    "~/Content/parentStyle.css"
-                ));
-
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
