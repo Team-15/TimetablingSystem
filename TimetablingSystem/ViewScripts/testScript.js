@@ -1,10 +1,14 @@
 ﻿$(document).ready(function () {
-    buildingList = [];
-    requestArray = [];
-    testRequestList();
+
+    //Data and Array setup
+    //buildingList = [];
+    //requestArray = [];
+    requestArray = testRequestList();
     moduleList = departmentModules;
     buildingList = buildingsWithRooms;
     dayList = daysArray;
+
+    //List setups
     createModList();
     createBuildingList();
     createDaysList();
@@ -12,52 +16,198 @@
     createStatusList();
     createDepartmentList();
     createStageList();
-    //var index = document.getElementById("selectbuilding").value
-    $("#selectbuilding").change(function () {
-       var index = document.getElementById("selectbuilding").value;
-       createRoomList(index);
+
+
+    $("#selectmod").change(function () {
+        selectedModule = this.value;
+        alert(selectedModule);
+
+        //Custom attribute uses to set flag true or false
+        //Repeat for other elements
+        //See your createModList and look for data-modulestate= attribute
+        modulesFlag = $("#selectmod").find(":selected").data("modulestate");
+        alert(modulesFlag);
+
+        //Execute the filters at the end of every change.
+        //Don't worry about the other filters, that's what the Flags handle
+        executeFilters();
+
     });
-    //alert(buildingList[2].rooms[0].code);
-    //alert(JSON.stringify(buildingList));
 
+    $("#selectbuilding").change(function () {
+        var index = document.getElementById("selectbuilding").value;
+        createRoomList(index);
+    });
 
 });
 
-$("#selectmod").change(function () {
-    alert(document.getElementById("selectmod").value);
-    runSearch();
-});
+
+//Filter Flags
+
+var modulesFlag = false; // List & Graphical
+var selectedModule = "";
+
+var buildingsFlag = false; //List and Graphical
+var selectedBuilding = "";
+var roomsFlag = false;
+var selectedRooms = "";
+
+var daysFlag = false; //List only
+var selectedDay = null;
+
+var weeksFlag = false; //List & Graphical
+var selectedWeek = null;
+
+var statusesFlag = false; //List and Graphical
+var selectedStatus = false;
 
 
-//var requestArray = null;
+
+
+var requestArray = [];
 
 var moduleList = [];
 
-//var buildingList = null;
+var buildingList = [];
 
 var dayList = [];
 
 
-function runSearch() {
-    for (var i = 0 ; i < requestArray.length; i++) {
-        //for (var j = 0 ; j < requestArray[i].weeks.length ; j++){
-        if ((requestArray[i].moduleCode == document.getElementById("selectmod").value) && (requestArray[i].allocatedRooms == document.getElementById("selectroom").value) && (requestArray[i].day == document.getElementById("selectday").value) && (requestArray[i].weeks[document.getElementById("selectweek").value -1] == true) && (requestArray[i].status == document.getElementById("selectstatus").value)) {
-                alert("hey")
-            }
-       // }
+function executeFilters() {
 
-    }
+    /*
+    Make a Copy of Original set of Requests, 
+    so that filtering can be redone if
+    any of the filtering values are changed
+    */
+    var filteringRequests = requestArray.slice(0);
+
+    /*
+    Each IF statement filters the array and 
+    returns it to the same variable,
+    allowing the filtering to be controlled purely
+    by the flags - this is flag mechanism and filtering
+    control, Nathan :D
+    */
+
+    if (modulesFlag) filteringRequests = moduleFilter(filteringRequests);
+
+    if (buildingsFlag) filteringRequests = buildingFilter(filteringRequests);
+
+    if (roomsFlag) filteringRequests = roomFilter(filteringRequests);
+
+    if (daysFlag) filteringRequests = dayFilter(filteringRequests);
+
+    if (weeksFlag) filteringRequests = weekFilter(filteringRequests);
+
+    if (statusesFlag) filteringRequests = statusFilter(filteringRequests);
+
+
+    //Return filtered array to be returned to list or graphical view generators
+    return filteringRequests;
 
 }
+
+function moduleFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by modules.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects.
+    */
+
+    return filteredRequests;
+
+}
+
+function buildingFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by buildings.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects
+    */
+
+    return filteredRequests;
+
+}
+
+function roomFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by rooms.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects
+    */
+
+    return filteredRequests;
+
+}
+
+function dayFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by days.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects
+    */
+
+    return filteredRequests;
+
+}
+
+function weekFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by weeks.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects
+    */
+
+    return filteredRequests;
+
+}
+
+function statusFilter(reqArray) {
+
+    var filteredRequests = [];
+    filteredRequests = reqArray; //Temporary, get rid of this later
+
+    /*
+    Execulte Alogrithm here for filtering by statuses.
+    Use the variable underneath the flag declaration.
+    Must retrun an Array of Request Objects
+    */
+
+    return filteredRequests;
+
+}
+
+
 
 function createModList() {
     var modlist="";
 
     modlist += 'Modules:';
     modlist += '<select id="selectmod">'
-    modlist += '<option value="All">' + "All" + '</option>';
+    modlist += '<option data-modulestate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < moduleList.length; i++) {
-        modlist += '<option value="'+moduleList[i].code+'">' + moduleList[i].code + ": " + moduleList[i].title +'</option>';
+        modlist += '<option data-modulestate=true value="' + moduleList[i].code + '">' + moduleList[i].code + ": " + moduleList[i].title + '</option>';
     }
     modlist += '</select>';
     document.getElementById('modulelist').innerHTML = modlist;
@@ -117,6 +267,7 @@ function createDaysList() {
 
 }
 
+
 function createWeekList() {
 
     var weeklist = "";
@@ -132,6 +283,7 @@ function createWeekList() {
 
 
 }
+
 
 function createStatusList() {
 
@@ -150,6 +302,7 @@ function createStatusList() {
 
 }
 
+
 function createDepartmentList() {
     var department = "";
 
@@ -162,11 +315,11 @@ function createDepartmentList() {
 
 }
 
+
 function createStageList() {
 
     var stage = "";
     stage += '<form>';
-    stage += '<input type="radio" name="dept">All</input>';
     stage += '<input type="radio" name="dept">Current</input>';
     stage += '<input type="radio" name="dept">Adhoc</input>';
     stage += '</form>';
@@ -174,6 +327,8 @@ function createStageList() {
 
 
 }
+
+
 
 function testRequestList() {
 
@@ -183,19 +338,26 @@ function testRequestList() {
     var testReq4 = new Request();
     var testReq5 = new Request();
 
-    testReq.department = "CO";
+    var module1 = new Module();
+    module1.code = "COA123";
+    module1.deptCode = "CO";
 
-    testReq.round = 1;
+    var module2 = new Module();
+    module2.code = "COA321";
+    module2.deptCode = "CO";
+
+    testReq.department = department;
+
+    testReq.round = roundID;
 
     testReq.id = "1234";
-    testReq.moduleCode = "COA101";
-    testReq.moduleTitle = "Test Module Title";
+    testReq.module = module1;
 
     testReq.priority = true;
 
     testReq.day = 2;
     testReq.startPeriod = 2;
-    testReq.endPeriod = 2;
+    testReq.endPeriod = 3;
     testReq.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false];
 
     testReq.students = 100;
@@ -213,16 +375,12 @@ function testRequestList() {
     testReq.allocatedRooms = ["J.0.02"];
 
 
-    requestArray.push(testReq);
+    testReq2.department = department;
 
-
-    testReq2.department = "CO";
-
-    testReq2.round = 1;
+    testReq2.round = roundID;
 
     testReq2.id = "1235";
-    testReq2.moduleCode = "COB124";
-    testReq2.moduleTitle = "Test Module Title";
+    testReq2.module = module2;
 
     testReq2.priority = false;
 
@@ -246,16 +404,13 @@ function testRequestList() {
     testReq2.allocatedRooms = ["N.0.01"];
 
 
-    requestArray.push(testReq2);
 
+    testReq3.department = department;
 
-    testReq3.department = "CO";
-
-    testReq3.round = 1;
+    testReq3.round = roundID;
 
     testReq3.id = "1236";
-    testReq3.moduleCode = "COB125";
-    testReq3.moduleTitle = "Test Module Title";
+    testReq3.module = module1;
 
     testReq3.priority = false;
 
@@ -279,16 +434,12 @@ function testRequestList() {
     testReq3.allocatedRooms = ["N.0.02"];
 
 
-    requestArray.push(testReq3);
+    testReq3.department = department;
 
+    testReq4.round = roundID;
 
-    testReq3.department = "CO";
-
-    testReq4.round = 1;
-
-    testReq4.id = "1236";
-    testReq4.moduleCode = "COB126";
-    testReq4.moduleTitle = "Test Module Title";
+    testReq4.id = "1237";
+    testReq4.module = module2;
 
     testReq4.priority = false;
 
@@ -311,13 +462,10 @@ function testRequestList() {
 
     testReq4.allocatedRooms = ["N.0.02"];
 
-    requestArray.push(testReq4);
+    testReq4.round = roundID;
 
-    testReq4.round = 1;
-
-    testReq5.id = "1236";
-    testReq5.moduleCode = "COB123";
-    testReq5.moduleTitle = "Test Module Title";
+    testReq5.id = "1238";
+    testReq5.module = module1;
 
     testReq5.priority = false;
 
@@ -340,6 +488,7 @@ function testRequestList() {
 
     testReq5.allocatedRooms = ["N.0.02"];
 
-    requestArray.push(testReq5);
+
+    return [testReq, testReq2, testReq3, testReq4, testReq5];
 
 }

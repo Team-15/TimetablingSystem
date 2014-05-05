@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
-    [Authorize]
+    //[Authorize]
     public class DeptModController : ApiController
     {
 

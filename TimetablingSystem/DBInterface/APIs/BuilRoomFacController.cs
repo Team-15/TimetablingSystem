@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
-    [Authorize]
+    //[Authorize]
     public class BuilRoomFacController : ApiController
     {
 
