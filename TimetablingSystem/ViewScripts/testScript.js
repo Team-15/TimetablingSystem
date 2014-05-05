@@ -52,8 +52,41 @@
         createRoomList(selectedBuilding);
     });
 
-});
 
+    $(function() {
+        $('#selectroom').change(function () {
+            alert("Heyy");
+        });
+    });
+
+
+    $("#selectday").change(function () {
+        selectedDay = this.value;
+        alert(selectedDay);
+        daysFlag = $("#selectday").find(":selected").data("daystate");
+        alert(daysFlag);
+
+
+    });
+
+    $("#selectweek").change(function () {
+        selectedWeek = this.value;
+        alert(selectedWeek);
+        weeksFlag = $("#selectweek").find(":selected").data("weekstate");
+        alert(weeksFlag);
+
+
+    });
+
+    $("#selectstatus").change(function () {
+        selectedStatus = this.value;
+        alert(selectedStatus);
+        statusesFlag = $("#selectstatus").find(":selected").data("statusstate");
+        alert(statusesFlag);
+
+
+    });
+});
 
 //Filter Flags
 
@@ -62,6 +95,7 @@ var selectedModule = "";
 
 var buildingsFlag = false; //List and Graphical
 var selectedBuilding = "";
+
 var roomsFlag = false;
 var selectedRooms = "";
 
@@ -126,7 +160,13 @@ function moduleFilter(reqArray) {
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
 
+    for (var i = 0 ; i < filteredRequests.length ; i++) {
+
+
+    }
+
     /*
+
     Execulte Alogrithm here for filtering by modules.
     Use the variable underneath the flag declaration.
     Must retrun an Array of Request Objects.
@@ -255,11 +295,11 @@ function createRoomList(index) {
 
     var rooms = "";
     rooms += '<select id="selectroom">'
-    rooms += '<option value="All">' + "All" + '</option>';
+    rooms += '<option data-roomstate=false value="All">' + "All" + '</option>';
 
     if (typeof index == "string") {
         for (var j = 0; j < buildingList[index].rooms.length; j++) {
-            rooms += '<option value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
+            rooms += '<option data-roomstate=true value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
             //rooms += '<option>' + j +'</option>';
         }
     }
@@ -277,9 +317,9 @@ function createDaysList() {
 
     daylist += 'day';
     daylist += '<select id="selectday">'
-    daylist += '<option value="All">' + "All" + '</option>';
+    daylist += '<option data-daystate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < dayList.length; i++) {
-        daylist += '<option value="' + i +'">' + dayList[i] + '</option>';
+        daylist += '<option data-daystate=true value="' + i + '">' + dayList[i] + '</option>';
     }
     daylist += '</select>';
     document.getElementById('dayslist').innerHTML = daylist;
@@ -293,9 +333,9 @@ function createWeekList() {
 
     weeklist += 'week';
     weeklist += '<select id="selectweek">'
-    weeklist += '<option value="All">' + "All" + '</option>';
+    weeklist += '<option data-weekstate=false value="All">' + "All" + '</option>';
     for (var i = 1; i <= 15/*(numberOfWeeks)*/; i++) {
-        weeklist += '<option value="'+i+'">'+i+'</option>';
+        weeklist += '<option data-weekstate=true value="' + i + '">' + i + '</option>';
     }
     weeklist += '</select>';
     document.getElementById('weeklist').innerHTML = weeklist;
@@ -310,10 +350,10 @@ function createStatusList() {
 
     status += 'Status';
     status += '<select id="selectstatus">'
-    status += '<option value="All">' + "All" + '</option>';
-    status += '<option value="null">' + "Unsubmitted" + '</option>';
+    status += '<option data-statusstate=false value="All">' + "All" + '</option>';
+    status += '<option data-statusstate=true value=null>' + "Unsubmitted" + '</option>';
     for (var i = 0; i < statusArray.length ; i++) {
-        status += '<option value="' + i + '">' + statusArray[i] + '</option>';
+        status += '<option data-statusstate=true value="' + i + '">' + statusArray[i] + '</option>';
     }
     status += '</select>';
     document.getElementById('statuslist').innerHTML = status;
