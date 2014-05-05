@@ -1,8 +1,13 @@
 ﻿$(document).ready(function () {
 
+    
+
     //Data and Array setup
-    //buildingList = [];
-    //requestArray = [];
+    requestArray = [];
+    moduleList = [];
+    buildingList = [];
+    dayList = [];
+
     requestArray = testRequestList();
     moduleList = departmentModules;
     buildingList = buildingsWithRooms;
@@ -35,8 +40,16 @@
     });
 
     $("#selectbuilding").change(function () {
-        var index = document.getElementById("selectbuilding").value;
-        createRoomList(index);
+        selectedBuilding = this.value;
+        alert(selectedBuilding);
+        buildingsFlag = $("#selectbuilding").find(":selected").data("buildingstate");
+        alert(buildingsFlag);
+        
+        if (buildingsFlag == false) $("#selectroom").prop("disabled", true);
+        else $("#selectroom").prop("disabled", false);
+
+
+        createRoomList(selectedBuilding);
     });
 
 });
@@ -63,7 +76,7 @@ var selectedStatus = false;
 
 
 
-
+/*
 var requestArray = [];
 
 var moduleList = [];
@@ -71,7 +84,7 @@ var moduleList = [];
 var buildingList = [];
 
 var dayList = [];
-
+*/
 
 function executeFilters() {
 
@@ -220,9 +233,9 @@ function createBuildingList() {
 
     building += 'building:';
     building += '<select id="selectbuilding">'
-    building += '<option value="All">' + "All" + '</option>';
+    building += '<option data-buildingstate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < buildingList.length; i++) {
-       building += '<option value="'+i+'">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
+        building += '<option data-buildingstate=true value="' + i + '">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
         
     }
 
@@ -240,14 +253,20 @@ function createBuildingList() {
 function createRoomList(index) {
 
 
-        var rooms = "";
-        rooms += '<select id="selectroom">'
+    var rooms = "";
+    rooms += '<select id="selectroom">'
+    rooms += '<option value="All">' + "All" + '</option>';
+
+    if (typeof index == "string") {
         for (var j = 0; j < buildingList[index].rooms.length; j++) {
             rooms += '<option value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
-        //rooms += '<option>' + j +'</option>';
+            //rooms += '<option>' + j +'</option>';
         }
-        rooms += '</select>';
-        document.getElementById('roomslist').innerHTML = rooms;
+    }
+
+    rooms += '</select>';
+    document.getElementById('roomslist').innerHTML = rooms;
+
 }
 
 
