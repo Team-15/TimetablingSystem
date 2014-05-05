@@ -50,13 +50,11 @@
 
 
         createRoomList(selectedBuilding);
-    });
 
-
-    $(function() {
         $('#selectroom').change(function () {
             alert("Heyy");
         });
+
     });
 
 
@@ -86,6 +84,7 @@
 
 
     });
+
 });
 
 //Filter Flags
