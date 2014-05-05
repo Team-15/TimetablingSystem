@@ -12,5 +12,10 @@ td.gridWeek {
 
 #roomList {
     overflow: auto; 
-    height: 400px;
+    height: 200px;
+}
+
+#chosenRoomsList {
+    overflow: auto; 
+    height: 100px;
 }
