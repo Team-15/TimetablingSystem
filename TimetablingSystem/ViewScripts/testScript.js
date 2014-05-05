@@ -148,6 +148,8 @@ function executeFilters() {
 
     if (statusesFlag) filteringRequests = statusFilter(filteringRequests);
 
+    alert("Filtered Requests Array have:");
+    alert(JSON.stringify(filteringRequests));
 
     //Return filtered array to be returned to list or graphical view generators
     return filteringRequests;
@@ -157,10 +159,13 @@ function executeFilters() {
 function moduleFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
+    
 
-    for (var i = 0 ; i < filteredRequests.length ; i++) {
+    for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
+        if (reqArray[reqCounter].module.code === selectedModule) {
+            filteredRequests.push(reqArray[reqCounter]);
+        }
 
     }
 
