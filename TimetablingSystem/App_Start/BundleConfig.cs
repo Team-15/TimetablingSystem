@@ -12,9 +12,6 @@ namespace TimetablingSystem
             /*          JS          */
             bundles.Add(new ScriptBundle("~/bundles/parent").Include(
 
-                //"~/Scripts/jquery-{version}.js",
-                //"~/Scripts/respond.js",
-
                 "~/Scripts/bootstrap.js",
                 "~/JS/testA.js",
                 "~/ViewScripts/parentScript.js",
@@ -22,7 +19,8 @@ namespace TimetablingSystem
                 "~/JS/globalFunctions.js",
                 "~/JS/instanceData.js",
                 "~/JS/objectDataTypes.js",
-                "~/JS/weeksManipulator.js"
+                "~/JS/weeksManipulator.js",
+                "~/JS/graphicalGenerator.js"
 
                 ));
 
@@ -56,8 +54,12 @@ namespace TimetablingSystem
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/parentCSS").Include(
+                    
                     "~/Content/bootstrap/bootstrap.css",
-                    "~/Content/parentStyle.css"
+                    "~/Content/parentStyle.css",
+                    "~/Content/displayStyle.css",
+                    "~/Content/graphicalDisplayStyle.css"
+                    
                 ));
 
 

@@ -1,0 +1,33 @@
+﻿.filtersContainer {
+
+    display: flex;
+    flex-flow: row  nowrap;
+
+    height: 100px;
+    width: 950px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid black;
+
+}
+
+.filterGroup {
+
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-left: 20px;
+
+}
+
+.displaysContainer {
+
+    width: 950px;
+
+    border: 1px solid black;
+
+}
