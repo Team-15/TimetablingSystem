@@ -20,6 +20,7 @@ namespace TimetablingSystem
                 "~/JS/instanceData.js",
                 "~/JS/objectDataTypes.js",
                 "~/JS/weeksManipulator.js",
+                "~/JS/dataManager.js",
                 "~/JS/graphicalGenerator.js"
 
                 ));

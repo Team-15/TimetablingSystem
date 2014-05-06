@@ -190,9 +190,11 @@ function graphicalViewGenerator(requestsArray) {
     $("#graphicalSection").html(graphicalHTML);
 
     $("input[name=gRadio]").click(function () {
-
+        
         var request = null;
-        for (var i = 0; i < requestsSet.length; i++) if (requestsSet[i].id === $(this).val()) request = requestsSet[i];
+
+        for (var i = 0; i < requestsSet.length; i++) if (requestsSet[i].id == $(this).val()) request = requestsSet[i];
+        
         displayData(request);
 
     });

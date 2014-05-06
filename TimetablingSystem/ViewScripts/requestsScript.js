@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    requestsSet = [];
+    requestsSet = getRequests();
 
     document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
 
@@ -27,3 +27,22 @@
     });
 
 });
+
+function getRequests() {
+
+    var requests = [];
+
+    $.ajax({
+        url: "api/request/GetRequests",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+            requests = translateJsonRequest(results);
+        }
+    });
+
+    return requests;
+
+}

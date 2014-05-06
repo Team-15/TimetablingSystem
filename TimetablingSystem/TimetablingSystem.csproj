@@ -313,6 +313,7 @@
       <LastGenOutput>TimetablingSystemModel.cs</LastGenOutput>
     </Content>
     <Content Include="Images\LboroLogo.png" />
+    <Content Include="JS\dataManager.js" />
     <Content Include="JS\globalConstants.js" />
     <Content Include="JS\globalFunctions.js" />
     <Content Include="JS\graphicalGenerator.js" />
