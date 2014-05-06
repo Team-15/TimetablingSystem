@@ -50,9 +50,11 @@
 
 
         createRoomList(selectedBuilding);
+        executeFilters();
 
         $('#selectroom').change(function () {
-            alert("Heyy");
+            alert(document.getElementById("selectroom").value);
+            executeFilters();
         });
 
     });
@@ -63,7 +65,7 @@
         alert(selectedDay);
         daysFlag = $("#selectday").find(":selected").data("daystate");
         alert(daysFlag);
-
+        executeFilters();
 
     });
 
@@ -72,7 +74,7 @@
         alert(selectedWeek);
         weeksFlag = $("#selectweek").find(":selected").data("weekstate");
         alert(weeksFlag);
-
+        executeFilters();
 
     });
 
@@ -259,14 +261,14 @@ function dayFilter(reqArray) {
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
 
-/*
+
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
-        if (reqArray[reqCounter].building.code === selectedBuilding) {
+        if (reqArray[reqCounter].day === selectedDay) {
             filteredRequests.push(reqArray[reqCounter]);
         }
     }
-   
+   /*
     Execulte Alogrithm here for filtering by days.
     Use the variable underneath the flag declaration.
     Must retrun an Array of Request Objects
@@ -281,6 +283,14 @@ function weekFilter(reqArray) {
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
 
+    
+    for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
+            if (reqArray[reqCounter].weeks[selectedWeek-1] == true) {
+                filteredRequests.push(reqArray[reqCounter]);
+            }
+    
+    }
+    
     /*
     Execulte Alogrithm here for filtering by weeks.
     Use the variable underneath the flag declaration.
@@ -453,7 +463,7 @@ function testRequestList() {
     var testReq5 = new Request();
 
     var module1 = new Module();
-    module1.code = "COA123";
+    module1.code = "COA101";
     module1.deptCode = "CO";
 
     var module2 = new Module();
