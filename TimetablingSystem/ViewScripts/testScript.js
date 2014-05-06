@@ -83,6 +83,7 @@
         alert(selectedStatus);
         statusesFlag = $("#selectstatus").find(":selected").data("statusstate");
         alert(statusesFlag);
+        executeFilters();
 
 
     });
@@ -221,7 +222,7 @@ function buildingFilter(reqArray) {
 function roomFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
+   // filteredRequests = reqArray; //Temporary, get rid of this later
     
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
@@ -243,6 +244,14 @@ function roomFilter(reqArray) {
 
         }
 
+    for (var duplicateCounter = 0 ; duplicateCounter < filteredRequests.length; duplicateCounter++) {
+        for (var duplicateCounter1 = 0 ; duplicateCounter1 < filteredRequests.length; duplicateCounter1++) {
+            if (filteredRequests[duplicateCounter1].id == filteredRequests[duplicateCounter].id && duplicateCounter!=duplicateCounter1) {
+                filteredRequests.splice(duplicateCounter1, 1);
+            }
+        }
+
+    }
 
   
 
@@ -281,7 +290,7 @@ function dayFilter(reqArray) {
 function weekFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
+    //filteredRequests = reqArray; //Temporary, get rid of this later
 
     
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
@@ -304,7 +313,15 @@ function weekFilter(reqArray) {
 function statusFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
+    //filteredRequests = reqArray; //Temporary, get rid of this later
+
+    for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
+        if (reqArray[reqCounter].status == selectedStatus) {
+            filteredRequests.push(reqArray[reqCounter]);
+        }
+
+    }
+
 
     /*
     Execulte Alogrithm here for filtering by statuses.
