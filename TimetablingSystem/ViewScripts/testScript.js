@@ -220,17 +220,29 @@ function roomFilter(reqArray) {
 
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
-
-    /*
+    
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
-        for (var reqCounter1 = 0; reqCounter1 < reqArray.rooms.length; reqCounte1r++) {
-            if (reqArray[reqCounter].allocatedRooms[reqCounter1] === selectedRooms) {
-                filteredRequests.push(reqArray[reqCounter]);
+
+        var currentReq = reqArray[reqCounter];
+
+        for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
+
+            if (currentReq.rooms[roomCounter] === selectedRooms) {
+
+                filteredRequests.push(currentReq);
             }
-        
         }
+        for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
+            if (currentReq.allocatedRooms === selectedRooms) {
+
+                filteredRequests.push(currentReq);
+            }
+        }
+
+        }
+
+
     }
-    */
 
     /*
     Execulte Alogrithm here for filtering by rooms.
@@ -247,14 +259,14 @@ function dayFilter(reqArray) {
     var filteredRequests = [];
     filteredRequests = reqArray; //Temporary, get rid of this later
 
-
+/*
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
         if (reqArray[reqCounter].building.code === selectedBuilding) {
             filteredRequests.push(reqArray[reqCounter]);
         }
     }
-    /*
+   
     Execulte Alogrithm here for filtering by days.
     Use the variable underneath the flag declaration.
     Must retrun an Array of Request Objects
