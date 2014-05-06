@@ -242,7 +242,7 @@ function roomFilter(reqArray) {
         }
 
 
-    }
+  
 
     /*
     Execulte Alogrithm here for filtering by rooms.
