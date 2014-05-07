@@ -1,20 +1,143 @@
 ﻿$(document).ready(function () {
     
+    
     requestsSet = [];
-    fArray = [];
+    //fArray = [];
 
 
     requestsSet = testRequestList();
-    fArray = testFacilities();
+    //fArray = testFacilities();
 
-    generateGraphicalDisplay();
+    //generateGraphicalDisplay();
 
     
+    var jsonReq = setupAddRequest(requestsSet[0]);
+    alert("jsonReq" + "\n" + JSON.stringify(jsonReq));
 
+    addRequest(jsonReq);
     
 
 });
 
+
+function setupAddRequest(request) {
+
+    var facilitiesData = [], roomAllocData = [], roomPrefData = [];
+
+    for (var faCounter = 0; faCounter < facilitiesArray.length; faCounter++) {
+
+        for (var fCounter = 0; fCounter < request.facilities.length; fCounter++) {
+
+            if (facilitiesArray[faCounter].id == request.facilities[fCounter]) {
+
+                facilitiesData.push({
+                    id: facilitiesArray[faCounter].id,
+                    name: facilitiesArray[faCounter].name
+                });
+
+            }
+
+        }
+
+    }
+
+    for (var bCounter = 0; bCounter < buildingsWithRooms.length; bCounter++) {
+
+        var currentBuilding = buildingsWithRooms[bCounter];
+
+        for (var rCounter = 0; rCounter < currentBuilding.rooms.length; rCounter++) {
+
+            var currentRoom = currentBuilding.rooms[rCounter];
+
+            for (var rpCounter = 0; rpCounter < request.rooms.length; rpCounter++) {
+
+                if (currentRoom.code == request.rooms[rpCounter]) {
+
+                    roomPrefData.push({
+                        code: currentRoom.code,
+                        buildingCode: currentBuilding.code,
+                        roomType: currentRoom.type,
+                        capacity: currentRoom.capacity
+                    });
+
+                }
+
+            }
+
+            for (var raCounter = 0; raCounter < request.rooms.length; raCounter++) {
+
+                if (currentRoom.code == request.allocatedRooms[raCounter]) {
+
+                    roomAllocData.push({
+                        code: currentRoom.code,
+                        buildingCode: currentBuilding.code,
+                        roomType: currentRoom.type,
+                        capacity: currentRoom.capacity
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+    var jsonRequestData =
+    {
+        //id: 0,
+        moduleCode: request.module.code,
+        deptCode: request.module.deptCode,
+        priority: request.priority,
+        day: request.day,
+        startPeriod: request.startPeriod,
+        endPeriod: request.endPeriod,
+        weeks: weeksEncoder(request.weeks),
+        numberOfStudents: request.students,
+        parkPreference: request.park,
+        sessionType: request.sessionType,
+        numberOfRooms: request.noOfRooms,
+        otherRequirements: request.otherReqs,
+        //roundID: request.round,
+        status: request.status,
+        traditional: request.traditional,
+        facilities: facilitiesData,
+        roomAlloc: roomAllocData,
+        roomPref: roomPrefData
+    }
+
+    
+    alert(JSON.stringify(jsonRequestData));
+
+    return jsonRequestData;
+    
+}
+
+function addRequest(jsonData) {
+
+    alert(JSON.stringify(jsonData));
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify(jsonData),
+        async: false,
+        success: function (results) {
+            alert("Added Called");
+            alert(results);
+        },
+        error: function (results) {
+            alert(JSON.stringify(results));
+        },
+        url: "api/request/PostNewRequest",
+        processData: false
+    });
+
+}
 
 
 function testFacilities() {
@@ -53,8 +176,6 @@ function testRequestList() {
     module2.deptCode = "CO";
     module2.title = "Team Projects";
 
-    testReq.department = department;
-
     testReq.round = roundID;
 
     testReq.id = "1234";
@@ -65,10 +186,10 @@ function testRequestList() {
     testReq.day = 2;
     testReq.startPeriod = 2;
     testReq.endPeriod = 3;
-    testReq.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false];
+    testReq.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false];
 
     testReq.students = 100;
-    testReq.park = 0;
+    testReq.park = 2;
     testReq.traditional = true;
     testReq.sessionType = 0;
     testReq.noOfRooms = 1;
@@ -76,7 +197,7 @@ function testRequestList() {
 
     testReq.status = 0;
 
-    testReq.facilities = ["10100", "10101"];
+    testReq.facilities = [1, 2];
     testReq.otherReqs = "test other reqs";
 
     testReq.allocatedRooms = ["J.0.02"];

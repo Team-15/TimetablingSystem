@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\displayStyle.css" />
+    <Content Include="Content\loginLogoutStyle.css" />
     <Content Include="Content\parentStyle.css" />
     <Content Include="Content\test2Style.css" />
     <Content Include="Content\test3Style.css" />

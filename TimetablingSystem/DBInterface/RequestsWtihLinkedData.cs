@@ -51,6 +51,10 @@ namespace TimetablingSystem.DBInterface
         [DataMember]
         public IEnumerable<room> roomPref { get; set; }
 
+        public RequestsWtihLinkedData() { 
+        
+        }
+
         public RequestsWtihLinkedData(request r)
         {
             id = r.id;
