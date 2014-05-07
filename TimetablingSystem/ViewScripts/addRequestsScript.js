@@ -95,22 +95,55 @@ function tableCreator() {
 
 //creates array of time/dates for the request(s)
 function timeAndDay() {
+
+    //Set up 2D array
     var timeDayArray = [];
-    //read all checkboxes and push ticked ones into a 2D array
     while (timeDayArray.push([]) < daysArray.length);
-    for (var i = 0; i < daysArray.length; i++) {
-        for (var j = 0; j < periodsArray.length; j++) {
-            if ($("#gridCheck-" + i + j).prop('checked')) {
-                timeDayArray[i].push([j]);
-            }
-        }
-    }
-    var keyPointsArray = [];
+
+    //read all checkboxes and push ticked ones into a 2D array
+    for (var i = 0; i < daysArray.length; i++) for (var j = 0; j < periodsArray.length; j++)  if ($("#gridCheck-" + i + j).prop('checked')) timeDayArray[i].push(j);
+
+    var dayWithkeyPoints = [];
 
     //find contingent blocks of checkboxes and make them into individual requests
-    for (var counter = 0; counter < timeDayArray.length; counter++) {
-        keyPointsArray[counter] = secondSorter(timeDayArray[counter]);
+    for (var counter = 0; counter < timeDayArray.length; counter++) dayWithkeyPoints[counter] = secondSorter(timeDayArray[counter]);
+
+
+    var dayPeriodBlock = [];
+
+    for (var dwkpCounter = 0; dwkpCounter < dayWithkeyPoints.length; dwkpCounter++) {
+
+        var keyPointsArray = dayWithkeyPoints[dwkpCounter];
+
+        for (var counter = 0; counter < keyPointsArray.length; counter++) {
+
+            var maxElement = keyPointsArray[counter].length - 1;
+
+            if (keyPointsArray[counter][0] == keyPointsArray[counter][maxElement]) {
+
+                dayPeriodBlock.push({
+                    day: dwkpCounter,
+                    start: keyPointsArray[counter][0],
+                    end: keyPointsArray[counter][0]
+                });
+
+            }
+            else {
+
+                dayPeriodBlock.push({
+                    day: dwkpCounter,
+                    start: keyPointsArray[counter][0],
+                    end: keyPointsArray[counter][maxElement]
+                });
+
+            }
+
+        }
+
     }
+
+    alert(JSON.stringify(dayPeriodBlock));
+
 }
 
 //second level sorter
