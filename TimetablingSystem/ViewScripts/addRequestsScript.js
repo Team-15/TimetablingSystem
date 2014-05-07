@@ -16,52 +16,6 @@ function createObjects() {
     newRequest = new Request();
 }
 
-//store user-chosen facilities in request instance
-function facilityStore(checkbox) {
-    if (checkbox.checked == true) {
-        newRequest.facilities.push(checkbox.id);
-    }
-}
-
-//stores all the non-facility requirements in the request object
-function infoStore() {
-    newRequest.students = $("#CAP").val();
-    newRequest.park = $('#PRK').get(0).selectedIndex;
-    newRequest.otherReqs = $("#ORE").val();
-    newRequest.noOfRooms = $("#NOR").val();
-    $('#PRT').click(function () {
-        newRequest.priority = true;
-    });
-    $('#PRF').click(function () {
-        newRequest.priority = false;
-    });
-    //wipe week array 
-    //check each week checkbox,
-    //and add currently ticked weeks
-    while(newRequest.weeks.length > 0) {
-        newRequest.weeks.pop();
-    }
-    for (var i = 1; i <= numberOfWeeks; i++) {
-        if ($("#weekChoice" + i).prop("checked")) {
-                    newRequest.weeks.push(i);
-        }
-    }
-    buildingPopulate();
-    roomListPopulate();
-}
-
-//populate module titles and codes
-function modulePopulate() {
-    var codeStr;
-
-    for (var i = 0; i < modulesArray.length; i++) {
-        $("#modTitleSelect").append("<option value='" + modulesArray[i].title + "'>" + modulesArray[i].title + "</option>");
-    }
-    for (var i = 0; i < modulesArray.length; i++) {
-        $("#modCodeSelect").append("<option value='" + modulesArray[i].code + "'>" + modulesArray[i].code + "</option>");
-    }
-}
-
 //creates the week selection row
 function weekCreator() {
     numberOfWeeks = 15; //temp set
@@ -92,6 +46,145 @@ function tableCreator() {
     tempStr += "</table>";
     $("#weekTable").append(tempStr);
 }
+
+//populate module titles and codes
+function modulePopulate() {
+    var codeStr;
+
+    for (var i = 0; i < modulesArray.length; i++) {
+        $("#modTitleSelect").append("<option value='" + modulesArray[i].title + "'>" + modulesArray[i].title + "</option>");
+    }
+    for (var i = 0; i < modulesArray.length; i++) {
+        $("#modCodeSelect").append("<option value='" + modulesArray[i].code + "'>" + modulesArray[i].code + "</option>");
+    }
+}
+
+//inserts facilities and requirements
+function facilityPopulate() {
+    var tempStr = "";
+    tempStr += "<table class='table reqTable'><tr>";
+    for (var i = 0; i < facArray.length; i++) {
+        tempStr += "<td><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</td>";
+        if (i % 2 != 0) {
+            tempStr += "</tr><tr>";
+        }
+    }
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='50'></td></tr>";
+    tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
+    for (var j = 0; j < parksArray.length; j++) {
+        tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
+    }
+    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
+    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
+    tempStr += "</select></td></tr></table>";
+    $("#propertiesBox").append(tempStr);
+}
+
+//creates building filter dropdown
+function buildingPopulate() {
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
+    for (var i = 0; i < buildArray.length; i++) {
+        if (newRequest.park == buildArray[i].park) {
+            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+        } else if (newRequest.park == 0) {
+            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
+        }
+    }
+    tempStr += "</select>";
+    $('#buildingList').empty();
+    $('#buildingList').append(tempStr);
+}
+
+//creates the list of rooms filtered by the building
+function roomListPopulate() {
+    var tempStr = "";
+    var buildNum = $("#buildingSelect").val();
+    if (buildNum == -1 && newRequest.park == 0) {
+        for (var j = 0; j < buildArray.length; j++) {
+            var chosenBuilding = buildArray[j];
+            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+                if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
+                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                }
+            }
+        }
+    } else if (buildNum == -1) {
+        for (var j = 0; j < buildArray.length; j++) {
+            var chosenBuilding = buildArray[j];
+            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+                if (chosenBuilding.rooms[i].capacity >= newRequest.students && buildArray[j].park == newRequest.park) {
+                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                }
+            }
+        }
+    } else {
+        var chosenBuilding = buildArray[buildNum];
+        for (var i = 0; i < chosenBuilding.rooms.length; i++) {
+            if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
+                tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            }
+        }
+    }
+    tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
+    tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
+    $('#roomList').empty();
+    $('#roomList').append(tempStr);
+}
+
+
+
+//stores all the non-facility requirements in the request object
+function infoStore() {
+    newRequest.students = $("#CAP").val();
+    newRequest.park = $('#PRK').get(0).selectedIndex;
+    newRequest.otherReqs = $("#ORE").val();
+    newRequest.noOfRooms = $("#NOR").val();
+    $('#PRT').click(function () {
+        newRequest.priority = true;
+    });
+    $('#PRF').click(function () {
+        newRequest.priority = false;
+    });
+    //wipe week array 
+    //check each week checkbox,
+    //and add currently ticked weeks
+    while(newRequest.weeks.length > 0) {
+        newRequest.weeks.pop();
+    }
+    for (var i = 1; i <= numberOfWeeks; i++) {
+        if ($("#weekChoice" + i).prop("checked")) {
+                    newRequest.weeks.push(i);
+        }
+    }
+    buildingPopulate();
+    roomListPopulate();
+}
+
+
+
+//keeps the dual-module dropdowns the same
+function moduleSelector(changedValue) {
+    var tempStr = $(changedValue).val();
+    for (var i = 0; i < modulesArray.length; i++) {
+        if (modulesArray[i].title == tempStr) {
+            $("#modCodeSelect").val(modulesArray[i].code);
+        } else if (modulesArray[i].code == tempStr) {
+            $("#modTitleSelect").val(modulesArray[i].title);
+        }
+    }
+}
+
+
+
+//store user-chosen facilities in request instance
+function facilityStore(checkbox) {
+    if (checkbox.checked == true) {
+        newRequest.facilities.push(checkbox.id);
+    }
+}
+
+
 
 //creates array of time/dates for the request(s)
 function timeAndDay() {
@@ -161,83 +254,7 @@ function secondSorter(arrayToSort) {
     return (keyPointsArray);
 }
 
-//inserts facilities and requirements
-function facilityPopulate() {
-    var tempStr = "";
-    tempStr += "<table class='table reqTable'><tr>";
-    for (var i = 0; i < facArray.length; i++) {
-        tempStr += "<td><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</td>";
-        if (i % 2 != 0) {
-            tempStr += "</tr><tr>";
-        }
-    }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='50'></td></tr>";
-    tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
-    for (var j = 0; j < parksArray.length; j++) {
-        tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
-    }
-    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
-    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
-    tempStr += "</select></td></tr></table>";
-    $("#propertiesBox").append(tempStr);
-}
 
-//creates the list of rooms filtered by the building
-function roomListPopulate() {
-    var tempStr = "";
-    var buildNum = $("#buildingSelect").val();
-    if (buildNum == -1 && newRequest.park == 0) {
-        for (var j = 0; j < buildArray.length; j++) {
-            var chosenBuilding = buildArray[j];
-            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-                if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
-                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-                }
-            }
-        }
-    } else if (buildNum == -1) {
-        for (var j = 0; j < buildArray.length; j++) {
-            var chosenBuilding = buildArray[j];
-            for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-                if (chosenBuilding.rooms[i].capacity >= newRequest.students && buildArray[j].park == newRequest.park) {
-                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-                }
-            }
-        }
-    } else {
-        var chosenBuilding = buildArray[buildNum];
-        for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-            if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
-                tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-            }
-        }
-    }
-    tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
-    tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
-    $('#roomList').empty();
-    $('#roomList').append(tempStr);
-}
-
-//creates building filter dropdown
-function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
-    for (var i = 0; i < buildArray.length; i++) {
-        if (newRequest.park == buildArray[i].park) {
-            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
-        } else if (newRequest.park == 0) {
-            tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
-        }
-    }
-    tempStr += "</select>";
-    $('#buildingList').empty();
-    $('#buildingList').append(tempStr);
-}
-
-//clears checked tickboxes of rooms selected
-function clearRoomSel() {
-    $('#roomList input:checkbox').attr('checked', false);
-}
 
 //clears checked tickboxes of weeks selected
 function clearWeeks() {
@@ -253,16 +270,11 @@ function setWeeks(weeksChosen) {
     }
 }
 
-//keeps the dual-module dropdowns the same
-function moduleSelector(changedValue) {
-    var tempStr = $(changedValue).val();
-    for (var i = 0; i < modulesArray.length; i++) {
-        if (modulesArray[i].title == tempStr) {
-            $("#modCodeSelect").val(modulesArray[i].code);
-        } else if (modulesArray[i].code == tempStr) {
-            $("#modTitleSelect").val(modulesArray[i].title);
-        }
-    }
+
+
+//clears checked tickboxes of rooms selected
+function clearRoomSel() {
+    $('#roomList input:checkbox').attr('checked', false);
 }
 
 //sorts rooms by capacity or alphabetically
