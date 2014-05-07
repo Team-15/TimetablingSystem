@@ -151,30 +151,7 @@ namespace TimetablingSystem.DBInterface
         }
 
 
-        public HttpResponseMessage PostNewRequest(RequestsWtihLinkedData rwld)
-        {
-
-            if (ModelState.IsValid)
-            {
-                var newReq = SetupNewRequestObject(rwld);
-
-                _db.requests.Add(newReq);
-
-                _db.SaveChanges();
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, newReq);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = newReq.id }));
-                return response;
-
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-
-            
-
-        }
+        
 
         private request SetupNewRequestObject(RequestsWtihLinkedData rwld)
         {
@@ -243,14 +220,43 @@ namespace TimetablingSystem.DBInterface
 
             return newRequest;
         }
+        
+        public HttpResponseMessage PostNewRequest(RequestsWtihLinkedData rwld)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var newReq = SetupNewRequestObject(rwld);
+
+                _db.requests.Add(newReq);
+
+                _db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, newReq);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = newReq.id }));
+                return response;
+
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+
+
+        }
 
         public void PostUpdateRequest(RequestsWtihLinkedData rwld)
         {
+
+
 
         }
 
         public void DeleteRequest(RequestsWtihLinkedData rwld)
         {
+
+
 
         }
 

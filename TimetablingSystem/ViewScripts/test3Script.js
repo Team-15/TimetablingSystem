@@ -85,7 +85,7 @@ function setupAddRequest(request) {
 
     var jsonRequestData =
     {
-        //id: 0,
+        id: 0,
         moduleCode: request.module.code,
         deptCode: request.module.deptCode,
         priority: request.priority,
@@ -98,7 +98,6 @@ function setupAddRequest(request) {
         sessionType: request.sessionType,
         numberOfRooms: request.noOfRooms,
         otherRequirements: request.otherReqs,
-        //roundID: request.round,
         status: request.status,
         traditional: request.traditional,
         facilities: facilitiesData,
