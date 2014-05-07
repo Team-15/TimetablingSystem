@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -151,7 +152,6 @@ namespace TimetablingSystem.DBInterface
         }
 
 
-        
 
         private request SetupNewRequestObject(RequestsWtihLinkedData rwld)
         {
@@ -220,12 +220,85 @@ namespace TimetablingSystem.DBInterface
 
             return newRequest;
         }
+
+        private request UpdateRequestObject(RequestsWtihLinkedData rwld)
+        {
+            
+            request currentReq =
+                    (from req in _db.requests
+                     where req.id == rwld.id
+                     select req).FirstOrDefault();
+
+            module selectedModule =
+                (from mod in _db.modules
+                 where mod.code == rwld.moduleCode
+                 select mod).FirstOrDefault();
+
+            currentReq.moduleCode = selectedModule.code;
+            currentReq.module = selectedModule;
+
+            round selectedRound = (new SemRouController()).GetLiveRound();
+
+            currentReq.roundID = selectedRound.id;
+
+            currentReq.priority = rwld.priority;
+            currentReq.day = rwld.day;
+            currentReq.startPeriod = rwld.startPeriod;
+            currentReq.endPeriod = rwld.endPeriod;
+            currentReq.weeks = rwld.weeks;
+            currentReq.numberOfStudents = rwld.numberOfStudents;
+            currentReq.parkPreference = rwld.parkPreference;
+            currentReq.sessionType = rwld.sessionType;
+            currentReq.numberOfRooms = rwld.numberOfRooms;
+            currentReq.otherRequirements = rwld.otherRequirements;
+            currentReq.status = rwld.status;
+            currentReq.traditional = rwld.traditional;
+
+            foreach (var facData in rwld.facilities)
+            {
+
+                facility selectedFacility =
+                    (from fac in _db.facilities
+                     where fac.id == facData.id
+                     select fac).FirstOrDefault();
+
+                currentReq.facilities.Add(selectedFacility);
+
+            }
+
+            foreach (var roomData in rwld.roomPref)
+            {
+
+                room selectedRoom =
+                    (from rm in _db.rooms
+                     where rm.code == roomData.code
+                     select rm).FirstOrDefault();
+
+                currentReq.roomsPref.Add(selectedRoom);
+
+            }
+
+            foreach (var roomData in rwld.roomAlloc)
+            {
+
+                room selectedRoom =
+                    (from rm in _db.rooms
+                     where rm.code == roomData.code
+                     select rm).FirstOrDefault();
+
+                currentReq.roomsAlloc.Add(selectedRoom);
+
+            }
+
+            return currentReq;
+        }
         
         public HttpResponseMessage PostNewRequest(RequestsWtihLinkedData rwld)
         {
 
             if (ModelState.IsValid)
             {
+                
                 var newReq = SetupNewRequestObject(rwld);
 
                 _db.requests.Add(newReq);
@@ -237,30 +310,55 @@ namespace TimetablingSystem.DBInterface
                 return response;
 
             }
-            else
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+        }
+
+        public HttpResponseMessage PostUpdateRequest(RequestsWtihLinkedData rwld)
+        {
+
+            if (ModelState.IsValid)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+                var updateReq = UpdateRequestObject(rwld);
+
+                _db.Entry(updateReq).State = EntityState.Modified;
+
+                _db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, updateReq);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = updateReq.id }));
+                return response;
+
             }
-
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
 
 
         }
 
-        public void PostUpdateRequest(RequestsWtihLinkedData rwld)
+        public HttpResponseMessage DeleteRequest(RequestsWtihLinkedData rwld)
         {
+            if (ModelState.IsValid)
+            {
 
+                request deleteReq =
+                    (from req in _db.requests
+                     where req.id == rwld.id
+                     select req).FirstOrDefault();
+
+                _db.requests.Remove(deleteReq);
+
+                _db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, deleteReq);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = deleteReq.id }));
+                return response;
+
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
 
 
         }
-
-        public void DeleteRequest(RequestsWtihLinkedData rwld)
-        {
-
-
-
-        }
-
-
 
 
 

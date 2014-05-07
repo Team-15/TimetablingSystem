@@ -42,3 +42,95 @@
     return requestArray;
 
 }
+
+function setupDBRequestModel(request) {
+
+    var facilitiesData = [], roomAllocData = [], roomPrefData = [];
+
+    for (var faCounter = 0; faCounter < facilitiesArray.length; faCounter++) {
+
+        for (var fCounter = 0; fCounter < request.facilities.length; fCounter++) {
+
+            if (facilitiesArray[faCounter].id == request.facilities[fCounter]) {
+
+                facilitiesData.push({
+                    id: facilitiesArray[faCounter].id,
+                    name: facilitiesArray[faCounter].name
+                });
+
+            }
+
+        }
+
+    }
+
+    for (var bCounter = 0; bCounter < buildingsWithRooms.length; bCounter++) {
+
+        var currentBuilding = buildingsWithRooms[bCounter];
+
+        for (var rCounter = 0; rCounter < currentBuilding.rooms.length; rCounter++) {
+
+            var currentRoom = currentBuilding.rooms[rCounter];
+
+            for (var rpCounter = 0; rpCounter < request.rooms.length; rpCounter++) {
+
+                if (currentRoom.code == request.rooms[rpCounter]) {
+
+                    roomPrefData.push({
+                        code: currentRoom.code,
+                        buildingCode: currentBuilding.code,
+                        roomType: currentRoom.type,
+                        capacity: currentRoom.capacity
+                    });
+
+                }
+
+            }
+
+            for (var raCounter = 0; raCounter < request.rooms.length; raCounter++) {
+
+                if (currentRoom.code == request.allocatedRooms[raCounter]) {
+
+                    roomAllocData.push({
+                        code: currentRoom.code,
+                        buildingCode: currentBuilding.code,
+                        roomType: currentRoom.type,
+                        capacity: currentRoom.capacity
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+    var jsonRequestData =
+    {
+        id: 0,
+        moduleCode: request.module.code,
+        deptCode: request.module.deptCode,
+        priority: request.priority,
+        day: request.day,
+        startPeriod: request.startPeriod,
+        endPeriod: request.endPeriod,
+        weeks: weeksEncoder(request.weeks),
+        numberOfStudents: request.students,
+        parkPreference: request.park,
+        sessionType: request.sessionType,
+        numberOfRooms: request.noOfRooms,
+        otherRequirements: request.otherReqs,
+        status: request.status,
+        traditional: request.traditional,
+        facilities: facilitiesData,
+        roomAlloc: roomAllocData,
+        roomPref: roomPrefData
+    }
+
+
+    alert(JSON.stringify(jsonRequestData));
+
+    return jsonRequestData;
+
+}

@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    requestsSet = [];
+    requestsSet = getResults();
 
     document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
 
