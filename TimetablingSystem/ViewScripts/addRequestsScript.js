@@ -140,6 +140,9 @@ function infoStore() {
     newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
     newRequest.noOfRooms = $("#NOR").val();
+    var modIndex = $("#modCodeSelect").get(0).selectedIndex;
+
+    newRequest.module = modulesArray[modIndex];
     $('#PRT').click(function () {
         newRequest.priority = true;
     });
@@ -154,7 +157,7 @@ function infoStore() {
     }
     for (var i = 1; i <= numberOfWeeks; i++) {
         if ($("#weekChoice" + i).prop("checked")) {
-                    newRequest.weeks.push(i);
+                    newRequest.weeks[i] = true;
         }
     }
     buildingPopulate();
@@ -236,6 +239,7 @@ function timeAndDay() {
     }
 
     alert(JSON.stringify(dayPeriodBlock));
+    multiRequestGen(dayPeriodBlock);
 
 }
 
@@ -254,7 +258,10 @@ function secondSorter(arrayToSort) {
     return (keyPointsArray);
 }
 
-
+//duplicates newRequest to number needed for day/time grid
+function multiRequestGen(timeDayArray) {
+    console.log(newRequest);
+}
 
 //clears checked tickboxes of weeks selected
 function clearWeeks() {
@@ -288,8 +295,10 @@ function removeCheckedRoom(checkbox) {
 }
 
 //copy ticked checkboxes to second list that has chosen rooms
+//push the chosen room to the request
 function checkedRoomList(checkbox) {
     tempStr = "";
     tempStr += "<div id='divPicked-" + checkbox.id + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id + " (capacity: " + $(this).attr('data-cap') + ")</input></div>";
     $('#chosenRoomsList').append(tempStr);
+    newRequest.rooms.push(checkbox.id);
 }
