@@ -83,9 +83,9 @@ function tableCreator() {
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td onclick='tableSelector(this.id)' class='gridHeader' id=gridHeader" + i + ">" + shortDaysArray[i] + "</td>";
+        tempStr += "<tr> <td class='gridHeader'><input type='checkbox' id=gridHeader" + i + "'>" + shortDaysArray[i] + "</input></td>";
         for (var j = 0; j < 9; j++) {
-            tempStr += "<td onclick='tableSelector(this.id)'class='gridWeek' id=gridWeek" + i + j + ">no</td>";
+            tempStr += "<td class='gridWeek'><input type='checkbox' id=gridCheck-" + i + j + ">no</input></td>";
         }
         tempStr += "</tr>";
     }
@@ -93,21 +93,39 @@ function tableCreator() {
     $("#weekTable").append(tempStr);
 }
 
-//tracks user-selected periods in the period grid
-function tableSelector(gridRef) {
-    if ($("#" + gridRef).attr('class') != 'gridBooked') {
-        if ($("#" + gridRef).hasClass('gridClicked')) {
-            $("#" + gridRef).removeClass("gridClicked");
-            $("#" + gridRef).addClass("grid");
-            console.log(gridRef + " disabled");
-            $("#" + gridRef).html("no");
-        } else {
-            $("#" + gridRef).removeClass("grid");
-            $("#" + gridRef).addClass("gridClicked");
-            console.log(gridRef + " enabled");
-            $("#" + gridRef).html("yes");
+//creates array of time/dates for the request(s)
+function timeAndDay() {
+    var timeDayArray = [];
+    //read all checkboxes and push ticked ones into a 2D array
+    while (timeDayArray.push([]) < daysArray.length);
+    for (var i = 0; i < daysArray.length; i++) {
+        for (var j = 0; j < periodsArray.length; j++) {
+            if ($("#gridCheck-" + i + j).prop('checked')) {
+                timeDayArray[i].push([j]);
+            }
         }
     }
+    var keyPointsArray = [];
+
+    //find contingent blocks of checkboxes and make them into individual requests
+    for (var counter = 0; counter < timeDayArray.length; counter++) {
+        keyPointsArray[counter] = secondSorter(timeDayArray[counter]);
+    }
+}
+
+//second level sorter
+function secondSorter(arrayToSort) {
+    var keyPoints = [];
+    var keyPointsArray = [];
+    for (var i = 0; i < arrayToSort.length; i++) {
+        if ((arrayToSort[i] + 1) != (arrayToSort[i + 1])) {
+            keyPoints.push(arrayToSort[i]);
+            keyPointsArray.push(keyPoints);
+            keyPoints = [];
+        } else keyPoints.push(arrayToSort[i]);
+    }
+
+    return (keyPointsArray);
 }
 
 //inserts facilities and requirements
