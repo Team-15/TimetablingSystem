@@ -260,8 +260,44 @@ function secondSorter(arrayToSort) {
 
 //duplicates newRequest to number needed for day/time grid
 function multiRequestGen(timeDayArray) {
-    console.log(newRequest);
+    for (var i = 0; i < timeDayArray.length; i++) {
+        singleRequest = newRequest;
+        singleRequest.day = timeDayArray[i].day;
+        singleRequest.startPeriod = timeDayArray[i].start;
+        singleRequest.endPeriod = timeDayArray[i].end;
+        var temp = setupDBRequestModel(singleRequest);
+        addCurrentRequest(temp);
+    }
 }
+
+function addCurrentRequest(jsonData) {
+
+    alert(JSON.stringify(jsonData));
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify(jsonData),
+        async: false,
+        success: function (results) {
+            alert("request submission successful");
+            alert(results);
+        },
+        error: function (results) {
+            alert("request submission failed");
+            alert(JSON.stringify(results));
+        },
+        url: "api/request/PostNewRequest",
+        processData: false
+    });
+
+}
+
+
 
 //clears checked tickboxes of weeks selected
 function clearWeeks() {
