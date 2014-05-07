@@ -136,10 +136,10 @@ function roomListPopulate() {
 
 //stores all the non-facility requirements in the request object
 function infoStore() {
-    newRequest.students = $("#CAP").val();
+    newRequest.students = parseInt($("#CAP").val(), 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
-    newRequest.noOfRooms = $("#NOR").val();
+    newRequest.noOfRooms = parseInt($("#NOR").val(), 10);
     var modIndex = $("#modCodeSelect").get(0).selectedIndex;
 
     newRequest.module = modulesArray[modIndex];
