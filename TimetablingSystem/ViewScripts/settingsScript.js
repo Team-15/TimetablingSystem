@@ -82,10 +82,10 @@ function table() {
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id="edit'+i+'" type="button">edit</button>'
+        tbl += '<button class="button" id="edit'+i+'" type="button">edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id="delete'+i+'" type="button">delete</button>'
+        tbl += '<button class="button" id="delete'+i+'" type="button">delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
