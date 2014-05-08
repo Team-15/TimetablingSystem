@@ -4,7 +4,7 @@ $(document).ready(function () {
     tableCreator();
     modulePopulate();
     facilityPopulate();
-    buildingPopulate();
+    infoStore();
 });
 
 //create room/facility/module objects from DB
@@ -14,6 +14,7 @@ function createObjects() {
     buildArray = buildingsWithRooms;
     //create new request for this instance
     newRequest = new Request();
+    newRequest.weeks = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 }
 
 //creates the week selection row
@@ -21,8 +22,8 @@ function weekCreator() {
     numberOfWeeks = 15; //temp set
     var tempStr = "";
     tempStr += "<table class = ''><tr><td>Weeks: ";
-    for (var i = 1; i <= numberOfWeeks; i++) {
-        tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + i;
+    for (var i = 0; i < numberOfWeeks; i++) {
+        tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + (i+1);
     }
     tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks(regularWeeks)'><input type='button' value='all' onclick='setWeeks(numberOfWeeks)'><input type='button' value='clear' onclick='clearWeeks()'></td></tr>"
     $("#weekSelect").append(tempStr);
@@ -83,7 +84,7 @@ function facilityPopulate() {
 
 //creates building filter dropdown
 function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='infoStore()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
         if (newRequest.park == buildArray[i].park) {
             tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
@@ -149,15 +150,11 @@ function infoStore() {
     $('#PRF').click(function () {
         newRequest.priority = false;
     });
-    //wipe week array 
-    //check each week checkbox,
-    //and add currently ticked weeks
-    while(newRequest.weeks.length > 0) {
-        newRequest.weeks.pop();
-    }
-    for (var i = 1; i <= numberOfWeeks; i++) {
+    for (var i = 0; i < numberOfWeeks; i++) {
         if ($("#weekChoice" + i).prop("checked")) {
-                    newRequest.weeks[i] = true;
+            newRequest.weeks[i] = true;
+        } else {
+            newRequest.weeks[i] = false;
         }
     }
     buildingPopulate();
@@ -191,6 +188,7 @@ function facilityStore(checkbox) {
 
 //creates array of time/dates for the request(s)
 function timeAndDay() {
+    infoStore();
 
     //Set up 2D array
     var timeDayArray = [];
@@ -308,7 +306,7 @@ function clearWeeks() {
 
 //sets week checkboxes to default selection
 function setWeeks(weeksChosen) {
-    for (var i = 0; i <= weeksChosen; i++) {
+    for (var i = 0; i < weeksChosen; i++) {
         $('#weekChoice' + i).prop('checked', true);
     }
 }
