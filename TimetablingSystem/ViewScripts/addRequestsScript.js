@@ -128,8 +128,6 @@ function roomListPopulate() {
             }
         }
     }
-    tempStr += "<input type='button' value='clear selection' onclick='clearRoomSel()'>";
-    tempStr += "<input type='button' value='sort by capacity' onclick='sortRooms()'>";
     $('#roomList').empty();
     $('#roomList').append(tempStr);
 }
