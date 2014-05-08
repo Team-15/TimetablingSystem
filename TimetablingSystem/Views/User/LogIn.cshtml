@@ -7,7 +7,8 @@
 
 <h2>Timetabling System Login</h2>
 
-@using (Html.BeginForm("LogIn", "User", FormMethod.Post)) { 
+@using (Html.BeginForm("LogIn", "User", FormMethod.Post, new { id = "loginForm" }))
+{ 
     
     <div>
 
@@ -18,13 +19,13 @@
             <div>
                 @*@Html.TextBoxFor(user => user.username)*@
                 @Html.DropDownListFor(user => user.username, ViewData["userList"] as List<SelectListItem>, "Please Select")
-                @Html.ValidationMessageFor(user => user.username)
+               <div class="errorMessage">@Html.ValidationMessageFor(user => user.username)</div> 
             </div>
 
             <div>@Html.LabelFor(user => user.password)</div>
             <div>
                 @Html.PasswordFor(user => user.password)
-                @Html.ValidationMessageFor(user => user.password)
+                <div class="errorMessage">@Html.ValidationMessageFor(user => user.password)</div>
             </div>
 
             <input class="button" type="submit" name="Login" value="Log In" />
