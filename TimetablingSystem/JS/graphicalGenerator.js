@@ -75,7 +75,7 @@ function detailsGenerator() {
                     </div>";
 
     detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
-                        <div class='dataTitle'>Tradional:</div>\
+                        <div class='dataTitle'>Traditional:</div>\
                         <div class='dataContent' id='traditional'></div>\
                         <div class='dataTitle'>Park:</div>\
                         <div class='dataContent' id='park'></div>\
