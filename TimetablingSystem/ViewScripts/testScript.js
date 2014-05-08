@@ -197,7 +197,7 @@ function buildingFilter(reqArray) {
 
             var notAdded = true;
 
-            if (currentReq.rooms.indexOf(roomsList[roomCounter]) != -1) {
+            if (currentReq.rooms.indexOf(roomsList[roomCounter].code) != -1) {
                 
                 filteredRequests.push(currentReq);
 
@@ -205,7 +205,7 @@ function buildingFilter(reqArray) {
 
             }
 
-            if ((currentReq.allocatedRooms.indexOf(roomsList[roomCounter]) != -1) && (notAdded)) {
+            if ((currentReq.allocatedRooms.indexOf(roomsList[roomCounter].code) != -1) && (notAdded)) {
 
                 filteredRequests.push(currentReq);
 
@@ -228,28 +228,36 @@ function roomFilter(reqArray) {
 
         var currentReq = reqArray[reqCounter];
 
-        for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
+        var notAdded = true;
 
-            if (currentReq.rooms[roomCounter] === selectedRooms) {
+        for (var duplicateCounter = 0 ; duplicateCounter < filteredRequests.length; duplicateCounter++) if (filteredRequests[duplicateCounter].id === currentReq.id) notAdded = false;
+        
+        
+            for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
+                if (notAdded) {
+                if (currentReq.rooms[roomCounter] === selectedRooms) {
 
-                filteredRequests.push(currentReq);
+                    filteredRequests.push(currentReq);
+
+                    notAdded = false;
+
+                }
             }
         }
-        for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
-            if (currentReq.allocatedRooms === selectedRooms) {
 
-                filteredRequests.push(currentReq);
+        
+            for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
+                if (notAdded) {
+                if (currentReq.allocatedRooms[roomCounter1] === selectedRooms) {
+
+                    filteredRequests.push(currentReq);
+
+                    notAdded = false;
+                }
             }
         }
-
-        }
-
-    for (var duplicateCounter = 0 ; duplicateCounter < filteredRequests.length; duplicateCounter++) {
-        for (var duplicateCounter1 = 0 ; duplicateCounter1 < filteredRequests.length; duplicateCounter1++) {
-            if (filteredRequests[duplicateCounter1].id == filteredRequests[duplicateCounter].id && duplicateCounter!=duplicateCounter1) {
-                filteredRequests.splice(duplicateCounter1, 1);
-            }
-        }
+        
+        
 
     }
 
