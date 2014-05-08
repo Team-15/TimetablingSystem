@@ -45,7 +45,10 @@
         buildingsFlag = $("#selectbuilding").find(":selected").data("buildingstate");
         alert(buildingsFlag);
         
-        if (buildingsFlag == false) $("#selectroom").prop("disabled", true);
+        if (buildingsFlag == false) {
+            $("#selectroom").prop("disabled", true);
+            roomsFlag = false;
+        }
         else $("#selectroom").prop("disabled", false);
 
 
@@ -53,8 +56,12 @@
         executeFilters();
 
         $('#selectroom').change(function () {
-            alert(document.getElementById("selectroom").value);
+
+            roomsFlag = $("#selectroom").find(":selected").data("roomstate");
+            selectedRoom = this.value;
+
             executeFilters();
+
         });
 
     });
@@ -99,7 +106,7 @@ var buildingsFlag = false; //List and Graphical
 var selectedBuilding = "";
 
 var roomsFlag = false;
-var selectedRooms = "";
+var selectedRoom = "";
 
 var daysFlag = false; //List only
 var selectedDay = null;
@@ -236,11 +243,11 @@ function roomFilter(reqArray) {
         var notAdded = true;
 
         for (var duplicateCounter = 0 ; duplicateCounter < filteredRequests.length; duplicateCounter++) if (filteredRequests[duplicateCounter].id === currentReq.id) notAdded = false;
-        
-        
-            for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
-                if (notAdded) {
-                if (currentReq.rooms[roomCounter] === selectedRooms) {
+
+
+        for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
+            if (notAdded) {
+                if (currentReq.rooms[roomCounter] === selectedRoom) {
 
                     filteredRequests.push(currentReq);
 
@@ -250,19 +257,20 @@ function roomFilter(reqArray) {
             }
         }
 
-        
-            for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
-                if (notAdded) {
-                if (currentReq.allocatedRooms[roomCounter1] === selectedRooms) {
+
+        for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
+            if (notAdded) {
+                if (currentReq.allocatedRooms[roomCounter1] === selectedRoom) {
 
                     filteredRequests.push(currentReq);
 
                     notAdded = false;
+
                 }
             }
         }
-        
-        
+
+
 
     }
 
