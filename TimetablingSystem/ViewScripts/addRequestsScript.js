@@ -78,6 +78,7 @@ function facilityPopulate() {
     tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
     tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
     tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
+    tempStr += "<tr><td>Type: <input type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'>traditional<input type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'>seminar</td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
@@ -149,6 +150,12 @@ function infoStore() {
     });
     $('#PRF').click(function () {
         newRequest.priority = false;
+    });
+    $('#TRD').click(function () {
+        newRequest.traditional = true;
+    });
+    $('#SMR').click(function () {
+        newRequest.traditional = false;
     });
     for (var i = 0; i < numberOfWeeks; i++) {
         if ($("#weekChoice" + i).prop("checked")) {
