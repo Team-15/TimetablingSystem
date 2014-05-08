@@ -25,7 +25,11 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + (i+1);
     }
-    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks(regularWeeks)'><input type='button' value='all' onclick='setWeeks(numberOfWeeks)'><input type='button' value='clear' onclick='clearWeeks()'></td></tr>"
+    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks(regularWeeks)'>";
+    tempStr += "<input type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
+    tempStr += "<input type='button' value='odd' onclick='setWeeks(-1)'>";
+    tempStr += "<input type='button' value='even' onclick='setWeeks(-2)'>";
+    tempStr += "<input type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 
@@ -132,8 +136,6 @@ function roomListPopulate() {
     $('#roomList').append(tempStr);
 }
 
-
-
 //stores all the non-facility requirements in the request object
 function infoStore() {
     newRequest.students = parseInt($("#CAP").val(), 10);
@@ -166,8 +168,6 @@ function infoStore() {
     roomListPopulate();
 }
 
-
-
 //keeps the dual-module dropdowns the same
 function moduleSelector(changedValue) {
     var tempStr = $(changedValue).val();
@@ -180,16 +180,12 @@ function moduleSelector(changedValue) {
     }
 }
 
-
-
 //store user-chosen facilities in request instance
 function facilityStore(checkbox) {
     if (checkbox.checked == true) {
         newRequest.facilities.push(checkbox.id);
     }
 }
-
-
 
 //creates array of time/dates for the request(s)
 function timeAndDay() {
@@ -300,23 +296,35 @@ function addCurrentRequest(jsonData) {
 
 }
 
-
-
-//clears checked tickboxes of weeks selected
-function clearWeeks() {
-    for (var i = 0; i <= numberOfWeeks; i++) {
-       $('#weekChoice' + i).prop('checked', false);
-    }
-}
-
-//sets week checkboxes to default selection
+//sets week checkboxes to chosen selection (default/odd/even/clear)
+//-1 signifies odd, -2 signifies even
 function setWeeks(weeksChosen) {
-    for (var i = 0; i < weeksChosen; i++) {
-        $('#weekChoice' + i).prop('checked', true);
+    if (weeksChosen == -1) {
+        for (var i = 0; i < regularWeeks; i++) {
+            if (i % 2 == 0) {
+                $('#weekChoice' + i).prop('checked', true);
+            } else {
+                $('#weekChoice' + i).prop('checked', false);
+            }
+        }
+    } else if (weeksChosen == "-2") {
+        for (var i = 0; i < regularWeeks; i++) {
+            if (i % 2 != 0) {
+                $('#weekChoice' + i).prop('checked', true);
+            } else {
+                $('#weekChoice' + i).prop('checked', false);
+            }
+        }
+    } else {
+        for (var i = 0; i < numberOfWeeks; i++) {
+            if (i < weeksChosen) {
+                $('#weekChoice' + i).prop('checked', true);
+            } else {
+                $('#weekChoice' + i).prop('checked', false);
+            }
+        }
     }
 }
-
-
 
 //clears checked tickboxes of rooms selected
 function clearRoomSel() {
