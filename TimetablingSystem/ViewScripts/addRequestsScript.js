@@ -84,7 +84,7 @@ function facilityPopulate() {
 
 //creates building filter dropdown
 function buildingPopulate() {
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='infoStore()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
+    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
         if (newRequest.park == buildArray[i].park) {
             tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
