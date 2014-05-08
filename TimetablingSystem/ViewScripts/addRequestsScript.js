@@ -119,7 +119,7 @@ function roomListPopulate() {
             var chosenBuilding = buildArray[j];
             for (var i = 0; i < chosenBuilding.rooms.length; i++) {
                 if (chosenBuilding.rooms[i].capacity >= newRequest.students) {
-                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                    tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 }
             }
         }
@@ -142,6 +142,15 @@ function roomListPopulate() {
     }
     $('#roomList').empty();
     $('#roomList').append(tempStr);
+}
+
+//copy ticked checkboxes to second list that has chosen rooms
+//push the chosen room to the request
+function checkedRoomList(checkbox) {
+    tempStr = "";
+    tempStr += "<div id='divPicked-" + checkbox.id + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
+    $('#chosenRoomsList').append(tempStr);
+    newRequest.rooms.push(checkbox.id);
 }
 
 //stores all the non-facility requirements in the request object
@@ -277,6 +286,7 @@ function multiRequestGen(timeDayArray) {
     }
 }
 
+//pushes the json-ified data to the database
 function addCurrentRequest(jsonData) {
 
     alert(JSON.stringify(jsonData));
@@ -347,13 +357,4 @@ function sortRooms() {
 //remove checked item when unticked
 function removeCheckedRoom(checkbox) {
     $($(checkbox).parent()).remove();
-}
-
-//copy ticked checkboxes to second list that has chosen rooms
-//push the chosen room to the request
-function checkedRoomList(checkbox) {
-    tempStr = "";
-    tempStr += "<div id='divPicked-" + checkbox.id + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id + " (capacity: " + $(this).attr('data-cap') + ")</input></div>";
-    $('#chosenRoomsList').append(tempStr);
-    newRequest.rooms.push(checkbox.id);
 }
