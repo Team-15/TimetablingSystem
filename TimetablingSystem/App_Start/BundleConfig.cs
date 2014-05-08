@@ -65,6 +65,8 @@ namespace TimetablingSystem
                     
                 ));
 
+            bundles.Add(new StyleBundle("~/Content/settingsCSS").Include("~/Content/settingsStyle.css"));
+
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
