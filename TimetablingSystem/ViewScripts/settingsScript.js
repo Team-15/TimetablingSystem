@@ -6,9 +6,18 @@ var newpass1 = "";
 
 $(document).ready(function () {
 
+    editedModules = [];
+    deleteModules = [];
+
+
     modulesArray = departmentModules;
  
     table();
+
+    $("#saveChanges").click(function () {
+        alert(JSON.stringify(editedModules));
+        alert(JSON.stringify(deleteModules));
+    });
 
     $("#addbutton").click(function () {
         var codeL = $("#code").val().length;
@@ -70,7 +79,7 @@ function setupDummyModules() {
 
 function table() {
     var tbl = "";
-    tbl += '<table border="1">';
+    tbl += '<table id="moduleTable" border="1">';
 
     for (var i = 0; i < modulesArray.length; i++) {
         tbl += '<tr>';
@@ -78,19 +87,20 @@ function table() {
         tbl += '<td>';
         tbl += modulesArray[i].code;
         tbl += '</td>'
-        tbl += '<td>';
+        tbl += '<td class="tdTitle">';
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button class="button" id="edit'+i+'" type="button">edit</button>'
+        tbl += '<button class="button" id="edit'+i+'" value="'+modulesArray[i].code+'" type="button">Edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button class="button" id="delete'+i+'" type="button">delete</button>'
+        tbl += '<button class="button" id="delete' + i + '" value="' + modulesArray[i].code + '" type="button">Delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
     }
     tbl += '</table>';
+    tbl+= 
     document.getElementById('tablediv').innerHTML = tbl;
     setupDelete();
     setupEdit();
@@ -112,15 +122,29 @@ function add() {
 
 }
 
-function remove(index) {
+function remove(index, mCode) {
+    deleteModules.push({
+        deleteCode: mCode
+    });
     modulesArray.splice(index, 1);
     table();
+
 }
 
-function edit(index) {
-    modulesArray[index].code = window.prompt("Please enter the new Code", modulesArray[index].code);
-    modulesArray[index].title = window.prompt("Please enter the new Title", modulesArray[index].title);
+function edit(index, mCode) {
+    var tempCode = window.prompt("Please enter the new Code", modulesArray[index].code);
+
+    if (tempCode != null) modulesArray[index].code = tempCode;
+
+    var tempTitle = window.prompt("Please enter the new Title", modulesArray[index].title);
+
+    if (tempTitle != null) modulesArray[index].title = tempTitle;
     table();
+    editedModules.push({
+        originalCode: mCode,
+        newCode: modulesArray[index].code,
+        newTitle: modulesArray[index].title
+    });
 }
 
 
@@ -173,7 +197,7 @@ function setupDelete() {
         $("#delete" + i).data("index", i);
         $("#delete" + i).click(function () {
             
-            remove($(this).data("index"));
+            remove($(this).data("index"),$(this).val());
         });
     }
 }
@@ -182,7 +206,7 @@ function setupEdit() {
     for (var i = 0; i < modulesArray.length; i++) {
         $("#edit" + i).data("index", i);
         $("#edit" + i).click(function () {
-            edit($(this).data("index"));
+            edit($(this).data("index"),$(this).val());
         });
     }
 }
