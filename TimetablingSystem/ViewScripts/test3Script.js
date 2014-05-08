@@ -2,20 +2,10 @@
     
     
     requestsSet = [];
-    //fArray = [];
 
 
     requestsSet = testRequestList();
-    //fArray = testFacilities();
 
-    //generateGraphicalDisplay();
-
-    /*
-    var jsonReq = setupDBRequestModel(requestsSet[0]);
-    alert("jsonReq" + "\n" + JSON.stringify(jsonReq));
-
-    addRequest(jsonReq);
-    */
 
 });
 

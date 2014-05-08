@@ -13,16 +13,14 @@
 
 }
 
+
+
 .headerContainer {
 
-    position: fixed;
     height: 50px;
     width: 940px;
 
     background: lavender;
-
-    left: 50%;
-    margin-left: -469px;
 
 }
 
@@ -49,7 +47,6 @@
 
     text-align: center;
     font-weight: bold;
-    text-decoration: underline;
 
     background: linen;
 
@@ -57,24 +54,41 @@
 
 }
 
+
+
 .requestContainerList {
 
-    margin-top:60px;
+    margin-top:10px;
 
+}
+
+
+.checkboxLabel {
+    
+    display: inline;
+    cursor: pointer;
+
+    font-weight: normal;
+
+}
+
+.requestCheckbox {
+    visibility:hidden;
+    display: none;
 }
 
 .requestContainer {
 
-    min-height: 50px;
-    max-height: 60px;
+    max-height: 54px;
     width: 940px;
-
-    overflow:hidden;
 
     margin-bottom: 10px;
 
-    transition-property: max-height, height;
-    transition-duration: 2s;
+    overflow:hidden;
+
+    transition-property: max-height;
+    transition-duration: 1s;
+    transition-delay: 0.2s;
     transition-timing-function: ease;
 
     border: 1px solid black;
@@ -83,20 +97,21 @@
 
 .requestContainer:hover {
 
-    min-height: 200px;
-
-    transition-property: max-height, height;
-    transition-duration: 2s;
-    transition-timing-function: ease;
+    max-height: 135px;
 
 }
+
+.checkboxLabel input[type=checkbox]:checked~.requestContainer{
+	max-height: 365px;
+}
+
 
 .requestHeader {
     display: flex;
     background: aliceblue;
 }
 
-.mainTable {
+.mainTable, .btnTable{
 
     margin-top: 5px;
     margin-bottom: 5px;
@@ -107,8 +122,21 @@
 
     table-layout: fixed;
 
+    user-select: none;
+
     border-collapse:separate;
 	border-spacing: 2px 5px;
+
+}
+
+.mainTable {
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
 }
 
@@ -138,182 +166,54 @@
     border: none !important;
 }
 
+
 .requestDetails {
-    
-    height: 200px;
 
     background: lightblue;
     
     overflow: hidden;
-    
-    border-top: 1px solid #000;
 
 }
 
 
+.detailsTable {
 
-.hiddenRow td{
-
-    height:0px;
-    padding: 0px;
-	border-top: none;
-	border-bottom: none;
-	border-right: 1px solid transparent;
-	border-left: 1px solid transparent;
-
-}
-
-
-/*
-#infoSection {
-
-    display: flex;
-    flex: 1 0 auto;
-    align-items: center;
-
-    width:240px;
-
-    //border: 1px solid black;
-}
-
-
-#detailsContainer {
-
-    display: flex;
-    flex-flow: column nowrap;
-
-    //min-height: 700px;
-    width: 230px;
-    margin: 5px;
-
-    border: 1px solid black;
-
-}
-
-.dataRow {
-    
-    min-height: 40px;
-    display: flex;
-    flex-flow: row nowrap;
-
-    justify-content: center;
-    align-items: center;
-    
-    
-    border-bottom: 1px solid grey;
-
-}
-
-.dataTitle {
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items:center;
-
-    height: 100%;
-    min-height: 40px;
-
-    padding-left: 3px;
-    padding-right: 3px;
-
-    font-weight: 600;
-    text-decoration: underline;
-
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-
-}
-
-.dataContent {
-
-    display:flex;
-    flex:1 0 0;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items:center;
-   
-    min-height: 40px;
-    padding: 0px 3px 0px 3px;
-
-    //border: 1px solid grey;
-
-}
-
-.dataBtn {
-
-    display:flex;
-    flex:1 0 auto;
-    justify-content: center;
-    align-items: center;
-
-}
-
-
-#graphicalSection {
-    
-    flex: 1 0 auto;
-
-    width: 710px;
-
-    //border: 1px solid black;
-
-}
-
-.daySection {
-    
-    display: inline-flex;
-    align-items: center;
-
-    margin:2px;
-
-    border: 1px solid black;
-
-}
-
-.dayTitle {
-
-    height: 30px;
-    width: 50px;
-    margin: 2px;
-
-    text-align: center;
-    line-height: 30px;
-
-    border: 1px solid black;
-
-}
-
-.dayTable {
-
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left:2px;
-    margin-right:3px;
-
-    empty-cells: show;
+    width: 940px;
 
     table-layout: fixed;
 
     border-collapse:separate;
-	border-spacing:1px 2px;
+	border-spacing: 2px 5px;
 
-    //border: 1px solid black;
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
 }
 
-.dayTable td {
-    
-    height:40px;
-	width:70px;
-    
+.detailsTable td {
+
+    display: table-cell;
+    padding: 5px;
+
     text-align: center;
 
+    background: linen;
+
     border: 1px solid grey;
+
 }
 
-.dayTable [id*="hiddenTD"] {
-	
+.detailsTable [class="hiddenTD"]{
+    
     height:0px;
+    width: 115px;
+
+    padding: 0px;
+    
 	border-top: none;
 	border-bottom: none;
 	border-right: 1px solid transparent;
@@ -321,29 +221,13 @@
 
 }
 
-.radioLabel {
-	
-    display: inline-block;
-	height: 100%;
-	width: 100%;
-    margin-bottom:0px;
+.scrollableDetail {
+    
+    max-height: 100px;
 
-	text-align:center;
-	vertical-align:middle;
+    word-wrap: break-word;
 
-    font-weight: normal;
-    text-decoration: none;
-
-	line-height: 40px;
-	cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
 
 }
-
-.dayTable input[type=radio]{
-
-    visibility: hidden;
-    display: none;
-
-}
-
-*/
