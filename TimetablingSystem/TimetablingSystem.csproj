@@ -235,6 +235,7 @@
     <Content Include="Content\displayStyle.css" />
     <Content Include="Content\loginLogoutStyle.css" />
     <Content Include="Content\parentStyle.css" />
+    <Content Include="Content\settingsStyle.css" />
     <Content Include="Content\test2Style.css" />
     <Content Include="Content\test3Style.css" />
     <Content Include="Content\testStyle.css" />
