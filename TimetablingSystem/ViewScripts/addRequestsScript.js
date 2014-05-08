@@ -89,11 +89,18 @@ function facilityPopulate() {
 
 //creates building filter dropdown
 function buildingPopulate() {
+    var existSizedRoom = false;
     var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
-        if (newRequest.park == buildArray[i].park) {
+        existSizedRoom = false;
+        for (var j = 0; j < buildArray[i].rooms.length; j++) {
+            if (buildArray[i].rooms[j].capacity >= newRequest.students) {
+                existSizedRoom = true;
+            }
+        }
+        if (newRequest.park == buildArray[i].park && existSizedRoom == true) {
             tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
-        } else if (newRequest.park == 0) {
+        } else if (newRequest.park == 0 && existSizedRoom == true) {
             tempStr += "<option id='buildingRadio" + buildArray[i].code + "' value='" + i + "'>" + buildArray[i].name + "</option>";
         }
     }
@@ -103,6 +110,7 @@ function buildingPopulate() {
 }
 
 //creates the list of rooms filtered by the building
+//-1 signifies all buildings
 function roomListPopulate() {
     var tempStr = "";
     var buildNum = $("#buildingSelect").val();
