@@ -1,19 +1,170 @@
-﻿#graphicalContainer {
+﻿#listContainer {
 
     display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
     align-items: center;
 
     width: 950px;
 
     margin: 0;
     padding: 0;
-
-    margin-bottom:100px;
-
-    //border: 1px solid black;
+    padding-top: 5px;
 
 }
 
+.headerContainer {
+
+    position: fixed;
+    height: 50px;
+    width: 940px;
+
+    background: lavender;
+
+    left: 50%;
+    margin-left: -469px;
+
+}
+
+.headerTable {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:2px;
+    margin-right:3px;
+
+    empty-cells: show;
+
+    table-layout: fixed;
+
+    border-collapse:separate;
+	border-spacing: 2px 5px;
+
+}
+
+.headerTable td {
+
+    display: table-cell;
+    padding: 5px;
+
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+
+    background: linen;
+
+    border: 1px solid grey;
+
+}
+
+.requestContainerList {
+
+    margin-top:60px;
+
+}
+
+.requestContainer {
+
+    min-height: 50px;
+    max-height: 60px;
+    width: 940px;
+
+    overflow:hidden;
+
+    margin-bottom: 10px;
+
+    transition-property: max-height, height;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+
+    border: 1px solid black;
+
+}
+
+.requestContainer:hover {
+
+    min-height: 200px;
+
+    transition-property: max-height, height;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+
+}
+
+.requestHeader {
+    display: flex;
+    background: aliceblue;
+}
+
+.mainTable {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:2px;
+    margin-right:3px;
+
+    empty-cells: show;
+
+    table-layout: fixed;
+
+    border-collapse:separate;
+	border-spacing: 2px 5px;
+
+}
+
+.mainTable td {
+
+    display: table-cell;
+    padding: 5px;
+
+    text-align: center;
+
+    background: linen;
+
+    border: 1px solid grey;
+
+}
+
+.titleTD {
+
+    font-weight: bold;
+
+}
+
+.requestBtn {
+    
+    padding: 0px !important;
+
+    border: none !important;
+}
+
+.requestDetails {
+    
+    height: 200px;
+
+    background: lightblue;
+    
+    overflow: hidden;
+    
+    border-top: 1px solid #000;
+
+}
+
+
+
+.hiddenRow td{
+
+    height:0px;
+    padding: 0px;
+	border-top: none;
+	border-bottom: none;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+
+}
+
+
+/*
 #infoSection {
 
     display: flex;
@@ -195,4 +346,4 @@
 
 }
 
-
+*/

@@ -3,28 +3,148 @@
 }
 @Styles.Render("~/Content/test3Style.css")
 
-<div id="" class="daySection">
 
-    <div class="dayTitle" style="border-color:transparent;" >
+<div id="listContainer">
+
+    <div class="headerContainer">
+
+        <table class="headerTable">
+
+            <tr>
+
+                <td style="width: 80px;">
+                    ID
+                </td>
+
+                <td style="width: 95px;">
+                    Department
+                </td>
+                <td style="width: 90px;">
+                    Module
+                </td>
+                <td style="width: 50px;">
+                    P
+                </td>
+                <td style="width: 90px;">
+                    Day
+                </td>
+                <td style="width: 60px;">
+                    Period
+                </td>
+                <td style="width: 65px;">
+                    Length
+                </td>
+                <td style="width: 200px;">
+                    Weeks
+                </td>
+
+            </tr>
+
+        </table>
+
     </div>
 
-    <table class="dayTable">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="requestContainerList">
+        
+        <div class="requestContainer">
 
-</div>
+            <div class="requestHeader">
 
-<div id="graphicalContainer">
+                <table class="mainTable">
+
+                    <tr>
+
+                        <td style="width: 80px;">1234
+                        </td>
+
+                        <td style="width: 95px;">CO
+                        </td>
+                        <td style="width: 90px;">COA123
+                        </td>
+                        <td style="width: 50px;">Yes
+                        </td>
+                        <td style="width: 90px;">Wednesday
+                        </td>
+                        <td style="width: 60px;">2
+                        </td>
+                        <td style="width: 65px;">2
+                        </td>
+                        <td style="width: 200px;">1-8, 10-12
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <table class="mainTable">
+
+                    <tr>
+
+                        <td class="requestBtn" style="width: 30px;">
+                            <input type="button" name="Edit" value="edit" />
+                        </td>
+
+                        <td class="requestBtn" style="width: 30px;">
+                            <input type="button" name="Duplicate" value="duplicate" />
+                        </td>
+                        <td class="requestBtn" style="width: 30px;">
+                            <input type="button" name="Delete" value="delete" />
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="requestDetails">
+
+                <table class="mainTable">
+
+                    <tr class="hiddenRow">
+
+                        <td style="width: 80px;"></td>
+                        <td style="width: 95px;"></td>
+                        <td style="width: 90px;"></td>
+                        <td style="width: 50px;"></td>
+                        <td style="width: 90px;"></td>
+                        <td style="width: 60px;"></td>
+                        <td style="width: 65px;"></td>
+                        <td style="width: 200px;"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" class="titleTD">
+                            Allocated Rooms:
+                        </td>
+                        <td colspan="6">
+                            N.0.01
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" class="titleTD">
+                            Room Preferences:
+                        </td>
+                        <td colspan="6">
+                            N.0.01
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
 
 </div>
 

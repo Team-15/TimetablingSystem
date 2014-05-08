@@ -74,6 +74,7 @@ function loadFacilitiesAndBuildingsWithRooms() {
         type: "GET",
         datatype: "JSON",
         data: {},
+        async: false,
         success: function (results) {
             facilitiesArray = setupFacilities(results);
         }
@@ -84,6 +85,7 @@ function loadFacilitiesAndBuildingsWithRooms() {
         type: "GET",
         datatype: "JSON",
         data: {},
+        async: false,
         success: function (results) {
             buildingsWithRooms = setupBuildingsWithRooms(results);
         }
@@ -157,6 +159,7 @@ function loadModules() {
         type: "GET",
         datatype: "JSON",
         data: {},
+        async: false,
         success: function (results) {
             departmentModules = setupModules(results);
         }
@@ -167,6 +170,7 @@ function loadModules() {
         type: "GET",
         datatype: "JSON",
         data: {},
+        async: false,
         success: function (results) {
             allDepartmentModules = setupModules(results);
         }

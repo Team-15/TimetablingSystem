@@ -10,16 +10,16 @@
 
     //generateGraphicalDisplay();
 
-    
+    /*
     var jsonReq = setupDBRequestModel(requestsSet[0]);
     alert("jsonReq" + "\n" + JSON.stringify(jsonReq));
 
     addRequest(jsonReq);
-    
+    */
 
 });
 
-function addRequest(jsonData) {
+function addCurrentRequest(jsonData) {
 
     alert(JSON.stringify(jsonData));
 

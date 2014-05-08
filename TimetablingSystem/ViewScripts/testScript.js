@@ -193,11 +193,14 @@ function buildingFilter(reqArray) {
 
         var currentReq = reqArray[reqCounter];
 
+        var notAdded = true;
+
+        for (var frCounter = 0; frCounter < filteredRequests.length; frCounter++) if (filteredRequests[frCounter].id == currentReq.id) notAdded = false;
+
+
         for (var roomCounter = 0; roomCounter < roomsList.length; roomCounter++) {
 
-            var notAdded = true;
-
-            if (currentReq.rooms.indexOf(roomsList[roomCounter]) != -1) {
+            if ((currentReq.rooms.indexOf(roomsList[roomCounter].code) != -1) && (notAdded)) {
                 
                 filteredRequests.push(currentReq);
 
@@ -205,9 +208,11 @@ function buildingFilter(reqArray) {
 
             }
 
-            if ((currentReq.allocatedRooms.indexOf(roomsList[roomCounter]) != -1) && (notAdded)) {
+            if ((currentReq.allocatedRooms.indexOf(roomsList[roomCounter].code) != -1) && (notAdded)) {
 
                 filteredRequests.push(currentReq);
+
+                notAdded = false;
 
             }
 
@@ -594,14 +599,14 @@ function testRequestList() {
     testReq4.traditional = true;
     testReq4.sessionType = 2;
     testReq4.noOfRooms = 1;
-    testReq4.rooms = ["N.0.01", "N.0.03"];
+    testReq4.rooms = ["J.0.01", "J.0.03"];
 
     testReq4.status = 1;
 
     testReq4.facilities = ["10102"];
     testReq4.otherReqs = "";
 
-    testReq4.allocatedRooms = ["N.0.02"];
+    testReq4.allocatedRooms = ["J.0.02"];
 
     testReq4.round = roundID;
 
