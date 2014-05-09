@@ -79,6 +79,10 @@ function facilityPopulate() {
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
+    tempStr += "<tr><td>Room type: <select id='RMT' onchange='infoStore()' onclick='infoStore()'>";
+    for (var k = 0; k < sessionTypesArray.length; k++) {
+        tempStr += "<option value='" + sessionTypesArray[k] + "'>" + sessionTypesArray[k] + "</option>";
+    }
     tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
     tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
     tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
@@ -181,6 +185,7 @@ function checkedRoomList(checkbox) {
 function infoStore() {
     newRequest.students = parseInt($("#CAP").val(), 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
+    newRequest.sessionTypesArray = $('#RMT').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
     newRequest.noOfRooms = parseInt($("#NOR").val(), 10);
     var modIndex = $("#modCodeSelect").get(0).selectedIndex;
