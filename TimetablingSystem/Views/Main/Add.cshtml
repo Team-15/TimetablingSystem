@@ -6,9 +6,9 @@
 <div class="row">
   <div class="col-md-6">
         <div id="propertiesBox">
-            Ad-hoc<input id='adhoc' type='checkbox'><br />
-            Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="moduleSelector(this)"></select><br />
-            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select>
+            Ad-hoc<input id='adhoc' type='checkbox'><br>
+            Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="moduleSelector(this)"></select><br>
+            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select><br>
         </div>
         <div id="weekSelect">
         </div>
@@ -21,15 +21,17 @@
     Rooms fitting your criteria:
     <div id="roomList">
     </div>
-    <input type='button' value='clear selection' onclick='clearRoomSel()'>
-    <input type='button' value='sort by capacity' onclick='sortRooms()'>
-    <div id="chosenRoomsList">
-    Chosen rooms: <br>
+    <br>
+    <input class="button" type='button' value='clear selection' onclick='clearRoomSel()'>
+    <input class="button" type='button' value='sort by capacity' onclick='sortRooms()'>
+    <br><br>Chosen rooms: <br>
+      <div id="chosenRoomsList">
     </div>
   </div>
 </div>
-<input type='button' value='save request' onclick='timeAndDay()'>
-<input type='button' value='save request and add another' onclick='timeAndDay()'>
-<input type='button' value='clear form' onclick=''>
+<br>
+<input class="button" type='button' value='save request' onclick='timeAndDay()'>
+<input class="button" type='button' value='save request and add another' onclick='timeAndDay()'>
+<input class="button" type='button' value='clear form' onclick=''>
 
 @Scripts.Render("~/bundles/addRequests")

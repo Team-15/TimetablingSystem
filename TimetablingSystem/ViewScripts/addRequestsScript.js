@@ -25,11 +25,11 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + (i+1);
     }
-    tempStr += "</td></tr><tr><td><input type='button' value='default' onclick='setWeeks(regularWeeks)'>";
-    tempStr += "<input type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
-    tempStr += "<input type='button' value='odd' onclick='setWeeks(-1)'>";
-    tempStr += "<input type='button' value='even' onclick='setWeeks(-2)'>";
-    tempStr += "<input type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
+    tempStr += "</td></tr><tr><td><input class='button' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
+    tempStr += "<input class='button' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
+    tempStr += "<input class='button' type='button' value='odd' onclick='setWeeks(-1)'>";
+    tempStr += "<input class='button' type='button' value='even' onclick='setWeeks(-2)'>";
+    tempStr += "<input class='button' type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 

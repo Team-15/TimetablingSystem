@@ -7,7 +7,9 @@ bottom: 0; left: 0; top: 0; right: 0;
     position: absolute;
     width: auto;
     max-width:750px;
-    height: 150px;
+    height: 158px;
+    border: 1px solid lightgrey;
+    opacity:0.9;
 }
 
 h2
@@ -22,7 +24,7 @@ color:rgb(71,51,103);
 
 }
 
-body {background-color:lightgray;
+body {background-color:rgb(240,240,240);
       opacity:0.9;
 }
 
@@ -35,10 +37,11 @@ body {background-color:lightgray;
    background: -ms-linear-gradient(top, #473367, #463367);
    background: -o-linear-gradient(top, #473367, #463367);
    color: #ffffff;
-   font-size: 14px;
+   font-size: 20px;
    font-family: 'Franklin Gothic Book';
    text-decoration: none;
    vertical-align: middle;
+   border:1px lightgrey;
    }
 .button:hover {
    border-top-color: #574a6b;
@@ -49,3 +52,7 @@ body {background-color:lightgray;
    border-top-color: #493367;
    background: #493367;
    }
+.errorMessage
+{
+    color:red;
+}
