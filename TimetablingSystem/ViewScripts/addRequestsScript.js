@@ -131,7 +131,7 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
 
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 
             }
         }
@@ -148,11 +148,11 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
                 
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' class='roomList' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 
             }
         }
-        
+
     //specific building
     } else {
         
@@ -163,7 +163,7 @@ function roomListPopulate() {
 
             for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
             
-            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' class='roomList' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
             
         }
         
@@ -172,13 +172,23 @@ function roomListPopulate() {
     $('#roomList').append(tempStr);
 }
 
+//tick
 //copy ticked checkboxes to second list that has chosen rooms
 //push the chosen room to the request
+//untick
+//remove room from chosen rooms
+//remove the room div
 function checkedRoomList(checkbox) {
     tempStr = "";
-    tempStr += "<div id='divPicked-" + checkbox.id + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
-    $('#chosenRoomsList').append(tempStr);
-    newRequest.rooms.push(checkbox.id);
+    pushID = checkbox.id;
+    if ($(checkbox).is(":checked")) {
+        tempStr += "<div id='divPicked-" + checkbox.id.split('.').join("") + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id.split('.').join("") + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
+        $('#chosenRoomsList').append(tempStr);
+        newRequest.rooms.push(pushID);
+    } else if ($(checkbox).is(":not(:checked)")) {
+        newRequest.rooms = newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
+        $("#divPicked-" + checkbox.id.split('.').join("")).remove();
+    }
 }
 
 //stores all the non-facility requirements in the request object
@@ -380,11 +390,6 @@ function setWeeks(weeksChosen) {
 //clears checked tickboxes of rooms selected
 function clearRoomSel() {
     $('#roomList input:checkbox').attr('checked', false);
-}
-
-//sorts rooms by capacity or alphabetically
-function sortRooms() {
-    
 }
 
 //remove checked item when unticked
