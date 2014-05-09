@@ -1,7 +1,7 @@
 ﻿function generateGraphicalDisplay() {
 
     layoutSetup();
-    detailsGenerator();
+    graphicalDetailsGenerator();
     graphicalViewGenerator(requestsSet);
     toggleTimeHeader(true);
 
@@ -18,7 +18,7 @@ function layoutSetup() {
 
 }
 
-function detailsGenerator() {
+function graphicalDetailsGenerator() {
 
     var detailsHTML = "";
 
@@ -193,7 +193,7 @@ function graphicalViewGenerator(requestsArray) {
         
         var request = null;
 
-        for (var i = 0; i < requestsSet.length; i++) if (requestsSet[i].id == $(this).val()) request = requestsSet[i];
+        for (var i = 0; i < requestsArray.length; i++) if (requestsArray[i].id == $(this).val()) request = requestsArray[i];
         
         displayData(request);
 

@@ -4,25 +4,26 @@
 
     requestsSet = getBookings();
 
-    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
+    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
 
     $("input[name=requestTypeRadio]").change(function () {
 
         if ($(this).val() == "current") requestsSet = getBookings();
         else requestsSet = getAdHocBookings();
 
-        if (listViewFlag) alert("ListView");
+        if (listViewFlag) generateListDisplay();
         else generateGraphicalDisplay();
 
     });
 
-    generateGraphicalDisplay();
+    generateListDisplay();
 
     $("input[name=displayRadio]").change(function () {
 
         if ($(this).val() === "list") {
 
-            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
+            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+            generateListDisplay();
 
             listViewFlag = true;
 
@@ -39,8 +40,14 @@
 
     $("input[name=timeRadio]").change(function () {
 
-        if ($(this).val() === "time") toggleTimeHeader(true);
-        else toggleTimeHeader(false);
+        if ($(this).val() === "time") {
+            toggleTimeHeader(true);
+            toggleTimeValue(true);
+        }
+        else {
+            toggleTimeHeader(false);
+            toggleTimeValue(false);
+        }
 
     });
 

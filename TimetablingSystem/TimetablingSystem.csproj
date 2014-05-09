@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\displayStyle.css" />
+    <Content Include="Content\listDisplayStyle.css" />
     <Content Include="Content\loginLogoutStyle.css" />
     <Content Include="Content\parentStyle.css" />
     <Content Include="Content\settingsStyle.css" />
@@ -320,6 +321,7 @@
     <Content Include="JS\globalFunctions.js" />
     <Content Include="JS\graphicalGenerator.js" />
     <Content Include="JS\instanceData.js" />
+    <Content Include="JS\listGenerator.js" />
     <Content Include="JS\testA.js" />
     <Content Include="JS\objectDataTypes.js" />
     <Content Include="JS\weeksManipulator.js" />

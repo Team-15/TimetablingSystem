@@ -2,14 +2,16 @@
 
     requestsSet = getResults();
 
-    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
+    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
 
-    generateGraphicalDisplay();
+    generateListDisplay();
 
     $("input[name=displayRadio]").change(function () {
 
         if ($(this).val() === "list") {
-            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'>List View Goes Here</div>";
+
+            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+            generateListDisplay();
 
         }
         else {
@@ -21,8 +23,14 @@
 
     $("input[name=timeRadio]").change(function () {
 
-        if ($(this).val() === "time") toggleTimeHeader(true);
-        else toggleTimeHeader(false);
+        if ($(this).val() === "time") {
+            toggleTimeHeader(true);
+            toggleTimeValue(true);
+        }
+        else {
+            toggleTimeHeader(false);
+            toggleTimeValue(false);
+        }
 
     });
 

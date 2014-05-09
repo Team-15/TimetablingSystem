@@ -21,7 +21,8 @@ namespace TimetablingSystem
                 "~/JS/objectDataTypes.js",
                 "~/JS/weeksManipulator.js",
                 "~/JS/dataManager.js",
-                "~/JS/graphicalGenerator.js"
+                "~/JS/graphicalGenerator.js",
+                "~/JS/listGenerator.js"
 
                 ));
 
@@ -61,8 +62,9 @@ namespace TimetablingSystem
                     "~/Content/bootstrap/bootstrap.css",
                     "~/Content/parentStyle.css",
                     "~/Content/displayStyle.css",
-                    "~/Content/graphicalDisplayStyle.css"
-                    
+                    "~/Content/graphicalDisplayStyle.css",
+                    "~/Content/listDisplayStyle.css"
+
                 ));
 
             bundles.Add(new StyleBundle("~/Content/settingsCSS").Include("~/Content/settingsStyle.css"));
