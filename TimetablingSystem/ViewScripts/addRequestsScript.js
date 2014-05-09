@@ -224,8 +224,12 @@ function moduleSelector(changedValue) {
 //store user-chosen facilities in request instance
 function facilityStore(checkbox) {
     if (checkbox.checked == true) {
-        newRequest.facilities.push(checkbox.id);
+        newRequest.facilities.push(parseInt(checkbox.id));
     }
+    if (checkbox.checked == false) {
+        newRequest.facilities = newRequest.facilities.splice(parseInt(checkbox.id), 1);
+    }
+    infoStore();
 }
 
 //creates array of time/dates for the request(s)
