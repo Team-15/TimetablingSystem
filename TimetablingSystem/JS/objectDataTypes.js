@@ -50,7 +50,7 @@ function Request() {
     this.sessionType = 0; //Index of sessionTypesArray, see globalConstants.js
     this.noOfRooms = 1; //Number > 0
 
-    this.facilities = []; //Array of facility IDs as strings
+    this.facilities = []; //Array of facility IDs as ints
     this.otherReqs = ""; //String
 
     //Only code strings required - do not store Room objects array
