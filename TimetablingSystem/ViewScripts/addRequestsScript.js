@@ -182,10 +182,19 @@ function checkedRoomList(checkbox) {
     tempStr = "";
     pushID = checkbox.id;
     if ($(checkbox).is(":checked")) {
-        tempStr += "<div id='divPicked-" + checkbox.id.split('.').join("") + "'><input type='checkbox' checked='true' id='picked-" + checkbox.id + "' val ='" + checkbox.id + "' data-cap='" + $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" + checkbox.id.split('.').join("") + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
+
+        tempStr += "<div id='divPicked-" +
+            checkbox.id.split('.').join("") +
+            "'><input type='checkbox' checked='true' id='picked-" +
+            checkbox.id + "' val ='" + checkbox.id + "' data-cap='" +
+            $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" +
+            checkbox.id.split('.').join("") + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
+
         $('#chosenRoomsList').append(tempStr);
         newRequest.rooms.push(pushID);
-    } else if ($(checkbox).is(":not(:checked)")) {
+    } else //if ($(checkbox).is(":not(:checked)"))
+    {
+        alert(JSON.stringify(newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1)));
         newRequest.rooms = newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
