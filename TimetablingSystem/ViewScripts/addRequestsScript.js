@@ -4,7 +4,7 @@ $(document).ready(function () {
     tableCreator();
     modulePopulate();
     facilityPopulate();
-    infoStore();
+    infoStore(); 
     if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
         loadInRequest();
     }
@@ -133,7 +133,7 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
 
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-primary'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-primary'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 
             }
         }
@@ -150,7 +150,7 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
                 
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 
             }
         }
@@ -165,7 +165,7 @@ function roomListPopulate() {
 
             for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
             
-            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
             
         }
         
@@ -199,7 +199,6 @@ function checkedRoomList(checkbox) {
         newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
-    console.log(newRequest.rooms);
 }
 
 //stores all the non-facility requirements in the request object
@@ -208,7 +207,7 @@ function infoStore() {
     tempStudents = tempStudents.replace(/[^0-9]/g, '');
     newRequest.students = parseInt(tempStudents, 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
-    newRequest.sessionTypesArray = $('#RMT').get(0).selectedIndex;
+    newRequest.sessionType = $('#RMT').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
     newRequest.noOfRooms = parseInt($("#NOR").val(), 10);
     var modIndex = $("#modCodeSelect").get(0).selectedIndex;
@@ -448,22 +447,13 @@ function removeCheckedRoom(checkbox) {
 //loads in request details for duplicate or edit option
 function loadInRequest() {
     newRequest = temporaryRequestStore;
-    $("#CAP").val() = newRequest.students;
-    $("#ORE").val() = newRequest.otherReqs;
-    $("#NOR").val() = newRequest.noOfRooms;
-    if (newRequest.priority == true) {
-        $('#PRT').attr('checked', true);
-    } else {
-        $('#PRF').attr('checked', true);
+
+    for (var k = 0; k < newRequest.facilities.length; k++) {
+        $("#" + newRequest.facilities[k]).attr('checked', true);
     }
-    if (newRequest.traditional == true) {
-        $('#TRD').attr('checked', true);
-    } else {
-        $('#SMR').attr('checked', true);
-    }
-    $('#PRK').prop('selectedIndex', newRequest.park);
-    $('#RMT').prop('selectedIndex', newRequest.sessionTypesArray);    
-    $("#modCodeSelect").prop('selectedIndex', modulesArray[newRequest.module]);
+    $("#modCodeSelect").val(newRequest.module.code);
+    $("#modTitleSelect").val(newRequest.module.title);
+    $("#CAP").val(newRequest.students);
     for (var i = 0; i < newRequest.weeks.length; i++) {
         if (newRequest.weeks[i] == true) {
             $("#weekChoice" + i).prop("checked", true)
@@ -471,8 +461,26 @@ function loadInRequest() {
             $("#weekChoice" + i).prop("checked", false)
         }
     }
-
-    //FIXME load in correct checked rooms
-    buildingPopulate();
-    roomListPopulate();
+    $("#ORE").val(newRequest.otherReqs);
+    $('#PRK').prop('selectedIndex', newRequest.park);
+    if (editRequestFlag == true) {
+        $("#NOR").val(newRequest.noOfRooms);
+        if (newRequest.priority == true) {
+            $('#PRT').attr('checked', true);
+        } else {
+            $('#PRF').attr('checked', true);
+        }
+        if (newRequest.traditional == true) {
+            $('#TRD').attr('checked', true);
+        } else {
+            $('#SMR').attr('checked', true);
+        }
+        $('#RMT').prop('selectedIndex', newRequest.sessionType);    
+        infoStore();
+        for (var j = 0; j < newRequest.rooms.length; j++) {
+            tempName = newRequest.rooms[0].split('.').join('');
+            newRequest.rooms.splice(0, 1);
+            $(":checkbox[value=" + tempName + "]").click();
+        }
+    }
 }
