@@ -28,30 +28,11 @@ body {background-color:rgb(240,240,240);
       opacity:0.9;
 }
 
-.button {
-   border-top: 1px solid #463367;
-   background: #463367;
-   background: -webkit-gradient(linear, left top, left bottom, from(#473367), to(#463367));
-   background: -webkit-linear-gradient(top, #473367, #463367);
-   background: -moz-linear-gradient(top, #473367, #463367);
-   background: -ms-linear-gradient(top, #473367, #463367);
-   background: -o-linear-gradient(top, #473367, #463367);
-   color: #ffffff;
-   font-size: 20px;
-   font-family: 'Franklin Gothic Book';
-   text-decoration: none;
-   vertical-align: middle;
-   border:1px lightgrey;
-   }
-.button:hover {
-   border-top-color: #574a6b;
-   background: #574a6b;
-   color: #ccc;
-   }
-.button:active {
-   border-top-color: #493367;
-   background: #493367;
-   }
+.btn-primary {
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}
 .errorMessage
 {
     color:red;
