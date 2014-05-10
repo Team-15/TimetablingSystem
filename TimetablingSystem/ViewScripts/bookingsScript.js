@@ -1,55 +1,63 @@
 ﻿$(document).ready(function () {
 
+    //Bookings View Flags
+    currentViewFlag = true;
+    departmentFlag = "allDepartments";
+    
+
     allModules = getAllModules();
 
-    listViewFlag = true;
+    performResetAndSetup();
 
-    requestsSet = getBookings();
+    unfilteredRequests = getBookings();
 
-    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+    requestsSet = executeFilters();
+
+    displayReloader();
+
+    $("#selectmod").prop("disabled", true);
 
     $("input[name=requestTypeRadio]").change(function () {
 
-        if ($(this).val() == "current") requestsSet = getBookings();
-        else requestsSet = getAdHocBookings();
+        if ($(this).val() == "current") currentViewFlag = true;
+        else currentViewFlag = false;
 
-        if (listViewFlag) generateListDisplay();
-        else generateGraphicalDisplay();
+        typeRequestLoader();
 
-    });
+        requestsSet = executeFilters();
 
-    generateListDisplay();
-
-    $("input[name=displayRadio]").change(function () {
-
-        if ($(this).val() === "list") {
-
-            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
-            generateListDisplay();
-
-            listViewFlag = true;
-
-        }
-        else {
-
-            document.getElementById("displaysContainer").innerHTML = "<div id='graphicalContainer'></div>";
-            generateGraphicalDisplay();
-
-            listViewFlag = false;
-        }
+        displayReloader();
 
     });
 
-    $("input[name=timeRadio]").change(function () {
+    $("input[name=departmentRadio]").change(function () {
 
-        if ($(this).val() === "time") {
-            toggleTimeHeader(true);
-            toggleTimeValue(true);
+        typeRequestLoader();
+
+        if ($(this).val() == "myDepartments") {
+
+            unfilteredRequests = departmenalFilter(true);
+
+            $("#selectmod").prop("disabled", false);
+
+        }
+        else if ($(this).val() == "otherDepartments") {
+
+            unfilteredRequests = departmenalFilter(false);
+
+            $("#selectmod").val("All");
+            $("#selectmod").prop("disabled", true);
         }
         else {
-            toggleTimeHeader(false);
-            toggleTimeValue(false);
+
+            $("#selectmod").val("All");
+            $("#selectmod").prop("disabled", true);
+
         }
+
+        requestsSet = executeFilters();
+
+        displayReloader();
 
     });
 
@@ -109,5 +117,45 @@ function getAdHocBookings() {
     });
 
     return requests;
+
+}
+
+
+function departmenalFilter(myDept) {
+
+    var filteredRequests = [];
+
+    if (myDept) {
+
+        for (var ufrCounter = 0; ufrCounter < unfilteredRequests.length; ufrCounter++) {
+
+            if (unfilteredRequests[ufrCounter].module.deptCode === department) filteredRequests.push(unfilteredRequests[ufrCounter]);
+
+        }
+
+    }
+    else {
+
+        for (var ufrCounter = 0; ufrCounter < unfilteredRequests.length; ufrCounter++) {
+
+            if (unfilteredRequests[ufrCounter].module.deptCode !== department) filteredRequests.push(unfilteredRequests[ufrCounter]);
+
+        }
+
+    }
+
+    return filteredRequests;
+
+}
+
+
+function typeRequestLoader() {
+    
+    if (currentViewFlag) unfilteredRequests = getBookings();
+    else unfilteredRequests = getAdHocBookings();
+
+}
+
+function departmentalViewSwitcher() {
 
 }

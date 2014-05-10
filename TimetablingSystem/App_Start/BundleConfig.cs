@@ -12,35 +12,31 @@ namespace TimetablingSystem
             /*          JS          */
             bundles.Add(new ScriptBundle("~/bundles/parent").Include(
 
-                "~/Scripts/bootstrap.js",
-                "~/JS/testA.js",
-                "~/ViewScripts/parentScript.js",
-                "~/JS/globalConstants.js",
-                "~/JS/globalFunctions.js",
-                "~/JS/instanceData.js",
-                "~/JS/objectDataTypes.js",
-                "~/JS/weeksManipulator.js",
-                "~/JS/dataManager.js",
-                "~/JS/graphicalGenerator.js",
-                "~/JS/listGenerator.js"
+                    "~/Scripts/bootstrap.js",
+                    "~/JS/testA.js",
+                    "~/ViewScripts/parentScript.js",
+                    "~/JS/globalConstants.js",
+                    "~/JS/globalFunctions.js",
+                    "~/JS/instanceData.js",
+                    "~/JS/objectDataTypes.js",
+                    "~/JS/weeksManipulator.js",
+                    "~/JS/dataManager.js",
+                    "~/JS/graphicalGenerator.js",
+                    "~/JS/listGenerator.js",
+                    "~/JS/filteringEngine.js"
 
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/addRequests").Include(
-                        "~/ViewScripts/addRequestsScript.js"));
+            bundles.Add(new ScriptBundle("~/bundles/addRequests").Include("~/ViewScripts/addRequestsScript.js"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/requests").Include(
-                        "~/ViewScripts/requestsScript.js"));
+            bundles.Add(new ScriptBundle("~/bundles/requests").Include("~/ViewScripts/requestsScript.js" ));
 
-            bundles.Add(new ScriptBundle("~/bundles/results").Include(
-                        "~/ViewScripts/resultsScript.js"));
+            bundles.Add(new ScriptBundle("~/bundles/results").Include("~/ViewScripts/resultsScript.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bookings").Include(
-                        "~/ViewScripts/bookingsScript.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bookings").Include("~/ViewScripts/bookingsScript.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/history").Include(
-                        "~/ViewScripts/historyScript.js"));
+            bundles.Add(new ScriptBundle("~/bundles/history").Include("~/ViewScripts/historyScript.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/settings").Include(
@@ -61,6 +57,7 @@ namespace TimetablingSystem
                     
                     "~/Content/bootstrap/bootstrap.css",
                     "~/Content/parentStyle.css",
+                    "~/Content/filterSectionStyle.css",
                     "~/Content/displayStyle.css",
                     "~/Content/graphicalDisplayStyle.css",
                     "~/Content/listDisplayStyle.css"
