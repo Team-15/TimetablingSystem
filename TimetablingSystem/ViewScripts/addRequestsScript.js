@@ -68,7 +68,7 @@ function facilityPopulate() {
     var tempStr = "";
     tempStr += "<table class='table reqTable'><tr>";
     for (var i = 0; i < facArray.length; i++) {
-        tempStr += "<td><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</td>";
+        tempStr += "<td><label class='facilityLabel'><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</label></td>";
         if (i % 2 != 0) {
             tempStr += "</tr><tr>";
         }
