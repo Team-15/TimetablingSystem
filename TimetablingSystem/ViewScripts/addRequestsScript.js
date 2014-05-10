@@ -5,7 +5,9 @@ $(document).ready(function () {
     modulePopulate();
     facilityPopulate();
     infoStore();
-
+    if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
+        loadInRequest();
+    }
 });
 
 //create room/facility/module objects from DB
@@ -433,4 +435,36 @@ function clearRoomSel() {
 //remove checked item when unticked
 function removeCheckedRoom(checkbox) {
     $($(checkbox).parent()).remove();
+}
+
+//loads in request details for duplicate or edit option
+function loadInRequest() {
+    newRequest = temporaryRequestStore;
+    $("#CAP").val() = newRequest.students;
+    $("#ORE").val() = newRequest.otherReqs;
+    $("#NOR").val() = newRequest.noOfRooms;
+    if (newRequest.priority == true) {
+        $('#PRT').attr('checked', true);
+    } else {
+        $('#PRF').attr('checked', true);
+    }
+    if (newRequest.traditional == true) {
+        $('#TRD').attr('checked', true);
+    } else {
+        $('#SMR').attr('checked', true);
+    }
+    $('#PRK').prop('selectedIndex', newRequest.park);
+    $('#RMT').prop('selectedIndex', newRequest.sessionTypesArray);    
+    $("#modCodeSelect").prop('selectedIndex', modulesArray[newRequest.module]);
+    for (var i = 0; i < newRequest.weeks.length; i++) {
+        if (newRequest.weeks[i] == true) {
+            $("#weekChoice" + i).prop("checked", true)
+        } else {
+            $("#weekChoice" + i).prop("checked", false)
+        }
+    }
+
+    //FIXME load in correct checked rooms
+    buildingPopulate();
+    roomListPopulate();
 }
