@@ -66,3 +66,15 @@ border:1px solid lightgrey;
    border-top-color: #493367;
    background: #493367;
    }
+.btn-primary {
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}
+
+.btn-default
+{
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}
