@@ -204,7 +204,9 @@ function checkedRoomList(checkbox) {
 
 //stores all the non-facility requirements in the request object
 function infoStore() {
-    newRequest.students = parseInt($("#CAP").val(), 10);
+    var tempStudents = $("#CAP").val();
+    tempStudents = tempStudents.replace(/[^0-9]/g, '');
+    newRequest.students = parseInt(tempStudents, 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.sessionTypesArray = $('#RMT').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
