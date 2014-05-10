@@ -25,11 +25,11 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''>" + (i+1);
     }
-    tempStr += "</td></tr><tr><td><input class='button' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
-    tempStr += "<input class='button' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
-    tempStr += "<input class='button' type='button' value='odd' onclick='setWeeks(-1)'>";
-    tempStr += "<input class='button' type='button' value='even' onclick='setWeeks(-2)'>";
-    tempStr += "<input class='button' type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
+    tempStr += "</td></tr><tr><td><input class='btn btn-primary' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
+    tempStr += "<input class='btn btn-primary' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
+    tempStr += "<input class='btn btn-primary' type='button' value='odd' onclick='setWeeks(-1)'>";
+    tempStr += "<input class='btn btn-primary' type='button' value='even' onclick='setWeeks(-2)'>";
+    tempStr += "<input class='btn btn-primary' type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 
@@ -69,7 +69,7 @@ function facilityPopulate() {
     var tempStr = "";
     tempStr += "<table class='table reqTable'><tr>";
     for (var i = 0; i < facArray.length; i++) {
-        tempStr += "<td><label class='facilityLabel'><input type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</label></td>";
+        tempStr += "<td><label class='btn btn-default'><input style='display:none' type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'>" + facArray[i].name + "</label></td>";
         if (i % 2 != 0) {
             tempStr += "</tr><tr>";
         }
@@ -85,8 +85,8 @@ function facilityPopulate() {
     }
     tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
     tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes<input type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</td></tr>";
-    tempStr += "<tr><td>Type: <input type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'>traditional<input type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'>seminar</td></tr>";
+    tempStr += "<tr><td>Priority: <label class='btn btn-default'><input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'>yes</label><label class='btn btn-default'><input style='display:none' type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'>no</label></td></tr>";
+    tempStr += "<tr><td>Type:<label class='btn btn-default'><input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'>traditional</label><label class='btn btn-default'><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'>seminar</label></td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
@@ -131,7 +131,7 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
 
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<label class='btn btn-primary'><input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
                 
             }
         }
