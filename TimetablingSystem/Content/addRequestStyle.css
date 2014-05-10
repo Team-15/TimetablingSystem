@@ -54,3 +54,20 @@ border:1px solid lightgrey;
   background-color: rgb(71,51,103);
   border-color: lightgrey;
 }
+    .btn-default:hover
+    {
+        background-color:#3276b1;
+    }
+{
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}
+
+input[type=checkbox]:checked + label {
+	background: #3276b1;
+}
+
+input[type=radio]:checked + label {
+	background: #3276b1;
+}
