@@ -222,9 +222,14 @@ function infoStore() {
     });
     $('#TRD').click(function () {
         newRequest.traditional = true;
+        $("#RMT option[value='Lab']").attr("disabled", false);
+        $("#RMT option[value='Tutorial']").attr("disabled", false);
     });
     $('#SMR').click(function () {
         newRequest.traditional = false;
+        $('#RMT').val("Lecture");
+        $("#RMT option[value='Lab']").attr("disabled", true);
+        $("#RMT option[value='Tutorial']").attr("disabled", true);
     });
     for (var i = 0; i < numberOfWeeks; i++) {
         if ($("#weekChoice" + i).prop("checked")) {
