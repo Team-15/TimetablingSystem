@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Bookings";
+}
+
+<div id="filtersContainer" class="filtersContainer">
+
+    <div class="filterGroup">
+        <div><input type="radio" name="requestTypeRadio" value="current" checked /> Current </div>
+        <div><input type="radio" name="requestTypeRadio" value="adHoc" /> Ad-Hoc</div>
+    </div>
+
+    <div class="filterGroup">
+        <div><input type="radio" name="timeRadio" value="time" checked /> Time </div>
+        <div><input type="radio" name="timeRadio" value="periods" /> Periods </div>
+    </div>
+
+    <div class="filterGroup">
+        <div><input type="radio" name="displayRadio" value="list" checked /> List View </div>
+        <div><input type="radio" name="displayRadio" value="graphical" /> Graphical View </div>
+    </div>
+
+    <div class="filterGroup">
+        <div><input type="radio" name="departmentRadio" value="allDepartments" checked /> All Departments </div>
+        <div><input type="radio" name="departmentRadio" value="myDepartments" /> My Departments </div>
+        <div><input type="radio" name="departmentRadio" value="otherDepartments" /> Other Departments </div>
+    </div>
+
+</div>
+
+<div id="displaysContainer" class="displaysContainer">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Scripts.Render("~/bundles/bookings")

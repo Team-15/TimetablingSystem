@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="383fab457a574220a76bb5c45130c9ff" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="team15Model.building" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.department" Width="1.5" PointX="3.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.facility" Width="1.5" PointX="1.625" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.module" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.request" Width="1.5" PointX="4.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.room" Width="1.5" PointX="0.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.round" Width="1.5" PointX="7.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="team15Model.semester" Width="1.5" PointX="8.125" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="team15Model.FK_room_building" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.FK_module_department" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.FK_request_module" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.FK_request_round" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.FK_round_semester" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.requestFacility" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="team15Model.roomAllocated" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.roomFacility" ManuallyRouted="false" />
+        <AssociationConnector Association="team15Model.roomPreference" ManuallyRouted="false" ></AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

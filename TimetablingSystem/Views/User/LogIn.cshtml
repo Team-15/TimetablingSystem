@@ -1,0 +1,38 @@
+﻿@model TimetablingSystem.Models.UserModel
+
+@{
+    Layout = "~/Views/Shared/_AuthorizeView.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<h2>Timetabling System Login</h2>
+
+@using (Html.BeginForm("LogIn", "User", FormMethod.Post, new { id = "loginForm" }))
+{ 
+    
+    <div>
+
+        <fieldset>
+
+            
+            <div>@Html.LabelFor(user => user.username)</div>
+            <div>
+                @*@Html.TextBoxFor(user => user.username)*@
+                @Html.DropDownListFor(user => user.username, ViewData["userList"] as List<SelectListItem>, "Please Select")
+               <div class="errorMessage">@Html.ValidationMessageFor(user => user.username)</div> 
+            </div>
+
+            <div>@Html.LabelFor(user => user.password)</div>
+            <div>
+                @Html.PasswordFor(user => user.password)
+                <div class="errorMessage">@Html.ValidationMessageFor(user => user.password)</div>
+            </div>
+            <br />
+            <input class="btn btn-primary" type="submit" name="Login" value="Log In" />
+
+        </fieldset>
+
+    </div>
+        
+    
+}

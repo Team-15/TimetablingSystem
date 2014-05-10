@@ -1,0 +1,53 @@
+﻿body {
+    min-width: 960px;
+    margin: 0px;
+    overflow-y: scroll;
+}
+
+#mainWrapper {
+    width:960px;
+
+    
+    top:0px;
+    margin: 0 auto;
+}
+
+.headerWrapper {
+    height: 100px;
+    /*
+        background: #330066;
+    */
+    background: linear-gradient(to right, #2f0065 25%,#5a3163 100%);
+}
+
+#lboroLogo {
+    top:20px;
+    left:20px;
+}
+
+#navSection ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#navSection ul li {
+    display: inline;
+}
+
+#navSection ul li a {
+    text-decoration: none;
+    padding: .2em 1em;
+    color: #fff;
+    background-color: #036;
+}
+
+#navSection ul li a:hover {
+    color: #fff;
+    background-color: #369;
+}
+
+#contentDiv {
+    padding:5px;
+}

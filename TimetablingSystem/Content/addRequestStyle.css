@@ -1,0 +1,56 @@
+﻿table.gridTable {
+    border: 1px solid black;
+}
+
+th {
+    border: 1px solid black;
+}
+
+td.gridWeek {
+    border: 1px solid black;
+}
+
+#roomList {
+    overflow: auto; 
+    height: 200px;
+    padding:5px;
+    border:1px solid lightgrey;
+}
+
+#chosenRoomsList {
+    overflow: auto; 
+    height: 125px;
+    border:1px solid lightgrey;
+    padding:5px;
+}
+
+#propertiesBox
+{
+border:1px solid lightgrey;
+}
+
+#moduleBox
+{
+border:1px solid lightgrey;
+}
+#weekSelect
+{
+
+}
+
+#weekTable
+{
+
+}
+.btn-primary {
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}
+
+.btn-default
+{
+  color: #fff;
+  background-color: rgb(71,51,103);
+  border-color: lightgrey;
+}

@@ -1,0 +1,400 @@
+﻿@{
+    ViewBag.Title = "Test3";
+}
+@Styles.Render("~/Content/test3Style.css")
+
+
+<div id="listContainer">
+
+
+   
+    <div class="headerContainer">
+
+        <table class="headerTable">
+
+            <tr>
+
+                <td style="width: 80px;">
+                    ID
+                </td>
+
+                <td style="width: 95px;">
+                    Department
+                </td>
+                <td style="width: 90px;">
+                    Module
+                </td>
+                <td style="width: 50px;">
+                    P
+                </td>
+                <td style="width: 90px;">
+                    Day
+                </td>
+                <td style="width: 60px;">
+                    Period
+                </td>
+                <td style="width: 65px;">
+                    Length
+                </td>
+                <td style="width: 200px;">
+                    Weeks
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+    @*
+    <div class="requestContainerList">
+
+        <label class="checkboxLabel">
+
+            <input type="checkbox" class="requestCheckbox" />
+            
+            <div class="requestContainer">
+
+                <div class="requestHeader">
+
+                    <table class="mainTable">
+
+                        <tr>
+
+                            <td style="width: 80px;" class="idData">1234
+                            </td>
+
+                            <td style="width: 95px;" class="deptData">CO
+                            </td>
+                            <td style="width: 90px;" class="mcData">COA123
+                            </td>
+                            <td style="width: 50px;" class="prData">Yes
+                            </td>
+                            <td style="width: 90px;" class="dayData">Wednesday
+                            </td>
+                            <td style="width: 60px;" class="periodData">2
+                            </td>
+                            <td style="width: 65px;" class="lengthData">2
+                            </td>
+                            <td style="width: 200px;" class="weeksData">1-8, 10-12
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <table class="btnTable">
+
+                        <tr>
+
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Edit" value="edit" />
+                            </td>
+
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Duplicate" value="duplicate" />
+                            </td>
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Delete" value="delete" />
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div class="requestDetails">
+
+                    <table class="detailsTable">
+
+                        <tr>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Module Title:
+                            </td>
+                            <td colspan="6" class="mtData">Server side Programming
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Allocated Rooms:
+                            </td>
+                            <td colspan="6" class="raData">N.0.01
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Room Preferences:
+                            </td>
+                            <td colspan="6" class="rpData">N.0.01
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD">Status
+                            </td>
+                            <td class="statusData">Alternative
+                            </td>
+
+                            <td class="titleTD" colspan="2">Number of Students:
+                            </td>
+                            <td class="nosData">20
+                            </td>
+
+                            <td class="titleTD" colspan="2">Number of Rooms
+                            </td>
+                            <td class="norData">1
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="1">Park
+                            </td>
+                            <td class="parkData">Central
+                            </td>
+                            <td class="titleTD" colspan="2">Traditional
+                            </td>
+                            <td class="traditionalData">Traditional
+                            </td>
+                            <td class="titleTD" colspan="2">Session Type:
+                            </td>
+                            <td class="stData">Lecture
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="3">Facilities
+                            </td>
+                            <td class="titleTD" colspan="5">Other Requirements
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td colspan="3">
+                                <div class="scrollableDetail facData">
+                                    sdfbnsafojdnlasdfnsad'ofnine 
+                                </div>
+                            </td>
+                            <td colspan="5">
+                                <div class="scrollableDetail orData">
+                                    Text
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </label>
+
+    </div>
+
+    <div class="requestContainerList">
+
+        <label class="checkboxLabel">
+
+            <input type="checkbox" class="requestCheckbox" />
+            
+            <div class="requestContainer" id="bankai">
+
+                <div class="requestHeader">
+
+                    <table class="mainTable">
+
+                        <tr>
+
+                            <td style="width: 80px;">1234
+                            </td>
+
+                            <td style="width: 95px;" class="deptData">CO
+                            </td>
+                            <td style="width: 90px;">COA123
+                            </td>
+                            <td style="width: 50px;">Yes
+                            </td>
+                            <td style="width: 90px;">Wednesday
+                            </td>
+                            <td style="width: 60px;">2
+                            </td>
+                            <td style="width: 65px;">2
+                            </td>
+                            <td style="width: 200px;">1-8, 10-12
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <table class="btnTable">
+
+                        <tr>
+
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Edit" value="edit" />
+                            </td>
+
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Duplicate" value="duplicate" />
+                            </td>
+                            <td class="requestBtn" style="width: 30px;">
+                                <input type="button" name="Delete" value="delete" />
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div class="requestDetails">
+
+                    <table class="detailsTable">
+
+                        <tr>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                            <td class="hiddenTD"></td>
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Module Title:
+                            </td>
+                            <td colspan="6">Server side Programming xXx
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Allocated Rooms:
+                            </td>
+                            <td colspan="6">N.0.01
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="2">Room Preferences:
+                            </td>
+                            <td colspan="6">N.0.01
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD">Status:
+                            </td>
+                            <td>Alternative
+                            </td>
+
+                            <td class="titleTD" colspan="2">Number of Students:
+                            </td>
+                            <td>20
+                            </td>
+
+                            <td class="titleTD" colspan="2">Number of Rooms
+                            </td>
+                            <td>1
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="1">Park:
+                            </td>
+                            <td>Central
+                            </td>
+                            <td class="titleTD" colspan="2">Traditional:
+                            </td>
+                            <td>Traditional
+                            </td>
+                            <td class="titleTD" colspan="2">Session Type:
+                            </td>
+                            <td>Lecture
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="titleTD" colspan="3">Facilities:
+                            </td>
+                            <td class="titleTD" colspan="5">Other Requirements:
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td colspan="3">
+                                <div class="scrollableDetail">
+                                    sdfbnsafojdnlasdfnsad'ofnine 
+                                </div>
+                            </td>
+                            <td colspan="5">
+                                <div class="scrollableDetail">
+                                    Text
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </label>
+
+    </div>
+    *@
+    
+
+</div>
+
+
+
+
+
+
+@Scripts.Render("~/ViewScripts/test3Script.js")

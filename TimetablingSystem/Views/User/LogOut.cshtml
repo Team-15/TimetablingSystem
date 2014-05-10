@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "LogOut";
+    Layout = "~/Views/Shared/_AuthorizeView.cshtml";
+}
+
+<h2>You have been Logged Out</h2>
+
+<h3>Redirecting to Log In</h3>
+
+If not redirected in 4 seconds, please click @Html.ActionLink("here", "LogIn", "User", new {id = "loginLink" })
+
+@Scripts.Render("~/bundles/logout")
