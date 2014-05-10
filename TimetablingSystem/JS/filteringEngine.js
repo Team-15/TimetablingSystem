@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    
+
 
     //Data and Array setup
     requestArray = [];
@@ -44,7 +44,7 @@
         alert(selectedBuilding);
         buildingsFlag = $("#selectbuilding").find(":selected").data("buildingstate");
         alert(buildingsFlag);
-        
+
         if (buildingsFlag == false) {
             $("#selectroom").prop("disabled", true);
             roomsFlag = false;
@@ -157,7 +157,7 @@ function executeFilters() {
 function moduleFilter(reqArray) {
 
     var filteredRequests = [];
-    
+
 
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
@@ -181,7 +181,7 @@ function moduleFilter(reqArray) {
 function buildingFilter(reqArray) {
 
     var filteredRequests = [];
-    
+
     var roomsList = buildingList[selectedBuilding].rooms;
 
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
@@ -222,8 +222,7 @@ function buildingFilter(reqArray) {
 function roomFilter(reqArray) {
 
     var filteredRequests = [];
-   // filteredRequests = reqArray; //Temporary, get rid of this later
-    
+
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
         var currentReq = reqArray[reqCounter];
@@ -234,7 +233,9 @@ function roomFilter(reqArray) {
 
 
         for (var roomCounter = 0; roomCounter < currentReq.rooms.length; roomCounter++) {
+
             if (notAdded) {
+
                 if (currentReq.rooms[roomCounter] === selectedRoom) {
 
                     filteredRequests.push(currentReq);
@@ -242,12 +243,16 @@ function roomFilter(reqArray) {
                     notAdded = false;
 
                 }
+
             }
+
         }
 
 
         for (var roomCounter1 = 0; roomCounter1 < currentReq.allocatedRooms.length; roomCounter1++) {
+
             if (notAdded) {
+
                 if (currentReq.allocatedRooms[roomCounter1] === selectedRoom) {
 
                     filteredRequests.push(currentReq);
@@ -255,20 +260,15 @@ function roomFilter(reqArray) {
                     notAdded = false;
 
                 }
+
             }
+
         }
 
 
 
     }
 
-  
-
-    /*
-    Execulte Alogrithm here for filtering by rooms.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects
-    */
 
     return filteredRequests;
 
@@ -277,8 +277,6 @@ function roomFilter(reqArray) {
 function dayFilter(reqArray) {
 
     var filteredRequests = [];
-    filteredRequests = reqArray; //Temporary, get rid of this later
-
 
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
@@ -286,11 +284,6 @@ function dayFilter(reqArray) {
             filteredRequests.push(reqArray[reqCounter]);
         }
     }
-   /*
-    Execulte Alogrithm here for filtering by days.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects
-    */
 
     return filteredRequests;
 
@@ -299,21 +292,12 @@ function dayFilter(reqArray) {
 function weekFilter(reqArray) {
 
     var filteredRequests = [];
-    //filteredRequests = reqArray; //Temporary, get rid of this later
 
-    
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
-            if (reqArray[reqCounter].weeks[selectedWeek-1] == true) {
-                filteredRequests.push(reqArray[reqCounter]);
-            }
-    
+
+        if (reqArray[reqCounter].weeks[selectedWeek - 1] == true) filteredRequests.push(reqArray[reqCounter]);
+
     }
-    
-    /*
-    Execulte Alogrithm here for filtering by weeks.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects
-    */
 
     return filteredRequests;
 
@@ -345,7 +329,7 @@ function statusFilter(reqArray) {
 
 
 function createModList() {
-    var modlist="";
+    var modlist = "";
 
     modlist += 'Modules:';
     modlist += '<select id="selectmod">'
@@ -367,13 +351,13 @@ function createBuildingList() {
     building += '<option data-buildingstate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < buildingList.length; i++) {
         building += '<option data-buildingstate=true value="' + i + '">' + buildingList[i].code + ": " + buildingList[i].name + '</option>';
-        
+
     }
 
     building += '</select>';
     building1 += '<select id="selectroom">'
     building1 += '<option value="All">' + "All" + '</option>';
-    
+
     building1 += '</select>';
     document.getElementById('buildinglist').innerHTML = building;
     document.getElementById('roomslist').innerHTML = building1;
@@ -391,7 +375,6 @@ function createRoomList(index) {
     if (typeof index == "string") {
         for (var j = 0; j < buildingList[index].rooms.length; j++) {
             rooms += '<option data-roomstate=true value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
-            //rooms += '<option>' + j +'</option>';
         }
     }
 
@@ -403,7 +386,7 @@ function createRoomList(index) {
 
 
 function createDaysList() {
-    
+
     var daylist = "";
 
     daylist += 'day';

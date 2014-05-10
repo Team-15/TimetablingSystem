@@ -2,6 +2,7 @@
     
     
     // Fix work column on scroll
+    /*
     contentStart = $("#listContainer").offset().top;
     contentSize = $("#listContainer").height();
 
@@ -36,16 +37,45 @@
 
     });
 
-
+    */
 
     requestsSet = [];
 
 
     requestsSet = testRequestList();
 
-    listViewGenerator2(requestsSet);
+    addAdHocRequest(setupDBRequestModel(requestsSet[0]));
+
+    //listViewGenerator2(requestsSet);
 
 });
+
+function addAdHocRequest(jsonData) {
+
+    alert(JSON.stringify(jsonData));
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify(jsonData),
+        async: false,
+        success: function (results) {
+            alert("request submission successful");
+            alert(results);
+        },
+        error: function (results) {
+            alert("request submission failed");
+            alert(JSON.stringify(results));
+        },
+        url: "api/request/PostNewAdHocRequest",
+        processData: false
+    });
+
+}
 
 
 function listViewGenerator2(requestsArray) {
@@ -187,17 +217,6 @@ function listDetailsGenerator2(requestsArray) {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
