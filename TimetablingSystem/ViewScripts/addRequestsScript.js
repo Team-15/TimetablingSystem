@@ -5,7 +5,9 @@ $(document).ready(function () {
     modulePopulate();
     facilityPopulate();
     infoStore();
-
+    if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
+        loadInRequest();
+    }
 });
 
 //create room/facility/module objects from DB
@@ -202,7 +204,9 @@ function checkedRoomList(checkbox) {
 
 //stores all the non-facility requirements in the request object
 function infoStore() {
-    newRequest.students = parseInt($("#CAP").val(), 10);
+    var tempStudents = $("#CAP").val();
+    tempStudents = tempStudents.replace(/[^0-9]/g, '');
+    newRequest.students = parseInt(tempStudents, 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.sessionTypesArray = $('#RMT').get(0).selectedIndex;
     newRequest.otherReqs = $("#ORE").val();
@@ -218,9 +222,14 @@ function infoStore() {
     });
     $('#TRD').click(function () {
         newRequest.traditional = true;
+        $("#RMT option[value='Lab']").attr("disabled", false);
+        $("#RMT option[value='Tutorial']").attr("disabled", false);
     });
     $('#SMR').click(function () {
         newRequest.traditional = false;
+        $('#RMT').val("Lecture");
+        $("#RMT option[value='Lab']").attr("disabled", true);
+        $("#RMT option[value='Tutorial']").attr("disabled", true);
     });
     for (var i = 0; i < numberOfWeeks; i++) {
         if ($("#weekChoice" + i).prop("checked")) {
@@ -433,4 +442,36 @@ function clearRoomSel() {
 //remove checked item when unticked
 function removeCheckedRoom(checkbox) {
     $($(checkbox).parent()).remove();
+}
+
+//loads in request details for duplicate or edit option
+function loadInRequest() {
+    newRequest = temporaryRequestStore;
+    $("#CAP").val() = newRequest.students;
+    $("#ORE").val() = newRequest.otherReqs;
+    $("#NOR").val() = newRequest.noOfRooms;
+    if (newRequest.priority == true) {
+        $('#PRT').attr('checked', true);
+    } else {
+        $('#PRF').attr('checked', true);
+    }
+    if (newRequest.traditional == true) {
+        $('#TRD').attr('checked', true);
+    } else {
+        $('#SMR').attr('checked', true);
+    }
+    $('#PRK').prop('selectedIndex', newRequest.park);
+    $('#RMT').prop('selectedIndex', newRequest.sessionTypesArray);    
+    $("#modCodeSelect").prop('selectedIndex', modulesArray[newRequest.module]);
+    for (var i = 0; i < newRequest.weeks.length; i++) {
+        if (newRequest.weeks[i] == true) {
+            $("#weekChoice" + i).prop("checked", true)
+        } else {
+            $("#weekChoice" + i).prop("checked", false)
+        }
+    }
+
+    //FIXME load in correct checked rooms
+    buildingPopulate();
+    roomListPopulate();
 }
