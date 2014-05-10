@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
-    //[Authorize]
+    [Authorize]
     public class SemRouController : ApiController
     {
 
@@ -77,7 +77,7 @@ namespace TimetablingSystem.DBInterface
 
         public semester GetAdHocSemester()
         {
-            round adHocRound = GetLiveRound();
+            round adHocRound = GetAdHocRound();
 
             semester adHocSemester = null;
 
@@ -92,19 +92,6 @@ namespace TimetablingSystem.DBInterface
             return adHocSemester;
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         protected override void Dispose(bool disposing)

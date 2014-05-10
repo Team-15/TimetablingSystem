@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace TimetablingSystem.DBInterface
 {
-    //[Authorize]
+    [Authorize]
     public class DeptModController : ApiController
     {
 
@@ -79,9 +79,7 @@ namespace TimetablingSystem.DBInterface
                 from mods in _db.modules
                 where mods.active == true
                 select mods;
-             
-            
-            
+
             return moduleList;
 
         }

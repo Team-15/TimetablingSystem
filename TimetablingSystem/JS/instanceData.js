@@ -1,7 +1,6 @@
-﻿//var currentSessionID = "";
+﻿var department = "";
 
-
-var department = "";
+var departmentName = "";
 
 
 var roundID = "";
@@ -14,7 +13,7 @@ var roundEnd = null;
 
 var liveSemesterID = "";
 
-var liveSemester = 1;
+var liveSemesterNumber = 1;
 
 var liveYear = 0;
 
@@ -29,7 +28,7 @@ var adHocEnd = null;
 
 var adHocSemesterID = "";
 
-var adHocSemester = 1;
+var adHocSemesterNumber = 1;
 
 var adHocYear = 0;
 
@@ -40,8 +39,6 @@ var departmentModules = [];
 
 var allDepartmentModules = [];
 
-//Move to script file dealing with all bookings view
-//var allModules = [];
 
 var facilitiesArray = [];
 
@@ -60,6 +57,7 @@ var temporaryRequestStore = null;
 
 function loadInstaceData() {
 
+    loadInstance();
     loadFacilitiesAndBuildingsWithRooms();
     loadModules();
 
@@ -152,6 +150,100 @@ function setupBuildingsWithRooms(buildingsData) {
 
 
 
+function loadInstance() {
+
+    $.ajax({
+        url: "api/deptmod/GetAuthorisedDepartment",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+            department = results.code;
+            departmentName = results.name;
+        }
+    });
+
+
+
+    $.ajax({
+        url: "api/SemRou/GetLiveRound",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+            
+            roundID = results.id;
+
+            roundNumber = results.roundNo;
+
+            roundStart = dbDateTimeConverter(results.startTime);
+
+            roundEnd = dbDateTimeConverter(results.endTime);
+
+        }
+    });
+
+    $.ajax({
+        url: "api/SemRou/GetLiveSemester",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+
+            liveSemesterID = results.id;
+
+            liveSemesterNumber = results.semesterNumber;
+
+            liveYear = results.year;
+
+            numberOfWeeks = results.numberOfWeeks;
+
+        }
+    });
+    
+
+
+    $.ajax({
+        url: "api/SemRou/GetAdHocRound",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+
+            adHocRoundID = results.id;
+
+            adHocStart = dbDateTimeConverter(results.startTime);
+
+            adHocEnd = dbDateTimeConverter(results.endTime);
+
+        }
+    });
+
+    $.ajax({
+        url: "api/SemRou/GetAdHocSemester",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+
+            adHocSemesterID = results.id;
+
+            adHocSemesterNumber = results.semesterNumber;
+
+            adHocYear = results.year;
+
+            adHocNumberOfWeeks = results.numberOfWeeks;
+
+        }
+    });
+
+}
+
 function loadModules() {
 
     $.ajax({
@@ -200,84 +292,8 @@ function setupModules(modulesData) {
 }
 
 
-
-function loadSession() {
-
-    /*
-    currentSessionID = document.location.href.match(/PHPSESSID=[^;]+/);
-
-    $.ajax({
-        url: "PHP/loadSessionData.php?" + currentSessionID,
-        type: "GET",
-        datatype: "json",
-        async: false,
-        data: {},
-        success: function (results) {
-            sessionDataSetup(results);
-        }
-    });
-    */
-}
-
-
-
-function sessionDataSetup(sessData) {
-
-    /*
-
-    sessionData = JSON.parse(sessData);
-
-    department = sessionData.Department;
-
-    if(sessionData.LiveSemester.length != 0) {
-
-        liveSemesterID = sessionData.LiveSemester[0].id;
-
-        liveSemester = sessionData.LiveSemester[0].semesterNumber;
-
-        liveYear = sessionData.LiveSemester[0].year;
-
-        numberOfWeeks = sessionData.LiveSemester[0].numberOfWeeks;
-
-
-        roundID = sessionData.LiveRound[0].id;
-
-        roundNumber = sessionData.LiveRound[0].roundNo;
-
-        roundStart = datetimeStringConverter(sessionData.LiveRound[0].start);
-
-        roundEnd = datetimeStringConverter(sessionData.LiveRound[0].end);
-
-    }
-
-
-    if(sessionData.AdHocSemester.length != 0) {
-
-        adHocSemesterID = sessionData.AdHocSemester[0].id;
-
-        adHocSemester = sessionData.AdHocSemester[0].semesterNumber;
-
-        adHocYear = sessionData.AdHocSemester[0].year;
-
-        adHocNumberOfWeeks = sessionData.AdHocSemester[0].numberOfWeeks;
-
-
-        adHocRoundID = sessionData.AdHocRound[0].id;
-
-        adHocStart = datetimeStringConverter(sessionData.AdHocRound[0].start);
-
-        adHocEnd = datetimeStringConverter(sessionData.AdHocRound[0].end);
-
-    }
-
-    loadFacilities(sessionData.AllFacilities);
-
-    */
-
-}
-
 function getCurrentRoundPercentage() {
-    /*
+    
     var currentDate = new Date();
 
     var percentage = (currentDate.getTime() - roundStart.getTime()) / (roundEnd.getTime() - roundStart.getTime());
@@ -286,5 +302,5 @@ function getCurrentRoundPercentage() {
 
     return percentage;
 
-    */
+    
 }
