@@ -5,6 +5,7 @@ $(document).ready(function () {
     modulePopulate();
     facilityPopulate();
     infoStore();
+
 });
 
 //create room/facility/module objects from DB
