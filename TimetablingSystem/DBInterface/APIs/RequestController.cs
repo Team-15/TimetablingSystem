@@ -5,17 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using TimetablingSystem.DBInterface;
 
 namespace TimetablingSystem.DBInterface
 {
-    //[Authorize]
-    
+    [Authorize]
     public class RequestController : ApiController
     {
-        //RequestsWtihLinkedData rwld { get; set; }
-
         private TimetablingSystemContext _db = new TimetablingSystemContext();
 
         private NonSensitiveDepartment nsd = (new DeptModController()).GetAuthorisedDepartment();
@@ -98,7 +94,7 @@ namespace TimetablingSystem.DBInterface
 
             IEnumerable<request> requests =
                 from req in _db.requests.Include("roomsAlloc").Include("roomsPref").Include("facilities").Include("module")
-                where (req.status == 2 || req.status == 3)
+                where (req.status == 1 || req.status == 2)
                         && 
                         req.module.active == true
                         && 
@@ -131,7 +127,7 @@ namespace TimetablingSystem.DBInterface
 
             IEnumerable<request> requests =
                 from req in _db.requests.Include("roomsAlloc").Include("roomsPref").Include("facilities").Include("module")
-                where (req.status == 2 || req.status == 3)
+                where (req.status == 1 || req.status == 2)
                         && 
                         req.module.active == true
                         && 
@@ -151,9 +147,54 @@ namespace TimetablingSystem.DBInterface
 
         }
 
+        public List<RequestsWtihLinkedData> GetHistory()
+        {
+
+            SemRouController srAPI = new SemRouController();
+
+            IEnumerable<round> liveRounds = srAPI.GetLiveRoundSet();
+            List<int> liveRoundsID = new List<int>();
+
+            IEnumerable<round> adhocRounds = srAPI.GetAdHocRoundSet();
+            List<int> adhocRoundsID = new List<int>();
+
+            foreach (round rnd in liveRounds)
+            {
+                liveRoundsID.Add(rnd.id);
+            }
+
+            foreach (round rnd in adhocRounds)
+            {
+                adhocRoundsID.Add(rnd.id);
+            }
+
+            IEnumerable<request> requests =
+                from req in _db.requests.Include("roomsAlloc").Include("roomsPref").Include("facilities").Include("module")
+                where (req.status == 1 || req.status == 2)
+                        &&
+                        req.module.department.code == nsd.code
+                        &&
+                        !liveRoundsID.Contains(req.roundID)
+                        &&
+                        !adhocRoundsID.Contains(req.roundID)
+                select req;
+
+            List<RequestsWtihLinkedData> rwldList = new List<RequestsWtihLinkedData>();
+
+            foreach (request req in requests)
+            {
+                RequestsWtihLinkedData rwld = new RequestsWtihLinkedData(req);
+
+                rwldList.Add(rwld);
+            }
+
+            return rwldList;
+
+        }
 
 
-        private request SetupNewRequestObject(RequestsWtihLinkedData rwld)
+
+        private request SetupNewRequestObject(RequestsWtihLinkedData rwld, bool current)
         {
             request newRequest = new request();
 
@@ -165,7 +206,24 @@ namespace TimetablingSystem.DBInterface
             newRequest.moduleCode = selectedModule.code;
             newRequest.module = selectedModule;
 
-            round selectedRound = (new SemRouController()).GetLiveRound();
+            SemRouController srAPI = new SemRouController();
+
+            round selectedRound;
+            if (current) { 
+                
+                selectedRound = srAPI.GetLiveRound();
+
+                newRequest.status = rwld.status;
+
+            }
+            else
+            {
+
+                selectedRound = srAPI.GetAdHocRound();
+
+                newRequest.status = 1;
+
+            }
 
             newRequest.roundID = selectedRound.id;
 
@@ -178,8 +236,7 @@ namespace TimetablingSystem.DBInterface
             newRequest.parkPreference = rwld.parkPreference;
             newRequest.sessionType = rwld.sessionType;
             newRequest.numberOfRooms = rwld.numberOfRooms;
-            newRequest.otherRequirements = rwld.otherRequirements;
-            newRequest.status = rwld.status;
+            newRequest.otherRequirements = rwld.otherRequirements;         
             newRequest.traditional = rwld.traditional;
 
             foreach (var facData in rwld.facilities)
@@ -237,10 +294,6 @@ namespace TimetablingSystem.DBInterface
             currentReq.moduleCode = selectedModule.code;
             currentReq.module = selectedModule;
 
-            round selectedRound = (new SemRouController()).GetLiveRound();
-
-            currentReq.roundID = selectedRound.id;
-
             currentReq.priority = rwld.priority;
             currentReq.day = rwld.day;
             currentReq.startPeriod = rwld.startPeriod;
@@ -293,13 +346,35 @@ namespace TimetablingSystem.DBInterface
             return currentReq;
         }
         
+
         public HttpResponseMessage PostNewRequest(RequestsWtihLinkedData rwld)
         {
 
             if (ModelState.IsValid)
             {
                 
-                var newReq = SetupNewRequestObject(rwld);
+                var newReq = SetupNewRequestObject(rwld, true);
+
+                _db.requests.Add(newReq);
+
+                _db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, newReq);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = newReq.id }));
+                return response;
+
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+        }
+
+        public HttpResponseMessage PostNewAdHocRequest(RequestsWtihLinkedData rwld)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                var newReq = SetupNewRequestObject(rwld, false);
 
                 _db.requests.Add(newReq);
 

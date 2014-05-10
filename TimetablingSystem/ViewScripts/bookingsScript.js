@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    allModules = getAllModules();
+
     listViewFlag = true;
 
     requestsSet = getBookings();
@@ -53,6 +55,25 @@
 
 });
 
+function getAllModules() {
+
+    var mArray = [];
+
+    $.ajax({
+        url: "api/deptmod/GetAllModules",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        async: false,
+        success: function (results) {
+            mArray = setupModules(results);
+        }
+    });
+
+    return mArray;
+
+}
+
 function getBookings() {
 
     var requests = [];
@@ -64,7 +85,7 @@ function getBookings() {
         data: {},
         async: false,
         success: function (results) {
-            requests = translateJsonRequest(results);
+            requests = translateJsonRequestOtherDepartments(results, allModules);
         }
     });
 
@@ -83,7 +104,7 @@ function getAdHocBookings() {
         data: {},
         async: false,
         success: function (results) {
-            requests = translateJsonRequest(results);
+            requests = translateJsonRequestOtherDepartments(results, allModules);
         }
     });
 

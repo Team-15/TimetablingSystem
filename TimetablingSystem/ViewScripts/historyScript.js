@@ -20,7 +20,7 @@ function getHistory() {
     var requests = [];
 
     $.ajax({
-        url: "api/request/GetResults",
+        url: "api/request/GetHistory",
         type: "GET",
         datatype: "JSON",
         data: {},
