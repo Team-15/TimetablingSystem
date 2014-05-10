@@ -1,26 +1,30 @@
 ﻿@{
     ViewBag.Title = "Settings";
 }
-
+@Styles.Render("~/Content/settingsCSS")
 
 <html>
 
 
 <body>
+    <div><h3>Module List</h3></div>
     <div id="tablediv"></div>
     <br>
+    <button class="button" id="saveChanges" type="button">Save Changes</button>
     <br>
-    <div>
+    <div id="addDiv">
         <h3>Add New Module</h3>
         Module code<input id="code" type="text"></input>
         Module name<input id="name" type="text"></input>
-        <button id="addbutton" type="button">Submit</button>
+        <button class="button" id="addbutton" type="button">Submit</button>
     </div>
     <br>
-    <br>
-    <div>
+    <div id="passwordDiv">
         <h3>Password management</h3>
-        <button id="resetbutton" type="button">Change Password</button>
+        Old Password<input id="oldpass" type="text"></input>
+        New Password<input id="newpass" type="text"></input>
+        Confirm New Password<input id="newpass1" type="text"></input>
+        <button class="button" id="resetbutton" type="button">Change Password</button>
     </div>
 
 

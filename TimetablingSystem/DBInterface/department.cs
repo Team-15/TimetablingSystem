@@ -14,16 +14,9 @@ namespace TimetablingSystem.DBInterface
     
     public partial class department
     {
-        public department()
-        {
-            this.modules = new HashSet<module>();
-        }
-    
         public string code { get; set; }
         public string name { get; set; }
         public string salt { get; set; }
         public string hashedPassword { get; set; }
-    
-        public virtual ICollection<module> modules { get; set; }
     }
 }

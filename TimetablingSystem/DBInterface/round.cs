@@ -14,11 +14,6 @@ namespace TimetablingSystem.DBInterface
     
     public partial class round
     {
-        public round()
-        {
-            this.requests = new HashSet<request>();
-        }
-    
         public int id { get; set; }
         public byte roundNo { get; set; }
         public System.DateTime startTime { get; set; }
@@ -27,7 +22,6 @@ namespace TimetablingSystem.DBInterface
         public bool live { get; set; }
         public int semesterID { get; set; }
     
-        public virtual ICollection<request> requests { get; set; }
-        public virtual semester semester { get; set; }
+        public virtual semester semester { internal get; set; }
     }
 }

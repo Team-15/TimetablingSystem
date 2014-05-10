@@ -14,16 +14,9 @@ namespace TimetablingSystem.DBInterface
     
     public partial class semester
     {
-        public semester()
-        {
-            this.rounds = new HashSet<round>();
-        }
-    
         public int id { get; set; }
         public string year { get; set; }
         public byte semesterNumber { get; set; }
         public byte numberOfWeeks { get; set; }
-    
-        public virtual ICollection<round> rounds { get; set; }
     }
 }

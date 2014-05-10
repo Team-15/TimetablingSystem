@@ -169,33 +169,42 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DBInterface\APIs\BuilRoomFacController.cs" />
+    <Compile Include="DBInterface\APIs\RequestController.cs" />
+    <Compile Include="DBInterface\APIs\SemRouController.cs" />
     <Compile Include="DBInterface\building.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBInterface\DBTestController.cs" />
+    <Compile Include="DBInterface\APIs\DBTestController.cs" />
+    <Compile Include="DBInterface\BuildingsWithRooms.cs" />
     <Compile Include="DBInterface\department.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBInterface\DeptModController.cs" />
+    <Compile Include="DBInterface\APIs\DeptModController.cs" />
     <Compile Include="DBInterface\facility.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBInterface\module.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\NonSensitiveDepartment.cs" />
     <Compile Include="DBInterface\request.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\RequestsWtihLinkedData.cs" />
     <Compile Include="DBInterface\room.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\RoomsWithFacilities.cs" />
     <Compile Include="DBInterface\round.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBInterface\semester.cs">
       <DependentUpon>TimetablingSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBInterface\APIs\TestDeptController.cs" />
     <Compile Include="DBInterface\TimetablingSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,11 +227,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\addRequestStyle.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\displayStyle.css" />
+    <Content Include="Content\listDisplayStyle.css" />
+    <Content Include="Content\loginLogoutStyle.css" />
     <Content Include="Content\parentStyle.css" />
+    <Content Include="Content\settingsStyle.css" />
+    <Content Include="Content\test2Style.css" />
+    <Content Include="Content\test3Style.css" />
+    <Content Include="Content\testStyle.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -277,6 +294,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\graphicalDisplayStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,8 +316,13 @@
       <LastGenOutput>TimetablingSystemModel.cs</LastGenOutput>
     </Content>
     <Content Include="Images\LboroLogo.png" />
+    <Content Include="JS\dataManager.js" />
+    <Content Include="JS\filteringEngine.js" />
     <Content Include="JS\globalConstants.js" />
+    <Content Include="JS\globalFunctions.js" />
+    <Content Include="JS\graphicalGenerator.js" />
     <Content Include="JS\instanceData.js" />
+    <Content Include="JS\listGenerator.js" />
     <Content Include="JS\testA.js" />
     <Content Include="JS\objectDataTypes.js" />
     <Content Include="JS\weeksManipulator.js" />
@@ -327,9 +350,16 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="ViewScripts\addRequestsScript.js" />
+    <Content Include="ViewScripts\bookingsScript.js" />
+    <Content Include="ViewScripts\historyScript.js" />
     <Content Include="ViewScripts\logoutScript.js" />
     <Content Include="ViewScripts\parentScript.js" />
+    <Content Include="ViewScripts\requestsScript.js" />
+    <Content Include="ViewScripts\resultsScript.js" />
     <Content Include="ViewScripts\settingsScript.js" />
+    <Content Include="ViewScripts\test2Script.js" />
+    <Content Include="ViewScripts\test3Script.js" />
+    <Content Include="ViewScripts\testScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -365,11 +395,13 @@
     <Content Include="Views\Display\Requests.cshtml" />
     <Content Include="Views\Display\Results.cshtml" />
     <Content Include="Views\Display\History.cshtml" />
-    <Content Include="Views\Display\AllBookings.cshtml" />
-    <Content Include="Views\Display\MyBookings.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Shared\_AuthorizeView.cshtml" />
     <Content Include="Views\User\LogOut.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
+    <Content Include="Views\Test\Test2.cshtml" />
+    <Content Include="Views\Test\Test3.cshtml" />
+    <Content Include="Views\Display\Bookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

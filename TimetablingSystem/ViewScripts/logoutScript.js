@@ -1,8 +1,8 @@
 ﻿$(document).ready(function(){
-
+    
     setInterval(function () {
 
-        window.location = "/";
+        window.location = $("#loginLink").attr("href");
 
     }, 4000);
     

@@ -1,24 +1,40 @@
 ﻿var modulesArray = null;
+var oldpass1 = "";
+var newpass = "";
+var newpass1 = "";
+
 
 $(document).ready(function () {
 
-    modulesArray = setupDummyModules();
+    editedModules = [];
+    deleteModules = [];
 
+
+    modulesArray = departmentModules;
+ 
     table();
 
-    
-    
+    $("#saveChanges").click(function () {
+        alert(JSON.stringify(editedModules));
+        alert(JSON.stringify(deleteModules));
+    });
 
-    /*
     $("#addbutton").click(function () {
-        add();
+        var codeL = $("#code").val().length;
+        var nameL = $("#name").val().length;
+        if (codeL != 0 && nameL != 0) {
+            add();
+        }
+        else {
+            alert("Please enter a code and a name for the new module")
+        }
     });
 
     $("#resetbutton").click(function () {
         reset();
     });
 
-    */
+
 
 });
 
@@ -52,7 +68,6 @@ function setupDummyModules() {
     module3.deptCode = "CO";
     module3.active = true;
 
-    alert("Done");
     return [module0, module1, module2, module3];
     
 }
@@ -64,7 +79,7 @@ function setupDummyModules() {
 
 function table() {
     var tbl = "";
-    tbl += '<table border="1">';
+    tbl += '<table id="moduleTable" border="1">';
 
     for (var i = 0; i < modulesArray.length; i++) {
         tbl += '<tr>';
@@ -72,55 +87,71 @@ function table() {
         tbl += '<td>';
         tbl += modulesArray[i].code;
         tbl += '</td>'
-        tbl += '<td>';
+        tbl += '<td class="tdTitle">';
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id="edit'+i+'" type="button">edit</button>'
+        tbl += '<button class="button" id="edit'+i+'" value="'+modulesArray[i].code+'" type="button">Edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button id="delete'+i+'" type="button">delete</button>'
+        tbl += '<button class="button" id="delete' + i + '" value="' + modulesArray[i].code + '" type="button">Delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
     }
     tbl += '</table>';
+    tbl+= 
     document.getElementById('tablediv').innerHTML = tbl;
     setupDelete();
     setupEdit();
 }
 
-/*
+
 function add() {
 
     var newModule = new Module();
-    newModule.code = $("#code").val;
-    newModule.title = $("#name").val;
+    newModule.code = $('#code').val();
+    newModule.title = $('#name').val();
 
     modulesArray.push(newModule);
 
+    document.getElementById("code").value = "";
+    document.getElementById("name").value = "";
+
     table();
-}
-*/
-function remove(index) {
-    modulesArray.splice(index, 1);
-    alert("hello");
-    table();
+
 }
 
-function edit(index) {
-    modulesArray[index].code = window.prompt("Please enter the new Code", modulesArray[index].code);
-    modulesArray[index].title = window.prompt("Please enter the new Title", modulesArray[index].title);
+function remove(index, mCode) {
+    deleteModules.push({
+        deleteCode: mCode
+    });
+    modulesArray.splice(index, 1);
     table();
+
 }
+
+function edit(index, mCode) {
+    var tempCode = window.prompt("Please enter the new Code", modulesArray[index].code);
+
+    if (tempCode != null) modulesArray[index].code = tempCode;
+
+    var tempTitle = window.prompt("Please enter the new Title", modulesArray[index].title);
+
+    if (tempTitle != null) modulesArray[index].title = tempTitle;
+    table();
+    editedModules.push({
+        originalCode: mCode,
+        newCode: modulesArray[index].code,
+        newTitle: modulesArray[index].title
+    });
+}
+
+
 
 
 
 /*
-var newpass = "";
-var newpass1 = "";
-var pass = "";
-
 function reset1() {
     newpass = window.prompt("Please enter your new password");
     newpass1 = window.prompt("Please confirm your new password");
@@ -135,21 +166,30 @@ function reset1() {
         pass = newpass
     }
 }
-
+*/
 
 function reset() {
-    var oldpass = window.prompt("Please enter your old password");
-    if (oldpass != "oldpass") {
+    oldpass1 = $('#oldpass').val();;
+    newpass = $('#newpass').val();
+    newpass1 = $('#newpass1').val()
+
+    if (oldpass1 != "oldpass") {
         alert("Incorrect Password, Please try again");
-        reset();
     }
     else {
-        reset1();
+        if (newpass.length != 0 && newpass1 != 0) {
+            if (newpass == newpass1) {
+                alert("Password has been changed");
+            }
+            else {
+                alert("Passwords do not match")
+            }
+        }
+        else { alert("Please enter your new password")}
     }
 
 }
 
-*/
 
 
 function setupDelete() {
@@ -157,7 +197,7 @@ function setupDelete() {
         $("#delete" + i).data("index", i);
         $("#delete" + i).click(function () {
             
-            remove($(this).data("index"));
+            remove($(this).data("index"),$(this).val());
         });
     }
 }
@@ -166,8 +206,7 @@ function setupEdit() {
     for (var i = 0; i < modulesArray.length; i++) {
         $("#edit" + i).data("index", i);
         $("#edit" + i).click(function () {
-            alert($(this).data("index"));
-            edit($(this).data("index"));
+            edit($(this).data("index"),$(this).val());
         });
     }
 }

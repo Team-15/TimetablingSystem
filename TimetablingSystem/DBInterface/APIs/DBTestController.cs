@@ -20,7 +20,7 @@ namespace TimetablingSystem.DBInterface
         public ActionResult Index()
         {
             
-
+            
             var moduleQuery =
                     from mRes in _db.modules
                     //where mRes.deptCode == "CO"
@@ -34,7 +34,7 @@ namespace TimetablingSystem.DBInterface
                     title = x.title,
                     deptCode = x.deptCode,
                     active = x.active
-                }), JsonRequestBehavior.AllowGet);
+                }), JsonRequestBehavior.DenyGet);
 
         }
 

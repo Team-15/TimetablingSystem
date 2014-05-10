@@ -2,4 +2,24 @@
     ViewBag.Title = "History";
 }
 
-<h2>History</h2>
+<div class="filtersContainer">
+    <div class="filterGroup">
+        <div><input type="radio" name="timeRadio" value="time" checked /> Time </div>
+        <div><input type="radio" name="timeRadio" value="periods" /> Periods </div>
+    </div>
+</div>
+
+<div id="displaysContainer">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@Scripts.Render("~/bundles/history")

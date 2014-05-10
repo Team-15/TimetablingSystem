@@ -31,18 +31,8 @@ namespace TimetablingSystem.Controllers
             return View();
         }
 
-        public ActionResult MyBookings()
+        public ActionResult Bookings()
         {
-            ViewBag.Message = "Your requests page.";
-
-            if (Request.IsAjaxRequest()) return PartialView();
-
-            return View();
-        }
-
-        public ActionResult AllBookings()
-        {
-            ViewBag.Message = "Your requests page.";
 
             if (Request.IsAjaxRequest()) return PartialView();
 

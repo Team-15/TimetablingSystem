@@ -1,14 +1,15 @@
 ﻿body {
     min-width: 960px;
     margin: 0px;
+    overflow-y: scroll;
 }
 
 #mainWrapper {
     width:960px;
 
-    position:absolute;
+    
     top:0px;
-    left:calc(50% - 480px);
+    margin: 0 auto;
 }
 
 .headerWrapper {
@@ -45,4 +46,8 @@
 #navSection ul li a:hover {
     color: #fff;
     background-color: #369;
+}
+
+#contentDiv {
+    padding:5px;
 }

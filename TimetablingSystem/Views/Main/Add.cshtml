@@ -1,24 +1,46 @@
 ﻿@{
     ViewBag.Title = "Add";
 }
+@Styles.Render("~/Content/addRequestStyle.css")
 
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-4">
+  <div class="col-md-6">
+        Ad-hoc<input id='adhoc' type='checkbox'><br>
+        <div id="moduleBox">
+            Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="moduleSelector(this)"></select><br>
+            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select><br><br>
+        </div>
         <div id="propertiesBox">
-            Module title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="ModuleSelector(this)"></select><br>
-            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="ModuleSelector(this)"></select>
-        </div>
+            
+        </div><br>
         <div id="weekSelect">
-        </div>
+        </div><br>
         <div id="weekTable">
-        </div>
+        </div><br>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
+    <div id="buildingList">  
+    </div>
+    Rooms fitting your criteria:
     <div id="roomList">
     </div>
+    <br>
+    <input class="btn btn-primary" type='button' value='clear selection' onclick='clearRoomSel()'>
+    <br><br>Chosen rooms: <br>
+      <div id="chosenRoomsList">
+    </div>
+        <input class="btn btn-primary" type='button' value='clear selection' onclick=''>
   </div>
-  <div class="col-md-2"></div>
+</div>
+<br>
+<input class="btn btn-primary" type='button' value='save request' onclick='timeAndDay()'>
+<input class="btn btn-primary" type='button' value='save request and add another' onclick='timeAndDay()'>
+<input class="btn btn-primary" type='button' value='clear form' onclick=''>
+
+<div class="btn-group" data-toggle="buttons-checkbox">
+  <button type="button" class="btn btn-primary">Left</button>
+  <button type="button" class="btn btn-primary">Middle</button>
+  <button type="button" class="btn btn-primary">Right</button>
 </div>
 
 @Scripts.Render("~/bundles/addRequests")

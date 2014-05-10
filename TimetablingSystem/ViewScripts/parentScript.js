@@ -33,4 +33,21 @@
     alert(weeksReadableFormat(x));
     */
 
+    //getStuff();
+    loadInstaceData();
+
 });
+
+function getStuff() {
+    
+    $.ajax({
+        url: "api/BuilRoomFac/GetBuildingsWithRoom",
+        type: "GET",
+        datatype: "JSON",
+        data: {},
+        success: function (results) {
+            alert(JSON.stringify(results));
+        }
+    });
+
+}

@@ -1,0 +1,243 @@
+﻿#listContainer {
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 950px;
+
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+
+
+}
+
+
+.headerContainer {
+
+    top: 150px;
+    width: 940px;
+
+    background: lavender;
+
+    z-index: 2;
+
+}
+
+.headerTable {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:2px;
+    margin-right:3px;
+
+    empty-cells: show;
+
+    table-layout: fixed;
+
+    border-collapse:separate;
+	border-spacing: 2px 5px;
+
+}
+
+.headerTable td {
+
+    display: table-cell;
+    padding: 5px;
+
+    text-align: center;
+    font-weight: bold;
+
+    background: azure;
+
+    border: 1px solid lightgrey;
+
+}
+
+
+.requestContainerList {
+
+    margin-top:10px;
+
+}
+
+
+.checkboxLabel {
+    
+    display: inline;
+    cursor: pointer;
+
+    font-weight: normal;
+
+}
+
+.requestCheckbox {
+    visibility:hidden;
+    display: none;
+}
+
+.requestContainer {
+
+    max-height: 54px;
+    width: 940px;
+
+    margin-bottom: 10px;
+
+    overflow:hidden;
+
+    transition-property: max-height;
+    transition-duration: 1s;
+    transition-delay: 0.1s;
+    transition-timing-function: ease;
+
+    border: 1px solid lightgrey;
+
+}
+
+.requestContainer:hover {
+
+    max-height: 175px;
+
+}
+
+.requestContainer:active {
+
+    transition-delay: 0s;
+
+}
+
+.checkboxLabel input[type=checkbox]:checked~.requestContainer{
+	max-height: 405px;
+    transition-delay: 0s;
+}
+
+
+.requestHeader {
+    display: flex;
+    background: aliceblue;
+}
+
+.mainTable, .btnTable{
+
+    align-self: center;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:2px;
+    margin-right:3px;
+
+    empty-cells: show;
+
+    table-layout: fixed;
+
+    user-select: none;
+
+    border-collapse:separate;
+	border-spacing: 2px 5px;
+
+}
+
+.mainTable {
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+.mainTable td {
+
+    display: table-cell;
+    padding: 5px;
+
+    text-align: center;
+
+    background: azure;
+
+    border: 1px solid lightgrey;
+
+}
+
+.titleTD {
+
+    font-weight: bold;
+
+}
+
+.requestBtn {
+    
+    padding: 0px !important;
+
+    border: none !important;
+}
+
+
+.requestDetails {
+
+    background: lightblue;
+    
+    overflow: hidden;
+
+}
+
+
+.detailsTable {
+
+    width: 940px;
+
+    table-layout: fixed;
+
+    border-collapse:separate;
+	border-spacing: 2px 5px;
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+.detailsTable td {
+
+    display: table-cell;
+    padding: 5px;
+
+    text-align: center;
+
+    background: azure;
+
+    border: 1px solid transparent;
+
+}
+
+.detailsTable [class="hiddenTD"]{
+    
+    height:0px;
+    width: 115px;
+
+    padding: 0px;
+    
+	border-top: none;
+	border-bottom: none;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+
+}
+
+.scrollableDetail {
+    
+    max-height: 100px;
+
+    word-wrap: break-word;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}

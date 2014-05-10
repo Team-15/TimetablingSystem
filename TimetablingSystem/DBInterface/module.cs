@@ -14,17 +14,11 @@ namespace TimetablingSystem.DBInterface
     
     public partial class module
     {
-        public module()
-        {
-            this.requests = new HashSet<request>();
-        }
-    
         public string code { get; set; }
         public string title { get; set; }
         public string deptCode { get; set; }
         public bool active { get; set; }
     
-        public virtual department department { get; set; }
-        public virtual ICollection<request> requests { get; set; }
+        public virtual department department { internal get; set; }
     }
 }
