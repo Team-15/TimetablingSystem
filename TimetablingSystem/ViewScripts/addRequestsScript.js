@@ -447,7 +447,6 @@ function removeCheckedRoom(checkbox) {
 //loads in request details for duplicate or edit option
 function loadInRequest() {
     newRequest = temporaryRequestStore;
-
     for (var k = 0; k < newRequest.facilities.length; k++) {
         $("#" + newRequest.facilities[k]).attr('checked', true);
     }
@@ -464,6 +463,7 @@ function loadInRequest() {
     $("#ORE").val(newRequest.otherReqs);
     $('#PRK').prop('selectedIndex', newRequest.park);
     if (editRequestFlag == true) {
+        $("#submitForm").val("update request");
         $("#NOR").val(newRequest.noOfRooms);
         if (newRequest.priority == true) {
             $('#PRT').attr('checked', true);
