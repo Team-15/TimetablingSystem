@@ -19,7 +19,6 @@ function createObjects() {
 
 //creates the week selection row
 function weekCreator() {
-    numberOfWeeks = 15; //temp set
     var tempStr = "";
     tempStr += "<table class = ''><tr><td>Weeks: ";
     for (var i = 0; i < numberOfWeeks; i++) {
@@ -192,11 +191,12 @@ function checkedRoomList(checkbox) {
 
         $('#chosenRoomsList').append(tempStr);
         newRequest.rooms.push(pushID);
-    } else //if ($(checkbox).is(":not(:checked)"))
+    } else if ($(checkbox).is(":not(:checked)"))
     {
         newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
+    console.log(newRequest.rooms);
 }
 
 //stores all the non-facility requirements in the request object
@@ -304,10 +304,7 @@ function timeAndDay() {
         }
 
     }
-
-    alert(JSON.stringify(dayPeriodBlock));
     multiRequestGen(dayPeriodBlock);
-
 }
 
 //second level sorter
@@ -326,6 +323,7 @@ function secondSorter(arrayToSort) {
 }
 
 //duplicates newRequest to number needed for day/time grid
+//passes it to the request or ad-hoc request
 function multiRequestGen(timeDayArray) {
     for (var i = 0; i < timeDayArray.length; i++) {
         singleRequest = newRequest;
@@ -333,7 +331,11 @@ function multiRequestGen(timeDayArray) {
         singleRequest.startPeriod = timeDayArray[i].start;
         singleRequest.endPeriod = timeDayArray[i].end;
         var temp = setupDBRequestModel(singleRequest);
-        addCurrentRequest(temp);
+        if ($('#adhoc').prop('checked', true)) {
+            addAdHocRequest(temp);
+        } else {
+            addCurrentRequest(temp);
+        }
     }
 }
 
@@ -360,6 +362,33 @@ function addCurrentRequest(jsonData) {
             alert(JSON.stringify(results));
         },
         url: "api/request/PostNewRequest",
+        processData: false
+    });
+
+}
+
+function addAdHocRequest(jsonData) {
+
+    alert(JSON.stringify(jsonData));
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify(jsonData),
+        async: false,
+        success: function (results) {
+            alert("request submission successful");
+            alert(results);
+        },
+        error: function (results) {
+            alert("request submission failed");
+            alert(JSON.stringify(results));
+        },
+        url: "api/request/PostNewAdHocRequest",
         processData: false
     });
 
