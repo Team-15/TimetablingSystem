@@ -194,8 +194,7 @@ function checkedRoomList(checkbox) {
         newRequest.rooms.push(pushID);
     } else //if ($(checkbox).is(":not(:checked)"))
     {
-        alert(JSON.stringify(newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1)));
-        newRequest.rooms = newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
+        newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
 }
