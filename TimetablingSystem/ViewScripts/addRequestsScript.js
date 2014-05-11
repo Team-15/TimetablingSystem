@@ -75,14 +75,12 @@ function tableCreator() {
 function setGridWeek(whichDay) {
     i = daysArray.indexOf($(whichDay).val());
     if ($(whichDay).is(":checked")) {
-        console.log("tick");
         for (var j = 0; j < periodsArray.length; j++) {
-            $("#gridCheck-" + i + j).attr('checked', true);
+            $("#gridCheck-" + i + j).prop('checked', true);
         }
     } else {
-        console.log("untick");
         for (var j = 0; j < periodsArray.length; j++) {
-            $("#gridCheck-" + i + j).attr('checked', false);
+            $("#gridCheck-" + i + j).prop('checked', false);
         }
     }
 }
