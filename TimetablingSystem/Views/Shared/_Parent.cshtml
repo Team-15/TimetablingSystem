@@ -26,21 +26,21 @@
         <nav id="navSection">
             <ul id="menuLinks">
                 <li>@Html.ActionLink("Home", "Home", "Main")</li>
-                <li>@Html.ActionLink("Add", "Add", "Main")</li>
+                <li>@Html.ActionLink("Add", "Add", "Main", null, new {id = "addPageBtn" })</li>
                 <li>@Html.ActionLink("Requests", "Requests", "Display")</li>
                 <li>@Html.ActionLink("Results", "Results", "Display")</li>
                 <li>@Html.ActionLink("Bookings", "Bookings", "Display")</li>
                 <li>@Html.ActionLink("History", "History", "Display")</li>
                 <li>@Html.ActionLink("Settings", "Settings", "Main")</li>
-                
-
+                <li><div id="progressbar"></div>40 day left until Round Ends </li>
+                @*
                 <li>@Html.ActionLink("Test1", "Test", "Test")</li>
                 <li>@Html.ActionLink("Test2", "Test2", "Test")</li>
-                <li>@Html.ActionLink("Test3", "Test3", "Test")</li>
+                <li>@Html.ActionLink("Test3", "Test3", "Test")</li>*@
             </ul>
         </nav>
         
-            <div id="progressbar"></div>
+            @*<div id="progressbar"></div>*@
 
 
         <div id="contentDiv">

@@ -33,7 +33,8 @@
 }
 
 #navSection ul li {
-    display: inline;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #navSection ul li a {
@@ -53,11 +54,17 @@
 }
 
 #progressbar {
-    
-    border: 1px solid lightgrey;
-    margin: 5px;
-    border-radius: 7px;
+
     height: 20px !important;
+    width: 200px;
+
+    margin: 2px;
+    margin-top: 7px;
+    margin-left: 20px;
+    
+    border-radius: 7px;
+    border: 1px solid lightgrey;
+    
 }
 
 .ui-progressbar.beginning .ui-progressbar-value { background: green; }
