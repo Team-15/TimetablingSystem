@@ -56,7 +56,7 @@ function tableCreator() {
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td class='gridHeader'><input style='display:none' type='checkbox' value='" + shortDaysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label for='gridHeader" + i + "' class='btn btn-default'> " + shortDaysArray[i] + "</label></td>";
+        tempStr += "<tr> <td class='gridHeader'><input style='display:none' type='checkbox' value='" + daysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label for='gridHeader" + i + "' class='btn btn-default'> " + daysArray[i] + "</label></td>";
         for (var j = 0; j < 9; j++) {
             tempStr += "<td class='gridWeek'><input style='display:none' type='checkbox' id=gridCheck-" + i + j + "></input><label for='gridCheck-" + i + j +"' class='btn btn-default'></label><div class='gridBox'></div></td>";
         }
@@ -68,7 +68,7 @@ function tableCreator() {
 }
 
 function setGridWeek(whichDay) {
-    i = shortDaysArray.indexOf($(whichDay).val());
+    i = daysArray.indexOf($(whichDay).val());
     if ($(whichDay).is(":checked")) {
         console.log("tick");
         for (var j = 0; j < periodsArray.length; j++) {
