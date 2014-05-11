@@ -55,7 +55,7 @@ function timePeriodToggle() {
 //creates period grid selector
 function tableCreator() {
     var tempStr = "";
-    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'><input id='timePeriodCheck' style='display:none' type='checkbox' onclick='timePeriodToggle()'><label for='timePeriodCheck' class='btn btn-default'>Times / Periods</label><input id='clearGrid' class='btn btn-default' type='button' value='clear table' onclick='clearTableGrid()'></th><tr>";
+    tempStr += "<table class = 'table-bordered' width='100%'><tr><th rowspan='2'>Day</th><th colspan='9'><input id='timePeriodCheck' style='display:none' type='checkbox' onclick='timePeriodToggle()'><label for='timePeriodCheck' class='btn btn-default'>Times / Periods</label><input id='clearGrid' class='btn btn-default' type='button' value='clear table' onclick='clearTableGrid()'></th><tr>";
     for (var h = 0; h < periodsArray.length; h++) {
         tempStr += "<th class = gridHeader><div id='TP-" + h + "'>" + timeDisplayArray[h] + "</div></th>";
     }
@@ -111,7 +111,7 @@ function modulePopulate() {
 //inserts facilities and requirements
 function facilityPopulate() {
     var tempStr = "";
-    tempStr += "<table class='table reqTable'><tr>";
+    tempStr += "<table class='table reqTable table-condensed'><tr>";
     for (var i = 0; i < facArray.length; i++) {
         tempStr += "<td><input style='display:none' type='checkbox' class='specReq' id='" + facArray[i].id + "' onchange='facilityStore(this)'><label class='btn btn-default' for='" + facArray[i].id + "'>" + facArray[i].name + "</label></td>";
         if (i % 2 != 0) {
