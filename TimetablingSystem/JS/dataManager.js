@@ -153,7 +153,7 @@ function setupDBRequestModel(request) {
 
     var jsonRequestData =
     {
-        id: 0,
+        id: request.id,
         moduleCode: request.module.code,
         deptCode: request.module.deptCode,
         priority: request.priority,

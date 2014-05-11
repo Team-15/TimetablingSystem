@@ -44,13 +44,13 @@
 
     requestsSet = testRequestList();
 
-    addAdHocRequest(setupDBRequestModel(requestsSet[0]));
+    updateRequest(setupDBRequestModel(requestsSet[0]));
 
     //listViewGenerator2(requestsSet);
 
 });
 
-function addAdHocRequest(jsonData) {
+function updateRequest(jsonData) {
 
     alert(JSON.stringify(jsonData));
 
@@ -71,7 +71,7 @@ function addAdHocRequest(jsonData) {
             alert("request submission failed");
             alert(JSON.stringify(results));
         },
-        url: "api/request/PostNewAdHocRequest",
+        url: "api/request/PostUpdateRequest",
         processData: false
     });
 
@@ -287,27 +287,27 @@ function testRequestList() {
 
     testReq.round = roundID;
 
-    testReq.id = "1234";
+    testReq.id = 116;
     testReq.module = module1;
 
-    testReq.priority = true;
+    testReq.priority = false;
 
-    testReq.day = 2;
-    testReq.startPeriod = 2;
-    testReq.endPeriod = 3;
-    testReq.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false];
+    testReq.day = 4;
+    testReq.startPeriod = 5;
+    testReq.endPeriod = 7;
+    testReq.weeks = [true, false, true, true, true, false, true, true, true, true, true, true, false, false, false];
 
-    testReq.students = 100;
+    testReq.students = 75;
     testReq.park = 2;
     testReq.traditional = true;
-    testReq.sessionType = 0;
+    testReq.sessionType = 1;
     testReq.noOfRooms = 1;
     testReq.rooms = ["J.0.01", "J.0.02"];
 
     testReq.status = null;
 
     testReq.facilities = [1, 2];
-    testReq.otherReqs = "test other reqs";
+    testReq.otherReqs = null;
 
     testReq.allocatedRooms = ["J.0.02"];
 

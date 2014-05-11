@@ -278,14 +278,9 @@ namespace TimetablingSystem.DBInterface
             return newRequest;
         }
 
-        private request UpdateRequestObject(RequestsWtihLinkedData rwld)
+        private request UpdateRequestObject(RequestsWtihLinkedData rwld, request currentReq)
         {
             
-            request currentReq =
-                    (from req in _db.requests
-                     where req.id == rwld.id
-                     select req).FirstOrDefault();
-
             module selectedModule =
                 (from mod in _db.modules
                  where mod.code == rwld.moduleCode
@@ -307,6 +302,7 @@ namespace TimetablingSystem.DBInterface
             currentReq.status = rwld.status;
             currentReq.traditional = rwld.traditional;
 
+
             foreach (var facData in rwld.facilities)
             {
 
@@ -318,6 +314,7 @@ namespace TimetablingSystem.DBInterface
                 currentReq.facilities.Add(selectedFacility);
 
             }
+
 
             foreach (var roomData in rwld.roomPref)
             {
@@ -331,19 +328,8 @@ namespace TimetablingSystem.DBInterface
 
             }
 
-            foreach (var roomData in rwld.roomAlloc)
-            {
-
-                room selectedRoom =
-                    (from rm in _db.rooms
-                     where rm.code == roomData.code
-                     select rm).FirstOrDefault();
-
-                currentReq.roomsAlloc.Add(selectedRoom);
-
-            }
-
             return currentReq;
+
         }
         
 
@@ -394,10 +380,20 @@ namespace TimetablingSystem.DBInterface
 
             if (ModelState.IsValid)
             {
+                request currentReq =
+                    (from req in _db.requests.Include("facilities").Include("roomsPref")
+                     where req.id == rwld.id
+                     select req).FirstOrDefault();
 
-                var updateReq = UpdateRequestObject(rwld);
+                currentReq.facilities.Clear();
 
-                _db.Entry(updateReq).State = EntityState.Modified;
+                currentReq.roomsPref.Clear();
+
+                _db.SaveChanges();
+
+                var updateReq = UpdateRequestObject(rwld, currentReq);
+
+                _db.Entry(currentReq).CurrentValues.SetValues(updateReq);
 
                 _db.SaveChanges();
 

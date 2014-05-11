@@ -28,7 +28,7 @@ function Facility() {
 function Request() {
 
     //Main fields (data required for all instances)
-    this.id = ""; //Number 
+    this.id = 0; //Number 
     this.module = new Module(); // One Module Object is stored - see module object (Above)
 
     this.priority = false; // Boolean
