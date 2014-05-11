@@ -44,14 +44,38 @@ function tableCreator() {
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td class='gridHeader'><input type='checkbox' id=gridHeader" + i + "'>" + shortDaysArray[i] + "</input></td>";
+        tempStr += "<tr> <td class='gridHeader'><input type='checkbox' value='" + shortDaysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' >" + shortDaysArray[i] + "</input></td>";
         for (var j = 0; j < 9; j++) {
             tempStr += "<td class='gridWeek'><input type='checkbox' id=gridCheck-" + i + j + ">no</input></td>";
         }
         tempStr += "</tr>";
     }
     tempStr += "</table>";
+    tempStr += "<input id='clearGrid' class='btn btn-primary' type='button' value='clear table' onclick='clearTableGrid()'>";
     $("#weekTable").append(tempStr);
+}
+
+function setGridWeek(whichDay) {
+    i = shortDaysArray.indexOf($(whichDay).val());
+
+    if ($(whichDay).is(":checked")) {
+        for (var j = 0; j < periodsArray.length; j++) {
+            $("#gridCheck-" + i + j).attr('checked', true);
+        }
+    } else {
+        for (var j = 0; j < periodsArray.length; j++) {
+            $("#gridCheck-" + i + j).attr('checked', false);
+        }
+    }
+}
+
+function clearTableGrid() {
+    for (var i = 0; i < daysArray.length; i++) {
+        for (var j = 0; j < periodsArray.length; j++) {
+            $("#gridCheck-" + i + j).attr('checked', false);
+        }
+        $("#gridHeader" + i).attr('checked', false);
+    }
 }
 
 //populate module titles and codes
@@ -76,7 +100,7 @@ function facilityPopulate() {
             tempStr += "</tr><tr>";
         }
     }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='50'></td></tr>";
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()'></td></tr>";
     tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
