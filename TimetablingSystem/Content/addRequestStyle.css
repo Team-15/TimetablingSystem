@@ -37,7 +37,8 @@ text-align:center;
 }
 #weekSelect
 {
-
+border:1px solid lightgrey;
+padding:5px;
 }
 
 #weekTable
