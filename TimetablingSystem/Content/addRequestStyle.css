@@ -32,6 +32,7 @@ border:1px solid lightgrey;
 #moduleBox
 {
 border:1px solid lightgrey;
+text-align:center;
 }
 #weekSelect
 {
@@ -56,18 +57,13 @@ border:1px solid lightgrey;
 }
     .btn-default:hover
     {
-        background-color:#3276b1;
+        background-color:rgb(143,0,79);
     }
-{
-  color: #fff;
-  background-color: rgb(71,51,103);
-  border-color: lightgrey;
-}
 
 input[type=checkbox]:checked + label {
-	background: #3276b1;
+	background: rgb(143,0,79);
 }
 
 input[type=radio]:checked + label {
-	background: #3276b1;
+	background: rgb(143,0,79);
 }
