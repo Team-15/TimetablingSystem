@@ -46,7 +46,7 @@ function tableCreator() {
     for (var i = 0; i < 5; i++) {
         tempStr += "<tr> <td class='gridHeader'><input type='checkbox' value='" + shortDaysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' >" + shortDaysArray[i] + "</input></td>";
         for (var j = 0; j < 9; j++) {
-            tempStr += "<td class='gridWeek'><input type='checkbox' id=gridCheck-" + i + j + ">no</input></td>";
+            tempStr += "<td class='gridWeek'><label class='gridLabel'><input type='checkbox' id=gridCheck-" + i + j + "></input><div class='gridBox'></div></label></td>";
         }
         tempStr += "</tr>";
     }
