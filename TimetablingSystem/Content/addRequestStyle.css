@@ -34,6 +34,7 @@ border:1px solid lightgrey;
 {
 border:1px solid lightgrey;
 text-align:center;
+border-bottom:none;
 }
 #weekSelect
 {
@@ -72,4 +73,10 @@ input[type=checkbox]:checked + label {
 
 input[type=radio]:checked + label {
 	background: #E657A6;
+}
+
+.form-control:focus
+{
+   
+    box-shadow: 0 1px 1px  rgba(71,51,103, 0.075) inset, 0 0 8px rgba(71,51,103, 0.6);
 }
