@@ -117,17 +117,17 @@ function facilityPopulate() {
         }
     }
 
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
-    tempStr += "<td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
-    tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
+    tempStr += "<tr><td>Number of students: <input class='form-control' type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
+    tempStr += "<td>Other requirements: <input class='form-control' type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
+    tempStr += "<tr><td>Park: <select class='form-control' id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='" + parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
-    tempStr += "<td>Room: type <select id='RMT' onchange='infoStore()' onclick='infoStore()'>";
+    tempStr += "<td>Room: type <select class='form-control' id='RMT' onchange='infoStore()' onclick='infoStore()'>";
     for (var k = 0; k < sessionTypesArray.length; k++) {
         tempStr += "<option value='" + sessionTypesArray[k] + "'>" + sessionTypesArray[k] + "</option>";
     }
-    tempStr += "</select> number <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "</select> number <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
 
     tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td>";
     tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
@@ -138,7 +138,7 @@ function facilityPopulate() {
 //creates building filter dropdown
 function buildingPopulate() {
     var existSizedRoom = false;
-    var tempStr = "Building filter: <select id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
+    var tempStr = "Building filter: <select class='form-control' id='buildingSelect' onchange='roomListPopulate()'><option id='buildingRadioAll' value='-1'>All buildings</option>";
     for (var i = 0; i < buildArray.length; i++) {
         existSizedRoom = false;
         for (var j = 0; j < buildArray[i].rooms.length; j++) {
