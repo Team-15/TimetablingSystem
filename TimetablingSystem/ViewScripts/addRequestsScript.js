@@ -17,7 +17,7 @@ function createObjects() {
     buildArray = buildingsWithRooms;
     //create new request for this instance
     newRequest = new Request();
-    newRequest.weeks = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    newRequest.weeks = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 }
 
 function clearForm() {
@@ -172,13 +172,15 @@ function roomListPopulate() {
             for (var i = 0; i < chosenBuilding.rooms.length; i++) {
 
                 var facAvail = true;
+                var rType = false;
 
                 for (var k = 0; k < newRequest.facilities.length; k++) {
                     if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
-                    if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
                 }
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-
+                if (chosenBuilding.rooms[i].type == newRequest.sessionType) {
+                    rType = true;
+                }
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail) && (rType)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
             }
         }
         //all buildings, specific park
@@ -189,18 +191,18 @@ function roomListPopulate() {
             var chosenBuilding = buildArray[j];
 
             for (var i = 0; i < chosenBuilding.rooms.length; i++) {
-
                 var facAvail = true;
+                var rType = false;
 
                 for (var k = 0; k < newRequest.facilities.length; k++) {
                     if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
-                    if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
                 }
-                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-
+                if (chosenBuilding.rooms[i].type == newRequest.sessionType) {
+                    rType = true;
+                }
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail) && (rType)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
             }
         }
-
         //specific building
     } else {
 
@@ -208,16 +210,17 @@ function roomListPopulate() {
 
         for (var i = 0; i < chosenBuilding.rooms.length; i++) {
             var facAvail = true;
+            var rType = false;
 
             for (var k = 0; k < newRequest.facilities.length; k++) {
                 if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
-                if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
+            }
+            if (chosenBuilding.rooms[i].type == newRequest.sessionType) {
+                rType = true;
             }
 
-            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
-
+            if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true) && (rType)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
         }
-
     }
     $('#roomList').empty();
     $('#roomList').append(tempStr);
