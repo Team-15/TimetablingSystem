@@ -129,7 +129,7 @@ function setupBuildingsWithRooms(buildingsData) {
             var room = new Room();
 
             room.code = roomsData[rCounter].code;
-            room.type = roomsData[rCounter].type;
+            room.type = roomsData[rCounter].roomType;
             room.capacity = roomsData[rCounter].capacity;
 
             var facilitiesData = roomsData[rCounter].facilities;
