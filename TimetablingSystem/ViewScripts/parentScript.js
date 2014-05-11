@@ -35,19 +35,25 @@
 
     //getStuff();
     loadInstaceData();
+    loadProgressBar();
 
 });
 
-function getStuff() {
+function loadProgressBar() {
     
-    $.ajax({
-        url: "api/BuilRoomFac/GetBuildingsWithRoom",
-        type: "GET",
-        datatype: "JSON",
-        data: {},
-        success: function (results) {
-            alert(JSON.stringify(results));
-        }
+
+    $("#progressbar").progressbar({
+
+        max: 100,
+
+        value: getCurrentRoundPercentage()
+
     });
+
+    $('#progressbar').height(15);
+
+    if ($("#progressbar").progressbar("value") < 60) $("#progressbar").addClass('beginning');
+    else if ($("#progressbar").progressbar("value") < 90) $("#progressbar").addClass('middle');
+    else $("#progressbar").addClass('end');
 
 }

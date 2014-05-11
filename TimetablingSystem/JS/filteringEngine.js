@@ -66,7 +66,11 @@ function performResetAndSetup() {
         selectedBuilding = this.value;
         buildingsFlag = $("#selectbuilding").find(":selected").data("buildingstate");
 
-        if (buildingsFlag == false) {
+
+        createRoomList(selectedBuilding);
+
+
+        if (!buildingsFlag) {
 
             $("#selectroom").val("All");
             $("#selectroom").prop("disabled", true);
@@ -76,22 +80,16 @@ function performResetAndSetup() {
         else $("#selectroom").prop("disabled", false);
 
 
-        createRoomList(selectedBuilding);
+        $('#selectroom').change();
+
 
         requestsSet = executeFilters();
 
         displayReloader();
 
-        $('#selectroom').change(function () {
+        
 
-            roomsFlag = $("#selectroom").find(":selected").data("roomstate");
-            selectedRoom = this.value;
-
-            requestsSet = executeFilters();
-
-            displayReloader();
-
-        });
+        
 
     });
 
@@ -132,8 +130,25 @@ function performResetAndSetup() {
     //View functions
     $("input[name=displayRadio]").change(function () {
 
-        if ($(this).val() === "list") displayViewFlag = true;
-        else displayViewFlag = false;
+        if ($(this).val() === "list") {
+
+            displayViewFlag = true;
+
+            $("#selectday").prop("disabled", false);
+
+        }
+        else {
+
+            displayViewFlag = false;
+            
+            $("#selectday").val("All");
+            $("#selectday").prop("disabled", true);
+
+        }
+        
+        $("#selectday").change();
+
+        requestsSet = executeFilters();
         
         displayReloader();
 
@@ -410,14 +425,25 @@ function createRoomList(index) {
     rooms += '<select id="selectroom">'
     rooms += '<option data-roomstate=false value="All">' + "All" + '</option>';
 
-    if (typeof index == "string") {
-        for (var j = 0; j < buildingList[index].rooms.length; j++) {
+    if (index !== "All") {
+        for (var j = 0; j < buildingList[parseInt(index)].rooms.length; j++) {
             rooms += '<option data-roomstate=true value="' + buildingList[index].rooms[j].code + '">' + buildingList[index].rooms[j].code + '</option>';
         }
     }
 
     rooms += '</select>';
     document.getElementById('roomslist').innerHTML = rooms;
+
+    $('#selectroom').change(function () {
+
+        roomsFlag = $("#selectroom").find(":selected").data("roomstate");
+        selectedRoom = this.value;
+
+        requestsSet = executeFilters();
+
+        displayReloader();
+
+    });
 
 }
 

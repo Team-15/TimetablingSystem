@@ -51,3 +51,15 @@
 #contentDiv {
     padding:5px;
 }
+
+#progressbar {
+    
+    border: 1px solid lightgrey;
+    margin: 5px;
+    border-radius: 7px;
+    height: 20px !important;
+}
+
+.ui-progressbar.beginning .ui-progressbar-value { background: green; }
+.ui-progressbar.middle .ui-progressbar-value { background: orange; }
+.ui-progressbar.end .ui-progressbar-value { background: red; }
