@@ -27,11 +27,11 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
     }
-    tempStr += "</td></tr><tr><td><input class='btn btn-primary' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
-    tempStr += "<input class='btn btn-primary' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
-    tempStr += "<input class='btn btn-primary' type='button' value='odd' onclick='setWeeks(-1)'>";
-    tempStr += "<input class='btn btn-primary' type='button' value='even' onclick='setWeeks(-2)'>";
-    tempStr += "<input class='btn btn-primary' type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
+    tempStr += "</td></tr><tr><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
+    tempStr += "<input class='btn btn-default' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
+    tempStr += "<input class='btn btn-default' type='button' value='odd' onclick='setWeeks(-1)'>";
+    tempStr += "<input class='btn btn-default' type='button' value='even' onclick='setWeeks(-2)'>";
+    tempStr += "<input class='btn btn-default' type='button' value='clear' onclick='setWeeks(0)'></td></tr>"
     $("#weekSelect").append(tempStr);
 }
 
@@ -157,7 +157,11 @@ function roomListPopulate() {
 
                 for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
 
+<<<<<<< HEAD
+                if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' onclick='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+=======
                 if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-primary'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
+>>>>>>> 7e82131a6bbf9d3c79d4060d20d70c7f926a6de6
                 
             }
         }
@@ -211,9 +215,16 @@ function checkedRoomList(checkbox) {
 
         tempStr += "<div id='divPicked-" +
             checkbox.id.split('.').join("") +
+<<<<<<< HEAD
+            "'><input style='display:none' type='checkbox' checked='true' id='picked-" +
+            checkbox.id + "' val ='" + checkbox.id + "' data-cap='" +
+            $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'><label for='picked-" +
+            checkbox.id + "' class='btn btn-default'></label>" +
+=======
             "'><input type='checkbox' checked='true' id='picked-" +
             checkbox.id + "' value ='" + checkbox.id + "' data-cap='" +
             $(checkbox).attr('data-cap') + "' onclick='removeCheckedRoom(this)'>" +
+>>>>>>> 7e82131a6bbf9d3c79d4060d20d70c7f926a6de6
             checkbox.id.split('.').join("") + " (capacity: " + $(checkbox).attr('data-cap') + ")</input></div>";
 
         $('#chosenRoomsList').append(tempStr);
