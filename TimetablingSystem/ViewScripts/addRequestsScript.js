@@ -100,7 +100,7 @@ function facilityPopulate() {
             tempStr += "</tr><tr>";
         }
     }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()'></td></tr>";
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='50'></td></tr>";
     tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='"+ parksArray[j] + "'>" + parksArray[j] + "</option>";
