@@ -1,0 +1,15 @@
+﻿#selectmod, #selectbuilding, #selectroom {
+
+    width: 200px;
+
+    margin: 5px;
+
+}
+
+#selectday, #selectweek, #selectstatus {
+
+    width: 100px;
+
+    margin: 5px;
+
+}

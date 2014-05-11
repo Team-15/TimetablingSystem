@@ -1,40 +1,13 @@
 ﻿$(document).ready(function () {
 
-    requestsSet = getRequests();
+    createStatusList(true);
+    performResetAndSetup();
 
-    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+    unfilteredRequests = getRequests();
 
-    generateListDisplay();
+    requestsSet = executeFilters();
 
-    $("input[name=displayRadio]").change(function () {
-
-        if ($(this).val() === "list") {
-
-            document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
-            generateListDisplay();
-
-        }
-        else {
-            document.getElementById("displaysContainer").innerHTML = "<div id='graphicalContainer'></div>";
-            generateGraphicalDisplay();
-        }
-
-    });
-
-    $("input[name=timeRadio]").change(function () {
-
-        if ($(this).val() === "time") {
-            toggleTimeHeader(true);
-            toggleTimeValue(true);
-        }
-        else {
-            toggleTimeHeader(false);
-            toggleTimeValue(false);
-        }
-
-    });
-
-    
+    displayReloader();
 
 });
 

@@ -1,17 +1,12 @@
 ﻿$(document).ready(function () {
 
-    requestsSet = getHistory();
+    performResetAndSetup();
 
-    document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+    unfilteredRequests = getHistory();
 
-    generateListDisplay();
+    requestsSet = executeFilters();
 
-    $("input[name=timeRadio]").change(function () {
-
-        if ($(this).val() === "time")  toggleTimeValue(true);
-        else toggleTimeValue(false);
-
-    });
+    displayReloader();
 
 });
 

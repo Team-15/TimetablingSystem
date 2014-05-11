@@ -1,7 +1,7 @@
 ﻿#graphicalContainer {
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     width: 950px;
     padding: 0;

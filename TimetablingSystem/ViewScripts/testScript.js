@@ -1,6 +1,22 @@
 ﻿$(document).ready(function () {
 
-    
+    modulesFlag = false; // List & Graphical
+    selectedModule = "";
+
+    buildingsFlag = false; //List and Graphical
+    selectedBuilding = "";
+
+    roomsFlag = false;
+    selectedRoom = "";
+
+    daysFlag = false; //List only
+    selectedDay = null;
+
+    weeksFlag = false; //List & Graphical
+    selectedWeek = null;
+
+    statusesFlag = false; //List and Graphical
+    selectedStatus = false;
 
     //Data and Array setup
     requestArray = [];
@@ -98,7 +114,7 @@
 });
 
 //Filter Flags
-
+/*
 var modulesFlag = false; // List & Graphical
 var selectedModule = "";
 
@@ -116,7 +132,7 @@ var selectedWeek = null;
 
 var statusesFlag = false; //List and Graphical
 var selectedStatus = false;
-
+*/
 function executeFilters() {
 
     /*

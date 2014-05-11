@@ -1,138 +1,183 @@
 ﻿$(document).ready(function () {
 
-
-
-    //Data and Array setup
-    requestArray = [];
-    moduleList = [];
-    buildingList = [];
-    dayList = [];
-
-    requestArray = testRequestList();
+    //List setups and Filter Generation
     moduleList = departmentModules;
     buildingList = buildingsWithRooms;
     dayList = daysArray;
 
-    //List setups
+    //Data and Array setup
+    unfilteredRequests = [];
+
+    modulesFlag = false;
+    selectedModule = "";
+
+    buildingsFlag = false;
+    selectedBuilding = "";
+
+    roomsFlag = false;
+    selectedRoom = "";
+
+    daysFlag = false;
+    selectedDay = null;
+
+    weeksFlag = false;
+    selectedWeek = null;
+
+    statusesFlag = false;
+    selectedStatus = false;
+
+    //Filtering by each view
+    timeViewFlag = true;
+    displayViewFlag = true;
+
+
+});
+
+function performResetAndSetup() {
+
+    //Reset for each page
+    modulesFlag = false;
+    buildingsFlag = false;
+    roomsFlag = false;
+    daysFlag = false;
+    weeksFlag = false;
+    statusesFlag = false;
+
+
     createModList();
     createBuildingList();
     createDaysList();
     createWeekList();
-    createStatusList();
-    createDepartmentList();
-    createStageList();
 
-
+    //Filtering Engine functions
     $("#selectmod").change(function () {
+
         selectedModule = this.value;
-        alert(selectedModule);
-
-        //Custom attribute uses to set flag true or false
-        //Repeat for other elements
-        //See your createModList and look for data-modulestate= attribute
         modulesFlag = $("#selectmod").find(":selected").data("modulestate");
-        alert(modulesFlag);
 
-        //Execute the filters at the end of every change.
-        //Don't worry about the other filters, that's what the Flags handle
-        executeFilters();
+        requestsSet = executeFilters();
+
+        displayReloader();
 
     });
 
     $("#selectbuilding").change(function () {
+
         selectedBuilding = this.value;
-        alert(selectedBuilding);
         buildingsFlag = $("#selectbuilding").find(":selected").data("buildingstate");
-        alert(buildingsFlag);
 
         if (buildingsFlag == false) {
+
+            $("#selectroom").val("All");
             $("#selectroom").prop("disabled", true);
             roomsFlag = false;
+
         }
         else $("#selectroom").prop("disabled", false);
 
 
         createRoomList(selectedBuilding);
-        executeFilters();
+
+        requestsSet = executeFilters();
+
+        displayReloader();
 
         $('#selectroom').change(function () {
 
             roomsFlag = $("#selectroom").find(":selected").data("roomstate");
             selectedRoom = this.value;
 
-            executeFilters();
+            requestsSet = executeFilters();
+
+            displayReloader();
 
         });
 
     });
 
-
     $("#selectday").change(function () {
+
         selectedDay = this.value;
-        alert(selectedDay);
         daysFlag = $("#selectday").find(":selected").data("daystate");
-        alert(daysFlag);
-        executeFilters();
+
+        requestsSet = executeFilters();
+
+        displayReloader();
 
     });
 
     $("#selectweek").change(function () {
+
         selectedWeek = this.value;
-        alert(selectedWeek);
         weeksFlag = $("#selectweek").find(":selected").data("weekstate");
-        alert(weeksFlag);
-        executeFilters();
+
+        requestsSet = executeFilters();
+
+        displayReloader();
 
     });
 
     $("#selectstatus").change(function () {
-        selectedStatus = this.value;
-        alert(selectedStatus);
-        statusesFlag = $("#selectstatus").find(":selected").data("statusstate");
-        alert(statusesFlag);
-        executeFilters();
 
+        selectedStatus = this.value;
+        statusesFlag = $("#selectstatus").find(":selected").data("statusstate");
+
+        requestsSet = executeFilters();
+
+        displayReloader();
 
     });
 
-});
 
-//Filter Flags
+    //View functions
+    $("input[name=displayRadio]").change(function () {
 
-var modulesFlag = false; // List & Graphical
-var selectedModule = "";
+        if ($(this).val() === "list") displayViewFlag = true;
+        else displayViewFlag = false;
+        
+        displayReloader();
 
-var buildingsFlag = false; //List and Graphical
-var selectedBuilding = "";
+    });
 
-var roomsFlag = false;
-var selectedRoom = "";
+    $("input[name=timeRadio]").change(function () {
 
-var daysFlag = false; //List only
-var selectedDay = null;
+        if ($(this).val() === "time") timeViewFlag = true;
+        else timeViewFlag = false;
 
-var weeksFlag = false; //List & Graphical
-var selectedWeek = null;
+        displayReloader();
 
-var statusesFlag = false; //List and Graphical
-var selectedStatus = false;
+    });
+
+}
+
+function displayReloader() {
+    
+    if (displayViewFlag) {
+
+        document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
+        generateListDisplay();
+
+    }
+    else {
+        document.getElementById("displaysContainer").innerHTML = "<div id='graphicalContainer'></div>";
+        generateGraphicalDisplay();
+    }
+
+    if (timeViewFlag) {
+        toggleTimeHeader(true);
+        toggleTimeValue(true);
+    }
+    else {
+        toggleTimeHeader(false);
+        toggleTimeValue(false);
+    }
+
+}
 
 function executeFilters() {
 
-    /*
-    Make a Copy of Original set of Requests, 
-    so that filtering can be redone if
-    any of the filtering values are changed
-    */
-    var filteringRequests = requestArray.slice(0);
+    var filteringRequests = unfilteredRequests.slice(0);
 
-    /*
-    Each IF statement filters the array and 
-    returns it to the same variable,
-    allowing the filtering to be controlled purely
-    by the flags - this is flag mechanism and filtering
-    control, Nathan :D
-    */
 
     if (modulesFlag) filteringRequests = moduleFilter(filteringRequests);
 
@@ -146,13 +191,14 @@ function executeFilters() {
 
     if (statusesFlag) filteringRequests = statusFilter(filteringRequests);
 
-    alert("Filtered Requests Array have:");
-    alert(JSON.stringify(filteringRequests));
+    //alert("Filtered Requests Array have:");
+    //alert(JSON.stringify(filteringRequests));
 
     //Return filtered array to be returned to list or graphical view generators
     return filteringRequests;
 
 }
+
 
 function moduleFilter(reqArray) {
 
@@ -166,13 +212,6 @@ function moduleFilter(reqArray) {
         }
 
     }
-
-    /*
-
-    Execulte Alogrithm here for filtering by modules.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects.
-    */
 
     return filteredRequests;
 
@@ -280,7 +319,7 @@ function dayFilter(reqArray) {
 
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
 
-        if (reqArray[reqCounter].day === selectedDay) {
+        if (reqArray[reqCounter].day === parseInt(selectedDay)) {
             filteredRequests.push(reqArray[reqCounter]);
         }
     }
@@ -306,25 +345,18 @@ function weekFilter(reqArray) {
 function statusFilter(reqArray) {
 
     var filteredRequests = [];
-    //filteredRequests = reqArray; //Temporary, get rid of this later
 
     for (var reqCounter = 0; reqCounter < reqArray.length; reqCounter++) {
-        if (reqArray[reqCounter].status == selectedStatus) {
-            filteredRequests.push(reqArray[reqCounter]);
-        }
+
+        if (reqArray[reqCounter].status == selectedStatus) filteredRequests.push(reqArray[reqCounter]);
 
     }
-
-
-    /*
-    Execulte Alogrithm here for filtering by statuses.
-    Use the variable underneath the flag declaration.
-    Must retrun an Array of Request Objects
-    */
 
     return filteredRequests;
 
 }
+
+
 
 
 
@@ -341,12 +373,11 @@ function createModList() {
     document.getElementById('modulelist').innerHTML = modlist;
 }
 
-
 function createBuildingList() {
     var building = "";
     var building1 = "";
 
-    building += 'building:';
+    building += 'Building:';
     building += '<select id="selectbuilding">'
     building += '<option data-buildingstate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < buildingList.length; i++) {
@@ -355,20 +386,27 @@ function createBuildingList() {
     }
 
     building += '</select>';
+
+    building1 += 'Rooms: ';
     building1 += '<select id="selectroom">'
     building1 += '<option value="All">' + "All" + '</option>';
 
     building1 += '</select>';
+
     document.getElementById('buildinglist').innerHTML = building;
     document.getElementById('roomslist').innerHTML = building1;
 
+    $("#selectroom").val("All");
+    $("#selectroom").prop("disabled", true);
+    roomsFlag = false;
 
 }
 
 function createRoomList(index) {
 
-
     var rooms = "";
+
+    rooms += 'Rooms: ';
     rooms += '<select id="selectroom">'
     rooms += '<option data-roomstate=false value="All">' + "All" + '</option>';
 
@@ -383,13 +421,11 @@ function createRoomList(index) {
 
 }
 
-
-
 function createDaysList() {
 
     var daylist = "";
 
-    daylist += 'day';
+    daylist += 'Day: ';
     daylist += '<select id="selectday">'
     daylist += '<option data-daystate=false value="All">' + "All" + '</option>';
     for (var i = 0; i < dayList.length; i++) {
@@ -400,12 +436,11 @@ function createDaysList() {
 
 }
 
-
 function createWeekList() {
 
     var weeklist = "";
 
-    weeklist += 'week';
+    weeklist += 'Week: ';
     weeklist += '<select id="selectweek">'
     weeklist += '<option data-weekstate=false value="All">' + "All" + '</option>';
     for (var i = 1; i <= 15/*(numberOfWeeks)*/; i++) {
@@ -417,211 +452,25 @@ function createWeekList() {
 
 }
 
-
-function createStatusList() {
+function createStatusList(requestState) {
 
     var status = "";
 
-    status += 'Status';
+    status += 'Status: ';
     status += '<select id="selectstatus">'
     status += '<option data-statusstate=false value="All">' + "All" + '</option>';
-    status += '<option data-statusstate=true value=null>' + "Unsubmitted" + '</option>';
-    for (var i = 0; i < statusArray.length ; i++) {
-        status += '<option data-statusstate=true value="' + i + '">' + statusArray[i] + '</option>';
+
+    if (requestState) {
+
+        status += '<option data-statusstate=true value=null>' + "Unsubmitted" + '</option>';
+        for (var i = 0; i < 1 ; i++) status += '<option data-statusstate=true value="' + i + '">' + statusArray[i] + '</option>';
+
     }
+    else for (var i = 1; i < statusArray.length ; i++) status += '<option data-statusstate=true value="' + i + '">' + statusArray[i] + '</option>';
+
     status += '</select>';
-    document.getElementById('statuslist').innerHTML = status;
 
-
-}
-
-
-function createDepartmentList() {
-    var department = "";
-
-    department += '<form>';
-    department += '<input type="radio" name="dept">All</input>';
-    department += '<input type="radio" name="dept">My Department</input>';
-    department += '<input type="radio" name="dept">Others</input>';
-    department += '</form>';
-    document.getElementById('deptlist').innerHTML = department;
+    if (document.getElementById('statuslist') != null) document.getElementById('statuslist').innerHTML = status;
 
 }
 
-
-function createStageList() {
-
-    var stage = "";
-    stage += '<form>';
-    stage += '<input type="radio" name="dept">Current</input>';
-    stage += '<input type="radio" name="dept">Adhoc</input>';
-    stage += '</form>';
-    document.getElementById('stagelist').innerHTML = stage;
-
-
-}
-
-
-
-function testRequestList() {
-
-    var testReq = new Request();
-    var testReq2 = new Request();
-    var testReq3 = new Request();
-    var testReq4 = new Request();
-    var testReq5 = new Request();
-
-    var module1 = new Module();
-    module1.code = "COA101";
-    module1.deptCode = "CO";
-
-    var module2 = new Module();
-    module2.code = "COA321";
-    module2.deptCode = "CO";
-
-    testReq.department = department;
-
-    testReq.round = roundID;
-
-    testReq.id = "1234";
-    testReq.module = module1;
-
-    testReq.priority = true;
-
-    testReq.day = 2;
-    testReq.startPeriod = 2;
-    testReq.endPeriod = 3;
-    testReq.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false];
-
-    testReq.students = 100;
-    testReq.park = 0;
-    testReq.traditional = true;
-    testReq.sessionType = 0;
-    testReq.noOfRooms = 1;
-    testReq.rooms = ["J.0.01", "J.0.02"];
-
-    testReq.status = 0;
-
-    testReq.facilities = ["10100", "10101"];
-    testReq.otherReqs = "test other reqs";
-
-    testReq.allocatedRooms = ["J.0.02"];
-
-
-    testReq2.department = department;
-
-    testReq2.round = roundID;
-
-    testReq2.id = "1235";
-    testReq2.module = module2;
-
-    testReq2.priority = false;
-
-    testReq2.day = 3;
-    testReq2.startPeriod = 4;
-    testReq2.endPeriod = 6;
-    testReq2.weeks = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false];
-
-    testReq2.students = 100;
-    testReq2.park = 0;
-    testReq2.traditional = true;
-    testReq2.sessionType = 2;
-    testReq2.noOfRooms = 1;
-    testReq2.rooms = ["N.0.01", "N.0.03"];
-
-    testReq2.status = 1;
-
-    testReq2.facilities = ["10102"];
-    testReq2.otherReqs = "";
-
-    testReq2.allocatedRooms = ["N.0.01"];
-
-
-
-    testReq3.department = department;
-
-    testReq3.round = roundID;
-
-    testReq3.id = "1236";
-    testReq3.module = module1;
-
-    testReq3.priority = false;
-
-    testReq3.day = 3;
-    testReq3.startPeriod = 5;
-    testReq3.endPeriod = 7;
-    testReq3.weeks = [false, false, false, true, false, true, false, true, true, true, true, true, false, true, false, false];
-
-    testReq3.students = 100;
-    testReq3.park = 0;
-    testReq3.traditional = true;
-    testReq3.sessionType = 2;
-    testReq3.noOfRooms = 1;
-    testReq3.rooms = ["N.0.01", "N.0.03"];
-
-    testReq3.status = 1;
-
-    testReq3.facilities = ["10102"];
-    testReq3.otherReqs = "";
-
-    testReq3.allocatedRooms = ["N.0.02"];
-
-
-    testReq3.department = department;
-
-    testReq4.round = roundID;
-
-    testReq4.id = "1237";
-    testReq4.module = module2;
-
-    testReq4.priority = false;
-
-    testReq4.day = 2;
-    testReq4.startPeriod = 3;
-    testReq4.endPeriod = 7;
-    testReq4.weeks = [false, false, false, true, false, true, false, true, true, true, true, true, false, true, false, false];
-
-    testReq4.students = 100;
-    testReq4.park = 0;
-    testReq4.traditional = true;
-    testReq4.sessionType = 2;
-    testReq4.noOfRooms = 1;
-    testReq4.rooms = ["J.0.01", "J.0.03"];
-
-    testReq4.status = 1;
-
-    testReq4.facilities = ["10102"];
-    testReq4.otherReqs = "";
-
-    testReq4.allocatedRooms = ["J.0.02"];
-
-    testReq4.round = roundID;
-
-    testReq5.id = "1238";
-    testReq5.module = module1;
-
-    testReq5.priority = false;
-
-    testReq5.day = 2;
-    testReq5.startPeriod = 2;
-    testReq5.endPeriod = 4;
-    testReq5.weeks = [false, false, false, true, false, true, false, true, true, true, true, true, false, true, false, false];
-
-    testReq5.students = 100;
-    testReq5.park = 0;
-    testReq5.traditional = true;
-    testReq5.sessionType = 2;
-    testReq5.noOfRooms = 1;
-    testReq5.rooms = ["N.0.01", "N.0.03"];
-
-    testReq5.status = 1;
-
-    testReq5.facilities = ["10102"];
-    testReq5.otherReqs = "";
-
-    testReq5.allocatedRooms = ["N.0.02"];
-
-
-    return [testReq, testReq2, testReq3, testReq4, testReq5];
-
-}
