@@ -31,8 +31,8 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
     }
-    tempStr += "</td><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
     tempStr += " | ";
+    tempStr += "</td><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
     tempStr += "<input class='btn btn-default' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
     tempStr += "<input class='btn btn-default' type='button' value='odd' onclick='setWeeks(-1)'>";
     tempStr += "<input class='btn btn-default' type='button' value='even' onclick='setWeeks(-2)'>";
