@@ -521,6 +521,12 @@ function clearRoomSel() {
     $('#roomList input:checkbox').attr('checked', false);
 }
 
+function clearChosenRoomSel() {
+    $('#roomList input:checkbox').attr('checked', false);
+    $('#chosenRoomsList').empty();
+    newRequest.rooms = [];
+}
+
 //remove checked item when unticked
 function removeCheckedRoom(checkbox) {
     $($(checkbox).parent()).remove();
