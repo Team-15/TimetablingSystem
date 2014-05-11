@@ -4,21 +4,18 @@
 @Styles.Render("~/Content/addRequestStyle.css")
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-7">
         Ad-hoc<input id='adhoc' type='checkbox'><br>
         <div id="moduleBox">
-            Module title:<br> <select id="modTitleSelect" name="modTitleSelect" class="modChooser" onchange="moduleSelector(this)"></select><br><br>
-            Module code:<br> <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select><br><br>
+            Module code: <select id="modCodeSelect" name="modCodeSelect" class="modChooser" onchange="moduleSelector(this)"></select>
+            title: <select id="modTitleSelect" name="modTitleSelect" class="modChooser" style='width: 250px;'onchange="moduleSelector(this)"></select>
         </div>
         <div id="propertiesBox">
             
         </div><br>
-        <div id="weekSelect">
-        </div><br>
-        <div id="weekTable">
-        </div><br>
+
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div id="buildingList">  
     </div>
     Rooms fitting your criteria:
@@ -31,6 +28,12 @@
     </div>
         <input class="btn btn-default" type='button' value='clear selection' onclick=''>
   </div>
+</div>
+<div class ="row2 col-md-12">
+        <div id="weekSelect">
+        </div><br>
+        <div id="weekTable">
+        </div><br>
 </div>
 <br>
 <input class="btn btn-default" id="submitForm" class="btn btn-primary" type='button' value='save request' onclick='timeAndDay()'>

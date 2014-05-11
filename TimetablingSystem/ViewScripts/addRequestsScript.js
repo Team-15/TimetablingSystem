@@ -27,7 +27,7 @@ function weekCreator() {
     for (var i = 0; i < numberOfWeeks; i++) {
         tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
     }
-    tempStr += "</td></tr><tr><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
+    tempStr += "</td><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
     tempStr += "<input class='btn btn-default' type='button' value='all' onclick='setWeeks(numberOfWeeks)'>";
     tempStr += "<input class='btn btn-default' type='button' value='odd' onclick='setWeeks(-1)'>";
     tempStr += "<input class='btn btn-default' type='button' value='even' onclick='setWeeks(-2)'>";
@@ -50,7 +50,7 @@ function timePeriodToggle() {
 //creates period grid selector
 function tableCreator() {
     var tempStr = "";
-    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'><input id='timePeriodCheck' style='display:none' type='checkbox' onclick='timePeriodToggle()'><label for='timePeriodCheck' class='btn btn-default'>Times / Periods</label></th><tr>";
+    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'><input id='timePeriodCheck' style='display:none' type='checkbox' onclick='timePeriodToggle()'><label for='timePeriodCheck' class='btn btn-default'>Times / Periods</label><input id='clearGrid' class='btn btn-default' type='button' value='clear table' onclick='clearTableGrid()'></th><tr>";
     for (var h = 0; h < periodsArray.length; h++) {
         tempStr += "<th class = gridHeader><div id='TP-" + h + "'>" + timeDisplayArray[h] + "</div></th>";
     }
@@ -63,18 +63,19 @@ function tableCreator() {
         tempStr += "</tr>";
     }
     tempStr += "</table>";
-    tempStr += "<input id='clearGrid' class='btn btn-default' type='button' value='clear table' onclick='clearTableGrid()'>";
+    tempStr += "";
     $("#weekTable").append(tempStr);
 }
 
 function setGridWeek(whichDay) {
     i = shortDaysArray.indexOf($(whichDay).val());
-
     if ($(whichDay).is(":checked")) {
+        console.log("tick");
         for (var j = 0; j < periodsArray.length; j++) {
             $("#gridCheck-" + i + j).attr('checked', true);
         }
     } else {
+        console.log("untick");
         for (var j = 0; j < periodsArray.length; j++) {
             $("#gridCheck-" + i + j).attr('checked', false);
         }
@@ -112,19 +113,21 @@ function facilityPopulate() {
             tempStr += "</tr><tr>";
         }
     }
-    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td></tr>";
+
+    tempStr += "<tr><td>Number of students: <input type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
+    tempStr += "<td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
     tempStr += "<tr><td>Park: <select id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='" + parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
-    tempStr += "<tr><td>Room type: <select id='RMT' onchange='infoStore()' onclick='infoStore()'>";
+    tempStr += "<td>Room: type <select id='RMT' onchange='infoStore()' onclick='infoStore()'>";
     for (var k = 0; k < sessionTypesArray.length; k++) {
         tempStr += "<option value='" + sessionTypesArray[k] + "'>" + sessionTypesArray[k] + "</option>";
     }
-    tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
-    tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td></tr>";
-    tempStr += "<tr><td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
+    tempStr += "</select> number <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+
+    tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td>";
+    tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
