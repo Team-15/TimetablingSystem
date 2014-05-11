@@ -271,12 +271,12 @@ function infoStore() {
     $('#PRF').click(function () {
         newRequest.priority = false;
     });
-    $('#TRD').click(function () {
+    $('#TRD').change(function () {
         newRequest.traditional = true;
         $("#RMT option[value='Lab']").attr("disabled", false);
         $("#RMT option[value='Tutorial']").attr("disabled", false);
     });
-    $('#SMR').click(function () {
+    $('#SMR').change(function () {
         newRequest.traditional = false;
         $('#RMT').val("Lecture");
         $("#RMT option[value='Lab']").attr("disabled", true);
