@@ -518,7 +518,9 @@ function setWeeks(weeksChosen) {
 
 //clears checked tickboxes of rooms selected
 function clearRoomSel() {
-    $('#roomList input:checkbox').attr('checked', false);
+    $('.roomList:input:checkbox:checked').each(function () {
+        $(this).click();
+    });
 }
 
 function clearChosenRoomSel() {
