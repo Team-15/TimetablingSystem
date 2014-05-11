@@ -57,13 +57,17 @@ text-align:center;
 }
     .btn-default:hover
     {
-        background-color:rgb(143,0,79);
+        background-color:#E657A6;
+    }
+    .btn-default:active
+    {
+        background-color:none;
     }
 
 input[type=checkbox]:checked + label {
-	background: rgb(143,0,79);
+	background: #E657A6;
 }
 
 input[type=radio]:checked + label {
-	background: rgb(143,0,79);
+	background: #E657A6;
 }
