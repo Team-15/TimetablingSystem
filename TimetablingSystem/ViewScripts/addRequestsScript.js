@@ -87,7 +87,7 @@ function facilityPopulate() {
     }
     tempStr += "<tr><td>Other requirements: <input type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'>";
     tempStr += "<tr><td>Number of rooms: <select id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
-    tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td></tr>";
+    tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td></tr>";
     tempStr += "<tr><td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
@@ -267,53 +267,86 @@ function facilityStore(checkbox) {
 //creates array of time/dates for the request(s)
 function timeAndDay() {
     infoStore();
+    if (validateForm()) {
+        //Set up 2D array
+        var timeDayArray = [];
+        while (timeDayArray.push([]) < daysArray.length);
 
-    //Set up 2D array
-    var timeDayArray = [];
-    while (timeDayArray.push([]) < daysArray.length);
+        //read all checkboxes and push ticked ones into a 2D array
+        for (var i = 0; i < daysArray.length; i++) for (var j = 0; j < periodsArray.length; j++) if ($("#gridCheck-" + i + j).prop('checked')) timeDayArray[i].push(j);
 
-    //read all checkboxes and push ticked ones into a 2D array
-    for (var i = 0; i < daysArray.length; i++) for (var j = 0; j < periodsArray.length; j++)  if ($("#gridCheck-" + i + j).prop('checked')) timeDayArray[i].push(j);
+        var dayWithkeyPoints = [];
 
-    var dayWithkeyPoints = [];
-
-    //find contingent blocks of checkboxes and make them into individual requests
-    for (var counter = 0; counter < timeDayArray.length; counter++) dayWithkeyPoints[counter] = secondSorter(timeDayArray[counter]);
+        //find contingent blocks of checkboxes and make them into individual requests
+        for (var counter = 0; counter < timeDayArray.length; counter++) dayWithkeyPoints[counter] = secondSorter(timeDayArray[counter]);
 
 
-    var dayPeriodBlock = [];
+        var dayPeriodBlock = [];
 
-    for (var dwkpCounter = 0; dwkpCounter < dayWithkeyPoints.length; dwkpCounter++) {
+        for (var dwkpCounter = 0; dwkpCounter < dayWithkeyPoints.length; dwkpCounter++) {
 
-        var keyPointsArray = dayWithkeyPoints[dwkpCounter];
+            var keyPointsArray = dayWithkeyPoints[dwkpCounter];
 
-        for (var counter = 0; counter < keyPointsArray.length; counter++) {
+            for (var counter = 0; counter < keyPointsArray.length; counter++) {
 
-            var maxElement = keyPointsArray[counter].length - 1;
+                var maxElement = keyPointsArray[counter].length - 1;
 
-            if (keyPointsArray[counter][0] == keyPointsArray[counter][maxElement]) {
+                if (keyPointsArray[counter][0] == keyPointsArray[counter][maxElement]) {
 
-                dayPeriodBlock.push({
-                    day: dwkpCounter,
-                    start: keyPointsArray[counter][0],
-                    end: keyPointsArray[counter][0]
-                });
+                    dayPeriodBlock.push({
+                        day: dwkpCounter,
+                        start: keyPointsArray[counter][0],
+                        end: keyPointsArray[counter][0]
+                    });
+
+                }
+                else {
+
+                    dayPeriodBlock.push({
+                        day: dwkpCounter,
+                        start: keyPointsArray[counter][0],
+                        end: keyPointsArray[counter][maxElement]
+                    });
+
+                }
 
             }
-            else {
-
-                dayPeriodBlock.push({
-                    day: dwkpCounter,
-                    start: keyPointsArray[counter][0],
-                    end: keyPointsArray[counter][maxElement]
-                });
-
-            }
-
         }
-
+        multiRequestGen(dayPeriodBlock);
+    } else {
+            alert("You have not filled in all mandatory fields. These include number of students, weeks and time or day.");
     }
-    multiRequestGen(dayPeriodBlock);
+}
+
+//check the user has selected the minimum requirements to save a request
+function validateForm() {
+    var filledIn = false;
+    var studentsBool = false;
+    var weeksBool = false;
+    var dayBool = false;
+    //num of students
+    if (newRequest.students > 0) {
+        studentsBool = true;
+    }
+    //weeks
+    for (var i = 0; i < newRequest.weeks.length; i++) {
+        if (newRequest.weeks[i] == true) {
+            weeksBool = true;
+        }
+    }
+    //day/time
+    for (var i = 0; i < daysArray.length; i++) {
+        for (var j = 0; j < periodsArray.length; j++) {
+            if ($("#gridCheck-" + i + j).prop('checked') == true) {
+                dayBool = true;
+            }
+        }
+    }
+    //if all three are true, set return to true
+    if ((studentsBool == true) && (weeksBool == true) && (dayBool == true)) {
+        filledIn = true;
+    }
+    return (filledIn);
 }
 
 //second level sorter

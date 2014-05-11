@@ -31,7 +31,7 @@ function Request() {
     this.id = ""; //Number 
     this.module = new Module(); // One Module Object is stored - see module object (Above)
 
-    this.priority = true; // Boolean
+    this.priority = false; // Boolean
 
     this.day = 0; //Index of daysArray, see globalConstants.js
     this.startPeriod = 0; //Index of periodsArray, see globalConstants.js
