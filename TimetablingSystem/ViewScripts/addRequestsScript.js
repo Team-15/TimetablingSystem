@@ -35,12 +35,24 @@ function weekCreator() {
     $("#weekSelect").append(tempStr);
 }
 
+function timePeriodToggle() {
+    if ($("#timePeriodCheck").is(":checked")) {
+        for (var i = 0; i < periodsArray.length; i++) {
+            $("#TP-" + i).html(periodsArray[i]);
+        }
+    } else {
+        for (var i = 0; i < periodsArray.length; i++) {
+            $("#TP-" + i).html(timeDisplayArray[i]);
+        }
+    }
+}
+
 //creates period grid selector
 function tableCreator() {
     var tempStr = "";
-    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'>Times / Periods</th><tr>";
+    tempStr += "<table class = 'gridTable'><tr><th rowspan='2'>Day</th><th colspan='9'><input id='timePeriodCheck' style='display:none' type='checkbox' onclick='timePeriodToggle()'><label for='timePeriodCheck' class='btn btn-default'>Times / Periods</label></th><tr>";
     for (var h = 0; h < periodsArray.length; h++) {
-        tempStr += "<th class = gridHeader>" + timeDisplayArray[h] + "</th>";
+        tempStr += "<th class = gridHeader><div id='TP-" + h + "'>" + timeDisplayArray[h] + "</div></th>";
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
