@@ -2,7 +2,13 @@
     ViewBag.Title = "Test";
 }
 @Styles.Render("~/Content/testStyle.css")
+<body>
+    <div id="bdy" style="font-size:12px;">
+	<a href="javascript:void(0);" onclick="changeFontSize('bdy','2');">Increase font</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:void(0);" onclick="changeFontSize('bdy',-2);">Decrease font</a>    <p><br /><br />
+	This is the test text to increase or decrease.
+</p></div></body>
 
-@*HTML goes here*@
 
 @Scripts.Render("~/ViewScripts/testScript.js");
