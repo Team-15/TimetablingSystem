@@ -123,11 +123,11 @@ function facilityPopulate() {
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='" + parksArray[j] + "'>" + parksArray[j] + "</option>";
     }
-    tempStr += "<td>Room: type <select class='form-control' id='RMT' onchange='infoStore()' onclick='infoStore()'>";
+    tempStr += "<td>Room type: <select class='form-control' id='RMT' onchange='infoStore()' onclick='infoStore()'>";
     for (var k = 0; k < sessionTypesArray.length; k++) {
         tempStr += "<option value='" + sessionTypesArray[k] + "'>" + sessionTypesArray[k] + "</option>";
     }
-    tempStr += "</select> number <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+    tempStr += "</select>Room number: <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
 
     tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td>";
     tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
@@ -173,8 +173,10 @@ function roomListPopulate() {
 
                 var facAvail = true;
 
-                for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
-
+                for (var k = 0; k < newRequest.facilities.length; k++) {
+                    if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
+                    if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
+                }
                 if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail)) tempStr += "<input style='display:none' type='checkbox' class='roomList' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
 
             }
@@ -190,8 +192,10 @@ function roomListPopulate() {
 
                 var facAvail = true;
 
-                for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
-
+                for (var k = 0; k < newRequest.facilities.length; k++) {
+                    if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
+                    if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
+                }
                 if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (chosenBuilding.park == newRequest.park) && (facAvail == true)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
 
             }
@@ -205,7 +209,10 @@ function roomListPopulate() {
         for (var i = 0; i < chosenBuilding.rooms.length; i++) {
             var facAvail = true;
 
-            for (var k = 0; k < newRequest.facilities.length; k++) if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
+            for (var k = 0; k < newRequest.facilities.length; k++) {
+                if (chosenBuilding.rooms[i].facilities.indexOf(newRequest.facilities[k]) == -1) facAvail = false;
+                if ((newRequest.traditional == false) && ((chosenBuilding.rooms[i].type == 1) || (chosenBuilding.rooms[i].type == 2))) facAvail = false;
+            }
 
             if ((chosenBuilding.rooms[i].capacity >= newRequest.students) && (facAvail == true)) tempStr += "<input style='display:none' type='checkbox' id='" + chosenBuilding.rooms[i].code + "' value='" + chosenBuilding.rooms[i].code.split('.').join("") + "' class='roomList' onchange='checkedRoomList(this)' data-counter='room-" + i + "' data-cap='" + chosenBuilding.rooms[i].capacity + "'><label for='" + chosenBuilding.rooms[i].code + "' class='btn btn-default'></label>" + chosenBuilding.rooms[i].code.split('.').join("") + " (capacity: " + chosenBuilding.rooms[i].capacity + ")<br>";
 
