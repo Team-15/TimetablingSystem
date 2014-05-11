@@ -20,6 +20,10 @@ function createObjects() {
     newRequest.weeks = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 }
 
+function clearForm() {
+    $("#addPageBtn").click();
+}
+
 //creates the week selection row
 function weekCreator() {
     var tempStr = "";
