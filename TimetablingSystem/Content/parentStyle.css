@@ -2,28 +2,176 @@
     min-width: 960px;
     margin: 0px;
     overflow-y: scroll;
+
+    background: #f7f7f7;
 }
 
 #mainWrapper {
-    width:960px;
-
     
     top:0px;
     margin: 0 auto;
+    
+    width:960px;
+
+    background: white;
+
 }
 
 .headerWrapper {
+    
+    position: relative;
+
     height: 100px;
-    /*
-        background: #330066;
-    */
-    background: linear-gradient(to right, #2f0065 25%,#5a3163 100%);
+
+    background: #330066;
+
+    border-right: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+
 }
 
 #lboroLogo {
+
+    position: relative;
+
     top:20px;
     left:20px;
+
 }
+
+
+#userTextContainer {
+
+    position: absolute;
+    top: 10px;
+    left: 320px;
+    width: 400px;
+
+}
+
+#userText {
+    
+    margin: 0 auto;
+    
+    max-height: 25px;
+    max-width: 400px;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    
+
+    overflow: hidden;
+
+    text-align: center;
+
+    font-weight: bold;
+    color: #330066;
+
+    background: white;
+    border-radius: 3px;
+
+    transition-property: max-height;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+
+}
+
+#userText:hover {
+
+    max-height: 85px;
+
+}
+
+
+#logoutBtn {
+    
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    width: 70px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 3px;
+
+}
+
+#logoutBtn a {
+    
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    text-decoration: none !important;
+
+}
+
+#logoutBtn:hover {
+
+    background: #FF2F97;
+
+}
+
+#logoutBtn a:hover {
+    
+    color: white;
+
+}
+
+
+#progressContainer {
+
+    position: absolute;
+    display: block;
+    bottom: 10px;
+    left: 240px;
+    padding: 2px 5px;
+
+    color: #306;
+    font-weight: bold;
+    vertical-align: middle;
+
+    background: white;
+    border-radius: 5px;
+
+}
+
+#roundInfo, #progressText {
+
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+#progressbar {
+
+    display: inline-block;
+
+    height: 20px !important;
+    width: 200px;
+
+    margin: auto 10px;
+
+    vertical-align: middle;
+    
+    border-radius: 7px;
+    background: #f0f0f0;
+    border: 1px solid lightgrey;
+    
+}
+
+.ui-progressbar .ui-progressbar-value { height: 20px !important; }
+
+.ui-progressbar.beginning .ui-progressbar-value { background: green; }
+.ui-progressbar.middle .ui-progressbar-value { background: orange; }
+.ui-progressbar.end .ui-progressbar-value { background: red; }
+
+
+
 
 #navSection ul {
     margin: 0;
@@ -53,20 +201,3 @@
     padding:5px;
 }
 
-#progressbar {
-
-    height: 20px !important;
-    width: 200px;
-
-    margin: 2px;
-    margin-top: 7px;
-    margin-left: 20px;
-    
-    border-radius: 7px;
-    border: 1px solid lightgrey;
-    
-}
-
-.ui-progressbar.beginning .ui-progressbar-value { background: green; }
-.ui-progressbar.middle .ui-progressbar-value { background: orange; }
-.ui-progressbar.end .ui-progressbar-value { background: red; }

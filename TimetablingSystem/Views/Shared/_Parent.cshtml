@@ -14,63 +14,54 @@
     <body>
         
         <div id="mainWrapper">
-        <header>
-            <div class="headerWrapper">
-                 <img id="lboroLogo" src="~/Images/LboroLogo.png" alt="Loughborough University Logo"/>
-            </div>
+            <header>
 
-            
-            
-        </header>
-        @Html.ActionLink("Log Out", "SignOut", "User")
-        <nav id="navSection">
-            <ul id="menuLinks">
-                <li>@Html.ActionLink("Home", "Home", "Main")</li>
-                <li>@Html.ActionLink("Add", "Add", "Main", null, new {id = "addPageBtn" })</li>
-                <li>@Html.ActionLink("Requests", "Requests", "Display")</li>
-                <li>@Html.ActionLink("Results", "Results", "Display")</li>
-                <li>@Html.ActionLink("Bookings", "Bookings", "Display")</li>
-                <li>@Html.ActionLink("History", "History", "Display")</li>
-                <li>@Html.ActionLink("Settings", "Settings", "Main")</li>
-                <li><div id="progressbar"></div>40 day left until Round Ends </li>
-                @*
+                <div class="headerWrapper">
+                    
+                    <img id="lboroLogo" src="~/Images/LboroLogo.png" alt="Loughborough University Logo" />
+
+                    <div id="userTextContainer">
+                        <div id="userText"></div>
+                    </div>
+                    
+
+                    <div id="logoutBtn">
+                        @Html.ActionLink("Log Out", "SignOut", "User")
+                    </div>
+                    
+                    <div id="progressContainer">
+                        <span id="roundInfo">Current Round: 3</span>
+                        <div id="progressbar"></div>
+                        <span id="progressText">40 day left until Round Ends</span>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <nav id="navSection">
+                <ul id="menuLinks">
+                    <li>@Html.ActionLink("Home", "Home", "Main")</li>
+                    <li>@Html.ActionLink("Add", "Add", "Main", null, new { id = "addPageBtn" })</li>
+                    <li>@Html.ActionLink("Requests", "Requests", "Display")</li>
+                    <li>@Html.ActionLink("Results", "Results", "Display")</li>
+                    <li>@Html.ActionLink("Bookings", "Bookings", "Display")</li>
+                    <li>@Html.ActionLink("History", "History", "Display")</li>
+                    <li>@Html.ActionLink("Settings", "Settings", "Main")</li>
+
+                    @*
                 <li>@Html.ActionLink("Test1", "Test", "Test")</li>
                 <li>@Html.ActionLink("Test2", "Test2", "Test")</li>
                 <li>@Html.ActionLink("Test3", "Test3", "Test")</li>*@
-            </ul>
-        </nav>
-        
-            @*<div id="progressbar"></div>*@
+                </ul>
+            </nav>
 
 
-        <div id="contentDiv">
-            @RenderBody()
-        </div>
-
-
-        @*
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                <div id="ContentDiv">
-                    @RenderBody()
-                </div>
-            </section>
-        </div>
-        *@
-
-
-        @*
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
+            <div id="contentDiv">
+                @RenderBody()
             </div>
-        </footer>
-        *@
 
-        @RenderSection("scripts", required: false)
+            @RenderSection("scripts", required: false)
 
         </div>
 

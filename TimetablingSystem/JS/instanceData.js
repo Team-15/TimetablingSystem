@@ -304,3 +304,17 @@ function getCurrentRoundPercentage() {
 
     
 }
+
+function getDaysLeftInRound() {
+
+    var currentDate = new Date();
+
+    var daysMilliseconds = roundEnd.getTime() - currentDate.getTime();
+
+    var days = daysMilliseconds / (1000 * 60 * 60 * 24)
+
+    days = Math.floor(days);
+
+    return days;
+
+}

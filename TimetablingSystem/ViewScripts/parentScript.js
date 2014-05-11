@@ -24,22 +24,13 @@
 
     });
 
-    /*
-    var x = [true, false, true, false, true, true, true, true, true, false, false, false];
-    var y = "010101010100001111111";
-
-    alert(weeksEncoder(x));
-    alert(weeksDecoder(y));
-    alert(weeksReadableFormat(x));
-    */
-
-    //getStuff();
     loadInstaceData();
-    loadProgressBar();
+    generateUserText();
+    loadProgressBarAndText();
 
 });
 
-function loadProgressBar() {
+function loadProgressBarAndText() {
     
 
     $("#progressbar").progressbar({
@@ -50,10 +41,27 @@ function loadProgressBar() {
 
     });
 
-    $('#progressbar').height(15);
-
-    if ($("#progressbar").progressbar("value") < 60) $("#progressbar").addClass('beginning');
-    else if ($("#progressbar").progressbar("value") < 90) $("#progressbar").addClass('middle');
+    if ($("#progressbar").progressbar("value") < 50) $("#progressbar").addClass('beginning');
+    else if ($("#progressbar").progressbar("value") < 80) $("#progressbar").addClass('middle');
     else $("#progressbar").addClass('end');
+
+    $("#roundInfo").html("Current Round: " + roundNumber);
+    $("#progressText").html(getDaysLeftInRound() + " days until Round ends");
+
+}
+
+function generateUserText() {
+    
+    var deptText = "";
+
+    deptText += "You are Logged In as: &nbsp &nbsp ";
+
+    deptText += department;
+
+    deptText += "<br />";
+
+    deptText += departmentName;
+
+    document.getElementById("userText").innerHTML = deptText;
 
 }

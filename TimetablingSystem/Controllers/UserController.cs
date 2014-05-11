@@ -101,7 +101,7 @@ namespace TimetablingSystem.Controllers
             {
                 userList.Add(new SelectListItem
                 {
-                    Text = dept.code+ " - " + dept.name,
+                    Text = dept.code+ ":  " + dept.name,
                     Value = dept.code
                 });
             }
