@@ -470,6 +470,9 @@ function setWeeks(weeksChosen) {
                 $('#weekChoice' + i).prop('checked', false);
             }
         }
+        for (var j = 12; j < numberOfWeeks; j++) {
+            $('#weekChoice' + j).prop('checked', false);
+        }
     } else if (weeksChosen == "-2") {
         for (var i = 0; i < regularWeeks; i++) {
             if (i % 2 != 0) {
@@ -477,6 +480,9 @@ function setWeeks(weeksChosen) {
             } else {
                 $('#weekChoice' + i).prop('checked', false);
             }
+        }
+        for (var j = 12; j < numberOfWeeks; j++) {
+            $('#weekChoice' + j).prop('checked', false);
         }
     } else {
         for (var i = 0; i < numberOfWeeks; i++) {
