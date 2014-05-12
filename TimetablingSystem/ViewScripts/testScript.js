@@ -12,7 +12,7 @@ function defaultFont(element) {
 function changeFontSize(element, step) {
     var el = document.getElementById(element);
     var fontSize = parseInt(el.style.fontSize, 10);
-    if (fontSize >= 10 && fontSize <= 24) {
+    if (fontSize >= 10 && fontSize <= 16) {
         step = parseInt(step, 10);
         var curFont = parseInt(el.style.fontSize, 10);
         el.style.fontSize = (curFont + step) + 'px';
@@ -22,7 +22,7 @@ function changeFontSize(element, step) {
         var curFont = parseInt(el.style.fontSize, 10);
         el.style.fontSize = (curFont + step) + 'px';
     }
-    else if (fontSize >= 22 && step == -2) {
+    else if (fontSize >= 16 && step == -2) {
         step = parseInt(step, 10);
         var curFont = parseInt(el.style.fontSize, 10);
         el.style.fontSize = (curFont + step) + 'px';
