@@ -591,4 +591,8 @@ function loadInRequest() {
         $("#adhoc").attr("checked", true);
         $("#adhoc").attr("disabled", true);
     }
+    duplicateRequestFlag = false;
+    editRequestFlag = false;
+    editAdHocFlag = false;
+    temporaryRequestStore = null;
 }
