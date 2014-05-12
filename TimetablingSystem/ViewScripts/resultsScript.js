@@ -29,3 +29,8 @@ function getResults() {
     return requests;
 
 }
+
+function refreshLoad() {
+    unfilteredRequests = getResults();
+    requestsSet = executeFilters();
+}

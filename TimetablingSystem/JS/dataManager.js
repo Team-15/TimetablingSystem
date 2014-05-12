@@ -204,4 +204,34 @@ function duplicateTransfer(duplicatingRequest) {
 
 function deleteExecute(deletingRequest) {
     alert(JSON.stringify(deletingRequest));
+
+    deleteRequest(setupDBRequestModel(deletingRequest));
+
+}
+
+function deleteRequest(jsonData) {
+
+    alert(JSON.stringify(jsonData));
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify(jsonData),
+        async: false,
+        success: function (results) {
+            alert("request deletion successful");
+            alert(results);
+        },
+        error: function (results) {
+            alert("request deletion failed");
+            alert(JSON.stringify(results));
+        },
+        url: "api/request/DeleteRequest",
+        processData: false
+    });
+
 }

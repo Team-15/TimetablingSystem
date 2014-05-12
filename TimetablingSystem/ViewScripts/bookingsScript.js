@@ -121,6 +121,13 @@ function getAdHocBookings() {
 }
 
 
+function refreshLoad() {
+    typeRequestLoader();
+    requestsSet = executeFilters();
+}
+
+
+
 function departmenalFilter(myDept) {
 
     var filteredRequests = [];
@@ -148,7 +155,6 @@ function departmenalFilter(myDept) {
 
 }
 
-
 function typeRequestLoader() {
     
     if (currentViewFlag) unfilteredRequests = getBookings();
@@ -156,6 +162,3 @@ function typeRequestLoader() {
 
 }
 
-function departmentalViewSwitcher() {
-
-}

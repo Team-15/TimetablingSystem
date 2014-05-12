@@ -171,11 +171,13 @@ function displayReloader() {
 
         document.getElementById("displaysContainer").innerHTML = "<div id='listContainer'></div>";
         generateListDisplay();
+        setupHeaderScroll();
 
     }
     else {
         document.getElementById("displaysContainer").innerHTML = "<div id='graphicalContainer'></div>";
         generateGraphicalDisplay();
+        $(window).unbind("scroll");
     }
 
     if (timeViewFlag) {

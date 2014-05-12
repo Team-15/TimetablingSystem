@@ -51,6 +51,8 @@ var duplicateRequestFlag = false;
 
 var editRequestFlag = false;
 
+var editAdHocFlag = false;
+
 var temporaryRequestStore = null;
 
 // *****************************************************************************

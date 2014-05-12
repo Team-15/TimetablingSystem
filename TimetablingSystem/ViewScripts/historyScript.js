@@ -28,3 +28,8 @@ function getHistory() {
     return requests;
 
 }
+
+function refreshLoad() {
+    unfilteredRequests = getHistory();
+    requestsSet = executeFilters();
+}

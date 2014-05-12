@@ -3,37 +3,6 @@
     listViewGenerator(requestsSet);
     toggleTimeValue(true);
 
-    window.onscroll = (function () {
-
-        if (window.XMLHttpRequest) {
-            var position = window.pageYOffset;
-
-            var elemTop = $(".requestContainerList").offset().top;
-
-            if (position >= (elemTop - 60)) {
-
-                $(".headerContainer").css({
-                    "position": "fixed",
-                    "top": "0",
-                    "left": "50%",
-                    "margin-left": "-469px",
-                    "height": "50px"
-                });
-
-            }
-            else {
-                $(".headerContainer").css({
-                    "position": "relative",
-                    "top": "initial",
-                    "left": "auto",
-                    "margin-left": "0px",
-                    "height": "50px"
-                });
-            }
-        }
-
-    });
-
 }
 
 function listViewGenerator(requestsArray) {
@@ -154,7 +123,7 @@ function listViewGenerator(requestsArray) {
 
     $("#listContainer").html(listHTML);
     listDetailsGenerator(requestsArray);
-
+    
 }
 
 function listDetailsGenerator(requestsArray) {
@@ -186,9 +155,16 @@ function listDetailsGenerator(requestsArray) {
 
     }
 
-    $(".listEditBtn").click(function () { editTransfer(requestFinder($(this).attr("data-rID"))); });
-    $(".listDuplicateBtn").click(function () { duplicateTransfer(requestFinder($(this).attr("data-rID"))); });
-    $(".listDeleteBtn").click(function () { deleteExecute(requestFinder($(this).attr("data-rID"))); });
+    $(".listEditBtn").click(function () {
+        if (currentViewFlag !== undefined) if (!currentViewFlag) editAdHocFlag = true;
+        editTransfer(listRequestFinder($(this).attr("data-rID")));
+    });
+    $(".listDuplicateBtn").click(function () { duplicateTransfer(listRequestFinder($(this).attr("data-rID"))); });
+    $(".listDeleteBtn").click(function () {
+        deleteExecute(listRequestFinder($(this).attr("data-rID")));
+        refreshLoad();
+        displayReloader();
+    });
 
 }
 
@@ -205,8 +181,43 @@ function toggleTimeValue(time) {
 
 }
 
-function requestFinder(idVal) {
+function listRequestFinder(idVal) {
 
     for (var rCounter = 0; rCounter < requestsSet.length; rCounter++) if (requestsSet[rCounter].id === parseInt(idVal)) return requestsSet[rCounter];
         
+}
+
+function setupHeaderScroll() {
+    
+    window.onscroll = (function () {
+
+        if (window.XMLHttpRequest) {
+            var position = window.pageYOffset;
+
+            var elemTop = $(".requestContainerList").offset().top;
+
+            if (position >= (elemTop - 60)) {
+
+                $(".headerContainer").css({
+                    "position": "fixed",
+                    "top": "0",
+                    "left": "50%",
+                    "margin-left": "-469px",
+                    "height": "50px"
+                });
+
+            }
+            else {
+                $(".headerContainer").css({
+                    "position": "relative",
+                    "top": "initial",
+                    "left": "auto",
+                    "margin-left": "0px",
+                    "height": "50px"
+                });
+            }
+        }
+
+    });
+
 }

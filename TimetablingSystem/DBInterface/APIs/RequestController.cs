@@ -263,17 +263,23 @@ namespace TimetablingSystem.DBInterface
 
             }
 
-            foreach (var roomData in rwld.roomAlloc)
+            if (!current)
             {
 
-                room selectedRoom =
-                    (from rm in _db.rooms
-                     where rm.code == roomData.code
-                     select rm).FirstOrDefault();
+                foreach (var roomData in rwld.roomPref)
+                {
 
-                newRequest.roomsAlloc.Add(selectedRoom);
+                    room selectedRoom =
+                        (from rm in _db.rooms
+                         where rm.code == roomData.code
+                         select rm).FirstOrDefault();
+
+                    newRequest.roomsAlloc.Add(selectedRoom);
+
+                }
 
             }
+            
 
             return newRequest;
         }
@@ -315,7 +321,6 @@ namespace TimetablingSystem.DBInterface
 
             }
 
-
             foreach (var roomData in rwld.roomPref)
             {
 
@@ -326,6 +331,31 @@ namespace TimetablingSystem.DBInterface
 
                 currentReq.roomsPref.Add(selectedRoom);
 
+            }
+
+
+
+            IEnumerable<round> adHocRounds = (new SemRouController()).GetAdHocRoundSet();
+
+            List<int> adHocRoundIDs = new List<int>();
+
+            foreach (round rnd in adHocRounds) adHocRoundIDs.Add(rnd.id);
+
+            if (adHocRoundIDs.IndexOf(currentReq.roundID) != -1)
+            {
+                currentReq.roomsAlloc.Clear();
+
+                foreach (var roomData in rwld.roomPref)
+                {
+
+                    room selectedRoom =
+                        (from rm in _db.rooms
+                         where rm.code == roomData.code
+                         select rm).FirstOrDefault();
+
+                    currentReq.roomsAlloc.Add(selectedRoom);
+
+                }
             }
 
             return currentReq;
@@ -375,13 +405,14 @@ namespace TimetablingSystem.DBInterface
 
         }
 
+
         public HttpResponseMessage PostUpdateRequest(RequestsWtihLinkedData rwld)
         {
 
             if (ModelState.IsValid)
             {
                 request currentReq =
-                    (from req in _db.requests.Include("facilities").Include("roomsPref")
+                    (from req in _db.requests.Include("facilities").Include("roomsPref").Include("roomsAlloc")
                      where req.id == rwld.id
                      select req).FirstOrDefault();
 
@@ -407,6 +438,7 @@ namespace TimetablingSystem.DBInterface
 
         }
 
+        [HttpPost]
         public HttpResponseMessage DeleteRequest(RequestsWtihLinkedData rwld)
         {
             if (ModelState.IsValid)
@@ -430,7 +462,6 @@ namespace TimetablingSystem.DBInterface
 
 
         }
-
 
 
         protected override void Dispose(bool disposing)

@@ -75,7 +75,7 @@ namespace TimetablingSystem.Controllers
                 {
                     
                     dept.salt = GenerateSalt();
-                    dept.hashedPassword = HashPassword("password", dept.salt);
+                    dept.hashedPassword = HashPassword("w6vnh4n", dept.salt);
                     
                 }
 

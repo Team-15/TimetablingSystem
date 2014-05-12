@@ -97,9 +97,9 @@ function graphicalDetailsGenerator() {
                     </div>";
 
     detailsHTML += "<div class='dataRow' style='background: linen;'>\
-                        <div class='dataBtn'> <input type='button' name='Edit' value='Edit' data-requestid='' /> </div>\
-                        <div class='dataBtn'> <input type='button' name='Duplicate' value='Duplicate' data-requestid='' /> </div>\
-                        <div class='dataBtn'> <input type='button' name='Delete' value='Delete' data-requestid='' /> </div>\
+                        <div class='dataBtn'> <input type='button' name='Edit' value='Edit' class='graphicalEditBtn'  data-requestid='' /> </div>\
+                        <div class='dataBtn'> <input type='button' name='Duplicate' value='Duplicate' class='graphicalDuplicateBtn' data-requestid='' /> </div>\
+                        <div class='dataBtn'> <input type='button' name='Delete' value='Delete' class='graphicalDeleteBtn' data-requestid='' /> </div>\
                     </div>";
 
 
@@ -241,5 +241,31 @@ function displayData(request) {
     $("#sessionType").html(sessionTypesArray[request.sessionType]);
     $("#otherRequirements").html(request.otherReqs);
     $("#facilities").html(htmlStringFormater(getFacilityTitles(request.facilities)));
+
+    $(".graphicalEditBtn").attr("data-requestid", request.id);
+    $(".graphicalDuplicateBtn").attr("data-requestid", request.id);
+    $(".graphicalDeleteBtn").attr("data-requestid", request.id);
+
+    $(".graphicalEditBtn").unbind("click");
+    $(".graphicalDuplicateBtn").unbind("click");
+    $(".graphicalDeleteBtn").unbind("click");
+
+    $(".graphicalEditBtn").click(function () {
+        if (currentViewFlag !== undefined) if (!currentViewFlag) editAdHocFlag = true;
+        editTransfer(graphicalRequestFinder($(this).attr("data-requestid")));
+        
+    });
+    $(".graphicalDuplicateBtn").click(function () { duplicateTransfer(graphicalRequestFinder($(this).attr("data-requestid"))); });
+    $(".graphicalDeleteBtn").click(function () {
+        deleteExecute(graphicalRequestFinder($(this).attr("data-requestid")));
+        refreshLoad();
+        displayReloader();
+    });
+
+}
+
+function graphicalRequestFinder(idVal) {
+
+    for (var rCounter = 0; rCounter < requestsSet.length; rCounter++) if (requestsSet[rCounter].id === parseInt(idVal)) return requestsSet[rCounter];
 
 }
