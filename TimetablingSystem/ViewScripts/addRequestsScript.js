@@ -130,7 +130,7 @@ function facilityPopulate() {
     tempStr += "</select>Room number: <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
 
     tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td>";
-    tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
+    tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' checked='checked' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
 }
