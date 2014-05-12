@@ -181,6 +181,7 @@ function setupDBRequestModel(request) {
 }
 
 function editTransfer(editingRequest) {
+
     alert(JSON.stringify(editingRequest));
 
     editRequestFlag = true;
@@ -191,7 +192,14 @@ function editTransfer(editingRequest) {
 }
 
 function duplicateTransfer(duplicatingRequest) {
+
     alert(JSON.stringify(duplicatingRequest));
+
+    duplicateRequestFlag = true;
+    temporaryRequestStore = duplicatingRequest;
+
+    $("#addPageBtn").click();
+
 }
 
 function deleteExecute(deletingRequest) {
