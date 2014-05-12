@@ -1,5 +1,11 @@
 ﻿$(document).ready(function () {
 
+    //Button Modes
+    editEnabled = false;
+    duplicateEnabled = false;
+    deleteEnabled = false;
+
+
     //Bookings View Flags
     currentViewFlag = true;
     departmentFlag = "allDepartments";
@@ -32,13 +38,25 @@
 
     $("input[name=departmentRadio]").change(function () {
 
+        //Btn Flag Reset
+        editEnabled = false;
+        duplicateEnabled = false;
+        deleteEnabled = false;
+
+
         typeRequestLoader();
+
 
         if ($(this).val() == "myDepartments") {
 
             unfilteredRequests = departmenalFilter(true);
 
             $("#selectmod").prop("disabled", false);
+
+            editEnabled = true;
+            duplicateEnabled = true;
+            deleteEnabled = true;
+
 
         }
         else if ($(this).val() == "otherDepartments") {
@@ -60,6 +78,9 @@
         displayReloader();
 
     });
+
+
+    
 
 });
 

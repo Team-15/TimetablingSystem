@@ -2,6 +2,8 @@
 
     listViewGenerator(requestsSet);
     toggleTimeValue(true);
+    setupHeaderScroll(true);
+    
 
 }
 
@@ -123,7 +125,7 @@ function listViewGenerator(requestsArray) {
 
     $("#listContainer").html(listHTML);
     listDetailsGenerator(requestsArray);
-    
+
 }
 
 function listDetailsGenerator(requestsArray) {
@@ -156,7 +158,7 @@ function listDetailsGenerator(requestsArray) {
     }
 
     $(".listEditBtn").click(function () {
-        if (currentViewFlag !== undefined) if (!currentViewFlag) editAdHocFlag = true;
+        if (typeof currentViewFlag !== "undefined") if (!currentViewFlag) editAdHocFlag = true;
         editTransfer(listRequestFinder($(this).attr("data-rID")));
     });
     $(".listDuplicateBtn").click(function () { duplicateTransfer(listRequestFinder($(this).attr("data-rID"))); });
@@ -166,6 +168,7 @@ function listDetailsGenerator(requestsArray) {
         displayReloader();
     });
 
+    listBtnMode();
 }
 
 function toggleTimeValue(time) {
@@ -187,37 +190,59 @@ function listRequestFinder(idVal) {
         
 }
 
-function setupHeaderScroll() {
+function setupHeaderScroll(scrollSwitch) {
     
-    window.onscroll = (function () {
+    if (scrollSwitch) {
 
-        if (window.XMLHttpRequest) {
-            var position = window.pageYOffset;
+        window.onscroll = (function () {
 
-            var elemTop = $(".requestContainerList").offset().top;
+            if (window.XMLHttpRequest) {
+                var position = window.pageYOffset;
 
-            if (position >= (elemTop - 60)) {
+                var elemTop = $(".requestContainerList").offset().top;
 
-                $(".headerContainer").css({
-                    "position": "fixed",
-                    "top": "0",
-                    "left": "50%",
-                    "margin-left": "-469px",
-                    "height": "50px"
-                });
+                if (position >= (elemTop - 60)) {
 
+                    $(".headerContainer").css({
+                        "position": "fixed",
+                        "top": "0",
+                        "left": "50%",
+                        "margin-left": "-469px",
+                        "height": "50px"
+                    });
+
+                }
+                else {
+                    $(".headerContainer").css({
+                        "position": "relative",
+                        "top": "initial",
+                        "left": "auto",
+                        "margin-left": "0px",
+                        "height": "50px"
+                    });
+                }
             }
-            else {
-                $(".headerContainer").css({
-                    "position": "relative",
-                    "top": "initial",
-                    "left": "auto",
-                    "margin-left": "0px",
-                    "height": "50px"
-                });
-            }
-        }
 
-    });
+        });
+
+    }
+    else {
+        window.onscroll = null;
+    }
+
+    
+
+}
+
+function listBtnMode() {
+
+    if (!editEnabled) $(".listEditBtn").prop("disabled", true);
+    else $(".listEditBtn").prop("disabled", false);
+    
+    if (!duplicateEnabled) $(".listDuplicateBtn").prop("disabled", true);
+    else $(".listDuplicateBtn").prop("disabled", false);
+
+    if (!deleteEnabled) $(".listDeleteBtn").prop("disabled", true);
+    else $(".listDeleteBtn").prop("disabled", false);
 
 }

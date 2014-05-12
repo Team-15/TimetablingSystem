@@ -1,5 +1,11 @@
 ﻿$(document).ready(function () {
 
+    //Button Modes
+    editEnabled = true;
+    duplicateEnabled = true;
+    deleteEnabled = true;
+
+
     createStatusList(true);
     performResetAndSetup();
 
@@ -8,6 +14,8 @@
     requestsSet = executeFilters();
 
     displayReloader();
+
+    
 
 });
 
