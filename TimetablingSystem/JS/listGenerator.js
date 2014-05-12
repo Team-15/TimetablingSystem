@@ -74,11 +74,11 @@ function listViewGenerator(requestsArray) {
                     </tr>\
                 </table>";
 
-        listHTML += "<table class='btnTable'>\
+        listHTML += "<table class='btnTable' onclick='return false;'>\
                      <tr>\
-                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Edit' value='edit' /></td>\
-                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Duplicate' value='duplicate' /></td>\
-                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Delete' value='delete' /></td>\
+                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Edit' class='listEditBtn' data-rID='" + requestsArray[rCounter].id + "' value='edit' /></td>\
+                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Duplicate' class='listDuplicateBtn' data-rID='" + requestsArray[rCounter].id + "' value='duplicate' /></td>\
+                        <td class='requestBtn' style='width: 30px;'><input type='button' name='Delete' class='listDeleteBtn' data-rID='" + requestsArray[rCounter].id + "' value='delete' /></td>\
                     </tr>\
                 </table>";
 
@@ -182,7 +182,13 @@ function listDetailsGenerator(requestsArray) {
         document.getElementById("request" + currentReq.id).querySelector(".facData").innerHTML = htmlStringFormater(getFacilityTitles(currentReq.facilities), true);
         document.getElementById("request" + currentReq.id).querySelector(".orData").innerHTML = currentReq.otherReqs;
 
+        
+
     }
+
+    $(".listEditBtn").click(function () { editTransfer(requestFinder($(this).attr("data-rID"))); });
+    $(".listDuplicateBtn").click(function () { duplicateTransfer(requestFinder($(this).attr("data-rID"))); });
+    $(".listDeleteBtn").click(function () { deleteExecute(requestFinder($(this).attr("data-rID"))); });
 
 }
 
@@ -197,4 +203,10 @@ function toggleTimeValue(time) {
 
     }
 
+}
+
+function requestFinder(idVal) {
+
+    for (var rCounter = 0; rCounter < requestsSet.length; rCounter++) if (requestsSet[rCounter].id === parseInt(idVal)) return requestsSet[rCounter];
+        
 }

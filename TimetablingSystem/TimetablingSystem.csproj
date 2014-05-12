@@ -325,7 +325,6 @@
     <Content Include="JS\graphicalGenerator.js" />
     <Content Include="JS\instanceData.js" />
     <Content Include="JS\listGenerator.js" />
-    <Content Include="JS\testA.js" />
     <Content Include="JS\objectDataTypes.js" />
     <Content Include="JS\weeksManipulator.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

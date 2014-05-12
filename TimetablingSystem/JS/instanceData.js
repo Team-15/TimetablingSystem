@@ -292,6 +292,7 @@ function setupModules(modulesData) {
 }
 
 
+
 function getCurrentRoundPercentage() {
     
     var currentDate = new Date();

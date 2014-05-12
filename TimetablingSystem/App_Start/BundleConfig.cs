@@ -13,7 +13,6 @@ namespace TimetablingSystem
             bundles.Add(new ScriptBundle("~/bundles/parent").Include(
 
                     "~/Scripts/bootstrap.js",
-                    "~/JS/testA.js",
                     "~/ViewScripts/parentScript.js",
                     "~/JS/globalConstants.js",
                     "~/JS/globalFunctions.js",

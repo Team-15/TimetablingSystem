@@ -179,3 +179,21 @@ function setupDBRequestModel(request) {
     return jsonRequestData;
 
 }
+
+function editTransfer(editingRequest) {
+    alert(JSON.stringify(editingRequest));
+
+    editRequestFlag = true;
+    temporaryRequestStore = editingRequest;
+
+    $("#addPageBtn").click();
+
+}
+
+function duplicateTransfer(duplicatingRequest) {
+    alert(JSON.stringify(duplicatingRequest));
+}
+
+function deleteExecute(deletingRequest) {
+    alert(JSON.stringify(deletingRequest));
+}
