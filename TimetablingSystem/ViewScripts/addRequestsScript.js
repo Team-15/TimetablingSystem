@@ -233,7 +233,7 @@ function roomListPopulate() {
 //remove room from chosen rooms
 //remove the room div
 function checkedRoomList(checkbox) {
-    disableBookedTimes();
+    //disableBookedTimes(bookedTimesArray); pass this any booked timeslots
     tempStr = "";
     pushID = checkbox.id;
     if ($(checkbox).is(":checked")) {
@@ -254,8 +254,13 @@ function checkedRoomList(checkbox) {
     }
 }
 
-function disableBookedTimes() {
-
+function disableBookedTimes(timeDayBookedArray) {
+    for (var i = 0; i < timeDayBookedArray.length; i++) {
+        tempLength = timeDayBookedArray[i].end + 1;
+        for (var dt = timeDayBookedArray[i].start; dt < tempLength; dt++) {
+            $("#gridCheck-" + timeDayBookedArray[i].day + dt).prop('disabled', true);
+        }
+    }
 }
 
 //stores all the non-facility requirements in the request object
