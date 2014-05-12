@@ -49,7 +49,7 @@ function changeFontSize(element, step) {
 
             var invStyle = document.getElementById("invertStyle");
             head.removeChild(invStyle);
-
+            
         }
     };
 
@@ -59,7 +59,7 @@ function changeFontSize(element, step) {
     } else {
         style.appendChild(document.createTextNode(css));
     }
-
+    
     //injecting the css to the head
-    head.appendChild(style);
+    if (window.counter % 2 != 0) head.appendChild(style);
 }
