@@ -262,10 +262,25 @@ function displayData(request) {
         displayReloader();
     });
 
+    graphicalBtnMode();
+
 }
 
 function graphicalRequestFinder(idVal) {
 
     for (var rCounter = 0; rCounter < requestsSet.length; rCounter++) if (requestsSet[rCounter].id === parseInt(idVal)) return requestsSet[rCounter];
+
+}
+
+function graphicalBtnMode() {
+
+    if (!editEnabled) $(".graphicalEditBtn").prop("disabled", true);
+    else $(".graphicalEditBtn").prop("disabled", false);
+
+    if (!duplicateEnabled) $(".graphicalDuplicateBtn").prop("disabled", true);
+    else $(".graphicalDuplicateBtn").prop("disabled", false);
+
+    if (!deleteEnabled) $(".graphicalDeleteBtn").prop("disabled", true);
+    else $(".graphicalDeleteBtn").prop("disabled", false);
 
 }

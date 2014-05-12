@@ -1,5 +1,11 @@
 ﻿$(document).ready(function () {
 
+    //Button Modes
+    editEnabled = false;
+    duplicateEnabled = true;
+    deleteEnabled = false;
+
+
     performResetAndSetup();
 
     unfilteredRequests = getHistory();
@@ -7,6 +13,8 @@
     requestsSet = executeFilters();
 
     displayReloader();
+
+    
 
 });
 
