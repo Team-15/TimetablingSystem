@@ -566,6 +566,11 @@ function loadInRequest() {
     }
     $("#ORE").val(newRequest.otherReqs);
     $('#PRK').prop('selectedIndex', newRequest.park);
+    tempLength = newRequest.endPeriod + 1;
+    for (var dt = newRequest.startPeriod; dt < tempLength; dt++) {
+        $("#gridCheck-" + newRequest.day + dt).prop('checked', true);
+    }
+
     if (editRequestFlag == true) {
         $("#submitForm").val("update request");
         $("#NOR").val(newRequest.noOfRooms);
