@@ -96,6 +96,12 @@ input[type=radio]:checked + label {
 
 }
 
+.gridBox:hover {
+
+    background: #CC0066;
+
+}
+
 .gridLabel {
 
     display: inline;
