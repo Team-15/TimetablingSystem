@@ -233,6 +233,7 @@ function roomListPopulate() {
 //remove room from chosen rooms
 //remove the room div
 function checkedRoomList(checkbox) {
+    disableBookedTimes();
     tempStr = "";
     pushID = checkbox.id;
     if ($(checkbox).is(":checked")) {
@@ -251,6 +252,10 @@ function checkedRoomList(checkbox) {
         newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
+}
+
+function disableBookedTimes() {
+
 }
 
 //stores all the non-facility requirements in the request object
@@ -581,5 +586,9 @@ function loadInRequest() {
             newRequest.rooms.splice(0, 1);
             $(":checkbox[value=" + tempName + "]").click();
         }
+    }
+    if (editAdHocFlag == true) {
+        $("#adhoc").attr("checked", true);
+        $("#adhoc").attr("disabled", true);
     }
 }
