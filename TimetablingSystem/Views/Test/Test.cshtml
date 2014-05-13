@@ -3,7 +3,7 @@
 }
 @Styles.Render("~/Content/testStyle.css")
 <body>
-<div id="bdy" style="font-size:12px;">    <img id="enlargeText" src="~/Images/plusbutton.png" alt="Enlarge Text" onclick="changeFontSize('mainWrapper','2')"/>    <img id="shrinkText" src="~/Images/minusbutton.png" alt="Shrink Text" onclick="changeFontSize('mainWrapper','-2')"/>    <img id="default" src="~/Images/default.png" alt="default" onclick="defaultFont('mainWrapper');"/>    <img id="contrast" src="~/Images/contrast.png" alt="contrast" onclick="negativar()"/>    <p><br /><br />
+<div id="bdy" style="font-size:12px;">    <table>        <tr>    <td id="td1"><img id="enlargeText" src="~/Images/plusbutton.png" alt="Enlarge Text" onclick="changeFontSize('mainWrapper','2')"/></td>    <td id="td2" ><img id="shrinkText" src="~/Images/minusbutton.png" alt="Shrink Text" onclick="changeFontSize('mainWrapper','-2')"/></td>    <td id="td3"><img id="default" src="~/Images/default.png" alt="default" onclick="defaultFont('mainWrapper');"/></td>    <td id="td4"><img id="contrast" src="~/Images/contrast.png" alt="contrast" onclick="negativar()"/></td>        </tr>    </table>    <p><br /><br />
 	This is the test text to increase or decrease.
 </p></div></body>
 

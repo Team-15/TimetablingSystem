@@ -18,3 +18,16 @@ width: 20px;
 height: 20px; 
 }
 
+#td2
+{
+    border-left: solid 1px lightgrey;
+}
+#td3
+{
+    border-left: solid 1px lightgrey;
+}
+#td4
+{
+    border-left: solid 1px lightgrey;
+}
+
