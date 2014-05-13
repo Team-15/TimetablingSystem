@@ -35,6 +35,17 @@
                         <span id="progressText">40 day left until Round Ends</span>
                     </div>
 
+                    <div id="accessibilityContainer">
+                        <table>
+                            <tr>
+                                <td><img id="enlargeText" src="~/Images/plusbutton.png" alt="Enlarge Text" onclick="changeFontSize('mainWrapper','2')" /></td>
+                                <td><img id="default" src="~/Images/default.png" alt="default" onclick="defaultFont('mainWrapper');" /></td>
+                                <td style="padding-right: 5px;"><img id="shrinkText" src="~/Images/minusbutton.png" alt="Shrink Text" onclick="changeFontSize('mainWrapper','-2')" /></td>
+                                <td style="padding-left: 5px; border-left: solid 2px lightgrey;"><img id="contrast" src="~/Images/contrast.png" alt="contrast" onclick="negativar()" /></td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
 
             </header>

@@ -14,6 +14,7 @@ namespace TimetablingSystem
 
                     "~/Scripts/bootstrap.js",
                     "~/ViewScripts/parentScript.js",
+                    "~/JS/accessibilityManager.js",
                     "~/JS/globalConstants.js",
                     "~/JS/globalFunctions.js",
                     "~/JS/instanceData.js",
@@ -61,6 +62,7 @@ namespace TimetablingSystem
                     
                     "~/Content/bootstrap/bootstrap.css",
                     "~/Content/parentStyle.css",
+                    "~/Content/accessibilityStyle.css",
                     "~/Content/filterSectionStyle.css",
                     "~/Content/displayStyle.css",
                     "~/Content/graphicalDisplayStyle.css",

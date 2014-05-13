@@ -231,6 +231,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\accessibilityStyle.css" />
     <Content Include="Content\addRequestStyle.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
@@ -321,6 +322,7 @@
       <LastGenOutput>TimetablingSystemModel.cs</LastGenOutput>
     </Content>
     <Content Include="Images\LboroLogo.png" />
+    <Content Include="JS\accessibilityManager.js" />
     <Content Include="JS\dataManager.js" />
     <Content Include="JS\filteringEngine.js" />
     <Content Include="JS\globalConstants.js" />

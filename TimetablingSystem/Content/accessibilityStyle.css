@@ -1,0 +1,33 @@
+﻿#accessibilityContainer {
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none repeat scroll 0% 0% #FFF;
+    border-radius: 5px;
+
+}
+
+#accessibilityContainer td {
+    padding: 3px 3px;
+}
+
+#contrast { 
+width: 20px; 
+height: 20px; 
+}
+
+#default { 
+width: 20px; 
+height: 20px; 
+}
+
+#shrinkText { 
+width: 20px; 
+height: 20px; 
+}
+
+#enlargeText{ 
+width: 20px; 
+height: 20px; 
+}
