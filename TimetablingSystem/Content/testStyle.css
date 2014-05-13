@@ -22,5 +22,12 @@ height: 20px;
 #td4
 {
     border-left: solid 1px lightgrey;
+    padding-left: 4px;
 }
+
+#td3
+{
+    padding-right: 4px;
+}
+
 

@@ -1,9 +1,19 @@
 ﻿
-.btn-primary {
+
+.btn-default
+{
   color: #fff;
   background-color: rgb(71,51,103);
   border-color: lightgrey;
 }
+.btn-default:hover
+ {
+  background-color:#E657A6;
+ }
+.btn-default:active
+ {
+  background-color:none;
+ }
 #addDiv
 {
 margin-left:auto;

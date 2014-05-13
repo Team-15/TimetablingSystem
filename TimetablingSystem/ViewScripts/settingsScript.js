@@ -98,10 +98,10 @@ function table() {
         tbl += modulesArray[i].title;
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button class="btn btn-primary" id="edit'+i+'" value="'+modulesArray[i].code+'" type="button">Edit</button>'
+        tbl += '<button class="btn btn-default" id="edit'+i+'" value="'+modulesArray[i].code+'" type="button">Edit</button>'
         tbl += '</td>';
         tbl += '<td>';
-        tbl += '<button class="btn btn-primary" id="delete' + i + '" value="' + modulesArray[i].code + '" type="button">Delete</button>'
+        tbl += '<button class="btn btn-default" id="delete' + i + '" value="' + modulesArray[i].code + '" type="button">Delete</button>'
         tbl += '</td>';
         tbl += '</tr>';
 
