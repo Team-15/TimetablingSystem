@@ -4,6 +4,7 @@ $(document).ready(function () {
     tableCreator();
     modulePopulate();
     facilityPopulate();
+    setWeeks(regularWeeks);
     infoStore();
     if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
         loadInRequest();
