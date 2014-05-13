@@ -224,6 +224,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
+    <Compile Include="Models\EditModules.cs" />
+    <Compile Include="Models\NewModule.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

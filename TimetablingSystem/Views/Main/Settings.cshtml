@@ -7,24 +7,30 @@
 
 
 <body>
-    <div>
-        <div>
-            <h3>Module List</h3>
+    <div id="moduleManagementContainer">
+        <div id="modulesListContainer">
+            <h3 class="settingsTitles">Module List</h3>
             <div id="tablediv"></div>
             <br>
         </div>
         <br>
         <div id="addDiv">
-            <h3>Add New Module</h3>
-            Module code<input id="code" type="text" />
-            Module name<input id="name" type="text" />
-            <button class="btn btn-primary" id="addbutton" type="button" name="Submit">Submit</button>
+            <h3 class="settingsTitles" style="margin-left:-100px;">Add New Module</h3>
+            Module Code:<br />
+            <span id="addDeptCode"></span><input id="code" type="text" />
+            <br />
+            <br />
+            Module Title:<br />
+            <input id="name" type="text" />
+            <br />
+            <br />
+            <button class="btn btn-primary" id="addbutton" type="button" name="Add Module">Add Module</button>
         </div>
         <button class='btn btn-primary' id="saveChanges" type="button" name="Save Changes">Save Changes</button>
     </div>
     <br>
     <div id="passwordDiv">
-        <h3>Password management</h3>
+        <h3 class="settingsTitles">Password management</h3>
         Old Password<input id="oldpass" type="password" />
         New Password<input id="newpass" type="password" />
         Confirm New Password<input id="newpassconfirm" type="password" />

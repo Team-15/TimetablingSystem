@@ -130,6 +130,120 @@ namespace TimetablingSystem.DBInterface
 
 
 
+        public HttpResponseMessage PostAddModules(List<NewModule> amList)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                foreach (NewModule nm in amList)
+                {
+
+                    module moduleCheck =
+                        (from mod in _db.modules
+                         where mod.code == nm.code
+                         select mod).FirstOrDefault();
+
+                    if (moduleCheck != null)
+                    {
+
+                        if (!moduleCheck.active)
+                        {
+                            _db.modules.Remove(moduleCheck);
+
+                            _db.SaveChanges();
+                        }
+                        else return Request.CreateErrorResponse(HttpStatusCode.OK, "New modules could not be creatd. \nModule " + moduleCheck.code + " Already Exists");
+                        
+                    }
+
+                    module addNewModule = new module();
+
+                    addNewModule.code = nm.code;
+                    addNewModule.title = nm.title;
+                    addNewModule.deptCode = GetAuthorisedDepartment().code;
+                    addNewModule.active = true;
+
+                    _db.modules.Add(addNewModule);
+                    
+                }
+
+                _db.SaveChanges();
+
+                
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, amList);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", null));
+            return response;
+
+        }
+
+        public HttpResponseMessage PostEditModule(List<EditModules> emList)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                foreach (EditModules em in emList)
+                {
+
+                    module editModule =
+                        (from mod in _db.modules
+                         where mod.code == em.originalCode
+                         select mod).FirstOrDefault();
+
+                    editModule.code = em.newCode;
+                    editModule.title = em.newTitle;
+
+                    _db.Entry(editModule).CurrentValues.SetValues(editModule);
+
+                    _db.SaveChanges();
+
+                }
+           
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, emList);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", null));
+            return response;
+
+        }
+
+        public HttpResponseMessage PostDeleteModules(List<string> dm)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                foreach (string mCode in dm)
+                {
+
+                    module deleteModule =
+                        (from mod in _db.modules
+                         where mod.code == mCode
+                         select mod).FirstOrDefault();
+
+                    deleteModule.active = false;
+
+                    _db.Entry(deleteModule).CurrentValues.SetValues(deleteModule);
+
+                    _db.SaveChanges();
+
+                }
+
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, dm);
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", null));
+            return response;
+
+        }
+
 
 
         protected override void Dispose(bool disposing)

@@ -11,10 +11,11 @@
 
     //changePswd();
 
+    addNewModule();
 });
 
 
-function changePswd() {
+function addNewModule() {
 
     //alert(JSON.stringify(jsonData));
 
@@ -25,29 +26,27 @@ function changePswd() {
         accepts: {
             text: "application/json"
         },
-        data: JSON.stringify({
-            currentPassword: "password",
-            newPassword: "w6vnh4n",
-            confirmPassword: "w6vnh4n"
-        }),
+        data: JSON.stringify([{
+            code: "COX123",
+            title: "Test X"
+        }]),
         async: false,
         success: function (results) {
             
             if (results.Message != null) {
                 alert(results.Message);
             }
-            else alert("Password Changed");
+            else alert("Changes Have Been Saved");
 
-            
         },
         error: function (results) {
-            alert("Password does not match the confirm password.");
+            alert("New modules creation failed");
             console.log(JSON.stringify(results));
         },
-        url: "api/deptmod/PostChangePassword",
+        url: "api/deptmod/PostAddModules",
         processData: false
     });
-
+    
 }
 
 
