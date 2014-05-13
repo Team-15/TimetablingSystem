@@ -129,6 +129,84 @@ function add() {
 
 }
 
+
+function edit(index, mCode) {
+
+    var tempCode = getEditedCode(index);
+
+    if (tempCode === null) return;
+
+    var tempTitle = getEditedTitle(index);
+
+    if (tempTitle === null) return;
+
+    tempCode = department + tempCode;
+
+    modulesArray[index].code = tempCode;
+    modulesArray[index].title = tempTitle;
+
+    table();
+
+    editedModules.push({
+        originalCode: mCode,
+        newCode: tempCode,
+        newTitle: tempTitle
+    });
+    
+}
+
+function getEditedCode(index) {
+
+    var continueLoop = true;
+
+    var newCode = "";
+
+    var wholeCode = modulesArray[index].code;
+    var pos = wholeCode.indexOf(department);
+
+    var partCode = wholeCode.substring((pos + department.length), wholeCode.length);
+
+    do {
+
+        var input = window.prompt("Please enter the Characters of the new Code \nfollowing " + department + ":", partCode);
+
+        if ((input === null) || (input.length !== 0)) {
+            continueLoop = false;
+            newCode = input;
+        }
+        else alert("Invalid Code");
+
+    } while (continueLoop);
+
+
+    return newCode;
+
+}
+
+function getEditedTitle(index) {
+
+    var continueLoop = true;
+
+    var newTitle = "";
+
+    do {
+
+        var input = window.prompt("Please enter the new Title", modulesArray[index].title);
+
+        if ((input === null) || (input.length !== 0)) {
+            continueLoop = false;
+            newTitle = input;
+        }
+        else alert("Invalid Title");
+
+    } while (continueLoop);
+
+
+    return newTitle;
+
+}
+
+
 function remove(index, mCode) {
     deleteModules.push({
         deleteCode: mCode
@@ -137,24 +215,6 @@ function remove(index, mCode) {
     table();
 
 }
-
-function edit(index, mCode) {
-    var tempCode = window.prompt("Please enter the new Code", modulesArray[index].code);
-
-    if (tempCode != null) modulesArray[index].code = tempCode;
-
-    var tempTitle = window.prompt("Please enter the new Title", modulesArray[index].title);
-
-    if (tempTitle != null) modulesArray[index].title = tempTitle;
-    table();
-    editedModules.push({
-        originalCode: mCode,
-        newCode: modulesArray[index].code,
-        newTitle: modulesArray[index].title
-    });
-}
-
-
 
 
 function setupDelete() {
@@ -171,7 +231,7 @@ function setupEdit() {
     for (var i = 0; i < modulesArray.length; i++) {
         $("#edit" + i).data("index", i);
         $("#edit" + i).click(function () {
-            edit($(this).data("index"),$(this).val());
+            edit($(this).data("index"), $(this).val());
         });
     }
 }
