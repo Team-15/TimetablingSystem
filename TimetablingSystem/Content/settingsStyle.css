@@ -7,6 +7,7 @@
 
 
 .settingsTitles {
+ 
  text-align:center;
 }
 
@@ -73,11 +74,14 @@ padding-left:10px !important;
 #addDiv
 {
     position: absolute;
-    top: 50px;
+    top: 63px;
     right: 20px;
     width: 350px;
+    height:290px;
 
-    padding-left: 70px;
+
+    border: 2px solid lightgrey;
+    text-align:center;
     
 }
 
@@ -102,5 +106,26 @@ padding-left:10px !important;
 
     margin-left:auto;
     margin-right:auto;
-    text-align:center;
+    
+    
+}
+#passdivbox
+{
+ padding-left:10%;
+}
+
+
+oldpass
+{
+ padding:4px;
+}
+
+newpass
+{
+ padding:4px;
+}
+
+newpassconfirm
+{
+ padding:4px;
 }
