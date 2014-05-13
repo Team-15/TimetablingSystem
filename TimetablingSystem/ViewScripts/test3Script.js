@@ -5,85 +5,15 @@
     requestsSet = [];
 
 
-    requestsSet = testRequestList();
+    //requestsSet = testRequestList();
 
-    //updateRequest(setupDBRequestModel(requestsSet[0]));
+    var weeksNeeded = [true, false, true, true, true, false, true, true, true, true, true, true, false, false, false];
 
-    //changePswd();
+    //var requestBookedTimes = availabilityFilter(["CC.1.11", "J.0.01", "J.0.02", "A.0.02"], weeksNeeded, true);
 
-    //addNewModule();
+    //alert(JSON.stringify(requestBookedTimes));
+
 });
-
-
-function addNewModule() {
-
-    //alert(JSON.stringify(jsonData));
-
-    $.ajax({
-        type: "POST",
-        datatype: "JSON",
-        contentType: "application/json;charset=utf-8",
-        accepts: {
-            text: "application/json"
-        },
-        data: JSON.stringify([{
-            code: "COX123",
-            title: "Test X"
-        }]),
-        async: false,
-        success: function (results) {
-            
-            if (results.Message != null) {
-                alert(results.Message);
-            }
-            else alert("Changes Have Been Saved");
-
-        },
-        error: function (results) {
-            alert("New modules creation failed");
-            console.log(JSON.stringify(results));
-        },
-        url: "api/deptmod/PostAddModules",
-        processData: false
-    });
-    
-}
-
-
-
-
-
-
-
-
-
-
-function updateRequest(jsonData) {
-
-    alert(JSON.stringify(jsonData));
-
-    $.ajax({
-        type: "POST",
-        datatype: "JSON",
-        contentType: "application/json;charset=utf-8",
-        accepts: {
-            text: "application/json"
-        },
-        data: JSON.stringify(jsonData),
-        async: false,
-        success: function (results) {
-            alert("request submission successful");
-            alert(results);
-        },
-        error: function (results) {
-            alert("request submission failed");
-            alert(JSON.stringify(results));
-        },
-        url: "api/request/PostUpdateRequest",
-        processData: false
-    });
-
-}
 
 function testFacilities() {
 

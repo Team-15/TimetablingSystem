@@ -323,6 +323,7 @@
     </Content>
     <Content Include="Images\LboroLogo.png" />
     <Content Include="JS\accessibilityManager.js" />
+    <Content Include="JS\bookingsManager.js" />
     <Content Include="JS\dataManager.js" />
     <Content Include="JS\filteringEngine.js" />
     <Content Include="JS\globalConstants.js" />

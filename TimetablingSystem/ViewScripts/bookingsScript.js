@@ -11,8 +11,6 @@
     departmentFlag = "allDepartments";
     
 
-    allModules = getAllModules();
-
     performResetAndSetup();
 
     unfilteredRequests = getBookings();
@@ -83,64 +81,6 @@
     
 
 });
-
-function getAllModules() {
-
-    var mArray = [];
-
-    $.ajax({
-        url: "api/deptmod/GetAllModules",
-        type: "GET",
-        datatype: "JSON",
-        data: {},
-        async: false,
-        success: function (results) {
-            mArray = setupModules(results);
-        }
-    });
-
-    return mArray;
-
-}
-
-function getBookings() {
-
-    var requests = [];
-
-    $.ajax({
-        url: "api/request/GetBookings",
-        type: "GET",
-        datatype: "JSON",
-        data: {},
-        async: false,
-        success: function (results) {
-            requests = translateJsonRequestOtherDepartments(results, allModules);
-        }
-    });
-
-    return requests;
-
-}
-
-function getAdHocBookings() {
-
-    var requests = [];
-
-    $.ajax({
-        url: "api/request/GetAdHocBookings",
-        type: "GET",
-        datatype: "JSON",
-        data: {},
-        async: false,
-        success: function (results) {
-            requests = translateJsonRequestOtherDepartments(results, allModules);
-        }
-    });
-
-    return requests;
-
-}
-
 
 function refreshLoad() {
     typeRequestLoader();

@@ -21,6 +21,7 @@ namespace TimetablingSystem
                     "~/JS/objectDataTypes.js",
                     "~/JS/weeksManipulator.js",
                     "~/JS/dataManager.js",
+                    "~/JS/bookingsManager.js",
                     "~/JS/graphicalGenerator.js",
                     "~/JS/listGenerator.js",
                     "~/JS/filteringEngine.js"
