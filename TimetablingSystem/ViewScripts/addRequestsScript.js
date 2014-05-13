@@ -132,7 +132,7 @@ function facilityPopulate() {
     }
     tempStr += "</select>Room number: <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
 
-    tempStr += "<tr><td>Number of students: <input class='form-control' type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
+    tempStr += "<tr><td>Number of students: <input class='form-control' type='number' id='CAP' min=0 max=150 onchange='infoStore()' onclick='infoStore()' value='0'></td>";
     tempStr += "<td>Other requirements: <input class='form-control' type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
 
     tempStr += "</select></td></tr></table>";
@@ -279,8 +279,11 @@ function disableBookedTimes() {
 
 //stores all the non-facility requirements in the request object
 function infoStore() {
+    if ($("#CAP").val() == '') {
+        $("#CAP").val(0);
+    }
     var tempStudents = $("#CAP").val();
-    tempStudents = tempStudents.replace(/[^0-9]/g, '');
+    //tempStudents = tempStudents.replace(/[^0-9]/g, '');
     newRequest.students = parseInt(tempStudents, 10);
     newRequest.park = $('#PRK').get(0).selectedIndex;
     newRequest.sessionType = $('#RMT').get(0).selectedIndex;
