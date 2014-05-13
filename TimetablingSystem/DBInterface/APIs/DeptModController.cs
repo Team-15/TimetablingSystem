@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using TimetablingSystem.Models;
 
 namespace TimetablingSystem.DBInterface
 {
@@ -42,6 +43,49 @@ namespace TimetablingSystem.DBInterface
 
         }
 
+
+        public HttpResponseMessage PostChangePassword(Models.PasswordModel pm)
+        {
+
+            Authentication auth = new Authentication();
+
+            string deptCode = GetAuthorisedDepartment().code;
+
+            bool correctPassword = auth.ValidateUser(deptCode, pm.currentPassword);
+
+            if (correctPassword)
+            {
+
+                if (ModelState.IsValid)
+                {
+
+                    department dept =
+                        (from d in _db.departments
+                         where d.code == deptCode
+                         select d).FirstOrDefault();
+
+                    string deptSalt = dept.salt;
+
+                    string newDeptPassword = auth.HashPassword(pm.newPassword, deptSalt);
+
+                    dept.hashedPassword = newDeptPassword;
+
+                    _db.Entry(dept).CurrentValues.SetValues(dept);
+
+                    _db.SaveChanges();
+
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pm);
+                    response.Headers.Location = new Uri(Url.Link("DefaultApi", null));
+                    return response;
+
+                }
+                else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            }
+            else return Request.CreateErrorResponse(HttpStatusCode.OK, "Invalid Password");
+
+        }
+        
 
 
         public IEnumerable<module> GetActiveModules()
@@ -83,6 +127,10 @@ namespace TimetablingSystem.DBInterface
             return moduleList;
 
         }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -7,24 +7,28 @@
 
 
 <body>
-    <div><h3>Module List</h3></div>
-    <div id="tablediv"></div>
-    <br>
-    <button class='btn btn-primary' id="saveChanges" type="button">Save Changes</button>
-    <br>
-    <div id="addDiv">
-        <h3>Add New Module</h3>
-        Module code<input id="code" type="text"></input>
-        Module name<input id="name" type="text"></input>
-        <button class='btn btn-primary'" id="addbutton" type="button">Submit</button>
+    <div>
+        <div>
+            <h3>Module List</h3>
+            <div id="tablediv"></div>
+            <br>
+        </div>
+        <br>
+        <div id="addDiv">
+            <h3>Add New Module</h3>
+            Module code<input id="code" type="text" />
+            Module name<input id="name" type="text" />
+            <button class="btn btn-primary" id="addbutton" type="button" name="Submit">Submit</button>
+        </div>
+        <button class='btn btn-primary' id="saveChanges" type="button" name="Save Changes">Save Changes</button>
     </div>
     <br>
     <div id="passwordDiv">
         <h3>Password management</h3>
-        Old Password<input id="oldpass" type="text"></input>
-        New Password<input id="newpass" type="text"></input>
-        Confirm New Password<input id="newpass1" type="text"></input>
-        <button class='btn btn-primary' id="resetbutton" type="button">Change Password</button>
+        Old Password<input id="oldpass" type="password" />
+        New Password<input id="newpass" type="password" />
+        Confirm New Password<input id="newpassconfirm" type="password" />
+        <button class='btn btn-primary' id="chngePwdBtn" type="button">Change Password</button>
     </div>
     
 

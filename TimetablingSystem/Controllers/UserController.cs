@@ -8,12 +8,15 @@ using System.Security.Cryptography;
 using System.Globalization;
 using TimetablingSystem.DBInterface;
 using System.Web.Security;
+using TimetablingSystem.Models;
 
 namespace TimetablingSystem.Controllers
 {
     
     public class UserController : Controller
     {
+
+        private Authentication auth = new Authentication();
 
         [HttpGet]
         public ActionResult LogIn()
@@ -73,9 +76,9 @@ namespace TimetablingSystem.Controllers
 
                 foreach (DBInterface.department dept in deptList)
                 {
-                    
-                    dept.salt = GenerateSalt();
-                    dept.hashedPassword = HashPassword("w6vnh4n", dept.salt);
+
+                    dept.salt = auth.GenerateSalt();
+                    dept.hashedPassword = auth.HashPassword("w6vnh4n", dept.salt);
                     
                 }
 
@@ -112,48 +115,15 @@ namespace TimetablingSystem.Controllers
 
         private bool UserValidator(string username, string password) 
         {
-
+            
             bool valid = false;
 
-            department user = null;
+            bool state = auth.ValidateUser(username, password);
 
-            using (TimetablingSystemContext _db = new TimetablingSystemContext())
-            {
-                user = _db.departments.FirstOrDefault(d => d.code == username);
-                
-            }
-
-            string hashedUserInput = HashPassword(password, user.salt);
-
-            if (user != null)
-            {
-                if (user.hashedPassword == hashedUserInput) valid = true;
-                else ModelState.AddModelError("password", "The Password is Incorrect");
-            }
+            if (state) valid = true;
+            else ModelState.AddModelError("password", "The Password is Incorrect");
             
             return valid;
-
-        }
-
-        private static string GenerateSalt() {
-
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] saltBytes = new byte[4];
-            rng.GetNonZeroBytes(saltBytes);
-
-            return Convert.ToBase64String(saltBytes);
-
-        }
-
-        private static string HashPassword(string password, string salt) {
-
-            string saltedPassword = salt + password;
-            Byte[] passwordBytes = Encoding.UTF8.GetBytes(saltedPassword);
-
-            HashAlgorithm encoder = new SHA256CryptoServiceProvider();
-            Byte[] hashedPassword = encoder.ComputeHash(passwordBytes);
-            
-            return BitConverter.ToString(hashedPassword);
 
         }
 

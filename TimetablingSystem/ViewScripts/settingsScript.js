@@ -1,10 +1,4 @@
-﻿var modulesArray = null;
-var oldpass1 = "";
-var newpass = "";
-var newpass1 = "";
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     editedModules = [];
     deleteModules = [];
@@ -30,48 +24,61 @@ $(document).ready(function () {
         }
     });
 
-    $("#resetbutton").click(function () {
-        reset();
+    $("#chngePwdBtn").click(function () {
+        changePassword();
     });
 
 
 
 });
 
-function setupDummyModules() {
+function changePassword() {
 
-    var module0 = new Module();
+    var current = $('#oldpass').val();
+    var newpass = $('#newpass').val();
+    var newpassconfirm = $('#newpassconfirm').val();
 
-    module0.code = "COA123";
-    module0.title = "Test module 1";
-    module0.deptCode = "CO";
-    module0.active = true;
+    changePasswordAJAX(current, newpass, newpassconfirm);
 
-    var module1 = new Module();
+    $('#oldpass').val("");
+    $('#newpass').val("");
+    $('#newpassconfirm').val("");
 
-    module1.code = "COA124";
-    module1.title = "Test module 2";
-    module1.deptCode = "CO";
-    module1.active = true;
-
-    var module2 = new Module();
-
-    module2.code = "COA125";
-    module2.title = "Test module 3";
-    module2.deptCode = "CO";
-    module2.active = true;
-
-    var module3 = new Module();
-
-    module3.code = "COA126";
-    module3.title = "Test module 4";
-    module3.deptCode = "CO";
-    module3.active = true;
-
-    return [module0, module1, module2, module3];
-    
 }
 
+function changePasswordAJAX(oldPwd, newPwd, confirmPwd) {
+
+    $.ajax({
+        type: "POST",
+        datatype: "JSON",
+        contentType: "application/json;charset=utf-8",
+        accepts: {
+            text: "application/json"
+        },
+        data: JSON.stringify({
+            currentPassword: oldPwd,
+            newPassword: newPwd,
+            confirmPassword: confirmPwd
+        }),
+        async: false,
+        success: function (results) {
+
+            if (results.Message != null) {
+                alert(results.Message);
+            }
+            else alert("Password Changed");
+
+
+        },
+        error: function (results) {
+            alert("Password does not match the confirm password.");
+            console.log(JSON.stringify(results));
+        },
+        url: "api/deptmod/PostChangePassword",
+        processData: false
+    });
+
+}
 
 
 
@@ -147,48 +154,6 @@ function edit(index, mCode) {
     });
 }
 
-
-
-
-
-/*
-function reset1() {
-    newpass = window.prompt("Please enter your new password");
-    newpass1 = window.prompt("Please confirm your new password");
-
-    if (newpass != newpass1) {
-        alert("Passwords do not match please try again");
-        reset1();
-
-    }
-    else {
-        alert("Your password has been changed")
-        pass = newpass
-    }
-}
-*/
-
-function reset() {
-    oldpass1 = $('#oldpass').val();;
-    newpass = $('#newpass').val();
-    newpass1 = $('#newpass1').val()
-
-    if (oldpass1 != "oldpass") {
-        alert("Incorrect Password, Please try again");
-    }
-    else {
-        if (newpass.length != 0 && newpass1 != 0) {
-            if (newpass == newpass1) {
-                alert("Password has been changed");
-            }
-            else {
-                alert("Passwords do not match")
-            }
-        }
-        else { alert("Please enter your new password")}
-    }
-
-}
 
 
 

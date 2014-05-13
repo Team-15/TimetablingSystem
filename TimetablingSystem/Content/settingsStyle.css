@@ -25,6 +25,7 @@ overflow : auto;
 margin-left: auto;
 margin-right: auto;
 width:50%;
+border: 1px solid black;
 }
 
 #moduleTable td
