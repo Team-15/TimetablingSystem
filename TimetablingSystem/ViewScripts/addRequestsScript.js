@@ -120,8 +120,7 @@ function facilityPopulate() {
     tempStr += "<tr><td>Priority: <input style='display:none' type='radio' id='PRT' name='priority' value='true' onchange='infoStore()' onclick='infoStore()'><label for='PRT' class='btn btn-default'>yes</label><input style='display:none' type='radio' checked='checked' id='PRF' name='priority' value='false' onchange='infoStore()' onclick='infoStore()'><label for='PRF' class='btn btn-default'>no</label></td>";
     tempStr += "<td>Type:<input style='display:none' type='radio' id='TRD' name='type' checked='checked' value='true' onchange='infoStore()' onclick='infoStore()'><label for='TRD' class='btn btn-default'>traditional</label><input style='display:none' type='radio' id='SMR' name='type' value='false' onchange='infoStore()' onclick='infoStore()'><label for='SMR' class='btn btn-default'>seminar</label></td></tr>";
 
-    tempStr += "<tr><td>Number of students: <input class='form-control' type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
-    tempStr += "<td>Other requirements: <input class='form-control' type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
+   
     tempStr += "<tr><td>Park: <select class='form-control' id='PRK' onchange='infoStore()' onclick='infoStore()'>";
     for (var j = 0; j < parksArray.length; j++) {
         tempStr += "<option value='" + parksArray[j] + "'>" + parksArray[j] + "</option>";
@@ -131,6 +130,9 @@ function facilityPopulate() {
         tempStr += "<option value='" + sessionTypesArray[k] + "'>" + sessionTypesArray[k] + "</option>";
     }
     tempStr += "</select>Room number: <select class='form-control' id='NOR' onchange='infoStore()' onclick='infoStore()'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select></td></tr>"; //FIXME dynamic # of rooms?    
+
+    tempStr += "<tr><td>Number of students: <input class='form-control' type='textbox' id='CAP' onchange='infoStore()' onclick='infoStore()' value='0'></td>";
+    tempStr += "<td>Other requirements: <input class='form-control' type='textbox' onchange='infoStore()' onclick='infoStore()' id='ORE'></td></tr>";
 
     tempStr += "</select></td></tr></table>";
     $("#propertiesBox").append(tempStr);
