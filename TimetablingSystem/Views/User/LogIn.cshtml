@@ -11,10 +11,8 @@
 { 
     
     <div>
-
         <fieldset>
 
-            <legend></legend>
             <div>@Html.LabelFor(user => user.username)</div>
             <div>
                 @*@Html.TextBoxFor(user => user.username)*@
@@ -27,7 +25,6 @@
                 @Html.PasswordFor(user => user.password)
                 <div class="errorMessage">@Html.ValidationMessageFor(user => user.password)</div>
             </div>
-            <br />
             <input class="btn btn-default" type="submit" name="Login" value="Log In" />
 
         </fieldset>
