@@ -29,7 +29,7 @@ function weekCreator() {
     var tempStr = "";
     tempStr += "<table class = ''><tr><td>Weeks: ";
     for (var i = 0; i < numberOfWeeks; i++) {
-        tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick=''><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
+        tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick='infoStore()'><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
     }
     tempStr += "&nbsp;|&nbsp;";
     tempStr += "</td><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
@@ -236,7 +236,7 @@ function roomListPopulate() {
 //remove room from chosen rooms
 //remove the room div
 function checkedRoomList(checkbox) {
-    //disableBookedTimes(bookedTimesArray); pass this any booked timeslots
+
     tempStr = "";
     pushID = checkbox.id;
     if ($(checkbox).is(":checked")) {
@@ -255,15 +255,25 @@ function checkedRoomList(checkbox) {
         newRequest.rooms.splice(newRequest.rooms.indexOf(pushID), 1);
         $("#divPicked-" + checkbox.id.split('.').join("")).remove();
     }
+    disableBookedTimes();
 }
 
-function disableBookedTimes(timeDayBookedArray) {
+function disableBookedTimes() {
+    var isNormal;
+    if ($("#adhoc").prop('checked') == true) {
+        isNormal = false;
+    } else {
+        isNormal = true;
+    }
+
+    var timeDayBookedArray = availabilityFilter(newRequest.rooms, newRequest.weeks, isNormal);
     for (var i = 0; i < timeDayBookedArray.length; i++) {
         tempLength = timeDayBookedArray[i].end + 1;
         for (var dt = timeDayBookedArray[i].start; dt < tempLength; dt++) {
             $("#gridCheck-" + timeDayBookedArray[i].day + dt).prop('disabled', true);
         }
     }
+    $("#gridCheck-01").prop('disabled', true);
 }
 
 //stores all the non-facility requirements in the request object
@@ -304,6 +314,7 @@ function infoStore() {
     }
     buildingPopulate();
     roomListPopulate();
+    disableBookedTimes();
 }
 
 //keeps the dual-module dropdowns the same
@@ -535,6 +546,7 @@ function setWeeks(weeksChosen) {
             }
         }
     }
+    infoStore();
 }
 
 //clears checked tickboxes of rooms selected
