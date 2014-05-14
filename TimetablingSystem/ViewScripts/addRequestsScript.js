@@ -274,7 +274,6 @@ function disableBookedTimes() {
             $("#gridCheck-" + timeDayBookedArray[i].day + dt).prop('disabled', true);
         }
     }
-    $("#gridCheck-01").prop('disabled', true);
 }
 
 //stores all the non-facility requirements in the request object
@@ -458,6 +457,11 @@ function multiRequestGen(timeDayArray) {
         } else {
             addCurrentRequest(temp);
         }
+    }
+    if ($('#adhoc').prop('checked', true)) {
+        $("#bookingsPageBtn").click();
+    } else {
+        $("#requestsPageBtn").click();
     }
 }
 
