@@ -33,12 +33,15 @@
     flex-wrap: nowrap;
 
     flex: 1 0 auto;
+    -webkit-flex: 1 0 auto;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
 
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     
 
     padding-left: 10px;

@@ -6,11 +6,14 @@
     display: -webkit-flex;
 
     flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
     flex-direction: column;
     flex-wrap: nowrap;
 
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: center;
+    -webkit-align-items: center;
 
     width: 950px;
 
@@ -131,6 +134,7 @@
     display: flex;
     display: flexbox;
     display: -webkit-box;
+    display: -webkit-flex;
 }
 
 .mainTable, .btnTable{
