@@ -1,7 +1,14 @@
 ﻿#listContainer {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-flow: column nowrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
     justify-content: center;
     align-items: center;
 
@@ -115,6 +122,10 @@
 
 .requestHeader {
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     background: aliceblue;
 }
 

@@ -1,7 +1,14 @@
 ﻿.filtersContainer {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-flow: row  nowrap;
+    -webkit-flex-flow: row nowrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
     height: 120px;
     width: 950px;
@@ -16,10 +23,23 @@
 .filterGroup {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
     flex: 1 0 auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+
     justify-content: center;
     align-items: flex-start;
+    
 
     padding-left: 10px;
 

@@ -1,6 +1,10 @@
 ﻿#graphicalContainer {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     align-items: flex-start;
 
     width: 950px;
@@ -11,7 +15,15 @@
 #infoSection {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex: 1 0 auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+
     align-items: center;
 
     width:240px;
@@ -22,7 +34,13 @@
 #detailsContainer {
 
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-flow: column nowrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
     width: 230px;
     margin: 5px;
@@ -36,9 +54,16 @@
 
 .dataRow {
     
-    min-height: 40px;
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-flow: row nowrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    min-height: 40px;
 
     justify-content: center;
     align-items: center;
@@ -51,6 +76,10 @@
 .dataTitle {
     
     display: flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex-wrap: wrap;
     justify-content: center;
     align-items:center;
@@ -72,7 +101,15 @@
 .dataContent {
 
     display:flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex:1 0 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+
     flex-wrap: wrap;
     justify-content: center;
     align-items:center;
@@ -85,7 +122,15 @@
 .dataBtn {
 
     display:flex;
+    display: flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+
     flex:1 0 auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+
     justify-content: center;
     align-items: center;
 
@@ -115,16 +160,21 @@
 #graphicalSection {
     
     flex: 1 0 auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
 
     width: 710px;
-
-    //border: 1px solid black;
 
 }
 
 .daySection {
     
     display: inline-flex;
+    display: inline-flexbox;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+
     align-items: center;
 
     margin:2px;
