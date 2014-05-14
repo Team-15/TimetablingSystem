@@ -221,12 +221,18 @@
     text-decoration: none;
     color: white;
 
+    border-radius: 3px;
+
+    outline: none;
+
 }
 
 #navSection ul li:hover,  #navSection ul li a:hover{
     
     color: #ef0279;
     background-color: white;
+
+    border-radius: 3px;
 
 }
 

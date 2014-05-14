@@ -57,6 +57,23 @@ var temporaryRequestStore = null;
 
 // *****************************************************************************
 
+//******Temporary Flag and Store for Room Availability Functionality************
+
+var roomAvailabilityFlag = true;
+
+var roomAvailabilityData = {
+
+    day: 1,
+    start: 2,
+    weeks: [],
+    adhoc: false,
+    roomCode: "J.0.01"
+
+};
+
+// *****************************************************************************
+
+
 function loadInstaceData() {
 
     loadInstance();
