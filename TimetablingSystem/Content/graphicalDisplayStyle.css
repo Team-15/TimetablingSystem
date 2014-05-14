@@ -27,7 +27,10 @@
     width: 230px;
     margin: 5px;
 
-    border: 1px solid black;
+    //color: white;
+
+    border-radius: 5px;
+    border: 2px solid lightgrey;
 
 }
 
@@ -41,7 +44,7 @@
     align-items: center;
     
     
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
 
 }
 
@@ -61,8 +64,8 @@
     font-weight: 600;
     text-decoration: underline;
 
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 
 }
 
@@ -77,8 +80,6 @@
     min-height: 40px;
     padding: 0px 3px 0px 3px;
 
-    //border: 1px solid grey;
-
 }
 
 .dataBtn {
@@ -88,6 +89,26 @@
     justify-content: center;
     align-items: center;
 
+    padding: 0px !important;
+
+    border: none !important;
+}
+
+.dataBtn input[type=button] {
+    
+    height: 30px;
+
+    color: white;
+
+    border-radius: 3px;
+    border: 1px solid lightgrey;
+    
+}
+
+.dataBtn input[type=button]:hover {
+    
+    background: #330066;
+    
 }
 
 
@@ -108,7 +129,8 @@
 
     margin:2px;
 
-    border: 1px solid black;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
 
 }
 
@@ -121,7 +143,7 @@
     text-align: center;
     line-height: 30px;
 
-    border: 1px solid black;
+    font-weight:bold;
 
 }
 
@@ -149,7 +171,8 @@
     
     text-align: center;
 
-    border: 1px solid grey;
+    border-radius: 3px;
+    border: 1px solid lightgrey;
 }
 
 .dayTable [id*="hiddenTD"] {

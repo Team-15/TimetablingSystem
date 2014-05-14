@@ -4,6 +4,7 @@
     editEnabled = true;
     duplicateEnabled = true;
     deleteEnabled = true;
+    displayViewFlag = true;
 
 
     createStatusList(true);

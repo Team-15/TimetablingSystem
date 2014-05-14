@@ -33,3 +33,100 @@
     border: 1px solid lightgrey;
 
 }
+
+
+/* Colour Coding the Requests */
+
+.defaultHeader {
+    color: dimgrey;
+    background: aliceblue;
+}
+
+.defaultDetails {
+    background: lightsteelblue;
+}
+
+.defaultCell {
+    color: black;
+    background: azure;
+}
+
+.defaultBtn {
+    background: dimgrey;
+}
+
+
+.pendingHeader {
+    color: darkblue;
+    background: gainsboro;
+}
+
+.pendingDetails {
+    background: silver;
+}
+
+.pendingCell {
+    color: white;
+    background: lightslategrey;
+}
+
+.pendingBtn {
+    background: darkblue;
+}
+
+
+.allocatedHeader {
+    color: darkgreen;
+    background: palegreen;
+}
+
+.allocatedDetails {
+    background: lightgreen;
+}
+
+.allocatedCell {
+    color: white;
+    background: limegreen;
+}
+
+.allocatedBtn {
+    background: darkgreen;
+}
+
+
+.alternativeHeader {
+    color: orangered;
+    background: moccasin ;
+}
+
+.alternativeDetails {
+    background: khaki;
+}
+
+.alternativeCell {
+    color: white;
+    background: goldenrod;
+}
+
+.alternativeBtn {
+    background: coral;
+}
+
+
+.rejectedHeader {
+    color: darkred;
+    background: lightcoral;
+}
+
+.rejectedDetails {
+    background: salmon;
+}
+
+.rejectedCell {
+    color: white;
+    background: tomato;
+}
+
+.rejectedBtn {
+    background: darkred;
+}

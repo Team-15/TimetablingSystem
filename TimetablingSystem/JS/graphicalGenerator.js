@@ -1,5 +1,39 @@
 ﻿$(document).ready(function () {
 
+    defaultColours = {
+        header: "defaultHeader",
+        detail: "defaultDetails",
+        cell: "defaultCell",
+        btn: "defaultBtn"
+    };
+
+    pendingColours = {
+        header: "pendingHeader",
+        detail: "pendingDetails",
+        cell: "pendingCell",
+        btn: "pendingBtn"
+    };
+
+    allocatedColours = {
+        header: "allocatedHeader",
+        detail: "allocatedDetails",
+        cell: "allocatedCell",
+        btn: "allocatedBtn"
+    };
+
+    alternativeColours = {
+        header: "alternativeHeader",
+        detail: "alternativeDetails",
+        cell: "alternativeCell",
+        btn: "alternativeBtn"
+    };
+
+    rejectedColours = {
+        header: "rejectedHeader",
+        detail: "rejectedDetails",
+        cell: "rejectedCell",
+        btn: "rejectedBtn"
+    };
 
 
 });
@@ -30,7 +64,7 @@ function graphicalDetailsGenerator() {
 
     detailsHTML += "<div id='detailsContainer'>";
 
-    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Department:</div>\
                         <div class='dataContent' id='deptCode'></div>\
                         <div class='dataTitle'>ID:</div>\
@@ -38,71 +72,71 @@ function graphicalDetailsGenerator() {
                     </div>";
 
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Code:</div>\
                         <div class='dataContent' id='modCode'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Title:</div>\
                         <div class='dataContent' id='modTitle'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>P:</div>\
                         <div class='dataContent' id='priority'></div>\
                         <div class='dataTitle'>Status:</div>\
                         <div class='dataContent' id='status'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Allocated<br />Room(s):</div>\
                         <div class='dataContent' id='roomsAlloc'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Room<br />Preference(s):</div>\
                         <div class='dataContent' id='roomsPref'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Weeks:</div>\
                         <div class='dataContent' id='weeks'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Number of Students:</div>\
                         <div class='dataContent' id='noOfStudents'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Number of Rooms:</div>\
                         <div class='dataContent' id='noOfRooms'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: lightblue;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Traditional:</div>\
                         <div class='dataContent' id='traditional'></div>\
                         <div class='dataTitle'>Park:</div>\
                         <div class='dataContent' id='park'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Session Type:</div>\
                         <div class='dataContent' id='sessionType'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Other<br />Requirements:</div>\
                         <div class='dataContent' id='otherRequirements'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataTitle'>Facilities:</div>\
                         <div class='dataContent' id='facilities'></div>\
                     </div>";
 
-    detailsHTML += "<div class='dataRow' style='background: linen;'>\
+    detailsHTML += "<div class='dataRow'>\
                         <div class='dataBtn'> <input type='button' name='Edit' value='Edit' class='graphicalEditBtn'  data-requestid='' /> </div>\
                         <div class='dataBtn'> <input type='button' name='Duplicate' value='Duplicate' class='graphicalDuplicateBtn' data-requestid='' /> </div>\
                         <div class='dataBtn'> <input type='button' name='Delete' value='Delete' class='graphicalDeleteBtn' data-requestid='' /> </div>\
@@ -112,6 +146,8 @@ function graphicalDetailsGenerator() {
     detailsHTML += "</div>";
 
     $("#infoSection").html(detailsHTML);
+
+    $("#detailsContainer").addClass(defaultColours.header);
 
 }
 
@@ -170,7 +206,15 @@ function graphicalViewGenerator(requestsArray) {
 
                     periodCounter += periodShift;
 
-                    graphicalHTML += "<td colspan='" + (periodShift + 1) + "' >";
+                    var statusColour;
+
+                    if (currentRequest.status === 0) statusColour = pendingColours;
+                    else if (currentRequest.status === 1) statusColour = allocatedColours;
+                    else if (currentRequest.status === 2) statusColour = alternativeColours;
+                    else if (currentRequest.status === 3) statusColour = rejectedColours;
+                    else statusColour = defaultColours;
+
+                    graphicalHTML += "<td colspan='" + (periodShift + 1) + "' class='" + statusColour.cell + "' >";
                     graphicalHTML += "<label class='radioLabel'>";
 
 
@@ -267,6 +311,21 @@ function displayData(request) {
         refreshLoad();
         displayReloader();
     });
+
+
+    var statusColour;
+
+    if (request.status === 0) statusColour = pendingColours;
+    else if (request.status === 1) statusColour = allocatedColours;
+    else if (request.status === 2) statusColour = alternativeColours;
+    else if (request.status === 3) statusColour = rejectedColours;
+    else statusColour = defaultColours;
+
+    $("#detailsContainer").removeClass("defaultHeader pendingHeader allocatedHeader alternativeHeader rejectedHeader");
+    $("#detailsContainer").addClass(statusColour.header);
+
+    $("#detailsContainer input[type=button]").removeClass("defaultBtn pendingBtn allocatedBtn alternativeBtn rejectedBtn");
+    $("#detailsContainer input[type=button]").addClass(statusColour.btn);
 
     graphicalBtnMode();
 

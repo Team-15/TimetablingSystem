@@ -4,6 +4,7 @@
     editEnabled = false;
     duplicateEnabled = true;
     deleteEnabled = false;
+    displayViewFlag = true;
 
 
     performResetAndSetup();

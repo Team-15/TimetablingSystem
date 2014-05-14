@@ -7,6 +7,7 @@
 
 
     //Bookings View Flags
+    displayViewFlag = true;
     currentViewFlag = true;
     departmentFlag = "allDepartments";
     
