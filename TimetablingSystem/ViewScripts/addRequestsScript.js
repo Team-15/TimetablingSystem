@@ -6,7 +6,7 @@ $(document).ready(function () {
     facilityPopulate();
     setWeeks(regularWeeks);
     infoStore();
-    if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
+    if ((duplicateRequestFlag == true) || (editRequestFlag == true) || (roomAvailabilityFlag == true)) {
         loadInRequest();
     }
 });
@@ -576,56 +576,91 @@ function removeCheckedRoom(checkbox) {
     $(":checkbox[value=" + $(checkbox).val().split('.').join('') + "]").prop("checked", false);
 }
 
-//loads in request details for duplicate or edit option
+//loads in request details for duplicate, edit or room availability option
 function loadInRequest() {
-    newRequest = temporaryRequestStore;
-    for (var k = 0; k < newRequest.facilities.length; k++) {
-        $("#" + newRequest.facilities[k]).attr('checked', true);
-    }
-    $("#modCodeSelect").val(newRequest.module.code);
-    $("#modTitleSelect").val(newRequest.module.title);
-    $("#CAP").val(newRequest.students);
-    for (var i = 0; i < newRequest.weeks.length; i++) {
-        if (newRequest.weeks[i] == true) {
-            $("#weekChoice" + i).prop("checked", true)
-        } else {
-            $("#weekChoice" + i).prop("checked", false)
-        }
-    }
-    $("#ORE").val(newRequest.otherReqs);
-    $('#PRK').prop('selectedIndex', newRequest.park);
-    tempLength = newRequest.endPeriod + 1;
-    for (var dt = newRequest.startPeriod; dt < tempLength; dt++) {
-        $("#gridCheck-" + newRequest.day + dt).prop('checked', true);
-    }
+    if (roomAvailabilityFlag == true) {
+        newRequest.weeks = roomAvailabilityData.weeks;
+        newRequest.startPeriod = roomAvailabilityData.start;
+        newRequest.endPeriod = roomAvailabilityData.start;
+        newRequest.day = roomAvailabilityData.day;
+        newRequest.rooms.push(roomAvailabilityData.roomCode);
+        $("#adhoc").prop('checked', roomAvailabilityData.adhoc);
 
-    if (editRequestFlag == true) {
-        $("#submitForm").val("update request");
-        $("#NOR").val(newRequest.noOfRooms);
-        if (newRequest.priority == true) {
-            $('#PRT').attr('checked', true);
-        } else {
-            $('#PRF').attr('checked', true);
+        for (var i = 0; i < newRequest.weeks.length; i++) {
+            if (newRequest.weeks[i] == true) {
+                $("#weekChoice" + i).prop("checked", true)
+            } else {
+                $("#weekChoice" + i).prop("checked", false)
+            }
         }
-        if (newRequest.traditional == true) {
-            $('#TRD').attr('checked', true);
-        } else {
-            $('#SMR').attr('checked', true);
-        }
-        $('#RMT').prop('selectedIndex', newRequest.sessionType);
-        infoStore();
+
         for (var j = 0; j < newRequest.rooms.length; j++) {
             tempName = newRequest.rooms[0].split('.').join('');
             newRequest.rooms.splice(0, 1);
             $(":checkbox[value=" + tempName + "]").click();
         }
+
+        tempLength = newRequest.endPeriod + 1;
+        for (var dt = newRequest.startPeriod; dt < tempLength; dt++) {
+            $("#gridCheck-" + newRequest.day + dt).prop('checked', true);
+        }
+
+        if (adhoc == true) {
+            $("#adhoc").attr("checked", true);
+            $("#adhoc").attr("disabled", true);
+        }
+
     }
-    if (editAdHocFlag == true) {
-        $("#adhoc").attr("checked", true);
-        $("#adhoc").attr("disabled", true);
+    if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
+        newRequest = temporaryRequestStore;
+        for (var k = 0; k < newRequest.facilities.length; k++) {
+            $("#" + newRequest.facilities[k]).attr('checked', true);
+        }
+        $("#modCodeSelect").val(newRequest.module.code);
+        $("#modTitleSelect").val(newRequest.module.title);
+        $("#CAP").val(newRequest.students);
+        for (var i = 0; i < newRequest.weeks.length; i++) {
+            if (newRequest.weeks[i] == true) {
+                $("#weekChoice" + i).prop("checked", true)
+            } else {
+                $("#weekChoice" + i).prop("checked", false)
+            }
+        }
+        $("#ORE").val(newRequest.otherReqs);
+        $('#PRK').prop('selectedIndex', newRequest.park);
+        tempLength = newRequest.endPeriod + 1;
+        for (var dt = newRequest.startPeriod; dt < tempLength; dt++) {
+            $("#gridCheck-" + newRequest.day + dt).prop('checked', true);
+        }
+
+        if (editRequestFlag == true) {
+            $("#submitForm").val("update request");
+            $("#NOR").val(newRequest.noOfRooms);
+            if (newRequest.priority == true) {
+                $('#PRT').attr('checked', true);
+            } else {
+                $('#PRF').attr('checked', true);
+            }
+            if (newRequest.traditional == true) {
+                $('#TRD').attr('checked', true);
+            } else {
+                $('#SMR').attr('checked', true);
+            }
+            $('#RMT').prop('selectedIndex', newRequest.sessionType);
+            infoStore();
+            for (var j = 0; j < newRequest.rooms.length; j++) {
+                tempName = newRequest.rooms[0].split('.').join('');
+                newRequest.rooms.splice(0, 1);
+                $(":checkbox[value=" + tempName + "]").click();
+            }
+        }
+        if (editAdHocFlag == true) {
+            $("#adhoc").attr("checked", true);
+            $("#adhoc").attr("disabled", true);
+        }
+        duplicateRequestFlag = false;
+        editRequestFlag = false;
+        editAdHocFlag = false;
+        temporaryRequestStore = null;
     }
-    duplicateRequestFlag = false;
-    editRequestFlag = false;
-    editAdHocFlag = false;
-    temporaryRequestStore = null;
 }
