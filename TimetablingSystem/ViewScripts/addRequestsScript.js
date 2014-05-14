@@ -609,7 +609,6 @@ function loadInRequest() {
             $("#adhoc").attr("checked", true);
             $("#adhoc").attr("disabled", true);
         }
-
     }
     if ((duplicateRequestFlag == true) || (editRequestFlag == true)) {
         newRequest = temporaryRequestStore;
@@ -663,4 +662,6 @@ function loadInRequest() {
         editAdHocFlag = false;
         temporaryRequestStore = null;
     }
+    roomAvailabilityFlag = false;
+    roomAvailabilityData = null;
 }
