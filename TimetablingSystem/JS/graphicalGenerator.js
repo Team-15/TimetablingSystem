@@ -1,4 +1,10 @@
-﻿function generateGraphicalDisplay() {
+﻿$(document).ready(function () {
+
+
+
+});
+
+function generateGraphicalDisplay() {
 
     layoutSetup();
     graphicalDetailsGenerator();

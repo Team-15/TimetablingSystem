@@ -20,7 +20,9 @@
     top: 150px;
     width: 940px;
 
-    background: #330066;
+
+    border-radius: 4px;
+    background: #5904ad;
 
     z-index: 2;
 
@@ -50,8 +52,10 @@
     text-align: center;
     font-weight: bold;
 
-    background: azure;
+    color: #330066;
+    background: white;
 
+    border-radius: 4px;
     border: 1px solid lightgrey;
 
 }
@@ -92,6 +96,7 @@
     transition-delay: 0.1s;
     transition-timing-function: ease;
 
+    border-radius: 4px;
     border: 1px solid lightgrey;
 
 }
@@ -115,8 +120,10 @@
 
 
 .requestHeader {
+    
     display: flex;
-    background: aliceblue;
+    display: flexbox;
+    display: -webkit-box;
 }
 
 .mainTable, .btnTable{
@@ -157,8 +164,7 @@
 
     text-align: center;
 
-    background: azure;
-
+    border-radius: 5px;
     border: 1px solid lightgrey;
 
 }
@@ -176,10 +182,24 @@
     border: none !important;
 }
 
+.requestBtn input[type=button] {
+    
+    height: 30px;
+
+    color: white;
+
+    border-radius: 3px;
+    border: 1px solid lightgrey;
+    
+}
+
+.requestBtn input[type=button]:hover {
+    
+    background: #330066;
+    
+}
 
 .requestDetails {
-
-    background: lightblue;
     
     overflow: hidden;
 
@@ -211,8 +231,7 @@
 
     text-align: center;
 
-    background: azure;
-
+    border-radius: 3px;
     border: 1px solid transparent;
 
 }
@@ -240,4 +259,96 @@
     overflow-y: auto;
     overflow-x: hidden;
 
+}
+
+
+/* Colour Coding the Requests */
+
+.defaultHeader {
+    background: aliceblue;
+}
+
+.defaultDetails {
+    background: lightsteelblue;
+}
+
+.defaultCell {
+    color: black;
+    background: azure;
+}
+
+.defaultBtn {
+    background: dimgrey;
+}
+
+
+.pendingHeader {
+    background: gainsboro;
+}
+
+.pendingDetails {
+    background: silver;
+}
+
+.pendingCell {
+    color: white;
+    background: lightslategrey;
+}
+
+.pendingBtn {
+    background: darkblue;
+}
+
+
+.allocatedHeader {
+    background: palegreen;
+}
+
+.allocatedDetails {
+    background: lightgreen;
+}
+
+.allocatedCell {
+    color: white;
+    background: limegreen;
+}
+
+.allocatedBtn {
+    background: darkgreen;
+}
+
+
+.alternativeHeader {
+    background: moccasin ;
+}
+
+.alternativeDetails {
+    background: khaki;
+}
+
+.alternativeCell {
+    color: white;
+    background: goldenrod;
+}
+
+.alternativeBtn {
+    background: coral;
+}
+
+
+.rejectedHeader {
+    background: lightcoral;
+}
+
+.rejectedDetails {
+    background: salmon;
+}
+
+.rejectedCell {
+    color: white;
+    background: tomato;
+}
+
+.rejectedBtn {
+    background: darkred;
 }

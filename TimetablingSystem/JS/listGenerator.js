@@ -1,4 +1,43 @@
-﻿function generateListDisplay() {
+﻿$(document).ready(function () {
+
+    defaultColours = {
+        header: "defaultHeader",
+        detail: "defaultDetails",
+        cell: "defaultCell",
+        btn: "defaultBtn"
+    };
+
+    pendingColours = {
+        header: "pendingHeader",
+        detail: "pendingDetails",
+        cell: "pendingCell",
+        btn: "pendingBtn"
+    };
+
+    allocatedColours = {
+        header: "allocatedHeader",
+        detail: "allocatedDetails",
+        cell: "allocatedCell",
+        btn: "allocatedBtn"
+    };
+
+    alternativeColours = {
+        header: "alternativeHeader",
+        detail: "alternativeDetails",
+        cell: "alternativeCell",
+        btn: "alternativeBtn"
+    };
+
+    rejectedColours = {
+        header: "rejectedHeader",
+        detail: "rejectedDetails",
+        cell: "rejectedCell",
+        btn: "rejectedBtn"
+    };
+
+});
+
+function generateListDisplay() {
 
     listViewGenerator(requestsSet);
     toggleTimeValue(true);
@@ -153,6 +192,19 @@ function listDetailsGenerator(requestsArray) {
         document.getElementById("request" + currentReq.id).querySelector(".facData").innerHTML = htmlStringFormater(getFacilityTitles(currentReq.facilities), true);
         document.getElementById("request" + currentReq.id).querySelector(".orData").innerHTML = currentReq.otherReqs;
 
+        var statusColour;
+
+        if (currentReq.status === 0) statusColour = pendingColours;
+        else if (currentReq.status === 1) statusColour = allocatedColours;
+        else if (currentReq.status === 2) statusColour = alternativeColours;
+        else if (currentReq.status === 3) statusColour = rejectedColours;
+        else statusColour = defaultColours;
+
+        $("#request" + currentReq.id).find(".requestHeader").addClass(statusColour.header);
+        $("#request" + currentReq.id).find(".requestDetails ").addClass(statusColour.detail);
+        $("#request" + currentReq.id).find(".mainTable td").addClass(statusColour.cell);
+        $("#request" + currentReq.id).find(".detailsTable td").not(".hiddenTD").addClass(statusColour.cell);
+        $("#request" + currentReq.id).find(".btnTable input[type='button']").addClass(statusColour.btn);
         
 
     }
