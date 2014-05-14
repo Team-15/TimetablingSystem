@@ -467,8 +467,6 @@ function multiRequestGen(timeDayArray) {
 //pushes the json-ified data to the database
 function addCurrentRequest(jsonData) {
 
-    alert(JSON.stringify(jsonData));
-
     $.ajax({
         type: "POST",
         datatype: "JSON",
@@ -480,11 +478,10 @@ function addCurrentRequest(jsonData) {
         async: false,
         success: function (results) {
             alert("request submission successful");
-            alert(results);
         },
         error: function (results) {
             alert("request submission failed");
-            alert(JSON.stringify(results));
+
         },
         url: "api/request/PostNewRequest",
         processData: false
@@ -494,7 +491,6 @@ function addCurrentRequest(jsonData) {
 
 function addAdHocRequest(jsonData) {
 
-    alert(JSON.stringify(jsonData));
 
     $.ajax({
         type: "POST",
@@ -507,11 +503,9 @@ function addAdHocRequest(jsonData) {
         async: false,
         success: function (results) {
             alert("request submission successful");
-            alert(results);
         },
         error: function (results) {
             alert("request submission failed");
-            alert(JSON.stringify(results));
         },
         url: "api/request/PostNewAdHocRequest",
         processData: false
