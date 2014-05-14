@@ -13,3 +13,28 @@
     margin: 5px;
 
 }
+
+#selectroom:disabled{
+    background: lightgrey;
+}
+
+.filtersContainer input[type=radio] {
+    display: none;
+}
+
+.filterBtn {
+    
+    color: #FFF;
+    background-color: #473367;
+    border-color: #D3D3D3;
+}
+
+.filterBtn:hover {
+    background-color:#E657A6;
+}
+
+.filtersContainer input[type=radio]:checked + .filterBtn
+{
+    color: white;
+    background-color: #E657A6;
+}
