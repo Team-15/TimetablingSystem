@@ -477,10 +477,10 @@ function addCurrentRequest(jsonData) {
         data: JSON.stringify(jsonData),
         async: false,
         success: function (results) {
-            alert("request submission successful");
+            alert("New Request Successfully Created");
         },
         error: function (results) {
-            alert("request submission failed");
+            alert("New Request Failed to be Created");
 
         },
         url: "api/request/PostNewRequest",
@@ -502,10 +502,10 @@ function addAdHocRequest(jsonData) {
         data: JSON.stringify(jsonData),
         async: false,
         success: function (results) {
-            alert("request submission successful");
+            alert("New Request Successfully Created");
         },
         error: function (results) {
-            alert("request submission failed");
+            alert("New Request Failed to be Created");
         },
         url: "api/request/PostNewAdHocRequest",
         processData: false
