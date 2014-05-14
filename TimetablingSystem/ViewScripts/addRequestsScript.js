@@ -451,13 +451,13 @@ function multiRequestGen(timeDayArray) {
         singleRequest.startPeriod = timeDayArray[i].start;
         singleRequest.endPeriod = timeDayArray[i].end;
         var temp = setupDBRequestModel(singleRequest);
-        if ($('#adhoc').prop('checked', true)) {
+        if ($('#adhoc').prop('checked')) {
             addAdHocRequest(temp);
         } else {
             addCurrentRequest(temp);
         }
     }
-    if ($('#adhoc').prop('checked', true)) {
+    if ($('#adhoc').prop('checked')) {
         $("#bookingsPageBtn").click();
     } else {
         $("#requestsPageBtn").click();
@@ -577,8 +577,17 @@ function loadInRequest() {
         newRequest.startPeriod = roomAvailabilityData.start;
         newRequest.endPeriod = roomAvailabilityData.start;
         newRequest.day = roomAvailabilityData.day;
+        //newRequest.traditonal = roomAvailabilityData.traditional;
+        //newRequest.sessionType = roomAvailabilityData.sessionType;
         newRequest.rooms.push(roomAvailabilityData.roomCode);
         $("#adhoc").prop('checked', roomAvailabilityData.adhoc);
+
+        //if (newRequest.traditional == true) {
+        //    $('#TRD').attr('checked', true);
+        //} else {
+        //    $('#SMR').attr('checked', true);
+        //}
+        //$('#RMT').prop('selectedIndex', newRequest.sessionType);
 
         for (var i = 0; i < newRequest.weeks.length; i++) {
             if (newRequest.weeks[i] == true) {
