@@ -40,6 +40,7 @@ border:1px solid lightgrey;
 text-align:center;
 border-bottom:none;
 }
+
 #weekSelect
 {
 border:1px solid lightgrey;
@@ -62,10 +63,12 @@ padding:5px;
   background-color: rgb(71,51,103);
   border-color: lightgrey;
 }
+
     .btn-default:hover
     {
         background-color:#E657A6;
     }
+
     .btn-default:active
     {
         background-color:none;
@@ -104,21 +107,17 @@ input[type=radio]:checked + label {
 
 .gridLabel {
 
-    display: inline;
+    display: inline-block;
     height: 100%;
     width: 100%;
-
+    margin: 0px;
 }
  
 .gridLabel input[type=checkbox] {
         display: none;
         visibility: hidden;
 }
+
 .gridLabel input[type=checkbox]:checked~ .gridBox{
         background: purple;
-}
-
-.stretch
-{
- 
 }
