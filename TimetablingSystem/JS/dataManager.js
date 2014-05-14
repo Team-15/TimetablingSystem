@@ -174,15 +174,13 @@ function setupDBRequestModel(request) {
     }
 
 
-    alert(JSON.stringify(jsonRequestData));
+    console.log(JSON.stringify(jsonRequestData));
 
     return jsonRequestData;
 
 }
 
 function editTransfer(editingRequest) {
-
-    alert(JSON.stringify(editingRequest));
 
     editRequestFlag = true;
     temporaryRequestStore = editingRequest;
@@ -193,8 +191,6 @@ function editTransfer(editingRequest) {
 
 function duplicateTransfer(duplicatingRequest) {
 
-    alert(JSON.stringify(duplicatingRequest));
-
     duplicateRequestFlag = true;
     temporaryRequestStore = duplicatingRequest;
 
@@ -203,7 +199,6 @@ function duplicateTransfer(duplicatingRequest) {
 }
 
 function deleteExecute(deletingRequest) {
-    alert(JSON.stringify(deletingRequest));
 
     deleteRequest(setupDBRequestModel(deletingRequest));
 
@@ -223,12 +218,12 @@ function deleteRequest(jsonData) {
         data: JSON.stringify(jsonData),
         async: false,
         success: function (results) {
-            alert("request deletion successful");
-            alert(results);
+            alert("Request Deletion Successful");
+            console.log(results);
         },
         error: function (results) {
-            alert("request deletion failed");
-            alert(JSON.stringify(results));
+            alert("Request Deletion Failed");
+            console.log(JSON.stringify(results));
         },
         url: "api/request/DeleteRequest",
         processData: false

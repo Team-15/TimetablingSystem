@@ -174,30 +174,67 @@
 .ui-progressbar.end .ui-progressbar-value { background: red; }
 
 
+#navSection {
 
+    height: 30px;
+
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0px 1px 2px lightgrey;
+
+    background: #ef0279;
+
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+
+}
 
 #navSection ul {
-    margin: 0;
+    
+    margin: 0 auto;
     padding: 0;
+
+    height: 100%;
+
+    line-height: 30px;
+
     list-style-type: none;
     text-align: center;
+    vertical-align:middle;
 }
 
 #navSection ul li {
+    
     display: inline-block;
     vertical-align: middle;
+
+    margin: -2px 10px 0px 10px;
+
 }
 
 #navSection ul li a {
+    
+    display: block;
+
+    width: 80px;
+
     text-decoration: none;
-    padding: .2em 1em;
-    color: #fff;
-    background-color: #036;
+    color: white;
+
 }
 
-#navSection ul li a:hover {
-    color: #fff;
-    background-color: #369;
+#navSection ul li:hover,  #navSection ul li a:hover{
+    
+    color: #ef0279;
+    background-color: white;
+
+}
+
+.activatedBtn {
+
+    color: white !important;
+    background-color: #330066 !important;
+
 }
 
 #contentDiv {

@@ -24,6 +24,18 @@
 
     });
 
+    /* Handels on-click of menu buttons - block coding */
+    $('#menuLinks li a, #menuLinks li').click(function () {
+
+        $('#menuLinks li a, #menuLinks li').removeClass("activatedBtn");
+
+        $(this).addClass("activatedBtn");
+
+        /* In order to stop the browser actually navigating to the page, false is returned */
+        //return false;
+
+    });
+
     loadInstaceData();
     generateUserText();
     loadProgressBarAndText();

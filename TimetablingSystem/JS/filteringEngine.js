@@ -209,8 +209,6 @@ function executeFilters() {
 
     if (statusesFlag) filteringRequests = statusFilter(filteringRequests);
 
-    //alert("Filtered Requests Array have:");
-    //alert(JSON.stringify(filteringRequests));
 
     //Return filtered array to be returned to list or graphical view generators
     return filteringRequests;
@@ -472,7 +470,7 @@ function createWeekList() {
     weeklist += 'Week: ';
     weeklist += '<select id="selectweek">'
     weeklist += '<option data-weekstate=false value="All">' + "All" + '</option>';
-    for (var i = 1; i <= 15/*(numberOfWeeks)*/; i++) {
+    for (var i = 1; i <= numberOfWeeks; i++) {
         weeklist += '<option data-weekstate=true value="' + i + '">' + i + '</option>';
     }
     weeklist += '</select>';

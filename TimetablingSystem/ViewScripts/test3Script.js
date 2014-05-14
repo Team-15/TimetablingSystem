@@ -7,9 +7,9 @@
 
     //requestsSet = testRequestList();
 
-    var weeksNeeded = [true, false, true, true, true, false, true, true, true, true, true, true, false, false, false];
+    var weeksNeeded = [false, false, false, false, false, false, false, false, false, false, false, false, false, true, false];
 
-    //var requestBookedTimes = availabilityFilter(["CC.1.11", "J.0.01", "J.0.02", "A.0.02"], weeksNeeded, true);
+    //var requestBookedTimes = availabilityFilter(["CC.1.11", "J.0.02", "A.0.02"], weeksNeeded, true);
 
     //alert(JSON.stringify(requestBookedTimes));
 
