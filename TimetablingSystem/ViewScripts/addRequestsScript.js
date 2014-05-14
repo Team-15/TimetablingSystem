@@ -62,7 +62,7 @@ function tableCreator() {
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td class='gridHeader'><input style='display:none' type='checkbox' value='" + daysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label for='gridHeader" + i + "' class='btn btn-default'> " + daysArray[i] + "</label></td>";
+        tempStr += "<tr> <td class='gridHeader'><input style='display:none;' type='checkbox' value='" + daysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label style='display:inline-block;width:100%;' for='gridHeader" + i + "' class='btn btn-default'> " + daysArray[i] + "</label></td>";
         for (var j = 0; j < 9; j++) {
             tempStr += "<td class='gridWeek'><label for='gridCheck-" + i + j + "' class='gridLabel' ><input type='checkbox' id=gridCheck-" + i + j + " /><div class='gridBox'></div></td></label>";
         }
