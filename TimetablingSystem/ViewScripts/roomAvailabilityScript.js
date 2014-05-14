@@ -1,6 +1,5 @@
-﻿/*
-$(document).ready(function () {
-    
+﻿$(document).ready(function () {
+
     raCurrentFlag = true;
 
     raWeeksSelected = [];
@@ -16,7 +15,7 @@ $(document).ready(function () {
 
 
     $("input[name = requestTypeRadio]").change(function () {
-          
+
         if ($(this).val() === "current") raCurrentFlag = true;
         else raCurrentFlag = false;
 
@@ -51,7 +50,7 @@ $(document).ready(function () {
 function roomsAvailGenerator() {
 
     var roomsAvailHTML = "";
-    
+
     roomsAvailHTML += "<div class='raDaySection' style='border-color:transparent; margin-bottom:10px;' >";
 
     roomsAvailHTML += "<div class='raDayTitle' style='border-color:transparent;' ></div>";
@@ -65,7 +64,7 @@ function roomsAvailGenerator() {
     }
 
     roomsAvailHTML += "</tr></table></div>";
-    
+
 
     for (var dayCounter = 0; dayCounter < shortDaysArray.length; dayCounter++) {
 
@@ -103,11 +102,11 @@ function generateWeeksCheckboxes() {
     var cbHTML = "";
 
     for (var wCounter = 1; wCounter <= numberOfWeeks; wCounter++) {
-        
+
         cbHTML += "<input type='checkbox' name='weeks' value='week" + wCounter + "' id='week" + wCounter + "' data-week=" + wCounter + " /><label for='week" + wCounter + "' class='btn raBtns'>" + wCounter + "</label>";
 
     }
-    
+
     $("#weeksContainer").html(cbHTML);
 
 }
@@ -160,11 +159,12 @@ function setupAvailGrid() {
             for (var pCounter = 0; pCounter < periodsArray.length; pCounter++) {
 
                 $("#" + dCounter + "-" + pCounter).removeClass("bookedSlot availableSlot");
-                $("#" + dCounter + "-" + pCounter).html();
+                $("#" + dCounter + "-" + pCounter).html("");
+                $("#" + dCounter + "-" + pCounter).unbind("click");
             }
 
         }
-        
+
     }
 
 }
@@ -228,10 +228,8 @@ function loadRAData(bookedTimes) {
 
             $("#addPageBtn").click();
         }
-        else return;
+        else return false;
 
     });
 
 }
-
-*/

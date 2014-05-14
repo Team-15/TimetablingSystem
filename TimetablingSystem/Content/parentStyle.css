@@ -207,7 +207,7 @@
     display: inline-block;
     vertical-align: middle;
 
-    margin: -2px 10px 0px 10px;
+    margin: -2px 5px 0px 5px;
 
 }
 
@@ -239,6 +239,12 @@
 
     color: white !important;
     background-color: #330066 !important;
+
+}
+
+#roomAvailPageBtn {
+
+    width: 180px !important;
 
 }
 

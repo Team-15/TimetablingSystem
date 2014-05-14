@@ -48,5 +48,13 @@ namespace TimetablingSystem.Controllers
             return View();
         }
 
+        public ActionResult RoomAvailability()
+        {
+
+            if (Request.IsAjaxRequest()) return PartialView();
+
+            return View();
+        }
+
     }
 }

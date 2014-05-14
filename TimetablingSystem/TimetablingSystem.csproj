@@ -242,6 +242,7 @@
     <Content Include="Content\listDisplayStyle.css" />
     <Content Include="Content\loginLogoutStyle.css" />
     <Content Include="Content\parentStyle.css" />
+    <Content Include="Content\roomAvailabilityStyle.css" />
     <Content Include="Content\settingsStyle.css" />
     <Content Include="Content\test2Style.css" />
     <Content Include="Content\test3Style.css" />
@@ -363,6 +364,7 @@
     <Content Include="ViewScripts\parentScript.js" />
     <Content Include="ViewScripts\requestsScript.js" />
     <Content Include="ViewScripts\resultsScript.js" />
+    <Content Include="ViewScripts\roomAvailabilityScript.js" />
     <Content Include="ViewScripts\settingsScript.js" />
     <Content Include="ViewScripts\test2Script.js" />
     <Content Include="ViewScripts\test3Script.js" />
@@ -408,6 +410,7 @@
     <Content Include="Views\Test\Test2.cshtml" />
     <Content Include="Views\Test\Test3.cshtml" />
     <Content Include="Views\Display\Bookings.cshtml" />
+    <Content Include="Views\Display\RoomAvailability.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

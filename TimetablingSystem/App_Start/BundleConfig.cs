@@ -39,6 +39,8 @@ namespace TimetablingSystem
 
             bundles.Add(new ScriptBundle("~/bundles/history").Include("~/ViewScripts/historyScript.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/roomAvailability").Include("~/ViewScripts/roomAvailabilityScript.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/settings").Include(
                         "~/ViewScripts/settingsScript.js"));
@@ -70,6 +72,8 @@ namespace TimetablingSystem
                     "~/Content/listDisplayStyle.css"
 
                 ));
+
+            bundles.Add(new StyleBundle("~/Content/raCSS").Include("~/Content/roomAvailabilityStyle.css"));
 
             bundles.Add(new StyleBundle("~/Content/settingsCSS").Include("~/Content/settingsStyle.css"));
 
