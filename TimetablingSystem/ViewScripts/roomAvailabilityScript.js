@@ -147,6 +147,8 @@ function setupAvailGrid() {
 
     if ((raSelectedRoom !== null) && hasWeek) {
 
+        for (var dCounter = 0; dCounter < shortDaysArray.length; dCounter++) for (var pCounter = 0; pCounter < periodsArray.length; pCounter++) $("#" + dCounter + "-" + pCounter).unbind("click");
+
         var unavailableTimes = availabilityFilter([raSelectedRoom], raWeeksSelected, raCurrentFlag);
 
         loadRAData(unavailableTimes);
@@ -192,6 +194,7 @@ function loadRAData(bookedTimes) {
         for (var p = bookedStart; p < bookedEnd; p++) {
 
             $("#" + dayBooked + "-" + p).removeClass("availableSlot");
+            $("#" + dayBooked + "-" + p).unbind("click");
             $("#" + dayBooked + "-" + p).addClass("bookedSlot");
             $("#" + dayBooked + "-" + p).html("Booked");
 

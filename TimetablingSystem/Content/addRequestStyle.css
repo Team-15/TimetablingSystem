@@ -121,3 +121,8 @@ input[type=radio]:checked + label {
 .gridLabel input[type=checkbox]:checked~ .gridBox{
         background: purple;
 }
+
+.gridLabel input[type=checkbox]:disabled~ .gridBox{
+        background: grey;
+        cursor: default;
+}
