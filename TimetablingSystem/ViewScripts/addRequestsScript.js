@@ -30,7 +30,7 @@ function weekCreator() {
     var tempStr = "";
     tempStr += "<table class = ''><tr><td>Weeks: ";
     for (var i = 0; i < numberOfWeeks; i++) {
-        tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick='infoStore()'><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
+        tempStr += "<input style='display:none' type='checkbox' class='wkInput' id='weekChoice" + i + "' onclick='disableBookedTimes()'><label for='weekChoice" + i + "' class='btn btn-default'>" + (i + 1) + "</label>";
     }
     tempStr += "&nbsp;|&nbsp;";
     tempStr += "</td><td><input class='btn btn-default' type='button' value='default' onclick='setWeeks(regularWeeks)'>";
@@ -62,7 +62,7 @@ function tableCreator() {
     }
     tempStr += "</tr>";
     for (var i = 0; i < 5; i++) {
-        tempStr += "<tr> <td class='gridHeader'><input style='display:none;' type='checkbox' value='" + daysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label style='display:inline-block;width:100%;' for='gridHeader" + i + "' class='btn btn-default'> " + daysArray[i] + "</label></td>";
+        tempStr += "<tr> <td class='gridHeader'><input style='display:none' type='checkbox' value='" + daysArray[i] + "' id='gridHeader" + i + "' onclick='setGridWeek(this)' ></input><label for='gridHeader" + i + "' class='btn btn-default'> " + daysArray[i] + "</label></td>";
         for (var j = 0; j < 9; j++) {
             tempStr += "<td class='gridWeek'><label for='gridCheck-" + i + j + "' class='gridLabel' ><input type='checkbox' id=gridCheck-" + i + j + " /><div class='gridBox'></div></td></label>";
         }
@@ -317,7 +317,6 @@ function infoStore() {
     }
     buildingPopulate();
     roomListPopulate();
-    disableBookedTimes();
 }
 
 //keeps the dual-module dropdowns the same
@@ -555,6 +554,7 @@ function setWeeks(weeksChosen) {
         }
     }
     infoStore();
+    disableBookedTimes();
 }
 
 //clears checked tickboxes of rooms selected
